@@ -1,10 +1,10 @@
 
-<aside class="main-sidebar sidebar-dark-blue elevation-4">
+<aside class="main-sidebar elevation-4" style="background-color: #ebebeb;">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
         <img src="{{ asset('image/logo.jpg') }}" alt="Kluane" class="brand-image img-circle elevation-3"
             style="opacity: .8;border-radius: 50px;">
-        <span class="brand-text font-weight-light">Kluane</span>
+        <span class="brand-text font-weight-light"> <b>Kluane</b></span>
     </a>
 
 
@@ -15,7 +15,7 @@
             </div>
             <div class="info">
                 <a href="{{-- route('anfitriones.perfil') --}}" class="d-block"
-                    class="d-block">{{-- Auth::user()->name --}}</a>
+                    class="d-block">{{-- Auth::user()->name --}} USUARIO</a>
             </div>
         </div>
 
