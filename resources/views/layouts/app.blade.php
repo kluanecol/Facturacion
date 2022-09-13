@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -41,7 +41,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                           
+
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:white;">
@@ -67,23 +67,18 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')        
+            @yield('content')
         </main>
+
+
     </div>
 
-    <footer class="main-footer" style="position: absolute;bottom:0;width:100%; margin-left: 0px!important;background-color:#80808066;color:rgba(230,230,230,1);border-top:0px solid gray;">
-            <div class="text-center">
-              <p> Desarrollado por <a href="http://www.sipse.com.co">SIPSE S.A.S.</a> SIPSE S.A.S.</a> para Kluane | Copyright &copy; 2020 Kluane.</p>
-            </div>
-            <div class="float-right d-none d-sm-inline-block"style="margin-top:-10px;">
-              <b>Versión</b> {{config('app.version')}}
-            </div>
-          </footer>
-        
-          <!-- Control Sidebar -->
-          <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-          </aside>
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    </aside>
 
 </body>
 </html>
