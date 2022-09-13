@@ -12,15 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::post('log_out', 'Auth\LoginController@logout')->name('log_out');
+Route::get('log_out', 'Auth\LoginController@logout')->name('log_out');
+
 
 Route::get('test', function () {
     Excel::create('Filename', function($excel) {
         $excel->sheet('Sheetname', function($sheet) {
 
             // Sheet manipulation
-         
+
         });
     })->export('xlsx');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
