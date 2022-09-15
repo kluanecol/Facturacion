@@ -36,7 +36,7 @@
 
     <link href=" {{ asset('icofont/icofont.min.css') }}" rel="stylesheet">
 
-
+    <link href="{{ asset('bower_components/jquery-loading/dist/jquery.loading.css') }}" rel="stylesheet">
     <!-- DataTables -->
     <link rel="stylesheet" href=" {{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href=" {{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
@@ -138,7 +138,7 @@
     @yield('css')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed body" onLoad="habilitarPagina();">
+<body class="hold-transition sidebar-mini layout-fixed body">
 
 
     @include('partials.navbar')
@@ -258,10 +258,27 @@
     <script src=" {{ asset('plugins/datatables-bs4/js/vfs_fonts.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.html5.min.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.print.min.js') }}"></script>
-    <!--script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script-->
+    <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js') }}" type="text/javascript">
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            Swal.fire({
+                title: '<strong>Kluane Facturación</strong>',
+                type: 'info',
+                html:
+                    '',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Genial!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                    '<i class="fa fa-thumbs-down"></i>',
+                cancelButtonAriaLabel: 'Thumbs down'
+            });
 
             $.ajaxSetup({
                 headers: {
@@ -280,16 +297,6 @@
             });
 
         });
-
-        function habilitarPagina() {
-            document.getElementById('capa_cargando').style.visibility = 'hidden';
-
-        }
-
-        function bloquearPagina() {
-            document.getElementById('capa_cargando').style.visibility = 'visible';
-
-        }
 
 
         $(function() {
@@ -320,11 +327,6 @@
     </script>
 
     @yield('scripts')
-    <div id="capa_cargando" class="clase_cargando">
-        <div style="position:absolute; top:250px; left:50%;">
-            <img src="{{ asset('img/cargando-loading-041.gif') }}" alt="">
-        </div>
-    </div>
 
 </body>
 
