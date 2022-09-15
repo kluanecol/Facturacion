@@ -18,8 +18,13 @@ Route::get('/', function () {
 Route::post('log_out', 'Auth\LoginController@logout')->name('log_out');
 Route::get('log_out', 'Auth\LoginController@logout')->name('log_out');
 
+Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+Route::get('changecountry/{id}', 'LanguageController@swapcountry')->name('lang.swapcountry');
 
 Route::get('test', function () {
+    //$users = DB::table('users')->get();
+    //dd($users);
+
     Excel::create('Filename', function($excel) {
         $excel->sheet('Sheetname', function($sheet) {
 

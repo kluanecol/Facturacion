@@ -44,14 +44,14 @@ class LoginController extends Controller
     {
 
         $userId = Auth()->user()->id;
-        $countries = UserCountry::join('countries','countries.id','=','users_by_countries.id_country')
+        $userCountries = UserCountry::join('countries','countries.id','=','users_by_countries.id_country')
         ->Where('users_by_countries.id_user',$userId)
         ->where('countries.state',1)
         ->get();
 
-         Session::put('countries', $countries);
+        Session::put('countries', $userCountries);
 
-         Session::put('country', $countries[0]->Countries);
+        Session::put('country', $userCountries[0]->country);
 
 
     }

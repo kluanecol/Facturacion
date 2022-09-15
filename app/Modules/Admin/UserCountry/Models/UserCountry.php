@@ -13,7 +13,7 @@ class UserCountry extends Model
     protected $table = 'users_by_countries';
     protected $primaryKey= 'id';
 
-    public function Country()
+    public function country()
     {
         return $this->belongsTo('App\Modules\Admin\Country\Models\Country', 'id_country', 'id');
     }
