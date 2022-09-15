@@ -56,17 +56,6 @@
             overflow-x: scroll;
         }
 
-        #example_extra {
-            width: 100% !important;
-        }
-
-        #example1 {
-            width: 100% !important;
-            overflow: auto;
-        }
-
-
-
         .btn-primary:not(:disabled):not(.disabled).active,
         .btn-fruit:not(:disabled):not(.disabled):active,
         .show>.btn-primary.dropdown-toggle {
