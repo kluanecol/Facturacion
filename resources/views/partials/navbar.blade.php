@@ -13,43 +13,6 @@
     <!--Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-
-
-
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <b>{{-- Auth::user()->name --}}</b>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">
-                    <a href="{{-- route('anfitriones.perfil') --}}" class="d-block">
-                        {!! trans('partials/navbar.Opciones') !!} <i class="fa fa-gears"></i>
-                    </a>
-                </span>
-                <div class="dropdown-divider"></div>
-                <span class="dropdown-item dropdown-header">
-
-                </span>
-                <div class="dropdown-divider"></div>
-                <span class="dropdown-item dropdown-header">
-
-                </span>
-
-                <a class="btn btn-primary btn-block" href="{{ route('log_out') }}"
-                    onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();"><i
-                        class="fas fa-arrow-right"></i>
-                    {!! trans('partials/navbar.Salir') !!}
-                </a>
-                <!--Comprobamos si el status esta a true y existe más de un lenguaje-->
-
-                <form id="logout-form" action="{{ route('log_out') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-
-                <div class="dropdown-divider"></div>
-            </div>
-        </li>
         @if (config('locale.status') && count(config('locale.languages')) > 1)
             <li class="nav-item">
                 @foreach (array_keys(config('locale.languages')) as $lang)
@@ -84,7 +47,39 @@
                     @endforeach
                 @endif
             </div>
-
         </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <b><i class="fas fa-user-circle"></i></b>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">
+                    <i class="fas fa-user-alt"></i>
+                </span>
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-item dropdown-header">
+
+                </span>
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-item dropdown-header">
+
+                </span>
+
+                <a class="btn btn-primary btn-block" href="{{ route('log_out') }}"
+                    onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();"><i
+                        class="fas fa-power-off"></i>
+                    {!! trans('messages\buttons.cerrarCesion') !!}
+                </a>
+
+                <form id="logout-form" action="{{ route('log_out') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+                <div class="dropdown-divider"></div>
+            </div>
+        </li>
+
     </ul>
 </nav>

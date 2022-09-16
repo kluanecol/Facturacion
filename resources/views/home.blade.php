@@ -11,7 +11,7 @@
   <div class="col-12">
     <div class="card" style="background-color:rgba(255,255,255,0.85);">
       <div class="card-header">
-          <h2 class="card-title">RHOMB FACTURACIÓN</h2>
+          <h2 class="card-title"> <b>{!! trans('messages\general.rhombFacturacion') !!}</b></h2>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -32,7 +32,6 @@
 </div>
 <!-- /.container-->
 
-<br>&nbsp;
 <br>&nbsp;
 <br>&nbsp;
 <br>&nbsp;
