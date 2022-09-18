@@ -50,90 +50,8 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <link rel="stylesheet" href=" {{ asset('css/admin_panel.css') }}">
+    <link rel="stylesheet" href=" {{ asset('css/general.css') }}">
 
-    <style type="text/css">
-        .dataTables_scroll {
-            overflow-x: scroll;
-        }
-
-        .btn-primary:not(:disabled):not(.disabled).active,
-        .btn-fruit:not(:disabled):not(.disabled):active,
-        .show>.btn-primary.dropdown-toggle {
-            color: #fff;
-            background-color: #275FA9;
-            border-color: #275FA9;
-        }
-
-        .btn-primary {
-            color: #fff;
-            background-color: #275FA9;
-            border-color: #275FA9;
-        }
-
-        .dropdown-item:active {
-            color: #fff;
-            background-color: #275FA9;
-        }
-
-        .main-sidebar,
-        .main-sidebar::before {
-            transition: margin-left .3s ease-in-out, width .3s ease-in-out;
-        }
-
-        body:not(.sidebar-mini-md) .content-wrapper,
-        body:not(.sidebar-mini-md) .main-footer,
-        body:not(.sidebar-mini-md) .main-header {
-            transition: margin-left .3s ease-in-out;
-        }
-
-        td {
-            font-family: Arial, Verdana;
-            font-size: 12px;
-        }
-
-        th {
-            font-family: Arial, Verdana;
-            font-size: 12px;
-        }
-
-        .sidebar-dark-blue {
-            background: #003366 !important;
-        }
-
-        body {
-            overflow-x: scroll;
-            color: #515151;
-        }
-
-
-
-        .table-responsive::-webkit-scrollbar {
-            -webkit-appearance: none;
-        }
-
-        .table-responsive::-webkit-scrollbar:vertical {
-            width: 10px;
-        }
-
-        .table-responsive::-webkit-scrollbar-button:increment,
-        .chatlist-body::-webkit-scrollbar-button {
-            display: none;
-        }
-
-        .table-responsive::-webkit-scrollbar:horizontal {
-            height: 10px;
-        }
-
-        .table-responsive::-webkit-scrollbar-thumb {
-            background-color: #275FA9;
-            border-radius: 10px;
-            /*border: 2px solid #f1f2f3;*/
-        }
-
-        .table-responsive::-webkit-scrollbar-track {
-            border-radius: 10px;
-        }
-    </style>
 
     @yield('css')
 </head>
@@ -314,16 +232,7 @@
             theme: 'bootstrap4'
         });
 
-        $(function() {
-            $('.scroll').jscroll({
-                autoTrigger: true,
-                nextSelector: '.pagination li.active + li a',
-                contentSelector: 'div.scroll',
-                callback: function() {
-                    $('ul.pagination:visible:first').hide();
-                }
-            });
-        });
+
     </script>
 
     @yield('scripts')

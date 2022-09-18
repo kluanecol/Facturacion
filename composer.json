@@ -9,7 +9,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "maatwebsite/excel": "~2.1.30"
+        "maatwebsite/excel": "~2.1.30",
+        "yajra/laravel-datatables": "1.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

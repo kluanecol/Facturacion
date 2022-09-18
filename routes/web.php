@@ -11,29 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Auth::routes();
 
 Route::post('log_out', 'Auth\LoginController@logout')->name('log_out');
 Route::get('log_out', 'Auth\LoginController@logout')->name('log_out');
 
-Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
-Route::get('changecountry/{id}', 'LanguageController@swapcountry')->name('lang.swapcountry');
+Route::group(['middleware' => 'auth'], function()
+{
 
-Route::get('test', function () {
-    //$users = DB::table('users')->get();
-    //dd($users);
+    Route::get('/', function () {
+        return view('home');
+    });
 
-    Excel::create('Filename', function($excel) {
-        $excel->sheet('Sheetname', function($sheet) {
+    Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
+    Route::get('changecountry/{id}', 'LanguageController@swapcountry')->name('lang.swapcountry');
 
-            // Sheet manipulation
+    Route::get('test', function () {
+        Excel::create('Filename', function($excel) {
+            $excel->sheet('Sheetname', function($sheet) {
 
-        });
-    })->export('xlsx');
+                // Sheet manipulation
+
+            });
+        })->export('xlsx');
+    });
+
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
