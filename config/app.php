@@ -161,6 +161,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom Service Providers...
+         */
+        App\Modules\Invoicing\Contract\Providers\ContractServiceProvider::class
+
     ],
 
     /*

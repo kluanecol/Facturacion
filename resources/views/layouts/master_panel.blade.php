@@ -130,8 +130,8 @@
         </aside>
     </div>
 
-
-
+    {{-- PLUGINS --}}
+    @stack('plugins')
     <!-- jQuery -->
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -182,36 +182,10 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            Swal.fire({
-                title: '<strong>Kluane Facturación</strong>',
-                type: 'info',
-                html:
-                    '',
-                showCloseButton: true,
-                showCancelButton: true,
-                focusConfirm: false,
-                confirmButtonText:
-                    '<i class="fa fa-thumbs-up"></i> Genial!',
-                confirmButtonAriaLabel: 'Thumbs up, great!',
-                cancelButtonText:
-                    '<i class="fa fa-thumbs-down"></i>',
-                cancelButtonAriaLabel: 'Thumbs down'
-            });
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
-
-            var height = $(window).height();
-            $('#capa_cargando').height(height);
-
-
-            $('form').each(function() {
-                $(this).submit(function(event) {
-                    bloquearPagina();
-                });
             });
 
         });

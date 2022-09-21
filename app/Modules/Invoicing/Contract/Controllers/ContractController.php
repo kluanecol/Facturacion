@@ -4,24 +4,22 @@ namespace App\Modules\Invoicing\Contract\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 
 class ContractController extends Controller
 {
     private $contractRepository;
     protected $countryRepository;
-/*
+
     function __construct(
-            TipoPagoProductoInterface $contractRepository,
-            CountryInterface $countryRepository
+            ContractInterface $contractRepository
         )
         {
             $this->contractRepository = $contractRepository;
-            $this->countryRepository = $countryRepository;
         }
-*/
+
     public function index(){
         $data = [];
-
-       dd("Index Contracts");
+        return view('sections.contracts.index', $data);
     }
 }
