@@ -31,6 +31,8 @@
     <link rel="stylesheet" href=" {{ asset('plugins/summernote/summernote-bs4.css') }} ">
 
     <link rel="stylesheet" href="{{ asset('dist/css/select2-bootstrap.css') }}">
+    <!-- Select picker -->
+    <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 
@@ -119,7 +121,24 @@
 
 
         <section class="content">
-            @yield('content')
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-kluane">
+                                <div class="bg-dark" style="border-radius: 5px;">
+                                    <h5 class="text-light m-1 py-2">@yield('card-icon')
+                                        <b>@yield('card-title')</b>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         @include('partials.footer')
@@ -162,6 +181,8 @@
     <script src=" {{ asset('dist/js/adminlte.js') }} "></script>
     <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <!-- Select picker -->
+    <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.min.js') }}" type="text/javascript"></script>
 
     <!-- AdminLTE for demo purposes -->
     <script src=" {{ asset('dist/js/demo.js') }}"></script>
@@ -189,6 +210,7 @@
             });
 
         });
+
 
 
         $(function() {
