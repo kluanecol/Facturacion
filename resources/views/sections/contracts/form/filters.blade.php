@@ -1,13 +1,8 @@
 <div class="col-md-6">
-    <div class="form-group form-md-line-input has-info">
-        {!! Form::select('id_area', [1,2,3], null, [
-            'class' => 'form-control selectpicker id_area ',
-            'data-live-search' => 'true',
-            'title' => 'Seleccione el área a la que se envío el lote de pagos',
-            'data-actions-box' => 'true',
+    <div class="form-group ">
+        {!! Form::select('id_area', [1,2,3,4], null, [
+            'class' => 'form-control select2',
             'multiple' => 'multiple',
-            'data-deselect-all-text' => 'Ninguno',
-            'data-select-all-text' => 'Todos',
             'id' => 'id_area',
             'required' => 'required',
             'data-size' => '5',
@@ -18,7 +13,7 @@
 </div>
 <div class="col-md-3">
     <div class="">
-        <select name="das" id="das" class ="form-control selectpicker" data-live-search = "true" title = "Seleccione el año">
+        <select name="das[]" id="das" class ="form-control select2" multiple="multiple">
             <option value="more">More food here</option>
             <option value="more1">More food here</option>
             <option value="more2">More food here</option>

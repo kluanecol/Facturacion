@@ -2,6 +2,9 @@
     background-color: #275FA9 !important;
 }
 
+.select2-selection__choice {
+    background-color: #275FA9 !important;
+}
 
 .dataTables_scroll {
     overflow-x: scroll;
