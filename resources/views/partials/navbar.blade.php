@@ -14,7 +14,7 @@
     <ul class="navbar-nav ml-auto">
 
         @if (config('locale.status') && count(config('locale.languages')) > 1)
-            <li class="nav-item">
+            <li class="nav-item mt-1">
                 @foreach (array_keys(config('locale.languages')) as $lang)
                     @if ($lang != App::getLocale())
                         @if (isset($inactive))

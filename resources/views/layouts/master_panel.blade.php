@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet"
-        href=" {{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }} ">
+    href=" {{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }} ">
     <!-- iCheck -->
     <link rel="stylesheet" href=" {{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }} ">
     <!-- JQVMap -->
@@ -45,8 +45,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-
-    <!--link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/-->
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap-3.3.7/css/bootstrap.css') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -124,7 +123,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card" style="background-color:rgba(255,255,255,0.85);">
                             <div class="card-header bg-kluane">
                                 <div class="bg-dark" style="border-radius: 5px;">
                                     <h5 class="text-light m-1 py-2">@yield('card-icon')
@@ -198,6 +197,7 @@
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.html5.min.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js') }}" type="text/javascript">
+
     </script>
 
     <script type="text/javascript">

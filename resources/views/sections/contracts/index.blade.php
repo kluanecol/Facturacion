@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <a href="{{-- route('inventario.compras.index') --}}" class="btn btn-primary btn-sm float-right">{!! trans('inventarios/compras/index_ordenes_servicios.Regresar') !!}</a>
+    <a href="{{-- route('inventario.compras.index') --}}" class="btn btn-primary">{!! trans('inventarios/compras/index_ordenes_servicios.Regresar') !!}</a>
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
         <div class="row">
             <div class="col-md-12">

@@ -1,11 +1,10 @@
 
-<aside class="main-sidebar elevation-4" style="background-color: #ebebeb;">
+<aside class="main-sidebar elevation-4 sidebar-dark-blue">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
         <img src="{{ asset('image/logo.jpg') }}" alt="Kluane" class="brand-image img-circle elevation-3"
             style="opacity: .8;border-radius: 50px;">
         <span class="brand-text font-weight-light"> <b>Kluane</b></span>
-        <hr>
     </a>
 
     <div class="sidebar">
@@ -22,7 +21,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class='nav-item has-treeview '><a href='#'
-                    class='nav-link active bg-kluane'><i class="icofont-document-folder"></i>
+                    class='nav-link active sidebar-dark-blue'><i class="icofont-document-folder"></i>
                     <p>{!! trans('menu\titles.contratos') !!}  <i class='right fas fa-angle-left'></i></p>
                     </a>
                     <ul class='nav nav-treeview'>

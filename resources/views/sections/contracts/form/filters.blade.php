@@ -1,6 +1,6 @@
 <div class="col-md-6">
     <div class="form-group form-md-line-input has-info">
-        {!! Form::select('id_area[]', [1,2,3], null, [
+        {!! Form::select('id_area', [1,2,3], null, [
             'class' => 'form-control selectpicker id_area ',
             'data-live-search' => 'true',
             'title' => 'Seleccione el área a la que se envío el lote de pagos',
@@ -18,14 +18,14 @@
 </div>
 <div class="col-md-3">
     <div class="">
-        <select name="das" id="das" class ="selectpicker" data-live-search = "true" title = "Seleccione el año">
-            <option data-tokens="more">More food here</option>
-            <option data-tokens="more1">More food here</option>
-            <option data-tokens="more2">More food here</option>
-            <option data-tokens="more3">More food here</option>
-            <option data-tokens="more4">More food here</option>
-            <option data-tokens="more5">More food here</option>
-            <option data-tokens="more6">More food here</option>
+        <select name="das" id="das" class ="form-control selectpicker" data-live-search = "true" title = "Seleccione el año">
+            <option value="more">More food here</option>
+            <option value="more1">More food here</option>
+            <option value="more2">More food here</option>
+            <option value="more3">More food here</option>
+            <option value="more4">More food here</option>
+            <option value="more5">More food here</option>
+            <option value="more6">More food here</option>
         </select>
 
         <label for="i_periodo">Año(*)</label>
@@ -34,7 +34,7 @@
 </div>
 <div class="col-md-3">
     <div class="form-group form-md-line-input has-info">
-       <select class=" form-control" name="a" id="a">
+       <select class="form-control" name="a" id="a">
 
             @for ($i = 0; $i < 9; $i++)
                 <option value="{{$i}}">{{$i}}</option>
@@ -47,7 +47,7 @@
 <div class="row mb-2">
     <div class="col-md-12">
         <div class="form-group form-md-line-input has-info">
-            <button type="button" class='btn blue consultar-lotes-pago btn-block'>
+            <button type="button">
                 <i class="fa fa-eye" aria-hidden="true"></i>
                 Consultar Lotes Enviados
             </button>
