@@ -13,7 +13,7 @@ jQuery(function() {
 
     $(document).on('click','#search-contracts',function(){
         id_project = $('#id_project').val();
-        year = $('year').val();
+        year = $('#year').val();
 
         var datos = {
             'id_project' : id_project,
@@ -447,17 +447,16 @@ function refreshContractsTable(datos) {
         },
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         columns: [
-            {data: 'i_pk_id', name: 'i_pk_id'},
-            {data: 'vc_usuario', name: 'vc_usuario'},
-            {data: 'vc_radicado', name: 'vc_radicado'},
-            {data: 'dt_fecha', name: 'dt_fecha'},
-            {data: 'vc_area', name: 'vc_area'},
+            {data: 'id', name: 'id'},
+            {data: 'project_name', name: 'project_name'},
+            {data: 'start_date', name: 'start_date'},
+            {data: 'end_date', name: 'end_date'},
+            {data: 'year', name: 'year'},
         ],
         dom: 'Bfrtip',
             buttons: [
             {
                 extend: 'excel',
-                title: 'Consulta Lotes de Pago - Pandora'
             }
             ],
         pageLength: 8,

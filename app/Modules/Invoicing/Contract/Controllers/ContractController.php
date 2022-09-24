@@ -24,6 +24,6 @@ class ContractController extends Controller
     }
 
     public function Search(Request $request){
-       dd($request->all());
+        return $this->contractRepository->dataTableContracts($request);
     }
 }

@@ -18,14 +18,15 @@ class CreateContractsTable extends Migration
             $table->increments('id');
             $table->date('initial_date');
             $table->date('end_date');
+            $table->integer('year');
 
-            $table->integer('fk_id_user')->unsigned();
+            $table->unsignedBigInteger('fk_id_user');
             $table->foreign('fk_id_user','fk_contract_to_user')->references('id')->on('users');
 
-            $table->integer('fk_id_proyecto')->unsigned();
-            $table->foreign('fk_id_proyecto','fk_contract_to_proyect')->references('id')->on('proyectos');
+            $table->unsignedBigInteger('fk_id_project');
+            $table->foreign('fk_id_project','fk_contract_to_project')->references('id')->on('proyectos');
 
-            $table->integer('fk_id_country')->unsigned();
+            $table->unsignedBigInteger('fk_id_country');
             $table->foreign('fk_id_country','fk_contract_to_country')->references('id')->on('countries');
 
             $table->timestamps();
@@ -43,10 +44,10 @@ class CreateContractsTable extends Migration
         Schema::table('fac_contracts', function (Blueprint $table)
         {
             $table->dropForeign('fk_contract_to_user');
-            $table->dropForeign('fk_contract_to_proyect');
+            $table->dropForeign('fk_contract_to_project');
             $table->dropForeign('fk_contract_to_country');
         });
 
-        Schema::dropIfExists('contracts');
+        Schema::dropIfExists('fac_contracts');
     }
 }
