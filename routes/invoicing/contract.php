@@ -9,6 +9,11 @@
                 'uses' => 'ContractController@index'
             ]);
 
+            Route::get('/search', [
+                'as' => 'contracts.search',
+                'uses' => 'ContractController@search'
+            ]);
+
 
         });
 

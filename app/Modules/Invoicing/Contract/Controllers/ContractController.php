@@ -22,4 +22,8 @@ class ContractController extends Controller
         $data = [];
         return view('sections.contracts.index', $data);
     }
+
+    public function Search(Request $request){
+       dd($request->all());
+    }
 }
