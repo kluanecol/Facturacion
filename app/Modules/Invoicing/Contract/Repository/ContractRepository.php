@@ -34,9 +34,9 @@ class ContractRepository implements ContractInterface{
             <i class="fa fa-eye" aria-hidden="true"></i></a>';
             */
             $table[] = [
-                'id' => $contract->i_pk_id,
+                'id' => $contract->id,
                 'project_name' => $contract->project->nombre_corto,
-                'start_date' => $contract->start,
+                'initial_date' => $contract->initial_date,
                 'end_date' => $contract->end_date,
                 'year' => $contract->year,
             ];

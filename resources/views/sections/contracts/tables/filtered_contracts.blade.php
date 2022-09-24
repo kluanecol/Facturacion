@@ -15,7 +15,7 @@
         <th class="text-center"><strong>{!! trans('form\labels.fechaFinal') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('form\labels.ano') !!}</strong></th>
     </thead>
-    <tbody class="text-center">
+    <tbody class="text-center bg-light">
 
     </tbody>
 </table>
