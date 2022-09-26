@@ -8,7 +8,7 @@
  */
 (function(factory) {
   'use strict';
-  
+
   if (typeof window !== 'undefined') {
     if (typeof define === 'function' && define.amd) {
       // AMD
@@ -238,7 +238,7 @@
       if (this.settings.zIndex !== undefined) {
         return this.settings.zIndex;
       } else {
-        return (parseInt(this.element.css('z-index')) || 0) + 1 + this.settings.fullPage;
+        return (parseInt(this.element.css('z-index')) || 0) + 100000 + this.settings.fullPage;
       }
     },
 

@@ -17,7 +17,6 @@
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
 
-
     <!-- iCheck -->
     <link rel="stylesheet" href=" {{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }} ">
     <!-- JQVMap -->
@@ -160,6 +159,7 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src=" {{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
+
     <!-- ChartJS -->
     <script src=" {{ asset('plugins/chart.js/Chart.min.js') }} "></script>
     <!-- JQVMap -->
@@ -196,7 +196,7 @@
     <script src=" {{ asset('plugins/datatables-bs4/js/vfs_fonts.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.html5.min.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js') }}" type="text/javascript">
+    <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js?v=2022-09-26') }}" type="text/javascript">
 
     </script>
 

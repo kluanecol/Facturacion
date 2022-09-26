@@ -26,4 +26,13 @@ class ContractController extends Controller
     public function Search(Request $request){
         return $this->contractRepository->dataTableContracts($request);
     }
+
+    public function getContractForm(Request $request){
+        $data = [];
+
+        $returnHTML = view('sections.contracts.form.form', $data)->render();
+        return response()->json(['success' => true, 'html'=>$returnHTML]);
+
+    }
+
 }

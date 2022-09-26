@@ -14,6 +14,10 @@
                 'uses' => 'ContractController@search'
             ]);
 
+            Route::post('/getContractForm', [
+                'as' => 'contracts.getContractForm',
+                'uses' => 'ContractController@getContractForm'
+            ]);
 
         });
 
