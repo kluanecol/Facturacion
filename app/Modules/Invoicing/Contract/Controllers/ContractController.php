@@ -35,4 +35,32 @@ class ContractController extends Controller
 
     }
 
+    public function save(Request $request){
+        $result = $this->contractRepository->save($request);
+
+        if (is_string($result)) {
+            $mensajes = [
+                'message' => $result,
+                'title' => 'Error no controlado!',
+                'type'  => 'warning',
+            ];
+        }
+        else if($result == 200){
+            $mensajes = [
+                'title' => 'Bien hecho!',
+                'message' => 'Datos guardados con éxito',
+                'type'  => 'success',
+                'status' => $result
+            ];
+        }else{
+            $mensajes = [
+                'message' => 'Algo salió Mal',
+                'title' => 'No fue posible guardar los datos',
+                'type'  => 'warning',
+                'status' => $result
+            ];
+        }
+        return response()->json($mensajes);
+
+    }
 }

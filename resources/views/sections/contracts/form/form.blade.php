@@ -5,7 +5,7 @@
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="id_project">Proyecto(*):</label>
 
-                    {!!Form::select('id_project',[], null,[
+                    {!!Form::select('id_project',[1,2,3,4,5,6,7,8,9], null,[
                         'class'=>'form-control selectpicker id_project ',
                         'data-live-search'=>'true',
                         'title'=>'Seleccione el proyecto',
@@ -33,29 +33,27 @@
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="initial_date">Fecha Inicio(*):</label>
-                    <div class="input-icon">
                         {!! Form::date('initial_date',null, [
                             'class' => 'form-control ',
                             'id' => 'initial_date',
                             'required' => 'required',
+                            'title'=>'',
                         ]) !!}
-                    </div>
+                    <span class="help-block"></span>
                 </div>
-                <span class="help-block"></span>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="end_date">Fecha Fin(*):</label>
-                    <div class="input-icon">
                         {!! Form::date('end_date', null, [
                             'class' => 'form-control ',
                             'id' => 'end_date',
                             'required' => 'required',
+                            'title'=>'',
                         ]) !!}
-                    </div>
+                        <span class="help-block"></span>
                 </div>
-                <span class="help-block"></span>
             </div>
 
         </div>

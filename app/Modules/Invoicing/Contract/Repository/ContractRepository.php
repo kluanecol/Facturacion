@@ -3,10 +3,9 @@
 namespace App\Modules\Invoicing\Contract\Repository;
 
 use App\Modules\Invoicing\Contract\Models\Contract;
-use App\Modulos\PostContractual\PagoLote\Repository\PagoLoteInterface;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class ContractRepository implements ContractInterface{
 
@@ -50,4 +49,29 @@ class ContractRepository implements ContractInterface{
     public function getByProjectAndYear($id_project, $year){
         return Contract::whereIn('fk_id_project',$id_project)->whereIn('year',$year)->get();
     }
+
+    public function save($request){
+        $result = 200;
+
+        try {
+           $contract = new Contract();
+           $contract->fk_id_user = Auth::user()->id;
+           $contract->fk_id_project = $request->id_project;
+           $contract->fk_id_country = Session::get('country')->id;
+           $contract->initial_date = $request->initial_date;
+           $contract->end_date = $request->end_date;
+
+           if ($contract->save()) {
+                $result = 200;
+            }else{
+                $result = 400;
+           }
+
+           return $result;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
 }

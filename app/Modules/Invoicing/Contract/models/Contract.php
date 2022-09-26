@@ -11,6 +11,18 @@ class Contract extends Model
     use SoftDeletes;
     protected $table = 'fac_contracts';
 
+    protected $primaryKey= 'id';
+
+    protected $fillable = [
+
+        'fk_id_user',
+        'fk_id_project',
+        'fk_id_country',
+        'initial_date',
+        'end_date'
+    ];
+
+    public $timestamps = true;
 
 
     public function project()

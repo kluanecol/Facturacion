@@ -11,6 +11,19 @@ let informes_seleccionados = [];
 jQuery(function() {
 	vURL = $('#main-url').data('url');
 
+    toastr.options = {
+        "closeButton": true,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+    }
+
+
     $(document).on('click','#search-contracts',function(){
         id_project = $('#id_project').val();
         year = $('#year').val();
@@ -37,8 +50,10 @@ jQuery(function() {
 
     $(document).on('click','#btn-add',function(){
 
+        if ($("#form-contract").valid()) {
+            saveContract();
+        }
 
-        $("#form-contract").valid();
     });
 
 
@@ -102,6 +117,67 @@ function getContractForm(){
                 showConfirmButton: false,
                 timer: 2000
             })
+        }
+    });
+}
+
+function saveContract() {
+
+    let myForm = document.getElementById('form-contract');
+    var datos = new FormData(myForm);
+
+    $('body').loading({
+      message: 'Procesando...'
+    });
+
+    $.ajax({
+
+        url: vURL+'/invoicing/contracts/save',
+        type: 'POST',
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        data: datos,
+        success: function(data){
+          $('body').loading('stop');
+
+            if (data.status == 200) {
+                Swal.fire({
+                    title: data.title,
+                    html: data.message,
+                    type: data.type,
+                    showConfirmButton: true,
+                });
+            }
+            else if(data.status == 400){
+                toastr.warning(data.message, data.title);
+            }
+            else{
+                toastr.error(data.message, data.title);
+            }
+        },
+        error: function(data){
+            $('body').loading('stop');
+
+            if(data.status == 419){
+                Swal.fire({
+                  title: `¡Algo salió Mal!`,
+                  html: `Ha caducado el tiempo de sesión, se recargará la página`,
+                  type: `error`,
+                  showConfirmButton: false,
+                  timer: 3000
+                }).then(()=>{
+                  location.reload();
+                });
+            }else if(data.status == 500){
+                Swal.fire({
+                    title: `¡Algo salió Mal!`,
+                    html: `Ha ocurrido un error en el servidor, contacte al equipo de soporte`,
+                    type: `error`,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
         }
     });
 }
@@ -186,27 +262,34 @@ function validarForm(id,rules,messages){
         rules = (rules == undefined) ? [] : rules;
         messages = (messages == undefined) ? [] : messages;
 
-        messages =  {
-            end_date: {
-                greaterThan: "La fecha final debe ser mayor a la inicial."
+        jQuery.validator.addMethod("greaterThan",
+        function(value, element, params) {
+            if (!/Invalid|NaN/.test(new Date(value))) {
+                return new Date(value) > new Date($(params).val());
             }
+            return isNaN(value) && isNaN($(params).val())
+                || (Number(value) > Number($(params).val()));
+        },'Must be greater than {0}.');
+
+        messages =  {
+            id_project: {
+                required: "Es obligatorio"
+            },
+            initial_date: {
+                greaterThan: "La fecha final debe ser mayor a la inicial."
+            },
+            end_date: {
+                greaterThan: "La fecha final debe ser mayor a la inicial.",
+                required: "fecha obligatoria"
+            }
+
         };
+
         $(id).validate().destroy();
 
         $.validator.addClassRules("vc_max", {
             maxlength: 25
         });
-
-        jQuery.validator.addMethod("greaterThan",
-        function(value, element, params) {
-
-            if (!/Invalid|NaN/.test(new Date(value))) {
-                return new Date(value) > new Date($(params).val());
-            }
-
-            return isNaN(value) && isNaN($(params).val())
-                || (Number(value) > Number($(params).val()));
-        },'Must be greater than {0}.');
 
         $(id).validate({
             //ignore: [],

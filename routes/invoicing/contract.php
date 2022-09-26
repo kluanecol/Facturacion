@@ -19,6 +19,11 @@
                 'uses' => 'ContractController@getContractForm'
             ]);
 
+            Route::post('/save', [
+                'as' => 'contracts.save',
+                'uses' => 'ContractController@save'
+            ]);
+
         });
 
     });
