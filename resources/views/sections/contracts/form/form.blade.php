@@ -2,8 +2,8 @@
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-contract','enctype' => 'multipart/form-data']) !!}
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group form-md-line-input has-info">
-                    <label for="id_project">Proyecto(*)</label>
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="id_project">Proyecto(*):</label>
                     <span class="help-block"></span>
                     {!!Form::select('id_project',[], null,[
                         'class'=>'form-control selectpicker id_project ',
@@ -17,8 +17,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="year">{!! trans('form\labels.ano') !!}(*)</label>
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="year">{!! trans('form\labels.ano') !!}(*):</label>
                     <span class="help-block"></span>
                     {!! Form::select('year', [1, 15, 13, 14], null, [
                         'class' => 'form-control selectpicker',
@@ -31,8 +31,8 @@
             </div>
 
             <div class="col-md-6">
-                <div class="form-group form-md-line-input has-info ">
-                    <label for="initial_date">Fecha Inicio</label>
+                <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
+                    <label for="initial_date">Fecha Inicio(*):</label>
                     <div class="input-icon">
                         {!! Form::date('initial_date',null, [
                             'class' => 'form-control ',
@@ -44,8 +44,8 @@
             </div>
 
             <div class="col-md-6">
-                <div class="form-group form-md-line-input has-info ">
-                    <label for="end_date">Fecha Fin</label>
+                <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
+                    <label for="end_date">Fecha Fin(*):</label>
                     <div class="input-icon">
                         {!! Form::date('end_date', null, [
                             'class' => 'form-control ',

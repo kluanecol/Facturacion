@@ -8,6 +8,7 @@
 <!-- Modal Styles -->
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
 
 @section('content')
 
@@ -41,8 +42,9 @@
 @endsection
 
 @push('plugins')
-    <script src=" {{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-09-25') }}" type="text/javascript"></script>
+
+    <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
+    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-09-28') }}" type="text/javascript"></script>
     <!-- Modal Scripts -->
     <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
     <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
@@ -57,10 +59,9 @@
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.html5.min.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.print.min.js') }}"></script>
     <!-- Validation Scripts -->
-
-
     <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js') }}" type="text/javascript">
     <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     </script>
 @endpush

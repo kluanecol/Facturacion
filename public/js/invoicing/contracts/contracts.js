@@ -151,7 +151,7 @@ function refreshContractsTable(datos) {
         columns: [
             {data: 'id', name: 'id'},
             {data: 'project_name', name: 'project_name'},
-            {data: 'start_date', name: 'start_date'},
+            {data: 'initial_date', name: 'initial_date'},
             {data: 'end_date', name: 'end_date'},
             {data: 'year', name: 'year'},
         ],
