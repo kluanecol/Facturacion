@@ -160,7 +160,11 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src=" {{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
-
+ <!-- Validation Scripts -->
+ <script src="{{ asset('plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('plugins/jquery-validation/js/localization/messages_es.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
     <!-- ChartJS -->
     <script src=" {{ asset('plugins/chart.js/Chart.min.js') }} "></script>
     <!-- JQVMap -->
@@ -210,9 +214,8 @@
                 }
             });
 
+
         });
-
-
 
         $(function() {
 
@@ -228,6 +231,10 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
+        $(document).on('click','.close-alert-modal',function(){
+            console.log("aca");
+                swal.close();
+            });
 
 
     </script>

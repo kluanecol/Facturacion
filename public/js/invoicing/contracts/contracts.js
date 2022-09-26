@@ -37,10 +37,8 @@ jQuery(function() {
 
     $(document).on('click','#btn-add',function(){
 
-        $('body').loading({
-            message: 'Cargando...',
 
-          });
+        $("#form-contract").valid();
     });
 
 
@@ -68,11 +66,11 @@ function getContractForm(){
                     showCancelButton: false,
                     showConfirmButton: false,
                     focusConfirm: false,
-                    allowOutsideClick: false
+                    allowOutsideClick: true
                   })
 
                 actualizarInputs();
-                //validarForm("#form-contract",[],[]);
+                validarForm("#form-contract",[],[]);
 
             } else {
                 Swal.fire({
@@ -180,47 +178,66 @@ function actualizarInputs(){
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-function validarForm(id,reglas,mensajes){
+function validarForm(id,rules,messages){
     /* JQUERY VALIDATE*/
     if(id==undefined || $(id).length == 0 ){
       return false;
     }else{
-        reglas = (reglas == undefined) ? [] : reglas;
-        mensajes = (mensajes == undefined) ? [] : mensajes;
+        rules = (rules == undefined) ? [] : rules;
+        messages = (messages == undefined) ? [] : messages;
+
+        messages =  {
+            end_date: {
+                greaterThan: "La fecha final debe ser mayor a la inicial."
+            }
+        };
         $(id).validate().destroy();
-        $.validator.addClassRules("obligatorio", {
-            required: true
-        });
 
         $.validator.addClassRules("vc_max", {
             maxlength: 25
-          });
-
-        $(id).validate({
-        //ignore: [],
-        rules: reglas,
-        messages: mensajes,
-        errorPlacement : function(error, element) {
-            $(element).closest('.form-group').find('.help-block').html(error.html());
-            $(element).closest('tr').find('.error-subtotal .help-block').html(error.html());
-
-        },
-        highlight : function(element) {
-            $(element).closest('.form-group').removeClass('has-info').addClass('has-error');
-            $(element).closest('tr').find('.error-subtotal .form-group').removeClass('has-info').addClass('has-error');
-            $(element).closest('div').find('.alert').removeClass('alert-note').addClass('alert-danger');
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).closest('.form-group').removeClass('has-error').addClass('has-info');
-            $(element).closest('.form-group').find('.help-block').html('');
-
-            $(element).closest('tr').find('.error-subtotal .form-group').removeClass('has-error').addClass('has-info');
-            $(element).closest('tr').find('.error-subtotal .help-block').html('');
-
-            $(element).closest('div').find('.alert').removeClass('alert-danger').addClass('alert-note');
-
-        }
         });
 
+        jQuery.validator.addMethod("greaterThan",
+        function(value, element, params) {
+
+            if (!/Invalid|NaN/.test(new Date(value))) {
+                return new Date(value) > new Date($(params).val());
+            }
+
+            return isNaN(value) && isNaN($(params).val())
+                || (Number(value) > Number($(params).val()));
+        },'Must be greater than {0}.');
+
+        $(id).validate({
+            //ignore: [],
+            rules: rules,
+            messages: messages,
+            errorPlacement : function(error, element) {
+                $(element).closest('.form-group').find('.help-block').html(error.html());
+                $(element).closest('tr').find('.error-subtotal .help-block').html(error.html());
+
+            },
+            highlight : function(element) {
+                $(element).closest('.form-group').removeClass('has-info').addClass('has-error');
+                $(element).closest('tr').find('.error-subtotal .form-group').removeClass('has-info').addClass('has-error');
+                $(element).closest('div').find('.alert').removeClass('alert-note').addClass('alert-danger');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-info');
+                $(element).closest('.form-group').find('.help-block').html('');
+
+                $(element).closest('tr').find('.error-subtotal .form-group').removeClass('has-error').addClass('has-info');
+                $(element).closest('tr').find('.error-subtotal .help-block').html('');
+
+                $(element).closest('div').find('.alert').removeClass('alert-danger').addClass('alert-note');
+            }
+
+        });
+
+        if($("#end_date").length>0){
+            $("#end_date").rules('add',
+                { greaterThan: "#initial_date"
+            });
+        }
     }
 }

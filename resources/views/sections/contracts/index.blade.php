@@ -58,7 +58,12 @@
     <script src=" {{ asset('plugins/datatables-bs4/js/vfs_fonts.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.html5.min.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.print.min.js') }}"></script>
-    <!-- Validation Scripts -->
+
+
+
+
+
+
     <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js') }}" type="text/javascript">
     <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 

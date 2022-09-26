@@ -87,3 +87,7 @@ body {
 .table-responsive::-webkit-scrollbar-track {
     border-radius: 10px;
 }
+
+.taf{
+    text-align: left;
+}

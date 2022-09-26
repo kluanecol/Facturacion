@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="id_project">Proyecto(*):</label>
-                    <span class="help-block"></span>
+
                     {!!Form::select('id_project',[], null,[
                         'class'=>'form-control selectpicker id_project ',
                         'data-live-search'=>'true',
@@ -13,13 +13,12 @@
                         'required' => 'required',
                         'data-size'=>'5'
                     ])!!}
-
+                    <span class="help-block"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="year">{!! trans('form\labels.ano') !!}(*):</label>
-                    <span class="help-block"></span>
                     {!! Form::select('year', [1, 15, 13, 14], null, [
                         'class' => 'form-control selectpicker',
                         'id' => 'year',
@@ -27,6 +26,7 @@
                         'data-live-search'=>'true',
                         'title'=>'Seleccione',
                     ]) !!}
+                    <span class="help-block"></span>
                 </div>
             </div>
 
@@ -41,6 +41,7 @@
                         ]) !!}
                     </div>
                 </div>
+                <span class="help-block"></span>
             </div>
 
             <div class="col-md-6">
@@ -54,14 +55,24 @@
                         ]) !!}
                     </div>
                 </div>
+                <span class="help-block"></span>
             </div>
 
         </div>
+        <hr>
         <div class="form-actions noborder">
-            <button type="button" class="btn btn-success btn-block" id="btn-add">
-                <i class="fa fa-send" aria-hidden="true"></i>
-                Guardar
-            </button>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input has-info">
+                    <button type="button" class='btn btn-danger close-alert-modal btn-block'>
+                        Cancelar  <i class="fa fa-times-circle"  aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success btn-block" id="btn-add">
+                    Guardar  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
 
     {!! Form::close() !!}
