@@ -2,6 +2,7 @@
 
 namespace App\Modules\Invoicing\Contract\Repository;
 
+use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use App\Modules\Invoicing\Contract\Models\Contract;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -15,35 +16,24 @@ class ContractRepository implements ContractInterface{
         $table=[];
 
         foreach ($contracts as $contract) {
-            /*
-            $anexo = '<a href="'.$contract->vc_anexo_radicado.'" class="btn btn-warning" target="_blank">
-            <i class="fa fa-download" aria-hidden="true"></i> Anexo</a>';
 
-            $zip = '<a href="'.$contract->vc_ruta_zip.'" class="btn btn purple" target="_blank">
-            <i class="fa fa-file-archive-o" aria-hidden="true"></i> ZIP</a>';
-
-            $informesEnviados = '<span class="caption-subject bold font-yellow-crusta uppercase"><i class="fa fa-send" aria-hidden="true"></i> Enviados </span>'.
-            '<span class="badge badge-warning">'. $contract->informes->count().'</span>';
-            $informesAprobados = '<span class="caption-subject bold font-blue-madison uppercase"><i class="fa fa-check-circle" aria-hidden="true"></i> Aprobados </span>'.
-            '<span class="badge badge-success">'. $contract->informes->where('i_estado',2)->count().'</span>';
-            $informesDevueltos = '<span class="caption-subject bold font-red uppercase"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Devueltos </span>'.
-            '<span class="badge badge-danger">'. $contract->informes->where('i_estado','===',0)->count().'</span>';
-
-            $informes = ' <a data-id="'.$lotePago->i_pk_id.'" class="btn btn-info ver_informes_lote">
-            <i class="fa fa-eye" aria-hidden="true"></i></a>';
-            */
             $table[] = [
                 'id' => $contract->id,
                 'project_name' => $contract->project->nombre_corto,
                 'initial_date' => $contract->initial_date,
                 'end_date' => $contract->end_date,
                 'year' => $contract->year,
+                'options' => view('sections.contracts.components.table-options', ['contract' => $contract])->render()
             ];
 
-            $opciones = null;
+
         }
 
-        return Datatables::of($table)->addIndexColumn()->rawColumns([''])->make(true);
+        return Datatables::of($table)->addIndexColumn()->rawColumns(['options'])->make(true);
+    }
+
+    public function getById($id){
+        return Contract::find($id);
     }
 
     public function getByProjectAndYear($id_project, $year){
@@ -54,14 +44,42 @@ class ContractRepository implements ContractInterface{
         $result = 200;
 
         try {
-           $contract = new Contract();
+            if (isset($request->id)) {
+                $contract = Contract::find($request->id);
+            }else{
+                $contract = new Contract();
+            }
+
            $contract->fk_id_user = Auth::user()->id;
            $contract->fk_id_project = $request->id_project;
-           $contract->fk_id_country = Session::get('country')->id;
+           $contract->fk_id_country = GeneralVariables::getCurrentCountryId();
            $contract->initial_date = $request->initial_date;
            $contract->end_date = $request->end_date;
+           $contract->year = $request->year;
 
            if ($contract->save()) {
+                $result = 200;
+            }else{
+                $result = 400;
+           }
+
+           return $result;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function delete($request){
+        $result = 200;
+
+        try {
+
+            if (isset($request->id_contract)) {
+                $contract = Contract::find($request->id_contract);
+            }
+
+           if ($contract->delete()) {
                 $result = 200;
             }else{
                 $result = 400;

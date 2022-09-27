@@ -1,11 +1,13 @@
 <div id="main_contenido_formulario">
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-contract','enctype' => 'multipart/form-data']) !!}
         <div class="row">
+
+            {!! Form::hidden('id', (isset($contract) ? $contract->id : null), ['id'=>'id_project']) !!}
+
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="id_project">Proyecto(*):</label>
-
-                    {!!Form::select('id_project',[1,2,3,4,5,6,7,8,9], null,[
+                    {!!Form::select('id_project',$projects, (isset($contract) ? $contract->fk_id_project : null) ,[
                         'class'=>'form-control selectpicker id_project ',
                         'data-live-search'=>'true',
                         'title'=>'Seleccione el proyecto',
@@ -19,7 +21,7 @@
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="year">{!! trans('form\labels.ano') !!}(*):</label>
-                    {!! Form::select('year', [1, 15, 13, 14], null, [
+                    {!! Form::select('year', $years, (isset($contract) ? $contract->year : null), [
                         'class' => 'form-control selectpicker',
                         'id' => 'year',
                         'required' => 'required',
@@ -33,7 +35,7 @@
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="initial_date">Fecha Inicio(*):</label>
-                        {!! Form::date('initial_date',null, [
+                        {!! Form::date('initial_date',(isset($contract) ? $contract->initial_date : null), [
                             'class' => 'form-control ',
                             'id' => 'initial_date',
                             'required' => 'required',
@@ -46,7 +48,7 @@
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="end_date">Fecha Fin(*):</label>
-                        {!! Form::date('end_date', null, [
+                        {!! Form::date('end_date', (isset($contract) ? $contract->end_date : null), [
                             'class' => 'form-control ',
                             'id' => 'end_date',
                             'required' => 'required',

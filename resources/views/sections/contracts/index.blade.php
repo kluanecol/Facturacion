@@ -24,9 +24,9 @@
         </div>
 
         <div class="row">
-            <div id="div-btn-add-contract" class="col-md-12">
+            <div id="div-btn-add-contract" class="col-md-12 mb-2">
                 <div class="btn-group-vertical" role="group">
-                    <button type="button" class="btn btn-outline-primary btn-block add-contract">
+                    <button type="button" class="btn btn-primary btn-block add-contract">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>  {!! trans('messages\buttons.nuevo') !!}
                     </button>
                     <br>
@@ -44,7 +44,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-09-28') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-09-29') }}" type="text/javascript"></script>
     <!-- Modal Scripts -->
     <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
     <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>

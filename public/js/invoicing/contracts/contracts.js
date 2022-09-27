@@ -1,12 +1,9 @@
 
 
 var vURL = null;
-var selectedData = null;
-let table_contracts= null;
-let id_project = null;
-let year = null;
-let periodo = null;
-let informes_seleccionados = [];
+let table_contracts = 0;
+let id_project = 0;
+let year = [];
 
 jQuery(function() {
 	vURL = $('#main-url').data('url');
@@ -25,16 +22,10 @@ jQuery(function() {
 
 
     $(document).on('click','#search-contracts',function(){
-        id_project = $('#id_project').val();
-        year = $('#year').val();
-
-        var datos = {
-            'id_project' : id_project,
-            'year' : year,
-        }
+        domData = getFormFields();
 
         if (id_project != '' && year != '') {
-            refreshContractsTable(datos);
+            refreshContractsTable(domData);
         }else{
             Swal.fire({
                 type: 'warning',
@@ -56,20 +47,26 @@ jQuery(function() {
 
     });
 
+    $(document).on('click','.edit-contract',function(){
+        getContractForm($(this).data('id'));
+    });
 
-
-
+    $(document).on('click','.delete-contract',function(){
+        deleteContract($(this).data('id'));
+    });
 
 
 });
 
-function getContractForm(){
+function getContractForm(id_contract = null){
 
-    var datos = {}
+    var domData = {
+        id_contract : id_contract
+    }
 
     $.post(
         vURL+"/invoicing/contracts/getContractForm",
-        datos,
+        domData,
         function(data)
         {
             if (data.success) {
@@ -84,9 +81,8 @@ function getContractForm(){
                     allowOutsideClick: true
                   })
 
-                actualizarInputs();
+                refreshInputs();
                 validarForm("#form-contract",[],[]);
-
             } else {
                 Swal.fire({
                     type: 'error',
@@ -124,7 +120,7 @@ function getContractForm(){
 function saveContract() {
 
     let myForm = document.getElementById('form-contract');
-    var datos = new FormData(myForm);
+    var domData = new FormData(myForm);
 
     $('body').loading({
       message: 'Procesando...'
@@ -137,7 +133,7 @@ function saveContract() {
         dataType: 'json',
         processData: false,
         contentType: false,
-        data: datos,
+        data: domData,
         success: function(data){
           $('body').loading('stop');
 
@@ -148,6 +144,9 @@ function saveContract() {
                     type: data.type,
                     showConfirmButton: true,
                 });
+                domData = getFormFields();
+                refreshContractsTable(domData);
+
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
@@ -180,6 +179,85 @@ function saveContract() {
             }
         }
     });
+}
+
+function deleteContract(id_contract) {
+
+    var formData = new FormData();
+    formData.append("id_contract", id_contract);
+
+    Swal.fire({
+        title: '¿Seguro que desea eliminar el contrato?',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, eliminar',
+        cancelButtonText: `Cancelar`,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result == true) {
+            $('body').loading({
+                message: 'Procesando...'
+            });
+
+            $.ajax({
+
+                url: vURL+'/invoicing/contracts/delete',
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(data){
+                    $('body').loading('stop');
+
+                    if (data.status == 200) {
+                        Swal.fire({
+                            title: data.title,
+                            html: data.message,
+                            type: data.type,
+                            showConfirmButton: true,
+                        });
+
+                        table_contracts.ajax.reload();
+
+                    }
+                    else if(data.status == 400){
+                        toastr.warning(data.message, data.title);
+                    }
+                    else{
+                        toastr.error(data.message, data.title);
+                    }
+                },
+                error: function(data){
+                    $('body').loading('stop');
+
+                    if(data.status == 419){
+                        Swal.fire({
+                            title: `¡Algo salió Mal!`,
+                            html: `Ha caducado el tiempo de sesión, se recargará la página`,
+                            type: `error`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        }).then(()=>{
+                            location.reload();
+                        });
+                    }else if(data.status == 500){
+                        Swal.fire({
+                            title: `¡Algo salió Mal!`,
+                            html: `Ha ocurrido un error en el servidor, contacte al equipo de soporte`,
+                            type: `error`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                }
+            });
+
+        }
+    })
+
 }
 
 
@@ -228,6 +306,7 @@ function refreshContractsTable(datos) {
             {data: 'initial_date', name: 'initial_date'},
             {data: 'end_date', name: 'end_date'},
             {data: 'year', name: 'year'},
+            {data: 'options', name: 'options'}
         ],
         dom: 'Bfrtip',
             buttons: [
@@ -239,7 +318,19 @@ function refreshContractsTable(datos) {
     });
 }
 
-function actualizarInputs(){
+function getFormFields() {
+    id_project = $('#id_project').val();
+    year = $('#year').val();
+
+    var domData = {
+        'id_project' : id_project,
+        'year' : year,
+    };
+
+    return domData;
+}
+
+function refreshInputs(){
     informes_seleccionados = [];
     $('[data-toggle="tooltip"]').tooltip();
     $(".datepicker").datepicker({

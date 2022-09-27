@@ -24,6 +24,11 @@
                 'uses' => 'ContractController@save'
             ]);
 
+            Route::post('/delete', [
+                'as' => 'contracts.delete',
+                'uses' => 'ContractController@delete'
+            ]);
+
         });
 
     });

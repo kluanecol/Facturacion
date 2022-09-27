@@ -18,7 +18,7 @@ class CreateContractsTable extends Migration
             $table->increments('id');
             $table->date('initial_date');
             $table->date('end_date');
-            $table->integer('year');
+            $table->smallInteger('year');
 
             $table->unsignedBigInteger('fk_id_user');
             $table->foreign('fk_id_user','fk_contract_to_user')->references('id')->on('users');

@@ -3,23 +3,31 @@
 namespace App\Modules\Invoicing\Contract\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\Project\Repository\ProjectInterface;
+use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Contract\Repository\ContractInterface;
+
+use Session;
 
 class ContractController extends Controller
 {
     private $contractRepository;
-    protected $countryRepository;
+    protected $projectRepository;
 
     function __construct(
-            ContractInterface $contractRepository
+            ContractInterface $contractRepository,
+            ProjectInterface $projectRepository
         )
         {
             $this->contractRepository = $contractRepository;
+            $this->projectRepository = $projectRepository;
         }
 
     public function index(){
-        $data = [];
+        $data['projects'] = $this->projectRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['years'] = GeneralVariables::yearsArray();
+
         return view('sections.contracts.index', $data);
     }
 
@@ -28,7 +36,12 @@ class ContractController extends Controller
     }
 
     public function getContractForm(Request $request){
-        $data = [];
+        if (isset($request->id_contract)) {
+            $data['contract'] = $this->contractRepository->getById($request->id_contract);
+        }
+
+        $data['projects'] = $this->projectRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['years'] = GeneralVariables::yearsArray();
 
         $returnHTML = view('sections.contracts.form.form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
@@ -63,4 +76,34 @@ class ContractController extends Controller
         return response()->json($mensajes);
 
     }
+
+    public function delete(Request $request){
+        $result = $this->contractRepository->delete($request);
+
+        if (is_string($result)) {
+            $mensajes = [
+                'message' => $result,
+                'title' => 'Error no controlado!',
+                'type'  => 'warning',
+            ];
+        }
+        else if($result == 200){
+            $mensajes = [
+                'title' => 'Bien hecho!',
+                'message' => 'Datos eliminados con éxito',
+                'type'  => 'success',
+                'status' => $result
+            ];
+        }else{
+            $mensajes = [
+                'message' => 'Algo salió Mal',
+                'title' => 'No fue posible eliminar los datos',
+                'type'  => 'warning',
+                'status' => $result
+            ];
+        }
+        return response()->json($mensajes);
+
+    }
+
 }
