@@ -196,7 +196,7 @@ function deleteContract(id_contract) {
         cancelButtonColor: '#3085d6',
         allowOutsideClick: false
     }).then((result) => {
-        if (result == true) {
+        if (result.value == true) {
             $('body').loading({
                 message: 'Procesando...'
             });
