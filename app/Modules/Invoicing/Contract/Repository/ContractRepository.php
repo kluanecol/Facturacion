@@ -12,8 +12,13 @@ class ContractRepository implements ContractInterface{
 
     public function dataTableContracts($request){
 
-        $contracts = $this->getByProjectAndYear($request->id_project, $request->year);
+        $contracts=[];
         $table=[];
+
+        if (isset($request->id_project) && isset($request->year)) {
+            $contracts = $this->getByProjectAndYear($request->id_project, $request->year);
+        }
+
 
         foreach ($contracts as $contract) {
 

@@ -2,7 +2,7 @@
 
 var vURL = null;
 let table_contracts = 0;
-let id_project = 0;
+let id_project = [];
 let year = [];
 
 jQuery(function() {
@@ -82,7 +82,7 @@ function getContractForm(id_contract = null){
                   })
 
                 refreshInputs();
-                validarForm("#form-contract",[],[]);
+                validateForm("#form-contract",[],[]);
             } else {
                 Swal.fire({
                     type: 'error',
@@ -345,7 +345,7 @@ function refreshInputs(){
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-function validarForm(id,rules,messages){
+function validateForm(id,rules,messages){
     /* JQUERY VALIDATE*/
     if(id==undefined || $(id).length == 0 ){
       return false;

@@ -44,7 +44,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-09-30') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-09-31') }}" type="text/javascript"></script>
     <!-- Modal Scripts -->
     <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
     <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
