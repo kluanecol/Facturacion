@@ -29,6 +29,11 @@
                 'uses' => 'ContractController@delete'
             ]);
 
+            Route::get('/config/{id}', [
+                'as' => 'contracts.configuration',
+                'uses' => 'ContractController@configuration'
+            ]);
+
         });
 
     });

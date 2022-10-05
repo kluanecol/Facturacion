@@ -112,4 +112,8 @@ class ContractController extends Controller
 
     }
 
+    public function configuration($idContract){
+        dd($idContract);
+    }
+
 }

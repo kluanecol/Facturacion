@@ -6,7 +6,7 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_project">Proyecto(*):</label>
+                    <label for="fk_id_project">{!! trans('form\labels.proyecto') !!}(*):</label>
                     {!!Form::select('fk_id_project',$projects, (isset($contract) ? $contract->fk_id_project : null) ,[
                         'class'=>'form-control selectpicker fk_id_project ',
                         'data-live-search'=>'true',
@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_client">Cliente(*):</label>
+                    <label for="fk_id_client">{!! trans('form\labels.cliente') !!}(*):</label>
                     {!!Form::select('fk_id_client',$clients, (isset($contract) ? $contract->fk_id_client : null) ,[
                         'class'=>'form-control selectpicker fk_id_client ',
                         'data-live-search'=>'true',
@@ -49,7 +49,7 @@
 
             <div class="col-md-4">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
-                    <label for="initial_date">Fecha Inicio(*):</label>
+                    <label for="initial_date">{!! trans('form\labels.fechaInicial') !!}(*):</label>
                         {!! Form::date('initial_date',(isset($contract) ? $contract->initial_date : null), [
                             'class' => 'form-control ',
                             'id' => 'initial_date',
@@ -62,7 +62,7 @@
 
             <div class="col-md-4">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
-                    <label for="end_date">Fecha Fin(*):</label>
+                    <label for="end_date">{!! trans('form\labels.fechaFinal') !!}(*):</label>
                         {!! Form::date('end_date', (isset($contract) ? $contract->end_date : null), [
                             'class' => 'form-control ',
                             'id' => 'end_date',
