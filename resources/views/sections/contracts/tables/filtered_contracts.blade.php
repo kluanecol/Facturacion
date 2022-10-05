@@ -11,6 +11,7 @@
     <thead class="bg-kluane text-light">
         <th class="text-center"><strong>Id</strong></th>
         <th class="text-center"><strong>{!! trans('form\labels.proyecto') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('form\labels.cliente') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('form\labels.fechaInicial') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('form\labels.fechaFinal') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('form\labels.ano') !!}</strong></th>

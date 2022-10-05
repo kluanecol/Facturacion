@@ -6,12 +6,12 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="id_project">Proyecto(*):</label>
-                    {!!Form::select('id_project',$projects, (isset($contract) ? $contract->fk_id_project : null) ,[
-                        'class'=>'form-control selectpicker id_project ',
+                    <label for="fk_id_project">Proyecto(*):</label>
+                    {!!Form::select('fk_id_project',$projects, (isset($contract) ? $contract->fk_id_project : null) ,[
+                        'class'=>'form-control selectpicker fk_id_project ',
                         'data-live-search'=>'true',
                         'title'=>'Seleccione el proyecto',
-                        'id'=>'id_project',
+                        'id'=>'fk_id_project',
                         'required' => 'required',
                         'data-size'=>'5'
                     ])!!}
@@ -19,6 +19,21 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="fk_id_client">Cliente(*):</label>
+                    {!!Form::select('fk_id_client',$clients, (isset($contract) ? $contract->fk_id_client : null) ,[
+                        'class'=>'form-control selectpicker fk_id_client ',
+                        'data-live-search'=>'true',
+                        'title'=>'Seleccione el cliente',
+                        'id'=>'fk_id_client',
+                        'required' => 'required',
+                        'data-size'=>'5'
+                    ])!!}
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="col-md-12"><br></div>
+            <div class="col-md-4">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="year">{!! trans('form\labels.ano') !!}(*):</label>
                     {!! Form::select('year', $years, (isset($contract) ? $contract->year : null), [
@@ -32,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="initial_date">Fecha Inicio(*):</label>
                         {!! Form::date('initial_date',(isset($contract) ? $contract->initial_date : null), [
@@ -45,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="end_date">Fecha Fin(*):</label>
                         {!! Form::date('end_date', (isset($contract) ? $contract->end_date : null), [

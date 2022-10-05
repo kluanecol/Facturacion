@@ -4,6 +4,7 @@ var vURL = null;
 let table_contracts = 0;
 let id_project = [];
 let year = [];
+let id_client = [];
 
 jQuery(function() {
 	vURL = $('#main-url').data('url');
@@ -24,7 +25,7 @@ jQuery(function() {
     $(document).on('click','#search-contracts',function(){
         domData = getFormFields();
 
-        if (id_project != '' && year != '') {
+        if (id_project != '' && year != '' && id_client != '') {
             refreshContractsTable(domData);
         }else{
             Swal.fire({
@@ -303,6 +304,7 @@ function refreshContractsTable(datos) {
         columns: [
             {data: 'id', name: 'id'},
             {data: 'project_name', name: 'project_name'},
+            {data: 'client_name', name: 'client_name'},
             {data: 'initial_date', name: 'initial_date'},
             {data: 'end_date', name: 'end_date'},
             {data: 'year', name: 'year'},
@@ -321,10 +323,12 @@ function refreshContractsTable(datos) {
 function getFormFields() {
     id_project = $('#id_project').val();
     year = $('#year').val();
+    id_client = $('#id_client').val();
 
     var domData = {
         'id_project' : id_project,
         'year' : year,
+        'id_client' : id_client,
     };
 
     return domData;

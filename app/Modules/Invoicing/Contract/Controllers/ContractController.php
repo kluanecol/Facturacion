@@ -3,6 +3,7 @@
 namespace App\Modules\Invoicing\Contract\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\Client\Repository\ClientInterface;
 use App\Modules\Admin\Project\Repository\ProjectInterface;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
@@ -14,18 +15,22 @@ class ContractController extends Controller
 {
     private $contractRepository;
     protected $projectRepository;
+    protected $clientRepository;
 
     function __construct(
             ContractInterface $contractRepository,
-            ProjectInterface $projectRepository
+            ProjectInterface $projectRepository,
+            ClientInterface $clientRepository
         )
         {
             $this->contractRepository = $contractRepository;
             $this->projectRepository = $projectRepository;
+            $this->clientRepository = $clientRepository;
         }
 
     public function index(){
         $data['projects'] = $this->projectRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['clients'] = $this->clientRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
         $data['years'] = GeneralVariables::yearsArray();
 
         return view('sections.contracts.index', $data);
@@ -41,6 +46,7 @@ class ContractController extends Controller
         }
 
         $data['projects'] = $this->projectRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['clients'] = $this->clientRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
         $data['years'] = GeneralVariables::yearsArray();
 
         $returnHTML = view('sections.contracts.form.form', $data)->render();

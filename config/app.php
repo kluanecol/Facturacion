@@ -167,7 +167,8 @@ return [
         App\Modules\Invoicing\Contract\Providers\ContractServiceProvider::class,
 
 
-        App\Modules\Admin\Project\Providers\ProjectServiceProvider::class
+        App\Modules\Admin\Project\Providers\ProjectServiceProvider::class,
+        App\Modules\Admin\Client\Providers\ClientServiceProvider::class
 
     ],
 

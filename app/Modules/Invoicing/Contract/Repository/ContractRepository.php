@@ -16,7 +16,7 @@ class ContractRepository implements ContractInterface{
         $table=[];
 
         if (isset($request->id_project) && isset($request->year)) {
-            $contracts = $this->getByProjectAndYear($request->id_project, $request->year);
+            $contracts = $this->getByProjectYearAndClient($request->id_project, $request->year, $request->id_client);
         }
 
 
@@ -25,6 +25,7 @@ class ContractRepository implements ContractInterface{
             $table[] = [
                 'id' => $contract->id,
                 'project_name' => $contract->project->nombre_corto,
+                'client_name' => $contract->client->nombre_cliente,
                 'initial_date' => $contract->initial_date,
                 'end_date' => $contract->end_date,
                 'year' => $contract->year,
@@ -41,8 +42,11 @@ class ContractRepository implements ContractInterface{
         return Contract::find($id);
     }
 
-    public function getByProjectAndYear($id_project, $year){
-        return Contract::whereIn('fk_id_project',$id_project)->whereIn('year',$year)->get();
+    public function getByProjectYearAndClient($idProject, $year, $idClient){
+        return Contract::whereIn('fk_id_project',$idProject)
+            ->whereIn('year',$year)
+            ->whereIn('fk_id_client',$idClient)
+            ->get();
     }
 
     public function save($request){
@@ -55,14 +59,11 @@ class ContractRepository implements ContractInterface{
                 $contract = new Contract();
             }
 
-           $contract->fk_id_user = Auth::user()->id;
-           $contract->fk_id_project = $request->id_project;
-           $contract->fk_id_country = GeneralVariables::getCurrentCountryId();
-           $contract->initial_date = $request->initial_date;
-           $contract->end_date = $request->end_date;
-           $contract->year = $request->year;
+           $data = $request->only($contract->getFillable());
+           $data['fk_id_user'] = Auth::user()->id;
+           $data['fk_id_country'] = GeneralVariables::getCurrentCountryId();
 
-           if ($contract->save()) {
+           if ($contract->fill($data)->save()) {
                 $result = 200;
             }else{
                 $result = 400;

@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-4">
     <div class="form-group ">
         <label for="id_project">{!! trans('form\labels.proyecto') !!}(*)</label>
         <span class="help-block"></span>
@@ -16,7 +16,25 @@
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
+    <div class="form-group ">
+        <label for="id_client">{!! trans('form\labels.cliente') !!}(*)</label>
+        <span class="help-block"></span>
+        {!! Form::select('id_client', $clients, null, [
+            'class' => 'form-control selectpicker',
+            'title'=>'Seleccione el cliente',
+            'data-actions-box'=>'true',
+            'multiple'=>'multiple',
+            'data-deselect-all-text'=>'Ninguno',
+            'data-select-all-text'=>'Todos',
+            'id' => 'id_client',
+            'required' => 'required',
+            'data-live-search'=>'true',
+        ]) !!}
+    </div>
+</div>
+
+<div class="col-md-4">
     <div class="form-group">
         <label for="year">{!! trans('form\labels.ano') !!}(*)</label>
         <span class="help-block"></span>
