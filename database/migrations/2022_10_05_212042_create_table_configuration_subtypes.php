@@ -22,6 +22,10 @@ class CreateTableConfigurationSubtypes extends Migration
             $table->text('english_description')->nullable();
             $table->json('json_countries');
             $table->tinyInteger('state');
+            $table->tinyInteger('required');
+            $table->tinyInteger('multiple');
+
+            $table->string('measure', 10)->nullable();
 
             $table->unsignedBigInteger('fk_id_configuration_type');
             $table->foreign('fk_id_configuration_type','fk_subtype_to_type')->references('id')->on('fac_configuration_types');
