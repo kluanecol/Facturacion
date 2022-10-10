@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebContractRoutes()
     {
-        Route::middleware('web')
+        Route::middleware(['web'])
              ->namespace($this->namespaceModules)
              ->group(base_path('routes/invoicing/contract.php'));
     }

@@ -30,8 +30,8 @@ jQuery(function() {
         }else{
             Swal.fire({
                 type: 'warning',
-                title: $('#msj-cant-filter-title').val()+'!',
-                text: $('#msj-cant-filter-subtitle').val()
+                title: $('#msg-cant-filter-title').val()+'!',
+                text: $('#msg-cant-filter-subtitle').val()
             });
         }
     });
@@ -264,6 +264,9 @@ function deleteContract(id_contract) {
 
 function refreshContractsTable(datos) {
     table_contracts = $('#table-contracts').DataTable({
+        language: {
+            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+        },
         processing: true,
         serverSide: false,
         responsive: false,
@@ -271,30 +274,7 @@ function refreshContractsTable(datos) {
         scrollX: 400,
         scrollY: 380,
         scrollCollapse: true,
-        language: {
-            "sProcessing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> <span class="sr-only">Procesando...</span>',
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar:",
-            "sUrl": "",
-            "sInfoThousands": ",",
-            "sLoadingRecords": "Cargando...",
-            "oPaginate": {
-                "sFirst": "Primero",
-                "sLast": "Último",
-                "sNext": "Siguiente",
-                "sPrevious": "Anterior"
-            },
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        },
+
         "ajax": {
             "url": vURL+"/invoicing/contracts/search",
             "type": 'POST',
