@@ -24,10 +24,12 @@ class CreateTableConfigurationSubtypes extends Migration
             $table->tinyInteger('state');
             $table->tinyInteger('required');
             $table->tinyInteger('multiple');
+            $table->tinyInteger('charge_by_percentage');
 
-            $table->string('measure', 10)->nullable();
+            $table->unsignedBigInteger('fk_id_measure')->nullable();
+            $table->foreign('fk_id_measure','fk_subtype_to_parametric')->references('id')->on('fac_parametrics');
 
-            $table->unsignedInteger('fk_id_configuration_type');
+            $table->unsignedBigInteger('fk_id_configuration_type');
             $table->foreign('fk_id_configuration_type','fk_subtype_to_type')->references('id')->on('fac_configuration_types');
 
 
@@ -46,6 +48,7 @@ class CreateTableConfigurationSubtypes extends Migration
         Schema::table('fac_configuration_subtypes', function (Blueprint $table)
         {
             $table->dropForeign('fk_subtype_to_type');
+            $table->dropForeign('fk_subtype_to_parametric');
         });
 
         Schema::dropIfExists('fac_configuration_subtypes');

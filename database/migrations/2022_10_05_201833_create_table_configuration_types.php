@@ -21,6 +21,7 @@ class CreateTableConfigurationTypes extends Migration
             $table->text('spanish_description')->nullable();
             $table->text('english_description')->nullable();
             $table->tinyInteger('state');
+            $table->json('json_countries');
 
             $table->timestamps();
             $table->softDeletes();
