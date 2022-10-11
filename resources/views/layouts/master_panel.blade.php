@@ -84,12 +84,7 @@
                 background-size: cover;
             }
 
-            .clase_cargando {
-                position: fixed;
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                background-color: #FFFFFF80;
+            .csa {
             }
         </style>
 
@@ -206,35 +201,20 @@
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        let current_lang =  ($('#current_lang').val() == "es") ? "english" : "spanish" ;
 
+        $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-
         });
 
-        $(function() {
-
-            $('.select2').select2();
-
-            $('.select2A').select2();
-
-
-
-
-        });
-
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        });
         $(document).on('click','.close-alert-modal',function(){
-            console.log("aca");
-                swal.close();
-            });
+            swal.close();
+        });
 
 
     </script>

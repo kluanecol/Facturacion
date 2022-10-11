@@ -18,14 +18,15 @@
                 @foreach (array_keys(config('locale.languages')) as $lang)
                     @if ($lang != App::getLocale())
                         @if (isset($inactive))
-                            <b><a class="nav-link" href="{!! route('lang.swap', $lang) !!}" title="Cambiar de idioma"
+                            <b><a class="nav-link" href="{!! route('lang.swap', $lang) !!}"
                                     style="  pointer-events: none;">
                                     [ {!! $lang !!} ]
                                 </a></b>
                         @else
-                            <b><a class="nav-link" href="{!! route('lang.swap', $lang) !!}" title="Cambiar de idioma">
+                            <b><a class="nav-link" href="{!! route('lang.swap', $lang) !!}">
                                     [ {!! $lang !!} ]
                                 </a></b>
+                                <input type="hidden" name="current_lang" id="current_lang" value="{{$lang}}">
                         @endif
                     @endif
                 @endforeach

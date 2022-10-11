@@ -265,7 +265,7 @@ function deleteContract(id_contract) {
 function refreshContractsTable(datos) {
     table_contracts = $('#table-contracts').DataTable({
         language: {
-            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+            "url": vURL+"/js/general/datatables/"+current_lang+".json"
         },
         processing: true,
         serverSide: false,

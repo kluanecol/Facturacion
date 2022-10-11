@@ -27,7 +27,7 @@ class CreateTableConfigurationSubtypes extends Migration
 
             $table->string('measure', 10)->nullable();
 
-            $table->unsignedBigInteger('fk_id_configuration_type');
+            $table->unsignedInteger('fk_id_configuration_type');
             $table->foreign('fk_id_configuration_type','fk_subtype_to_type')->references('id')->on('fac_configuration_types');
 
 
