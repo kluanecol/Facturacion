@@ -73,7 +73,7 @@ function getContractForm(id_contract = null){
             if (data.success) {
                 Swal.fire({
                     width:'800px',
-                    title: '<strong>Gestión de contrato</strong>',
+                    title: '<strong>'+$('#msg-contract-form-title').val()+'</strong>',
                     html:data.html,
                     showCloseButton: false,
                     showCancelButton: false,
@@ -124,7 +124,7 @@ function saveContract() {
     var domData = new FormData(myForm);
 
     $('body').loading({
-      message: 'Procesando...'
+      message: $('#msg-loading').val()
     });
 
     $.ajax({
@@ -188,18 +188,18 @@ function deleteContract(id_contract) {
     formData.append("id_contract", id_contract);
 
     Swal.fire({
-        title: '¿Seguro que desea eliminar el contrato?',
+        title: $('#msg-contract-delete').val(),
         type: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Si, eliminar',
-        cancelButtonText: `Cancelar`,
+        confirmButtonText: $('#msg-delete').val(),
+        cancelButtonText: $('#msg-cancel').val(),
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
         allowOutsideClick: false
     }).then((result) => {
         if (result.value == true) {
             $('body').loading({
-                message: 'Procesando...'
+                message: $('#msg-loading').val()
             });
 
             $.ajax({
@@ -330,7 +330,7 @@ function refreshInputs(){
 }
 
 function validateForm(id,rules,custom_messages){
-    /* JQUERY VALIDATE*/
+
     if(id==undefined || $(id).length == 0 ){
       return false;
     }else{
@@ -344,14 +344,11 @@ function validateForm(id,rules,custom_messages){
             }
             return isNaN(value) && isNaN($(params).val())
                 || (Number(value) > Number($(params).val()));
-        },'Must be greater than {0}.');
+        },$('#msg-final-date-greater').val());
 
         $.validator.addClassRules("is_required", {
             required: true,
-
         });
-
-
 
         $(id).validate().destroy();
 

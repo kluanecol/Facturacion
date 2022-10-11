@@ -60,21 +60,21 @@ class ContractController extends Controller
         if (is_string($result)) {
             $mensajes = [
                 'message' => $result,
-                'title' => 'Error no controlado!',
+                'title' => trans('messages\general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
             $mensajes = [
-                'title' => 'Bien hecho!',
-                'message' => 'Datos guardados con éxito',
+                'title' => trans('messages\general.bienHecho'),
+                'message' => trans('messages\general.guardadoConExito'),
                 'type'  => 'success',
                 'status' => $result
             ];
         }else{
             $mensajes = [
-                'message' => 'Algo salió Mal',
-                'title' => 'No fue posible guardar los datos',
+                'message' => trans('messages\general.algoSalioMal'),
+                'title' => trans('messages\general.errorAlGuardar'),
                 'type'  => 'warning',
                 'status' => $result
             ];
@@ -89,21 +89,21 @@ class ContractController extends Controller
         if (is_string($result)) {
             $mensajes = [
                 'message' => $result,
-                'title' => 'Error no controlado!',
+                'title' => trans('messages\general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
             $mensajes = [
-                'title' => 'Bien hecho!',
-                'message' => 'Datos eliminados con éxito',
+                'title' => trans('messages\general.bienHecho'),
+                'message' => trans('messages\general.borradoConExito'),
                 'type'  => 'success',
                 'status' => $result
             ];
         }else{
             $mensajes = [
-                'message' => 'Algo salió Mal',
-                'title' => 'No fue posible eliminar los datos',
+                'message' => trans('messages\general.algoSalioMal'),
+                'title' => trans('messages\general.errorAlEliminar'),
                 'type'  => 'warning',
                 'status' => $result
             ];

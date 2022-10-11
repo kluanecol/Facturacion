@@ -1,3 +1,5 @@
+
+<input type="hidden" id="msg-loading" value="{!! trans('messages\general.cargando') !!}">
 {{--Error Messages--}}
 <input type="hidden" id="msg-cant-filter-title" value="{!! trans('messages\general.noEsPosibleFiltrar') !!}">
 <input type="hidden" id="msg-cant-filter-subtitle" value="{!! trans('messages\general.seleccioneTodosLosFiltros') !!}">
@@ -11,3 +13,6 @@
 <input type="hidden" id="msg-final-date-greater" value="{!! trans('messages\validation.fechaFinalMayor') !!}">
 
 
+{{--Decision messages--}}
+<input type="hidden" id="msg-cancel" value="{!! trans('messages\general.cancelar') !!}">
+<input type="hidden" id="msg-delete" value="{!! trans('messages\general.eliminar') !!}">
