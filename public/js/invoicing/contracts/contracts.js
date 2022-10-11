@@ -87,8 +87,8 @@ function getContractForm(id_contract = null){
             } else {
                 Swal.fire({
                     type: 'error',
-                    title: 'Algo salió mal!',
-                    text: 'Ocurrió un error al obtener los datos',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -98,8 +98,8 @@ function getContractForm(id_contract = null){
         if(data.status == 419){
             Swal.fire({
                 type: 'error',
-                title: 'Algo salió mal!',
-                text: '`Ha caducado el tiempo de sesión, se recargará la páginas',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
                 showConfirmButton: false,
                 timer: 2000
             }).then(()=>{
@@ -109,8 +109,8 @@ function getContractForm(id_contract = null){
         }else if(data.status == 500){
             Swal.fire({
                 type: 'error',
-                title: 'Algo salió mal!',
-                text: 'Ha ocurrido un error en el servidor, contacte al soporte',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -161,8 +161,8 @@ function saveContract() {
 
             if(data.status == 419){
                 Swal.fire({
-                  title: `¡Algo salió Mal!`,
-                  html: `Ha caducado el tiempo de sesión, se recargará la página`,
+                  title: $('#msg-something-went-wrong').val(),
+                  html: $('#msg-session-expired').val(),
                   type: `error`,
                   showConfirmButton: false,
                   timer: 3000
@@ -171,8 +171,8 @@ function saveContract() {
                 });
             }else if(data.status == 500){
                 Swal.fire({
-                    title: `¡Algo salió Mal!`,
-                    html: `Ha ocurrido un error en el servidor, contacte al equipo de soporte`,
+                    title: $('#msg-something-went-wrong').val(),
+                    html: $('#msg-contact-support').val(),
                     type: `error`,
                     showConfirmButton: false,
                     timer: 3000
@@ -236,8 +236,8 @@ function deleteContract(id_contract) {
 
                     if(data.status == 419){
                         Swal.fire({
-                            title: `¡Algo salió Mal!`,
-                            html: `Ha caducado el tiempo de sesión, se recargará la página`,
+                            title: $('#msg-something-went-wrong').val(),
+                            html: $('#msg-session-expired').val(),
                             type: `error`,
                             showConfirmButton: false,
                             timer: 3000
@@ -246,8 +246,8 @@ function deleteContract(id_contract) {
                         });
                     }else if(data.status == 500){
                         Swal.fire({
-                            title: `¡Algo salió Mal!`,
-                            html: `Ha ocurrido un error en el servidor, contacte al equipo de soporte`,
+                            title: $('#msg-something-went-wrong').val(),
+                            html: $('#msg-contact-support').val(),
                             type: `error`,
                             showConfirmButton: false,
                             timer: 3000
@@ -329,13 +329,13 @@ function refreshInputs(){
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-function validateForm(id,rules,messages){
+function validateForm(id,rules,custom_messages){
     /* JQUERY VALIDATE*/
     if(id==undefined || $(id).length == 0 ){
       return false;
     }else{
         rules = (rules == undefined) ? [] : rules;
-        messages = (messages == undefined) ? [] : messages;
+        custom_messages = (custom_messages == undefined) ? [] : custom_messages;
 
         jQuery.validator.addMethod("greaterThan",
         function(value, element, params) {
@@ -346,19 +346,12 @@ function validateForm(id,rules,messages){
                 || (Number(value) > Number($(params).val()));
         },'Must be greater than {0}.');
 
-        messages =  {
-            id_project: {
-                required: "Es obligatorio"
-            },
-            initial_date: {
-                greaterThan: "La fecha final debe ser mayor a la inicial."
-            },
-            end_date: {
-                greaterThan: "La fecha final debe ser mayor a la inicial.",
-                required: "fecha obligatoria"
-            }
+        $.validator.addClassRules("is_required", {
+            required: true,
 
-        };
+        });
+
+
 
         $(id).validate().destroy();
 
@@ -369,7 +362,7 @@ function validateForm(id,rules,messages){
         $(id).validate({
             //ignore: [],
             rules: rules,
-            messages: messages,
+            messages: custom_messages,
             errorPlacement : function(error, element) {
                 $(element).closest('.form-group').find('.help-block').html(error.html());
                 $(element).closest('tr').find('.error-subtotal .help-block').html(error.html());

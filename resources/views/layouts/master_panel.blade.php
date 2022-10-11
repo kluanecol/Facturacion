@@ -158,7 +158,7 @@
  <!-- Validation Scripts -->
  <script src="{{ asset('plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
  <script src="{{ asset('plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
- <script src="{{ asset('plugins/jquery-validation/js/localization/messages_es.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('plugins/jquery-validation/js/localization/messages_'.Session::get('locale').'.js') }}" type="text/javascript"></script>
  <script src="{{ asset('plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}" type="text/javascript"></script>
     <!-- ChartJS -->
     <script src=" {{ asset('plugins/chart.js/Chart.min.js') }} "></script>

@@ -13,7 +13,7 @@
 @section('content')
 
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
-        @include('sections.contracts.form.messages')
+        @include('sections.validation.messages')
         <div class="row">
             <div class="col-md-12">
 
@@ -44,10 +44,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-10-08') }}" type="text/javascript"></script>
-    <!-- Modal Scripts -->
-    <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-10-10') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
@@ -58,11 +55,6 @@
     <script src=" {{ asset('plugins/datatables-bs4/js/vfs_fonts.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.html5.min.js') }}"></script>
     <script src=" {{ asset('plugins/datatables-bs4/js/buttons.print.min.js') }}"></script>
-
-
-
-
-
 
     <script src="{{ asset('bower_components/jquery-loading/dist/jquery.loading.min.js') }}" type="text/javascript">
     <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
