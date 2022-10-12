@@ -25,7 +25,7 @@ class CreateTableFacParametricsTable extends Migration
             $table->decimal('value', 8, 2)->nullable();
             $table->string('symbol', 10)->nullable();
 
-            $table->unsignedBigInteger('fk_id_parent');
+            $table->unsignedBigInteger('fk_id_parent')->nullable();
             $table->foreign('fk_id_parent','fk_parametric_to_parent')->references('id')->on('fac_parametrics');
 
             $table->timestamps();

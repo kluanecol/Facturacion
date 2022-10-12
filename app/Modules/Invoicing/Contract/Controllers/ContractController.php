@@ -118,9 +118,11 @@ class ContractController extends Controller
 
     public function configuration($idContract){
         $data=[];
-        $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
-        return view('sections.contracts.configurations.index', $data);
 
+        $data['contract'] = $this->contractRepo->getById($idContract);
+        $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
+
+        return view('sections.contracts.configurations.index', $data);
     }
 
 }

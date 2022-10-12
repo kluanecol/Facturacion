@@ -10,6 +10,7 @@
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/configuration_collapse.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/card.css') }}" rel="stylesheet" type="text/css" />
 
 @section('content')
 
@@ -20,7 +21,8 @@
             <div class="col-md-12">
 
                 <div class="row mb-2">
-                    @include('sections.contracts.configurations.form.subtype-filter')
+                    @include('sections.contracts.components.contract-card')
+                    {{-- @include('sections.contracts.configurations.form.subtype-filter')--}}
 
                     <div class="container">
                         <div class="row">
@@ -34,22 +36,10 @@
                         </div>
                     </div>
                 </div>
-            </div><hr>
+            </div>
+            <hr>
         </div>
 
-        <div class="row">
-            <div id="div-btn-add-contract" class="col-md-12 mb-2">
-                <div class="btn-group-vertical" role="group">
-                    <button type="button" class="btn btn-primary btn-block add-contract">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>  {!! trans('messages\buttons.nuevo') !!}
-                    </button>
-                    <br>
-                </div>
-            </div>
-            <div class="col-md-12">
-                @include('sections.contracts.tables.filtered_contracts')
-            </div>
-        </div>
     </div>
 
 

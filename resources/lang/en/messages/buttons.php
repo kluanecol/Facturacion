@@ -1,8 +1,8 @@
 <?php
 
 return [
-
     'aceptar' => 'Accept',
+    'agregar' => 'Add',
     'Buscar' => 'Search',
     'cerrarCesion' => 'Log out',
     'consultar' => 'Search',
