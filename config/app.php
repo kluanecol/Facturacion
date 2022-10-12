@@ -165,6 +165,7 @@ return [
          * Custom Service Providers...
          */
         App\Modules\Invoicing\Contract\Providers\ContractServiceProvider::class,
+        App\Modules\Invoicing\ConfigurationSubtype\Providers\Providers\ConfigurationSubtypeServiceProvider::class,
 
 
         App\Modules\Admin\Project\Providers\ProjectServiceProvider::class,

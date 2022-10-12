@@ -19,6 +19,6 @@ return [
     'errorAlEliminar' => 'Unable to delete data',
     //Success Messages
     'bienHecho' => '¡Well done!',
-    'guardadoConExito' => 'Dta saved successfully',
+    'guardadoConExito' => 'Data saved successfully',
     'borradoConExito' => 'Data deleted successfully'
 ];

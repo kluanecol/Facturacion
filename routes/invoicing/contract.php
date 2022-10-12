@@ -29,10 +29,13 @@
                 'uses' => 'ContractController@delete'
             ]);
 
-            Route::get('/config/{id}', [
-                'as' => 'contracts.configuration',
-                'uses' => 'ContractController@configuration'
-            ]);
+            Route::group(['prefix' => 'config' ], function (){
+
+                Route::get('/{id}', [
+                    'as' => 'contracts.configuration',
+                    'uses' => 'ContractController@configuration'
+                ]);
+            });
 
         });
 

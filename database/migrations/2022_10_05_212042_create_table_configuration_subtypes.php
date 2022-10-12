@@ -15,22 +15,21 @@ class CreateTableConfigurationSubtypes extends Migration
     {
         Schema::create('fac_configuration_subtypes', function (Blueprint $table) {
 
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('spanish_name', 255)->nullable($value = "Sin nombre");
             $table->string('english_name', 255)->nullable($value = "No name");
             $table->text('spanish_description')->nullable();
             $table->text('english_description')->nullable();
             $table->json('json_countries');
-            $table->tinyInteger('state');
-            $table->tinyInteger('required');
-            $table->tinyInteger('multiple');
-            $table->tinyInteger('charge_by_percentage');
+            $table->tinyInteger('state')->nullable($value = 1);
+            $table->tinyInteger('required')->nullable($value = 0);
+            $table->tinyInteger('multiple')->nullable($value = 0);
+            $table->tinyInteger('charge_by_percentage')->nullable($value = 0);
 
             $table->unsignedBigInteger('fk_id_measure')->nullable();
             $table->foreign('fk_id_measure','fk_subtype_to_parametric')->references('id')->on('fac_parametrics');
 
-            $table->unsignedBigInteger('fk_id_configuration_type');
-            $table->foreign('fk_id_configuration_type','fk_subtype_to_type')->references('id')->on('fac_configuration_types');
+            $table->integer('fk_id_configuration_type');
 
 
             $table->timestamps();
@@ -47,7 +46,6 @@ class CreateTableConfigurationSubtypes extends Migration
     {
         Schema::table('fac_configuration_subtypes', function (Blueprint $table)
         {
-            $table->dropForeign('fk_subtype_to_type');
             $table->dropForeign('fk_subtype_to_parametric');
         });
 

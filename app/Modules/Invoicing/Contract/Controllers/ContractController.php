@@ -113,7 +113,10 @@ class ContractController extends Controller
     }
 
     public function configuration($idContract){
-        dd($idContract);
+        $data=[];
+        $data['configurationSubtypes'] = [];
+        return view('sections.contracts.configurations.index', $data);
+
     }
 
 }
