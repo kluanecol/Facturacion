@@ -9,6 +9,7 @@
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/configuration_collapse.css') }}" rel="stylesheet" type="text/css" />
 
 @section('content')
 
@@ -20,6 +21,18 @@
 
                 <div class="row mb-2">
                     @include('sections.contracts.configurations.form.subtype-filter')
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    @foreach ($configurationSubtypes as $configuration)
+                                        @include('sections.contracts.configurations.components.configuration-subtype',['configuration' => $configuration])
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div><hr>
         </div>

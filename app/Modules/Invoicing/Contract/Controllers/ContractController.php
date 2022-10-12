@@ -8,45 +8,49 @@ use App\Modules\Admin\Project\Repository\ProjectInterface;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Contract\Repository\ContractInterface;
+use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeInterface;
 
 use Session;
 
 class ContractController extends Controller
 {
-    private $contractRepository;
-    protected $projectRepository;
-    protected $clientRepository;
+    private $contractRepo;
+    protected $projectRepo;
+    protected $clientRepo;
+    protected $configurationSubtypeRepo;
 
     function __construct(
-            ContractInterface $contractRepository,
-            ProjectInterface $projectRepository,
-            ClientInterface $clientRepository
+            ContractInterface $contractRepo,
+            ProjectInterface $projectRepo,
+            ClientInterface $clientRepo,
+            ConfigurationSubtypeInterface $configurationSubtypeRepo
         )
         {
-            $this->contractRepository = $contractRepository;
-            $this->projectRepository = $projectRepository;
-            $this->clientRepository = $clientRepository;
+            $this->contractRepo = $contractRepo;
+            $this->projectRepo = $projectRepo;
+            $this->clientRepo = $clientRepo;
+            $this->configurationSubtypeRepo = $configurationSubtypeRepo;
         }
 
     public function index(){
-        $data['projects'] = $this->projectRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
-        $data['clients'] = $this->clientRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
+        $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['clients'] = $this->clientRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
         $data['years'] = GeneralVariables::yearsArray();
 
         return view('sections.contracts.index', $data);
     }
 
     public function Search(Request $request){
-        return $this->contractRepository->dataTableContracts($request);
+        return $this->contractRepo->dataTableContracts($request);
     }
 
     public function getContractForm(Request $request){
         if (isset($request->id_contract)) {
-            $data['contract'] = $this->contractRepository->getById($request->id_contract);
+            $data['contract'] = $this->contractRepo->getById($request->id_contract);
         }
 
-        $data['projects'] = $this->projectRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
-        $data['clients'] = $this->clientRepository->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
+        $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['clients'] = $this->clientRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
         $data['years'] = GeneralVariables::yearsArray();
 
         $returnHTML = view('sections.contracts.form.form', $data)->render();
@@ -55,7 +59,7 @@ class ContractController extends Controller
     }
 
     public function save(Request $request){
-        $result = $this->contractRepository->save($request);
+        $result = $this->contractRepo->save($request);
 
         if (is_string($result)) {
             $mensajes = [
@@ -84,7 +88,7 @@ class ContractController extends Controller
     }
 
     public function delete(Request $request){
-        $result = $this->contractRepository->delete($request);
+        $result = $this->contractRepo->delete($request);
 
         if (is_string($result)) {
             $mensajes = [
@@ -114,7 +118,7 @@ class ContractController extends Controller
 
     public function configuration($idContract){
         $data=[];
-        $data['configurationSubtypes'] = [];
+        $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
         return view('sections.contracts.configurations.index', $data);
 
     }

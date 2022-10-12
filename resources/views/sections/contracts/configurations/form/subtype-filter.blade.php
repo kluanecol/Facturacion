@@ -2,7 +2,7 @@
     <div class="form-group ">
         <label for="id_configuration_subtype">{!! trans('form\labels.tipoDeConfiguracion') !!}(*)</label>
         <span class="help-block"></span>
-        {!! Form::select('id_configuration_subtype', $configurationSubtypes, null, [
+        {!! Form::select('id_configuration_subtype', is_object($configurationSubtypes) ? $configurationSubtypes->pluck('name','id') : [], null, [
             'class' => 'form-control selectpicker',
             'title'=>'Seleccione el tipo de configuracion a agregar',
             'id' => 'id_configuration_subtype',

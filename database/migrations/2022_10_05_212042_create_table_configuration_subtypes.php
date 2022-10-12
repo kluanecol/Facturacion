@@ -25,6 +25,7 @@ class CreateTableConfigurationSubtypes extends Migration
             $table->tinyInteger('required')->nullable($value = 0);
             $table->tinyInteger('multiple')->nullable($value = 0);
             $table->tinyInteger('charge_by_percentage')->nullable($value = 0);
+            $table->integer('order')->nullable();
 
             $table->unsignedBigInteger('fk_id_measure')->nullable();
             $table->foreign('fk_id_measure','fk_subtype_to_parametric')->references('id')->on('fac_parametrics');
