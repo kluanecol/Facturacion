@@ -4,11 +4,11 @@
         <span class="help-block"></span>
         {!! Form::select('id_project', $projects, null, [
             'class' => 'form-control selectpicker',
-            'title'=>'Seleccione el proyecto',
+            'title'=>trans('messages\general.seleccioneEl').' '.trans('form\labels.proyecto') ,
             'data-actions-box'=>'true',
             'multiple'=>'multiple',
-            'data-deselect-all-text'=>'Ninguno',
-            'data-select-all-text'=>'Todos',
+            'data-deselect-all-text'=>trans('messages\general.ninguno'),
+            'data-select-all-text'=>trans('messages\general.seleccionarTodo'),
             'id' => 'id_project',
             'required' => 'required',
             'data-live-search'=>'true',
@@ -22,11 +22,11 @@
         <span class="help-block"></span>
         {!! Form::select('id_client', $clients, null, [
             'class' => 'form-control selectpicker',
-            'title'=>'Seleccione el cliente',
+            'title'=>trans('messages\general.seleccioneEl').' '.trans('form\labels.cliente'),
             'data-actions-box'=>'true',
             'multiple'=>'multiple',
-            'data-deselect-all-text'=>'Ninguno',
-            'data-select-all-text'=>'Todos',
+            'data-deselect-all-text'=>trans('messages\general.ninguno'),
+            'data-select-all-text'=>trans('messages\general.seleccionarTodo'),
             'id' => 'id_client',
             'required' => 'required',
             'data-live-search'=>'true',
@@ -44,10 +44,10 @@
             'required' => 'required',
             'multiple' => 'multiple',
             'data-live-search'=>'true',
-            'title'=>'Seleccione el año',
+            'title'=>trans('messages\general.seleccioneEl').' '.trans('form\labels.ano'),
             'data-actions-box'=>'true',
-            'data-deselect-all-text'=>'Ninguno',
-            'data-select-all-text'=>'Todos',
+            'data-deselect-all-text'=>trans('messages\general.ninguno'),
+            'data-select-all-text'=>trans('messages\general.seleccionarTodo'),
         ]) !!}
     </div>
 </div>

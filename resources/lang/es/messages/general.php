@@ -20,6 +20,10 @@ return [
     //Success Messages
     'bienHecho' => '¡Bien hecho!',
     'guardadoConExito' => 'Datos guardados con éxito',
-    'borradoConExito' => 'Datos eliminados con éxito'
+    'borradoConExito' => 'Datos eliminados con éxito',
 
+    'seleccionarTodo' => 'Seleccionar todo',
+    'ninguno' => 'Ninguno',
+    'seleccioneEl' => 'Seleccione el',
+    'seleccioneLa' => 'Seleccione la'
 ];

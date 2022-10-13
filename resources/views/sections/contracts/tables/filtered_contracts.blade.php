@@ -1,8 +1,8 @@
 
 
 <h5>
-    <span class="caption-subject bold font-blue-madison uppercase"><i class="fa fa-pencil-square-o"
-            aria-hidden="true"></i>Resultados filtrados<b><span id=""></span></b></span>
+    <span class="caption-subject bold font-blue-madison uppercase"><i class="icofont-filter"
+            aria-hidden="true"></i>{!! trans('messages\contracts.contratosFiltrados') !!}<b><span id=""></span></b></span>
 </h5>
 
 <hr>

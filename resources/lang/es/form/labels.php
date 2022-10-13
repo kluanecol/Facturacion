@@ -6,5 +6,5 @@ return [
     'fechaInicial' => 'Fecha inicial',
     'fechaFinal' => 'Fecha final',
     'opciones' => 'Opciones',
-    'proyecto' => 'Proyecto',
+    'proyecto' => 'Proyecto'
 ];

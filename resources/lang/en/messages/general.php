@@ -20,5 +20,10 @@ return [
     //Success Messages
     'bienHecho' => '¡Well done!',
     'guardadoConExito' => 'Data saved successfully',
-    'borradoConExito' => 'Data deleted successfully'
+    'borradoConExito' => 'Data deleted successfully',
+    //Select Messages
+    'seleccionarTodo' => 'Select all',
+    'ninguno' => 'None',
+    'seleccioneEl' => 'Select the',
+    'seleccioneLa' => 'Select the'
 ];
