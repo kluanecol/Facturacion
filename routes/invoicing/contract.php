@@ -2,7 +2,7 @@
     Route::group(['prefix' => 'invoicing','middleware' => 'auth','cors'], function(){
         $controller = "Invoicing\Contract\Controllers";
 
-        Route::group(['namespace' => $controller, 'prefix' => 'contracts' ], function (){
+        Route::group(['namespace' => $controller, 'prefix' => 'contract' ], function (){
 
             Route::get('/index', [
                 'as' => 'contracts.index',
@@ -29,7 +29,7 @@
                 'uses' => 'ContractController@delete'
             ]);
 
-            Route::group(['prefix' => 'config' ], function (){
+            Route::group(['prefix' => 'configContract' ], function (){
 
                 Route::get('/{id}', [
                     'as' => 'contracts.configuration',

@@ -22,7 +22,6 @@
 
                 <div class="row mb-2">
                     @include('sections.contracts.components.contract-card')
-                    {{-- @include('sections.contracts.configurations.form.subtype-filter')--}}
 
                     <div class="container">
                         <div class="row">
@@ -48,7 +47,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contracts/contracts.js?v=2022-10-11') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/configurationSubtypes/configurationSubtypes.js?v=2022-10-13') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

@@ -36,8 +36,8 @@ jQuery(function() {
         }
     });
 
-    $(document).on('click','.add-contract',function(){
-        getContractForm();
+    $(document).on('click','.add-configuration',function(){
+        getConfigurationForm($(this).data('id'));
     });
 
     $(document).on('click','#btn-add',function(){
@@ -59,14 +59,14 @@ jQuery(function() {
 
 });
 
-function getContractForm(id_contract = null){
+function getConfigurationForm(id_configuration){
 
     var domData = {
-        id_contract : id_contract
+        id_configuration : id_configuration
     }
 
     $.post(
-        vURL+"/invoicing/contract/getContractForm",
+        vURL+"/invoicing/configurationSubtype/getForm",
         domData,
         function(data)
         {
@@ -129,7 +129,7 @@ function saveContract() {
 
     $.ajax({
 
-        url: vURL+'/invoicing/contract/save',
+        url: vURL+'/invoicing/contracts/save',
         type: 'POST',
         dataType: 'json',
         processData: false,
@@ -204,7 +204,7 @@ function deleteContract(id_contract) {
 
             $.ajax({
 
-                url: vURL+'/invoicing/contract/delete',
+                url: vURL+'/invoicing/contracts/delete',
                 type: 'POST',
                 dataType: 'json',
                 processData: false,
@@ -276,7 +276,7 @@ function refreshContractsTable(datos) {
         scrollCollapse: true,
 
         "ajax": {
-            "url": vURL+"/invoicing/contract/search",
+            "url": vURL+"/invoicing/contracts/search",
             "type": 'POST',
             "data": datos
         },
@@ -315,7 +315,7 @@ function getFormFields() {
 }
 
 function refreshInputs(){
-
+    informes_seleccionados = [];
     $('[data-toggle="tooltip"]').tooltip();
     $(".datepicker").datepicker({
         format: 'yyyy-mm-dd',

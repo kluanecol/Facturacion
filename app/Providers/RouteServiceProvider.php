@@ -66,6 +66,13 @@ class RouteServiceProvider extends ServiceProvider
              ->group(base_path('routes/invoicing/contract.php'));
     }
 
+    protected function mapWebConfigurationSubtypeRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespaceModules)
+             ->group(base_path('routes/invoicing/configurationSubtype.php'));
+    }
+
     /**
      * Define the "api" routes for the application.
      *

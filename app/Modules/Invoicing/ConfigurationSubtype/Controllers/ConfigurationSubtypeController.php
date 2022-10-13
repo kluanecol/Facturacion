@@ -8,6 +8,7 @@ use App\Modules\Admin\Project\Repository\ProjectInterface;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeInterface;
+use App\Modules\Invoicing\ConfigurationSubtype\Context\ConfigurationSubtypeFormsContext;
 
 use Session;
 
@@ -22,6 +23,16 @@ class ConfigurationSubtypeController extends Controller
         )
         {
             $this->contractRepository = $contractRepository;
+    }
+
+
+    public function getForm(Request $request)
+    {
+        $idConfiguration = $request->input('id_configuration');
+
+        $strategyClass = ConfigurationSubTypeFormsContext::STRATEGY[$idConfiguration];
+
+        return (new $strategyClass)->getForm();
     }
 
 }
