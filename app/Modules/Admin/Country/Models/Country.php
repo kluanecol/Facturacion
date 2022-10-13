@@ -14,6 +14,11 @@ class Country extends Model
     protected $fillable=['name','state'];
     protected $dates=['deleted_at'];
 
+    public function __construct()
+    {
+        $this->connection = config('connections.rhomb');
+    }
+
     public function UsersCountries()
     {
         return $this->hasMany('App\Modules\Admin\Country\Models\UserCountry', 'id_country', 'id' );

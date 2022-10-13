@@ -13,12 +13,12 @@ class CreateTableContractConfigurations extends Migration
      */
     public function up()
     {
-        Schema::create('fac_contract_configurations', function (Blueprint $table) {
+        Schema::create('contract_configurations', function (Blueprint $table) {
 
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('fk_id_configuration_subtype');
-            $table->foreign('fk_id_configuration_subtype','fk_contract_to_subtype')->references('id')->on('fac_configuration_subtypes');
+            $table->foreign('fk_id_configuration_subtype','fk_contract_to_subtype')->references('id')->on('configuration_subtypes');
 
             $table->unsignedInteger('fk_id_activity')->nullable();
             $table->unsignedInteger('fk_id_product')->nullable();
@@ -40,11 +40,11 @@ class CreateTableContractConfigurations extends Migration
      */
     public function down()
     {
-        Schema::table('fac_contract_configurations', function (Blueprint $table)
+        Schema::table('contract_configurations', function (Blueprint $table)
         {
             $table->dropForeign('fk_subtype_to_type');
         });
 
-        Schema::dropIfExists('fac_contract_configurations');
+        Schema::dropIfExists('contract_configurations');
     }
 }

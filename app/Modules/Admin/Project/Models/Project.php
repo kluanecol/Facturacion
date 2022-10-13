@@ -10,4 +10,9 @@ class Project extends Model
     use SoftDeletes;
     protected $table = 'proyectos';
 
+    public function __construct()
+    {
+        $this->connection = config('connections.rhomb');
+    }
+
 }

@@ -13,7 +13,7 @@ class CreateTableConfigurationTypes extends Migration
      */
     public function up()
     {
-        Schema::create('fac_configuration_types', function (Blueprint $table) {
+        Schema::create('configuration_types', function (Blueprint $table) {
 
             $table->increments('id');
             $table->string('spanish_name', 255);
@@ -36,6 +36,6 @@ class CreateTableConfigurationTypes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fac_configuration_types');
+        Schema::dropIfExists('configuration_types');
     }
 }

@@ -11,7 +11,8 @@ use Session;
 class ConfigurationSubtype extends Model
 {
     use SoftDeletes;
-    protected $table = 'fac_configuration_subtypes';
+
+    protected $table = 'configuration_subtypes';
 
     protected $primaryKey= 'id';
 

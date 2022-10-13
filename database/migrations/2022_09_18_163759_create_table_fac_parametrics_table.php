@@ -13,7 +13,7 @@ class CreateTableFacParametricsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fac_parametrics', function (Blueprint $table) {
+        Schema::create('parametrics', function (Blueprint $table) {
 
             $table->bigIncrements('id');
             $table->json('json_countries');
@@ -26,7 +26,7 @@ class CreateTableFacParametricsTable extends Migration
             $table->string('symbol', 10)->nullable();
 
             $table->unsignedBigInteger('fk_id_parent')->nullable();
-            $table->foreign('fk_id_parent','fk_parametric_to_parent')->references('id')->on('fac_parametrics');
+            $table->foreign('fk_id_parent','fk_parametric_to_parent')->references('id')->on('parametrics');
 
             $table->timestamps();
             $table->softDeletes();
@@ -40,12 +40,12 @@ class CreateTableFacParametricsTable extends Migration
      */
     public function down()
     {
-        Schema::table('fac_parametrics', function (Blueprint $table)
+        Schema::table('parametrics', function (Blueprint $table)
         {
             $table->dropForeign('fk_id_parent');
 
         });
 
-        Schema::dropIfExists('fac_parametrics');
+        Schema::dropIfExists('parametrics');
     }
 }

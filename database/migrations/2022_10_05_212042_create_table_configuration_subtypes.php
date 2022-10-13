@@ -13,7 +13,7 @@ class CreateTableConfigurationSubtypes extends Migration
      */
     public function up()
     {
-        Schema::create('fac_configuration_subtypes', function (Blueprint $table) {
+        Schema::create('configuration_subtypes', function (Blueprint $table) {
 
             $table->bigIncrements('id');
             $table->string('spanish_name', 255)->nullable($value = "Sin nombre");
@@ -26,9 +26,9 @@ class CreateTableConfigurationSubtypes extends Migration
             $table->tinyInteger('multiple')->nullable($value = 0);
             $table->tinyInteger('charge_by_percentage')->nullable($value = 0);
             $table->integer('order')->nullable();
-
+            $table->integer('icon')->nullable();
             $table->unsignedBigInteger('fk_id_measure')->nullable();
-            $table->foreign('fk_id_measure','fk_subtype_to_parametric')->references('id')->on('fac_parametrics');
+            $table->foreign('fk_id_measure','fk_subtype_to_parametric')->references('id')->on('parametrics');
 
             $table->integer('fk_id_configuration_type');
 
@@ -45,11 +45,11 @@ class CreateTableConfigurationSubtypes extends Migration
      */
     public function down()
     {
-        Schema::table('fac_configuration_subtypes', function (Blueprint $table)
+        Schema::table('configuration_subtypes', function (Blueprint $table)
         {
             $table->dropForeign('fk_subtype_to_parametric');
         });
 
-        Schema::dropIfExists('fac_configuration_subtypes');
+        Schema::dropIfExists('configuration_subtypes');
     }
 }

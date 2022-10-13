@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contract extends Model
 {
-    use SoftDeletes;
-    protected $table = 'fac_contracts';
+
+    protected $table = 'contracts';
 
     protected $primaryKey= 'id';
 
@@ -26,6 +26,7 @@ class Contract extends Model
 
     public $timestamps = true;
 
+    use SoftDeletes;
 
     public function project()
     {
