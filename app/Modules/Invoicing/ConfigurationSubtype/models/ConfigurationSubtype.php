@@ -44,4 +44,8 @@ class ConfigurationSubtype extends Model
         }
 
     }
+
+    public function scopeActive(){
+        return $this->where('state',1);
+    }
 }

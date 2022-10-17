@@ -2,7 +2,7 @@
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-contract','enctype' => 'multipart/form-data']) !!}
         <div class="row">
 
-            {!! Form::hidden('id', (isset($contract) ? $contract->id : null), ['id'=>'id_project']) !!}
+            {!! Form::hidden('id', (isset($contract) ? $contract->id : null), ['id'=>'id_contract']) !!}
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">

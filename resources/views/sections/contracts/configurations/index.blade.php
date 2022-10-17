@@ -47,7 +47,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/configurationSubtypes/configurationSubtypes.js?v=2022-10-13') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/configurationSubtypes/configurationSubtypes.js?v=2022-10-14') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

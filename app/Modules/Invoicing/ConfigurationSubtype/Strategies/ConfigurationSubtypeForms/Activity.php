@@ -4,11 +4,11 @@ namespace App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSub
 
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeFormsInterface;
 
-class Casing implements ConfigurationSubtypeFormsInterface
+class Activity implements ConfigurationSubtypeFormsInterface
 {
     public function getForm()
     {
         $data = [];
-        return view('sections.contracts.configurations.form.subtypes.casing', $data)->render();
+        return view('sections.contracts.configurations.form.subtypes.activity', $data)->render();
     }
 }

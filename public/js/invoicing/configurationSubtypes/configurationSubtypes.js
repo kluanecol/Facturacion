@@ -60,6 +60,9 @@ jQuery(function() {
 });
 
 function getConfigurationForm(id_configuration){
+    $('body').loading({
+        message: $('#msg-loading').val()
+    });
 
     var domData = {
         id_configuration : id_configuration
@@ -80,11 +83,13 @@ function getConfigurationForm(id_configuration){
                     showConfirmButton: false,
                     focusConfirm: false,
                     allowOutsideClick: true
-                  })
+                })
 
+                $('body').loading('stop');
                 refreshInputs();
                 validateForm("#form-contract",[],[]);
             } else {
+                $('body').loading('stop');
                 Swal.fire({
                     type: 'error',
                     title: $('#msg-something-went-wrong').val(),
@@ -95,6 +100,7 @@ function getConfigurationForm(id_configuration){
             }
         }
     ).fail(function(data) {
+        $('body').loading('stop');
         if(data.status == 419){
             Swal.fire({
                 type: 'error',

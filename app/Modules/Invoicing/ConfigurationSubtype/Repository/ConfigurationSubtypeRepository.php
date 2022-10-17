@@ -11,7 +11,9 @@ use Session;
 class ConfigurationSubtypeRepository implements ConfigurationSubtypeInterface{
 
     public function getActive(){
-        return ConfigurationSubtype::where('state',1)->orderBy('order')->get();
+       return ConfigurationSubtype::active()
+        ->whereJsonContains('json_countries->country', GeneralVariables::getCurrentCountryId())
+        ->orderBy('order')->get();
     }
 
 }
