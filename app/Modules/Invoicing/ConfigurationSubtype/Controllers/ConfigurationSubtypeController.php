@@ -15,8 +15,7 @@ use Session;
 class ConfigurationSubtypeController extends Controller
 {
     private $ConfigurationSubtypeRepository;
-    protected $projectRepository;
-    protected $clientRepository;
+    protected $parametricRepository;
 
     function __construct(
             ConfigurationSubtypeInterface $contractRepository

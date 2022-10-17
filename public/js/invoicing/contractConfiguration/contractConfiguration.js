@@ -40,10 +40,10 @@ jQuery(function() {
         getConfigurationForm($(this).data('id'));
     });
 
-    $(document).on('click','#btn-add',function(){
+    $(document).on('click','#btn-save-configuration',function(){
 
-        if ($("#form-contract").valid()) {
-            saveContract();
+        if ($('#form-configuration').valid()) {
+
         }
 
     });
@@ -87,7 +87,7 @@ function getConfigurationForm(id_configuration){
 
                 $('body').loading('stop');
                 refreshInputs();
-                validateForm("#form-contract",[],[]);
+                validateForm("#form-configuration",[],[]);
             } else {
                 $('body').loading('stop');
                 Swal.fire({

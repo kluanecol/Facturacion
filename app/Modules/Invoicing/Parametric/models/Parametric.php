@@ -4,6 +4,7 @@ namespace App\Modules\Invoicing\Parametric\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 
 class Parametric extends Model
 {
@@ -28,5 +29,17 @@ class Parametric extends Model
 
     use SoftDeletes;
 
+    public function getNameAttribute()
+    {
+        if (GeneralVariables::getCurrentLanguage() == 'es') {
+            return $this->spanish_name;
+        } else {
+            return $this->english_name;
+        }
 
+    }
+
+    public function scopeActive(){
+        return $this->where('state',1);
+    }
 }

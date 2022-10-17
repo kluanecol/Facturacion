@@ -6,7 +6,7 @@ use App\Modules\Admin\Client\Models\Client;
 use App\Modules\Admin\Project\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Session;
+use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 
 class ConfigurationSubtype extends Model
 {
@@ -37,7 +37,7 @@ class ConfigurationSubtype extends Model
 
     public function getNameAttribute()
     {
-        if (Session::get('locale') == 'es') {
+        if (GeneralVariables::getCurrentLanguage() == 'es') {
             return $this->spanish_name;
         } else {
             return $this->english_name;
