@@ -3,27 +3,60 @@
 namespace App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms;
 
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeFormsInterface;
+use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeRepository;
+use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfigurationRepository;
 use App\Modules\Invoicing\Parametric\Repository\ParametricRepository;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 
 class Currency implements ConfigurationSubtypeFormsInterface
 {
 
+    CONST ID_CONFIGURATION = 4;
+
     protected $parametricRepository;
+    protected $configurationSubtypeRepository;
+    protected $contractConfigurationRepository;
 
     function __construct()
     {
         $this->parametricRepository = new ParametricRepository();
+        $this->configurationSubtypeRepository = new ConfigurationSubtypeRepository();
+        $this->contractConfigurationRepository = new ContractConfigurationRepository();
     }
 
 
-    public function getForm()
+    public function getForm($idContract)
     {
         $data = [];
+        $data['idConfiguration'] = self::ID_CONFIGURATION;
+        $data['idContract'] = $idContract;
         $data['currencys'] = $this->parametricRepository->getActiveChildren(GeneralVariables::ID_PARAMETRIC_CURRENCY)->pluck('name','id');
 
         return view('sections.contracts.configurations.form.subtypes.currency', $data)->render();
     }
 
+    public function validate($request){
+
+        $result = 200;
+        $configuration = $this->configurationSubtypeRepository->getById(self::ID_CONFIGURATION);
+
+        if ($configuration->multiple == 0) {
+            $actualConfigurations = $this->contractConfigurationRepository->getByContractAndSubtype($request->fk_id_contract, self::ID_CONFIGURATION);
+
+            if ($actualConfigurations->count() > 0) {
+
+                $message = [
+                    'title' => trans('messages\contractConfiguration.yaExisteLaConfiguracion'),
+                    'message' => trans('messages\contractConfiguration.algoSalioMal'),
+                    'type'  => 'warning',
+                    'status' => 500
+                ];
+
+                return $message;
+            }
+        }
+
+        return $result;
+    }
 
 }

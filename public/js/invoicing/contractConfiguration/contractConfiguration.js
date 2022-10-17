@@ -22,19 +22,6 @@ jQuery(function() {
     }
 
 
-    $(document).on('click','#search-contracts',function(){
-        domData = getFormFields();
-
-        if (id_project != '' && year != '' && id_client != '') {
-            refreshContractsTable(domData);
-        }else{
-            Swal.fire({
-                type: 'warning',
-                title: $('#msg-cant-filter-title').val()+'!',
-                text: $('#msg-cant-filter-subtitle').val()
-            });
-        }
-    });
 
     $(document).on('click','.add-configuration',function(){
         getConfigurationForm($(this).data('id'));
@@ -43,7 +30,7 @@ jQuery(function() {
     $(document).on('click','#btn-save-configuration',function(){
 
         if ($('#form-configuration').valid()) {
-
+            saveConfiguration();
         }
 
     });
@@ -65,7 +52,8 @@ function getConfigurationForm(id_configuration){
     });
 
     var domData = {
-        id_configuration : id_configuration
+        id_configuration : id_configuration,
+        id_contract : $('#id_contract').val()
     }
 
     $.post(
@@ -124,9 +112,9 @@ function getConfigurationForm(id_configuration){
     });
 }
 
-function saveContract() {
+function saveConfiguration() {
 
-    let myForm = document.getElementById('form-contract');
+    let myForm = document.getElementById('form-configuration');
     var domData = new FormData(myForm);
 
     $('body').loading({
@@ -135,7 +123,7 @@ function saveContract() {
 
     $.ajax({
 
-        url: vURL+'/invoicing/contracts/save',
+        url: vURL+'/invoicing/contractConfiguration/save',
         type: 'POST',
         dataType: 'json',
         processData: false,
@@ -151,9 +139,6 @@ function saveContract() {
                     type: data.type,
                     showConfirmButton: true,
                 });
-                domData = getFormFields();
-                refreshContractsTable(domData);
-
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);

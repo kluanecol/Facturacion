@@ -62,28 +62,28 @@ class ContractController extends Controller
         $result = $this->contractRepo->save($request);
 
         if (is_string($result)) {
-            $mensajes = [
+            $messages = [
                 'message' => $result,
                 'title' => trans('messages\general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
-            $mensajes = [
+            $messages = [
                 'title' => trans('messages\general.bienHecho'),
                 'message' => trans('messages\general.guardadoConExito'),
                 'type'  => 'success',
                 'status' => $result
             ];
         }else{
-            $mensajes = [
+            $messages = [
                 'message' => trans('messages\general.algoSalioMal'),
                 'title' => trans('messages\general.errorAlGuardar'),
                 'type'  => 'warning',
                 'status' => $result
             ];
         }
-        return response()->json($mensajes);
+        return response()->json($messages);
 
     }
 
@@ -91,28 +91,28 @@ class ContractController extends Controller
         $result = $this->contractRepo->delete($request);
 
         if (is_string($result)) {
-            $mensajes = [
+            $messages = [
                 'message' => $result,
                 'title' => trans('messages\general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
-            $mensajes = [
+            $messages = [
                 'title' => trans('messages\general.bienHecho'),
                 'message' => trans('messages\general.borradoConExito'),
                 'type'  => 'success',
                 'status' => $result
             ];
         }else{
-            $mensajes = [
+            $messages = [
                 'message' => trans('messages\general.algoSalioMal'),
                 'title' => trans('messages\general.errorAlEliminar'),
                 'type'  => 'warning',
                 'status' => $result
             ];
         }
-        return response()->json($mensajes);
+        return response()->json($messages);
 
     }
 

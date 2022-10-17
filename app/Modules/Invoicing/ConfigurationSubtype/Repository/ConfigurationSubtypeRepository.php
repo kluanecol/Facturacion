@@ -16,4 +16,8 @@ class ConfigurationSubtypeRepository implements ConfigurationSubtypeInterface{
         ->orderBy('order')->get();
     }
 
+    public function getById($id){
+        return ConfigurationSubtype::find($id);
+     }
+
 }

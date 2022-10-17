@@ -14,6 +14,7 @@ class ContractConfiguration extends Model
     protected $primaryKey= 'id';
 
     protected $fillable = [
+       'fk_id_contract',
        'fk_id_configuration_subtype',
        'fk_id_parametric',
        'fk_id_activity',

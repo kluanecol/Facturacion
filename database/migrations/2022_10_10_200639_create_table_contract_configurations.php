@@ -17,6 +17,9 @@ class CreateTableContractConfigurations extends Migration
 
             $table->bigIncrements('id');
 
+            $table->unsignedBigInteger('fk_id_contract');
+            $table->foreign('fk_id_contract','fk_contract_to_configuration')->references('id')->on('contracts');
+
             $table->unsignedBigInteger('fk_id_configuration_subtype');
             $table->foreign('fk_id_configuration_subtype','fk_contract_to_subtype')->references('id')->on('configuration_subtypes');
 
@@ -28,7 +31,7 @@ class CreateTableContractConfigurations extends Migration
 
             $table->decimal('initial_range', 8, 2)->nullable();
             $table->decimal('final_range', 8, 2)->nullable();
-            $table->decimal('value', 8, 2);
+            $table->decimal('value', 8, 2)->default(0);
             $table->integer('order')->nullable();
 
             $table->timestamps();
@@ -45,8 +48,9 @@ class CreateTableContractConfigurations extends Migration
     {
         Schema::table('contract_configurations', function (Blueprint $table)
         {
+            $table->dropForeign('fk_contract_to_configuration');
             $table->dropForeign('fk_subtype_to_type');
-            $table->dropForeign('fk_id_parametric');
+            $table->dropForeign('fk_contract_to_parametric');
         });
 
         Schema::dropIfExists('contract_configurations');

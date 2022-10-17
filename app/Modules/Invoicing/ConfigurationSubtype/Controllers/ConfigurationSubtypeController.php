@@ -14,7 +14,6 @@ use Session;
 
 class ConfigurationSubtypeController extends Controller
 {
-    private $ConfigurationSubtypeRepository;
     protected $parametricRepository;
 
     function __construct(
@@ -28,10 +27,11 @@ class ConfigurationSubtypeController extends Controller
     public function getForm(Request $request)
     {
         $idConfiguration = $request->input('id_configuration');
+        $idContract = $request->input('id_contract');
 
-        $strategyClass = ConfigurationSubTypeFormsContext::STRATEGY[$idConfiguration];
+        $strategySubtypeConfiguration = ConfigurationSubTypeFormsContext::STRATEGY[$idConfiguration];
 
-        $returnHTML = (new $strategyClass)->getForm();
+        $returnHTML = (new $strategySubtypeConfiguration)->getForm($idContract);
         return response()->json(['success' => true, 'html'=>$returnHTML]);
     }
 

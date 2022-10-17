@@ -44,6 +44,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebContractRoutes();
 
         $this->mapWebConfigurationSubtypeRoutes();
+
+        $this->mapWebContractConfigurationRoutes();
         //
     }
 
@@ -73,6 +75,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespaceModules)
              ->group(base_path('routes/invoicing/configurationSubtype.php'));
+    }
+
+    protected function mapWebContractConfigurationRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->namespaceModules)
+             ->group(base_path('routes/invoicing/contractConfiguration.php'));
     }
 
     /**

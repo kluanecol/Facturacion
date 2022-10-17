@@ -1,3 +1,4 @@
+{!! Form::hidden('id_contract', (isset($contract) ? $contract->id : null), ['id'=>'id_contract']) !!}
 <div class="col-md-12">
     <div class="course">
         <div class="col-xs-12">
