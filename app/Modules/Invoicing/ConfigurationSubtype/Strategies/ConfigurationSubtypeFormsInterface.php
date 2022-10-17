@@ -7,4 +7,6 @@ interface ConfigurationSubtypeFormsInterface
     public function getForm(int $idContract);
 
     public function validate(Request $request);
+
+    public function getList(int $idContract);
 }

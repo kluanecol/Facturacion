@@ -5,6 +5,8 @@ namespace App\Modules\Invoicing\ContractConfiguration\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
+use App\Modules\Invoicing\Parametric\Models\Parametric;
+use App\Modules\Invoicing\ConfigurationSubtype\Models\ConfigurationSubtype;
 
 class ContractConfiguration extends Model
 {
@@ -30,5 +32,14 @@ class ContractConfiguration extends Model
 
     use SoftDeletes;
 
+    public function currency()
+    {
+        return $this->belongsTo(Parametric::class, 'fk_id_parametric','id');
+    }
+
+    public function configurationSubtype()
+    {
+        return $this->belongsTo(ConfigurationSubtype::class, 'fk_id_configuration_subtype','id');
+    }
 
 }

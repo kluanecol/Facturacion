@@ -6,8 +6,13 @@
 
 
             Route::post('/save', [
-                'as' => 'contractConfigurations.save',
+                'as' => 'contractConfiguration.save',
                 'uses' => 'ContractConfigurationController@save'
+            ]);
+
+            Route::post('/getList', [
+                'as' => 'contractConfiguration.getList',
+                'uses' => 'ContractConfigurationController@getList'
             ]);
 
         });

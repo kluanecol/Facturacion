@@ -35,6 +35,16 @@ class Currency implements ConfigurationSubtypeFormsInterface
         return view('sections.contracts.configurations.form.subtypes.currency', $data)->render();
     }
 
+    public function getList($idContract)
+    {
+        $data = [];
+        $data['idConfiguration'] = self::ID_CONFIGURATION;
+        $data['idContract'] = $idContract;
+        $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
+
+        return view('sections.contracts.configurations.list.subtypes.currency', $data)->render();
+    }
+
     public function validate($request){
 
         $result = 200;

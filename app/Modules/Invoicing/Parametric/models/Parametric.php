@@ -39,6 +39,16 @@ class Parametric extends Model
 
     }
 
+    public function getDescriptionAttribute()
+    {
+        if (GeneralVariables::getCurrentLanguage() == 'es') {
+            return $this->spanish_description;
+        } else {
+            return $this->english_description;
+        }
+
+    }
+
     public function scopeActive(){
         return $this->where('state',1);
     }

@@ -1,10 +1,7 @@
 
 
 var vURL = null;
-let table_contracts = 0;
-let id_project = [];
-let year = [];
-let id_client = [];
+let reload = false;
 
 jQuery(function() {
 	vURL = $('#main-url').data('url');
@@ -21,7 +18,15 @@ jQuery(function() {
         "timeOut": "5000",
     }
 
+    $('.collapse').on('show.bs.collapse',function(){
+        reload = true;
+    });
 
+    $(document).on('click','.configuration-collapse',function(){
+        if (reload) {
+            reloadConfigurationContainer($(this).data('id'));
+        }
+    });
 
     $(document).on('click','.add-configuration',function(){
         getConfigurationForm($(this).data('id'));
@@ -173,136 +178,63 @@ function saveConfiguration() {
     });
 }
 
-function deleteContract(id_contract) {
-
-    var formData = new FormData();
-    formData.append("id_contract", id_contract);
-
-    Swal.fire({
-        title: $('#msg-contract-delete').val(),
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonText: $('#msg-delete').val(),
-        cancelButtonText: $('#msg-cancel').val(),
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        allowOutsideClick: false
-    }).then((result) => {
-        if (result.value == true) {
-            $('body').loading({
-                message: $('#msg-loading').val()
-            });
-
-            $.ajax({
-
-                url: vURL+'/invoicing/contracts/delete',
-                type: 'POST',
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-                data: formData,
-                success: function(data){
-                    $('body').loading('stop');
-
-                    if (data.status == 200) {
-                        Swal.fire({
-                            title: data.title,
-                            html: data.message,
-                            type: data.type,
-                            showConfirmButton: true,
-                        });
-
-                        table_contracts.ajax.reload();
-
-                    }
-                    else if(data.status == 400){
-                        toastr.warning(data.message, data.title);
-                    }
-                    else{
-                        toastr.error(data.message, data.title);
-                    }
-                },
-                error: function(data){
-                    $('body').loading('stop');
-
-                    if(data.status == 419){
-                        Swal.fire({
-                            title: $('#msg-something-went-wrong').val(),
-                            html: $('#msg-session-expired').val(),
-                            type: `error`,
-                            showConfirmButton: false,
-                            timer: 3000
-                        }).then(()=>{
-                            location.reload();
-                        });
-                    }else if(data.status == 500){
-                        Swal.fire({
-                            title: $('#msg-something-went-wrong').val(),
-                            html: $('#msg-contact-support').val(),
-                            type: `error`,
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                    }
-                }
-            });
-
-        }
-    })
-
-}
-
-
-function refreshContractsTable(datos) {
-    table_contracts = $('#table-contracts').DataTable({
-        language: {
-            "url": vURL+"/js/general/datatables/"+current_lang+".json"
-        },
-        processing: true,
-        serverSide: false,
-        responsive: false,
-        "destroy": true,
-        scrollX: 400,
-        scrollY: 380,
-        scrollCollapse: true,
-
-        "ajax": {
-            "url": vURL+"/invoicing/contracts/search",
-            "type": 'POST',
-            "data": datos
-        },
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'project_name', name: 'project_name'},
-            {data: 'client_name', name: 'client_name'},
-            {data: 'initial_date', name: 'initial_date'},
-            {data: 'end_date', name: 'end_date'},
-            {data: 'year', name: 'year'},
-            {data: 'options', name: 'options'}
-        ],
-        dom: 'Bfrtip',
-            buttons: [
-            {
-                extend: 'excel',
-            }
-            ],
-        pageLength: 8,
+function reloadConfigurationContainer(id_configuration){
+    reload = false;
+    $('body').loading({
+        message: $('#msg-loading').val()
     });
-}
-
-function getFormFields() {
-    id_project = $('#id_project').val();
-    year = $('#year').val();
-    id_client = $('#id_client').val();
 
     var domData = {
-        'id_project' : id_project,
-        'year' : year,
-        'id_client' : id_client,
-    };
+        id_configuration : id_configuration,
+        id_contract : $('#id_contract').val()
+    }
 
-    return domData;
+    console.log(domData);
+    $.post(
+        vURL+"/invoicing/contractConfiguration/getList",
+        domData,
+        function(data)
+        {
+            if (data.success) {
+                console.log(data);
+                $('#container-configuration-'+data.id_configuration).html(data.html);
+                $('body').loading('stop');
+                refreshInputs();
+
+            } else {
+                $('body').loading('stop');
+                Swal.fire({
+                    type: 'error',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        }
+    ).fail(function(data) {
+        $('body').loading('stop');
+        if(data.status == 419){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=>{
+                location.reload();
+            });
+
+        }else if(data.status == 500){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    });
 }
 
 function refreshInputs(){

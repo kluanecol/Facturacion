@@ -58,4 +58,16 @@ class ContractConfigurationController extends Controller
             return response()->json($validate);
         }
     }
+
+    public function getList(Request $request){
+        $idConfiguration = $request->input('id_configuration');
+        $idContract = $request->input('id_contract');
+
+        $strategySubtypeConfiguration = ConfigurationSubTypeFormsContext::STRATEGY[$idConfiguration];
+
+        $returnHTML = (new $strategySubtypeConfiguration)->getlist($idContract);
+        return response()->json(['success' => true, 'html'=> $returnHTML, 'id_configuration' => $idConfiguration]);
+    }
+
+
 }

@@ -28,7 +28,7 @@
                             <div class="col-md-12">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     @foreach ($configurationSubtypes as $configuration)
-                                        @include('sections.contracts.configurations.components.configuration-subtype',['configuration' => $configuration])
+                                        @include('sections.contracts.configurations.components.configuration-subtype',['configuration' => $configuration ,'contract' => $contract])
                                     @endforeach
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contractConfiguration/contractConfiguration.js?v=2022-10-14') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/contractConfiguration/contractConfiguration.js?v=2022-10-16') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

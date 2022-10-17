@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="heading-{{$configuration->id}}">
         <h4 class="panel-title">
-            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$configuration->id}}" aria-expanded="true" aria-controls="collapse-{{$configuration->id}}">
+            <a class="collapse configuration-collapse" data-id="{{$configuration->id}}" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$configuration->id}}" aria-expanded="true" aria-controls="collapse-{{$configuration->id}}">
                 <div>
                     <i class="{{$configuration->icon}}" style="font-size: 35;"></i>{{$configuration->name}}
                     <button type="button" class="btn btn-xs btn-primary add-configuration pull-right" data-id="{{$configuration->id}}">
