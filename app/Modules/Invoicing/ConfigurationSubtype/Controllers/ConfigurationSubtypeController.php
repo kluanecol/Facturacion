@@ -33,8 +33,6 @@ class ConfigurationSubtypeController extends Controller
 
         $returnHTML = (new $strategyClass)->getForm();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
-
-        return (new $strategyClass)->getForm();
     }
 
 }
