@@ -22,6 +22,10 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
             ->first();
     }
 
+    public function getById($id){
+        return ContractConfiguration::find($id);
+    }
+
     public function save($request){
         $result = 200;
 

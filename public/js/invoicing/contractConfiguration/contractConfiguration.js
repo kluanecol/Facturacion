@@ -29,7 +29,7 @@ jQuery(function() {
     });
 
     $(document).on('click','.add-configuration',function(){
-        getConfigurationForm($(this).data('id'));
+        getConfigurationForm($(this).data('id'), null);
     });
 
     $(document).on('click','#btn-save-configuration',function(){
@@ -40,25 +40,21 @@ jQuery(function() {
 
     });
 
-    $(document).on('click','.edit-contract',function(){
-        getContractForm($(this).data('id'));
+    $(document).on('click','.edit-configuration',function(){
+        getConfigurationForm($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
     });
-
-    $(document).on('click','.delete-contract',function(){
-        deleteContract($(this).data('id'));
-    });
-
 
 });
 
-function getConfigurationForm(id_configuration){
+function getConfigurationForm(id_configuration, id_contract_configuration){
     $('body').loading({
         message: $('#msg-loading').val()
     });
 
     var domData = {
         id_configuration : id_configuration,
-        id_contract : $('#id_contract').val()
+        id_contract : $('#id_contract').val(),
+        id_contract_configuration : id_contract_configuration
     }
 
     $.post(

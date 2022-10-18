@@ -24,16 +24,29 @@ class Activity implements ConfigurationSubtypeFormsInterface
         $this->configurationSubtypeRepository = new ConfigurationSubtypeRepository();
     }
 
-    public function getForm($idContract)
+    public function getForm($idContract, $idContractConfiguration)
     {
         $data = [];
-        $currentActivities = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION)->pluck('fk_id_activity')->toArray();
+
+        if (isset($idContractConfiguration)) {
+            $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);
+        }
+
+        $currentActivities = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
+
+        if (isset($data['contractConfiguration'])) {
+            $currentActivities = $currentActivities->whereNotIn('fk_id_activity', [$data['contractConfiguration']->fk_id_activity]);
+        }
+
+        $currentActivities = $currentActivities->pluck('fk_id_activity')->toArray();
 
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
         $data['activities'] = $this->generalParametricRepository->getActivitiesByCountry(GeneralVariables::getCurrentCountryId())
-            ->whereNotIn('id',$currentActivities)
+            ->whereNotIn('id', $currentActivities)
             ->sortBy('name')->pluck('name','id');
+
+
 
         return view('sections.contracts.configurations.form.subtypes.activity', $data)->render();
     }
@@ -44,7 +57,7 @@ class Activity implements ConfigurationSubtypeFormsInterface
 
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
-        $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
+        $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION)->sortBy('activity.name');
 
         return view('sections.contracts.configurations.list.subtypes.activity', $data)->render();
     }
@@ -55,7 +68,7 @@ class Activity implements ConfigurationSubtypeFormsInterface
 
         $configuration = $this->configurationSubtypeRepository->getById(self::ID_CONFIGURATION);
 
-        if ($configuration->multiple == 1) {
+        if ($configuration->multiple == 1 && $request->id == null) {
             $actualConfigurations = $this->contractConfigurationRepository->getActivityConfiguration($request->fk_id_contract, self::ID_CONFIGURATION, $request->fk_id_activity);
 
             if (is_object($actualConfigurations)) {

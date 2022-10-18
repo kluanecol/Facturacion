@@ -31,7 +31,7 @@ class ConfigurationSubtypeController extends Controller
 
         $strategySubtypeConfiguration = ConfigurationSubTypeFormsContext::STRATEGY[$idConfiguration];
 
-        $returnHTML = (new $strategySubtypeConfiguration)->getForm($idContract);
+        $returnHTML = (new $strategySubtypeConfiguration)->getForm($idContract,  $request->input('id_contract_configuration'));
         return response()->json(['success' => true, 'html'=>$returnHTML]);
     }
 

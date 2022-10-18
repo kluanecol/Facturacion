@@ -25,12 +25,16 @@ class Currency implements ConfigurationSubtypeFormsInterface
     }
 
 
-    public function getForm($idContract)
+    public function getForm($idContract, $idContractConfiguration)
     {
         $data = [];
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
         $data['currencys'] = $this->parametricRepository->getActiveChildren(GeneralVariables::ID_PARAMETRIC_CURRENCY)->pluck('name','id');
+
+        if (isset($idContractConfiguration)) {
+            $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);
+        }
 
         return view('sections.contracts.configurations.form.subtypes.currency', $data)->render();
     }
@@ -50,7 +54,7 @@ class Currency implements ConfigurationSubtypeFormsInterface
         $result = 200;
         $configuration = $this->configurationSubtypeRepository->getById(self::ID_CONFIGURATION);
 
-        if ($configuration->multiple == 0) {
+        if ($configuration->multiple == 0 && $request->id == null ) {
             $actualConfigurations = $this->contractConfigurationRepository->getByContractAndSubtype($request->fk_id_contract, self::ID_CONFIGURATION);
 
             if ($actualConfigurations->count() > 0) {
