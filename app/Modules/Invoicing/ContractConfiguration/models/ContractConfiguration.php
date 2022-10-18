@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use App\Modules\Invoicing\Parametric\Models\Parametric;
 use App\Modules\Invoicing\ConfigurationSubtype\Models\ConfigurationSubtype;
+use App\Modules\Admin\GeneralParametric\Models\GeneralParametric;
 
 class ContractConfiguration extends Model
 {
@@ -42,4 +43,8 @@ class ContractConfiguration extends Model
         return $this->belongsTo(ConfigurationSubtype::class, 'fk_id_configuration_subtype','id');
     }
 
+    public function activity()
+    {
+        return $this->belongsTo(GeneralParametric::class, 'fk_id_activity','id');
+    }
 }

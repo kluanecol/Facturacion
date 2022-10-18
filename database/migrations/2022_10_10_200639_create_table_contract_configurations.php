@@ -31,7 +31,7 @@ class CreateTableContractConfigurations extends Migration
 
             $table->decimal('initial_range', 8, 2)->nullable();
             $table->decimal('final_range', 8, 2)->nullable();
-            $table->decimal('value', 8, 2)->default(0);
+            $table->decimal('value', 16, 2)->default(0);
             $table->integer('order')->nullable();
 
             $table->timestamps();

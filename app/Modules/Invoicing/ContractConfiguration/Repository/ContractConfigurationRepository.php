@@ -15,6 +15,13 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
             ->get();
     }
 
+    public function getActivityConfiguration($idContract, $idConfigurationSubtype, $idActivity){
+        return ContractConfiguration::where('fk_id_contract', $idContract)
+            ->where('fk_id_configuration_subtype', $idConfigurationSubtype)
+            ->where('fk_id_activity', $idActivity)
+            ->first();
+    }
+
     public function save($request){
         $result = 200;
 

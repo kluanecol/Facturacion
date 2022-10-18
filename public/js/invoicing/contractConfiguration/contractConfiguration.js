@@ -138,12 +138,8 @@ function saveConfiguration() {
           $('body').loading('stop');
 
             if (data.status == 200) {
-                Swal.fire({
-                    title: data.title,
-                    html: data.message,
-                    type: data.type,
-                    showConfirmButton: true,
-                });
+
+                toastr.success(data.message, data.title);
 
                 reloadConfigurationContainer(data.id_configuration);
             }
@@ -182,9 +178,6 @@ function saveConfiguration() {
 
 function reloadConfigurationContainer(id_configuration){
     reload = false;
-    $('body').loading({
-        message: $('#msg-loading').val()
-    });
 
     var domData = {
         id_configuration : id_configuration,
@@ -199,11 +192,9 @@ function reloadConfigurationContainer(id_configuration){
             if (data.success) {
 
                 $('#container-configuration-'+data.id_configuration).html(data.html);
-                $('body').loading('stop');
                 refreshInputs();
 
             } else {
-                $('body').loading('stop');
                 Swal.fire({
                     type: 'error',
                     title: $('#msg-something-went-wrong').val(),
@@ -214,7 +205,6 @@ function reloadConfigurationContainer(id_configuration){
             }
         }
     ).fail(function(data) {
-        $('body').loading('stop');
         if(data.status == 419){
             Swal.fire({
                 type: 'error',
