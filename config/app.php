@@ -170,7 +170,8 @@ return [
         App\Modules\Invoicing\ContractConfiguration\Providers\ContractConfigurationServiceProvider::class,
 
         App\Modules\Admin\Project\Providers\ProjectServiceProvider::class,
-        App\Modules\Admin\Client\Providers\ClientServiceProvider::class
+        App\Modules\Admin\Client\Providers\ClientServiceProvider::class,
+        App\Modules\Admin\GeneralParametric\Providers\GeneralParametricServiceProvider::class
 
     ],
 

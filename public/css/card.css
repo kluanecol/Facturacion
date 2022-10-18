@@ -1,5 +1,3 @@
-    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
-
 
     .course {
         background-color: #fff;
@@ -12,7 +10,7 @@
 
     }
 
-    .course h6 {
+    .course h5 {
         opacity: 0.6;
         margin: 0;
         letter-spacing: 1px;
@@ -37,12 +35,10 @@
         display: inline-block;
         font-size: 12px;
         opacity: 0.6;
-        margin-top: 30px;
         text-decoration: none;
     }
 
     .course-info {
-        padding: 30px;
         position: relative;
         width: 100%;
     }
