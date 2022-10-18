@@ -144,6 +144,8 @@ function saveConfiguration() {
                     type: data.type,
                     showConfirmButton: true,
                 });
+
+                reloadConfigurationContainer(data.id_configuration);
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
@@ -189,14 +191,13 @@ function reloadConfigurationContainer(id_configuration){
         id_contract : $('#id_contract').val()
     }
 
-    console.log(domData);
     $.post(
         vURL+"/invoicing/contractConfiguration/getList",
         domData,
         function(data)
         {
             if (data.success) {
-                console.log(data);
+
                 $('#container-configuration-'+data.id_configuration).html(data.html);
                 $('body').loading('stop');
                 refreshInputs();

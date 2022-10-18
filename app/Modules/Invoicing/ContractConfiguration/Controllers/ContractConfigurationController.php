@@ -36,7 +36,8 @@ class ContractConfigurationController extends Controller
                     'title' => trans('messages\general.bienHecho'),
                     'message' => trans('messages\general.guardadoConExito'),
                     'type'  => 'success',
-                    'status' => $result
+                    'status' => $result,
+                    'id_configuration' => $idConfiguration
                 ];
             }else if (is_string($result)) {
                 $messages = [
