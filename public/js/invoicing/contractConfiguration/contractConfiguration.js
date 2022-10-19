@@ -3,6 +3,8 @@
 var vURL = null;
 let reload = false;
 
+
+
 jQuery(function() {
 	vURL = $('#main-url').data('url');
 
@@ -21,6 +23,7 @@ jQuery(function() {
     $('.collapse').on('show.bs.collapse',function(){
         reload = true;
     });
+
 
     $(document).on('click','.configuration-collapse',function(){
         if (reload) {
@@ -302,6 +305,11 @@ function reloadConfigurationContainer(id_configuration){
     });
 }
 
+function updateRangeInput(elem) {
+    $('#'+$(elem).attr("id")+'_container').text($(elem).val());
+
+}
+
 function refreshInputs(){
     informes_seleccionados = [];
     $('[data-toggle="tooltip"]').tooltip();
@@ -315,6 +323,9 @@ function refreshInputs(){
     $("select.selectpicker").selectpicker('refresh');
 
     $('[data-toggle="tooltip"]').tooltip();
+
+
+
 }
 
 function validateForm(id,rules,custom_messages){
@@ -325,14 +336,9 @@ function validateForm(id,rules,custom_messages){
         rules = (rules == undefined) ? [] : rules;
         custom_messages = (custom_messages == undefined) ? [] : custom_messages;
 
-        jQuery.validator.addMethod("greaterThan",
-        function(value, element, params) {
-            if (!/Invalid|NaN/.test(new Date(value))) {
-                return new Date(value) > new Date($(params).val());
-            }
-            return isNaN(value) && isNaN($(params).val())
-                || (Number(value) > Number($(params).val()));
-        },$('#msg-final-date-greater').val());
+        jQuery.validator.addMethod("biggerthanInitialRange", function (value, element) {
+            return this.optional(element) || parseInt(value) > parseInt($("#initial_range").val());
+        }, jQuery.validator.format($('#msg-final-range-greater').val()));
 
         $.validator.addClassRules("is_required", {
             required: true,
@@ -370,10 +376,6 @@ function validateForm(id,rules,custom_messages){
 
         });
 
-        if($("#end_date").length>0){
-            $("#end_date").rules('add',
-                { greaterThan: "#initial_date"
-            });
-        }
     }
 }
+

@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('form\labels.valorPorHora') !!}(*):</label>
+                    <label for="value">{!! trans('form\labels.valorPorHora') !!}(*):</label>
                     {!! Form::number('value', isset($contractConfiguration) ? $contractConfiguration->value : null, ['class' => 'form-control is_required', 'id' => 'value', 'min'=> '0', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>

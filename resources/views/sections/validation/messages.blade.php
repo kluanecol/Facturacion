@@ -11,6 +11,7 @@
 {{--General Validation messages--}}
 <input type="hidden" id="msg-required" value="{!! trans('messages\validation.requerido') !!}">
 <input type="hidden" id="msg-final-date-greater" value="{!! trans('messages\validation.fechaFinalMayor') !!}">
+<input type="hidden" id="msg-final-range-greater" value="{!! trans('messages\validation.rangoFinalMayor') !!}">
 
 
 {{--Decision messages--}}

@@ -11,5 +11,7 @@ return [
     'valor' => 'Value',
     'moneda' => 'Currency',
     'tipoDeMoneda' => 'Type of currency',
-    'valorPorHora' => 'Cost per hour'
+    'valorPorHora' => 'Cost per hour',
+    'desde' => 'From',
+    'hasta' => 'To',
 ];
