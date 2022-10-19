@@ -12,7 +12,7 @@
                     <p><b>{{$configuration->activity->name}}</b></p>
                 </td>
                 <td>
-                    <p><b>{{$configuration->value}}</b></p>
+                    <p><b>{{number_format($configuration->value,2,",",".")}}</b></p>
                 </td>
                 <td>
                     <a  class="btn  btn-warning edit-configuration" data-configuration-id="{{$configuration->fk_id_configuration_subtype}}" data-contract-configuration-id="{{$configuration->id}}" target="_blank"><i class="icofont-pencil-alt-1"></i></a>
