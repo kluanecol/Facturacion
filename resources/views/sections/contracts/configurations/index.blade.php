@@ -16,14 +16,14 @@
 
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
         @include('sections.validation.messages')
-        @include('sections.contracts.components.messages')
+        @include('sections.contracts.configurations.components.messages')
         <div class="row">
             <div class="col-md-12">
 
                 <div class="row mb-2">
                     @include('sections.contracts.components.contract-card')
 
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -47,7 +47,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contractConfiguration/contractConfiguration.js?v=2022-10-19') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/contractConfiguration/contractConfiguration.js?v=2022-10-20') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

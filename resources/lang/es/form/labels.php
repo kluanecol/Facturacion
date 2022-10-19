@@ -6,5 +6,10 @@ return [
     'fechaInicial' => 'Fecha inicial',
     'fechaFinal' => 'Fecha final',
     'opciones' => 'Opciones',
-    'proyecto' => 'Proyecto'
+    'proyecto' => 'Proyecto',
+    'actividad' => 'Actividad',
+    'valor' => 'Valor',
+    'moneda' => 'Moneda',
+    'tipoDeMoneda' => 'Tipo de moneda',
+    'valorPorHora' => 'Valor por hora',
 ];

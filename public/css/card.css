@@ -39,6 +39,7 @@
     }
 
     .course-info {
+        margin-top: 30px !important;
         position: relative;
         width: 100%;
     }

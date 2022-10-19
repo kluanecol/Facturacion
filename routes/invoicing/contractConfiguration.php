@@ -15,6 +15,10 @@
                 'uses' => 'ContractConfigurationController@getList'
             ]);
 
+            Route::post('/delete', [
+                'as' => 'contractConfiguration.delete',
+                'uses' => 'ContractConfigurationController@delete'
+            ]);
         });
 
     });

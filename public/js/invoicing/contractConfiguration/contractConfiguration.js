@@ -44,6 +44,10 @@ jQuery(function() {
         getConfigurationForm($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
     });
 
+    $(document).on('click','.delete-configuration',function(){
+        deleteConfiguration($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
+    });
+
 });
 
 function getConfigurationForm(id_configuration, id_contract_configuration){
@@ -65,7 +69,7 @@ function getConfigurationForm(id_configuration, id_contract_configuration){
             if (data.success) {
                 Swal.fire({
                     width:'800px',
-                    title: '<strong>'+$('#msg-contract-form-title').val()+'</strong>',
+                    title: '<strong>'+$('#msg-contract-config-form-title').val()+'</strong>',
                     html:data.html,
                     showCloseButton: false,
                     showCancelButton: false,
@@ -171,6 +175,80 @@ function saveConfiguration() {
         }
     });
 }
+
+function deleteConfiguration(id_configuration, id_contract_configuration) {
+
+    var formData = new FormData();
+    formData.append("id_configuration", id_configuration);
+    formData.append("id_contract_configuration", id_contract_configuration);
+
+    Swal.fire({
+        title: $('#msg-contract-config-delete').val(),
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonText: $('#msg-delete').val(),
+        cancelButtonText: $('#msg-cancel').val(),
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.value == true) {
+            $('body').loading({
+                message: $('#msg-loading').val()
+            });
+
+            $.ajax({
+
+                url: vURL+'/invoicing/contractConfiguration/delete',
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(data){
+                    $('body').loading('stop');
+
+                    if (data.status == 200) {
+                        toastr.success(data.message, data.title);
+                        reloadConfigurationContainer(data.id_configuration);
+                    }
+                    else if(data.status == 400){
+                        toastr.warning(data.message, data.title);
+                    }
+                    else{
+                        toastr.error(data.message, data.title);
+                    }
+                },
+                error: function(data){
+                    $('body').loading('stop');
+
+                    if(data.status == 419){
+                        Swal.fire({
+                            title: $('#msg-something-went-wrong').val(),
+                            html: $('#msg-session-expired').val(),
+                            type: `error`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        }).then(()=>{
+                            location.reload();
+                        });
+                    }else if(data.status == 500){
+                        Swal.fire({
+                            title: $('#msg-something-went-wrong').val(),
+                            html: $('#msg-contact-support').val(),
+                            type: `error`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                }
+            });
+
+        }
+    })
+
+}
+
 
 function reloadConfigurationContainer(id_configuration){
     reload = false;

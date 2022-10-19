@@ -18,7 +18,7 @@
                     <a  class="btn  btn-warning edit-configuration" data-configuration-id="{{$configuration->fk_id_configuration_subtype}}" data-contract-configuration-id="{{$configuration->id}}" target="_blank"><i class="icofont-pencil-alt-1"></i></a>
 
                     @if ($configuration->configurationSubtype->multiple == 1)
-                        <a  class="btn  btn-danger delete-configuration" data-id="{{$configuration->id}}" target="_blank"><i class="icofont-trash"></i></a>
+                        <a  class="btn  btn-danger delete-configuration" data-configuration-id="{{$configuration->fk_id_configuration_subtype}}" data-contract-configuration-id="{{$configuration->id}}" target="_blank"><i class="icofont-trash"></i></a>
                     @endif
                 </td>
             </tr>

@@ -50,4 +50,26 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
             return $e->getMessage();
         }
     }
+
+    public function delete($request){
+        $result = 200;
+
+        try {
+
+            if (isset($request->id_contract_configuration)) {
+                $contractConfiguration = ContractConfiguration::find($request->id_contract_configuration);
+            }
+
+           if ($contractConfiguration->delete()) {
+                $result = 200;
+            }else{
+                $result = 400;
+           }
+
+           return $result;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

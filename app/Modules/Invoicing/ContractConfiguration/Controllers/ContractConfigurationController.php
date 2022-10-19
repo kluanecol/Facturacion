@@ -70,5 +70,36 @@ class ContractConfigurationController extends Controller
         return response()->json(['success' => true, 'html'=> $returnHTML, 'id_configuration' => $idConfiguration]);
     }
 
+    public function delete(Request $request){
+        $result = $this->contractConfigurationRepo->delete($request);
+
+        if (is_string($result)) {
+            $messages = [
+                'message' => $result,
+                'title' => trans('messages\general.errorNoControlado'),
+                'type'  => 'warning',
+            ];
+        }
+        else if($result == 200){
+            $messages = [
+                'title' => trans('messages\general.bienHecho'),
+                'message' => trans('messages\general.borradoConExito'),
+                'type'  => 'success',
+                'status' => $result,
+                'id_configuration' => $request->id_configuration
+            ];
+        }else{
+            $messages = [
+                'message' => trans('messages\general.algoSalioMal'),
+                'title' => trans('messages\general.errorAlEliminar'),
+                'type'  => 'warning',
+                'status' => $result,
+                'id_configuration' => $request->id_configuration
+            ];
+        }
+        return response()->json($messages);
+
+    }
+
 
 }
