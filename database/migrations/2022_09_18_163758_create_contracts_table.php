@@ -15,7 +15,7 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
 
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->date('initial_date');
             $table->date('end_date');
             $table->smallInteger('year');

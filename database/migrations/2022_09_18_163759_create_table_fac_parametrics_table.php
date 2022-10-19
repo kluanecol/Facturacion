@@ -42,7 +42,7 @@ class CreateTableFacParametricsTable extends Migration
     {
         Schema::table('parametrics', function (Blueprint $table)
         {
-            $table->dropForeign('fk_id_parent');
+            $table->dropForeign('fk_parametric_to_parent');
 
         });
 

@@ -8,7 +8,7 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('form\labels.tipoDeMoneda') !!}(*):</label>
+                    <label for="fk_id_activity">{!! trans('form\labels.actividad') !!}(*):</label>
                     {!!Form::select('fk_id_activity',$activities, (isset($contractConfiguration) ? $contractConfiguration->fk_id_activity : null) ,[
                         'class'=>'form-control selectpicker fk_id_activity is_required',
                         'data-live-search'=>'true',

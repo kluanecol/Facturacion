@@ -49,7 +49,7 @@ class CreateTableContractConfigurations extends Migration
         Schema::table('contract_configurations', function (Blueprint $table)
         {
             $table->dropForeign('fk_contract_to_configuration');
-            $table->dropForeign('fk_subtype_to_type');
+            $table->dropForeign('fk_contract_to_subtype');
             $table->dropForeign('fk_contract_to_parametric');
         });
 
