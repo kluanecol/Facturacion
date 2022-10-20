@@ -32,11 +32,11 @@
                 <div class="wrapper">
                     <div class="values">
                         <span id="initial_range_container">
-                            0
+                            {{isset($contractConfiguration) ? $contractConfiguration->initial_range : 0}}
                         </span>
                         <span> &dash; </span>
                         <span id="final_range_container">
-                            1000
+                            {{isset($contractConfiguration) ? $contractConfiguration->final_range : 500}}
                         </span>
                     </div>
                 </div><br>
@@ -45,7 +45,7 @@
             <div class="col-md-3 pt-1"><label for="initial_range">{!! trans('form\labels.desde') !!}:</label></div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <input name="initial_range" type="range" class="form-range form-control range is_required" min="0" max="1000" step="50" id="initial_range" oninput="updateRangeInput(this)" >
+                    <input name="initial_range" type="range" class="form-range form-control range is_required" min="0" max="1000" step="50" id="initial_range" oninput="updateRangeInput(this)" value="{{isset($contractConfiguration) ? $contractConfiguration->initial_range : 0}}">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="col-md-3 pt-1"> <label for="final_range">{!! trans('form\labels.hasta') !!}:</label></div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <input name="final_range" type="range" class="form-range form-control range biggerthanInitialRange is_required" min="0" max="1000" step="50" id="final_range" oninput="updateRangeInput(this)" >
+                    <input name="final_range" type="range" class="form-range form-control range biggerthanInitialRange is_required" min="0" max="1000" step="50" id="final_range" oninput="updateRangeInput(this)"  value="{{isset($contractConfiguration) ? $contractConfiguration->final_range : 500}}">
                     <span class="help-block"></span>
                 </div>
             </div>
