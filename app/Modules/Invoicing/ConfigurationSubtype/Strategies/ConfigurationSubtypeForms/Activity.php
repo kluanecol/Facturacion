@@ -74,8 +74,8 @@ class Activity implements ConfigurationSubtypeFormsInterface
             if (is_object($actualConfigurations)) {
 
                 $message = [
-                    'title' => trans('messages\general.algoSalioMal'),
-                    'message' =>trans('messages\contractConfiguration.yaEstaConfiguradaEstaActividad'),
+                    'title' => trans('general.algoSalioMal'),
+                    'message' =>trans('contractConfiguration.yaEstaConfiguradaEstaActividad'),
                     'type'  => 'warning',
                     'status' => 400
                 ];

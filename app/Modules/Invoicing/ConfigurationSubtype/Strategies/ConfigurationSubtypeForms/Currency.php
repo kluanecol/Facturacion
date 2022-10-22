@@ -60,8 +60,8 @@ class Currency implements ConfigurationSubtypeFormsInterface
             if ($actualConfigurations->count() > 0) {
 
                 $message = [
-                    'title' => trans('messages\general.algoSalioMal'),
-                    'message' =>trans('messages\contractConfiguration.yaExisteLaConfiguracion'),
+                    'title' => trans('general.algoSalioMal'),
+                    'message' =>trans('contractConfiguration.yaExisteLaConfiguracion'),
                     'type'  => 'warning',
                     'status' => 400
                 ];
