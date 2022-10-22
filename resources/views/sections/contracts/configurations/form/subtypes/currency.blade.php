@@ -8,7 +8,7 @@
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_parametric">{!! trans('form\labels.tipoDeMoneda') !!}(*):</label>
+                    <label for="fk_id_parametric">{!! trans('labels.tipoDeMoneda') !!}(*):</label>
                     {!!Form::select('fk_id_parametric',$currencys, (isset($contractConfiguration) ? $contractConfiguration->fk_id_parametric : null) ,[
                         'class'=>'form-control selectpicker fk_id_parametric is_required',
                         'data-live-search'=>'true',
@@ -25,7 +25,7 @@
             <div class="col-md-6 col-xs-12">
                 <div class="form-group form-md-line-input has-info">
                     <button type="button" class='btn btn-danger close-alert-modal btn-block'>
-                        {!! trans('messages\buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
+                        {!! trans('buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -33,13 +33,13 @@
             @if (isset($contractConfiguration))
                 <div class="col-md-6 col-xs-12">
                     <button type="button" class="btn btn-warning btn-block btn-save-configuration" id="btn-save-configuration">
-                        {!! trans('messages\buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                        {!! trans('buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @else
                 <div class="col-md-6 col-xs-12">
                     <button type="button" class="btn btn-success btn-block btn-save-configuration" id="btn-save-configuration">
-                        {!! trans('messages\buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                        {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @endif

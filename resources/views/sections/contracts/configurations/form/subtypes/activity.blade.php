@@ -8,7 +8,7 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('form\labels.actividad') !!}(*):</label>
+                    <label for="fk_id_activity">{!! trans('labels.actividad') !!}(*):</label>
                     {!!Form::select('fk_id_activity',$activities, (isset($contractConfiguration) ? $contractConfiguration->fk_id_activity : null) ,[
                         'class'=>'form-control selectpicker fk_id_activity is_required',
                         'data-live-search'=>'true',
@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="value">{!! trans('form\labels.valorPorHora') !!}(*):</label>
+                    <label for="value">{!! trans('labels.valorPorHora') !!}(*):</label>
                     {!! Form::number('value', isset($contractConfiguration) ? $contractConfiguration->value : null, ['class' => 'form-control is_required', 'id' => 'value', 'min'=> '0', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
@@ -32,20 +32,20 @@
             <div class="col-md-6 col-xs-12">
                 <div class="form-group form-md-line-input has-info">
                     <button type="button" class='btn btn-danger close-alert-modal btn-block'>
-                        {!! trans('messages\buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
+                        {!! trans('buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
             @if (isset($contractConfiguration))
                 <div class="col-md-6 col-xs-12">
                     <button type="button" class="btn btn-warning btn-block btn-save-configuration" id="btn-save-configuration">
-                        {!! trans('messages\buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                        {!! trans('buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @else
                 <div class="col-md-6 col-xs-12">
                     <button type="button" class="btn btn-success btn-block btn-save-configuration" id="btn-save-configuration">
-                        {!! trans('messages\buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                        {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @endif

@@ -8,7 +8,7 @@
 
             <!--div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('form\labels.broca') !!}(*):</label>
+                    <label for="fk_id_activity">{!! trans('labels.broca') !!}(*):</label>
                     {!!Form::select('fk_id_activity',[], (isset($contractConfiguration) ? $contractConfiguration->fk_id_activity : null) ,[
                         'class'=>'form-control selectpicker fk_id_activity is_required',
                         'data-live-search'=>'true',
@@ -22,7 +22,7 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('form\labels.valorPorHora') !!}(*):</label>
+                    <label for="fk_id_activity">{!! trans('labels.valorPorHora') !!}(*):</label>
                     {!! Form::number('value', isset($contractConfiguration) ? $contractConfiguration->value : null, ['class' => 'form-control is_required', 'id' => 'value', 'min'=> '0', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
@@ -42,7 +42,7 @@
                 </div><br>
             </div>
 
-            <div class="col-md-3 pt-1"><label for="initial_range">{!! trans('form\labels.desde') !!}:</label></div>
+            <div class="col-md-3 pt-1"><label for="initial_range">{!! trans('labels.desde') !!}:</label></div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <input name="initial_range" type="range" class="form-range form-control range is_required" min="0" max="1000" step="50" id="initial_range" oninput="updateRangeInput(this)" value="{{isset($contractConfiguration) ? $contractConfiguration->initial_range : 0}}">
@@ -51,7 +51,7 @@
             </div>
             <div class="col-md-3"></div>
 
-            <div class="col-md-3 pt-1"> <label for="final_range">{!! trans('form\labels.hasta') !!}:</label></div>
+            <div class="col-md-3 pt-1"> <label for="final_range">{!! trans('labels.hasta') !!}:</label></div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <input name="final_range" type="range" class="form-range form-control range biggerthanInitialRange is_required" min="0" max="1000" step="50" id="final_range" oninput="updateRangeInput(this)"  value="{{isset($contractConfiguration) ? $contractConfiguration->final_range : 500}}">
@@ -65,20 +65,20 @@
             <div class="col-md-6 col-xs-12">
                 <div class="form-group form-md-line-input has-info">
                     <button type="button" class='btn btn-danger close-alert-modal btn-block'>
-                        {!! trans('messages\buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
+                        {!! trans('buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
             @if (isset($contractConfiguration))
                 <div class="col-md-6 col-xs-12">
                     <button type="button" class="btn btn-warning btn-block btn-save-configuration" id="btn-save-configuration">
-                        {!! trans('messages\buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                        {!! trans('buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @else
                 <div class="col-md-6 col-xs-12">
                     <button type="button" class="btn btn-success btn-block btn-save-configuration" id="btn-save-configuration">
-                        {!! trans('messages\buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                        {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @endif

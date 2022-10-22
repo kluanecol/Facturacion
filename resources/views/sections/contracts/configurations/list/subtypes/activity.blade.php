@@ -1,8 +1,8 @@
 <table class="table table-hover table-bordered" id="table-activities" style="width: 100%;">
     <thead class="text-light thead-dark">
-        <th class="text-center"><strong>{!! trans('form\labels.actividad') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('form\labels.valor') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('form\labels.opciones') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.actividad') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.valor') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
     </thead>
     <tbody class="text-center bg-light">
 

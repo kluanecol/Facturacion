@@ -1,7 +1,7 @@
 @extends('layouts.master_panel')
-@section('title', trans('menu\titles.configuracion'))
+@section('title', trans('titles.configuracion'))
 @section('card-icon')<i class="icofont-options"></i>@endsection
-@section('card-title', strtoupper(trans('menu\titles.configuracion')))
+@section('card-title', strtoupper(trans('titles.configuracion')))
 
  <!-- DatePicker -->
  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">

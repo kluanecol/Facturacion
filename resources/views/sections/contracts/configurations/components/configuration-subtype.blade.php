@@ -5,7 +5,7 @@
                 <div>
                     <i class="{{$configuration->icon}}" style="font-size: 35;"></i>{{$configuration->name}}
                     <button type="button" class="btn btn-xs btn-primary add-configuration pull-right" data-id="{{$configuration->id}}">
-                        {!! trans('messages\buttons.agregar') !!} <span style="font-size: 16"><b> + </b></span>
+                        {!! trans('buttons.agregar') !!} <span style="font-size: 16"><b> + </b></span>
                     </button>
                 </div>
 

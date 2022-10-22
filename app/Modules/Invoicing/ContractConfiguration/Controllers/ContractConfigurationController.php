@@ -33,8 +33,8 @@ class ContractConfigurationController extends Controller
 
             if($result == 200){
                 $messages = [
-                    'title' => trans('messages\general.bienHecho'),
-                    'message' => trans('messages\general.guardadoConExito'),
+                    'title' => trans('general.bienHecho'),
+                    'message' => trans('general.guardadoConExito'),
                     'type'  => 'success',
                     'status' => $result,
                     'id_configuration' => $idConfiguration
@@ -42,13 +42,13 @@ class ContractConfigurationController extends Controller
             }else if (is_string($result)) {
                 $messages = [
                     'message' => $result,
-                    'title' => trans('messages\general.errorNoControlado'),
+                    'title' => trans('general.errorNoControlado'),
                     'type'  => 'error',
                 ];
             }else{
                 $messages = [
-                    'message' => trans('messages\general.algoSalioMal'),
-                    'title' => trans('messages\general.errorAlGuardar'),
+                    'message' => trans('general.algoSalioMal'),
+                    'title' => trans('general.errorAlGuardar'),
                     'type'  => 'warning',
                     'status' => $result
                 ];
@@ -76,22 +76,22 @@ class ContractConfigurationController extends Controller
         if (is_string($result)) {
             $messages = [
                 'message' => $result,
-                'title' => trans('messages\general.errorNoControlado'),
+                'title' => trans('general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
             $messages = [
-                'title' => trans('messages\general.bienHecho'),
-                'message' => trans('messages\general.borradoConExito'),
+                'title' => trans('general.bienHecho'),
+                'message' => trans('general.borradoConExito'),
                 'type'  => 'success',
                 'status' => $result,
                 'id_configuration' => $request->id_configuration
             ];
         }else{
             $messages = [
-                'message' => trans('messages\general.algoSalioMal'),
-                'title' => trans('messages\general.errorAlEliminar'),
+                'message' => trans('general.algoSalioMal'),
+                'title' => trans('general.errorAlEliminar'),
                 'type'  => 'warning',
                 'status' => $result,
                 'id_configuration' => $request->id_configuration

@@ -3,7 +3,7 @@
     <div class="course">
         <div class="col-md-12 col-xs-12 text-center">
             <div class="course-preview">
-                <h6>{!! trans('messages\contracts.datosDelContrato') !!} ID: {{(isset($contract) ? $contract->id : 'N/R')}}</h6>
+                <h6>{!! trans('contracts.datosDelContrato') !!} ID: {{(isset($contract) ? $contract->id : 'N/R')}}</h6>
                 <h5>{{(isset($contract) ? $contract->project->nombre_corto : 'N/R')}}</h5>
                 <h5>{{(isset($contract) ? $contract->client->nombre_cliente : 'N/R')}}</h5>
                 <h5>{{(isset($contract) ? $contract->initial_date.' - '.$contract->end_date : 'N/R')}}</h5>

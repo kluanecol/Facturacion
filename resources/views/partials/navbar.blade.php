@@ -71,7 +71,7 @@
                     onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();"><i
                         class="fas fa-power-off"></i>
-                    {!! trans('messages\buttons.cerrarCesion') !!}
+                    {!! trans('buttons.cerrarCesion') !!}
                 </a>
 
                 <form id="logout-form" action="{{ route('log_out') }}" method="POST" style="display: none;">

@@ -1,7 +1,7 @@
 @extends('layouts.master_panel')
-@section('title', trans('menu\titles.contratos'))
+@section('title', trans('titles.contratos'))
 @section('card-icon')<i class="icofont-document-folder"></i>@endsection
-@section('card-title', strtoupper(trans('menu\titles.contratos')))
+@section('card-title', strtoupper(trans('titles.contratos')))
 
  <!-- DatePicker -->
  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
@@ -28,7 +28,7 @@
             <div id="div-btn-add-contract" class="col-md-12 mb-2">
                 <div class="btn-group-vertical" role="group">
                     <button type="button" class="btn btn-primary btn-block add-contract">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>  {!! trans('messages\buttons.nuevo') !!}
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>  {!! trans('buttons.nuevo') !!}
                     </button>
                     <br>
                 </div>

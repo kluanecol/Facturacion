@@ -22,17 +22,17 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class='nav-item has-treeview '><a href='#'
                     class='nav-link active sidebar-dark-blue'><i class="icofont-document-folder"></i>
-                    <p>{!! trans('menu\titles.contratos') !!}  <i class='right fas fa-angle-left'></i></p>
+                    <p>{!! trans('titles.contratos') !!}  <i class='right fas fa-angle-left'></i></p>
                     </a>
                     <ul class='nav nav-treeview'>
                        <li class='nav-item'><a href='{{ route('contracts.index')}}'
                                     class='nav-link'><i class="icofont-info"></i>
-                                    <p><b><font size="2">{!! trans('menu\titles.gestion') !!}</font></b> </p>
+                                    <p><b><font size="2">{!! trans('titles.gestion') !!}</font></b> </p>
                                 </a></li>
                         <!--fin level 2--endcan-->
                         <li class='nav-item'><a href='{{-- route('roles.index') --}}'
                                     class='nav-link'><i class="icofont-gear"></i>
-                                    <p><b><font size="2">{!! trans('menu\titles.configuracion') !!}</font></b></p>
+                                    <p><b><font size="2">{!! trans('titles.configuracion') !!}</font></b></p>
                                 </a></li>
                         <!--fin level 2--endcan-->
                     </ul>

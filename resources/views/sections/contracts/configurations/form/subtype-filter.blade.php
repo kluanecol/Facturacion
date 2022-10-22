@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="form-group ">
-        <label for="id_configuration_subtype">{!! trans('form\labels.tipoDeConfiguracion') !!}(*)</label>
+        <label for="id_configuration_subtype">{!! trans('labels.tipoDeConfiguracion') !!}(*)</label>
         <span class="help-block"></span>
         {!! Form::select('id_configuration_subtype', is_object($configurationSubtypes) ? $configurationSubtypes->pluck('name','id') : [], null, [
             'class' => 'form-control selectpicker',

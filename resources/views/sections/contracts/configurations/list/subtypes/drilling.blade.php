@@ -1,10 +1,10 @@
 <table class="table table-hover table-bordered" id="table-currencys" style="width: 100%;">
     <thead class="text-light thead-dark">
-        <th class="text-center"><strong>{!! trans('form\labels.broca') !!}</strong></th>
-        <th class="text-center"><strong>{!!trans('form\labels.desde') !!}</strong></th>
-        <th class="text-center"><strong>{!!trans('form\labels.hasta') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('form\labels.valor') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('form\labels.opciones') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.broca') !!}</strong></th>
+        <th class="text-center"><strong>{!!trans('labels.desde') !!}</strong></th>
+        <th class="text-center"><strong>{!!trans('labels.hasta') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.valor') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
     </thead>
     <tbody class="text-center bg-light">
             @foreach ($configurations as $configuration)
