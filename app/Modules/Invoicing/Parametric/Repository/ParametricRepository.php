@@ -12,7 +12,7 @@ class ParametricRepository implements ParametricInterface{
 
     public function getActiveChildren($idParent){
         return Parametric::active()
-        ->whereJsonContains('json_countries->country', GeneralVariables::getCurrentCountryId())
+        ->where('json_countries', 'like', '%' . GeneralVariables::getCurrentCountryId() . '%')
         ->where('fk_id_parent',$idParent)
         ->get();
     }
