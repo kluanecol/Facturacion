@@ -1,5 +1,5 @@
 <?php
-    Route::group(['prefix' => 'invoicing','middleware' => 'auth','cors'], function(){
+    Route::group(['prefix' => 'invoicing','middleware' => 'auth'], function(){
         $controller = "Invoicing\ConfigurationSubtype\Controllers";
 
         Route::group(['namespace' => $controller, 'prefix' => 'configurationSubtype'], function (){
