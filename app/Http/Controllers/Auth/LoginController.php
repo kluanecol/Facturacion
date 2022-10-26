@@ -50,7 +50,7 @@ class LoginController extends Controller
         ->get();
 
         Session::put('countries', $userCountries);
-
+        session()->put('locale', 'es');
         Session::put('country', $userCountries[0]->country);
 
 

@@ -26,6 +26,7 @@ class CreateTableContractConfigurations extends Migration
             $table->unsignedBigInteger('fk_id_parametric')->nullable();
             $table->foreign('fk_id_parametric','fk_contract_to_parametric')->references('id')->on('parametrics');
 
+            $table->unsignedInteger('fk_id_diameter')->nullable();
             $table->unsignedInteger('fk_id_activity')->nullable();
             $table->unsignedInteger('fk_id_product')->nullable();
 

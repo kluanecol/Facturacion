@@ -20,6 +20,7 @@ class ContractConfiguration extends Model
        'fk_id_contract',
        'fk_id_configuration_subtype',
        'fk_id_parametric',
+       'fk_id_diameter',
        'fk_id_activity',
        'fk_id_product',
        'initial_range',
@@ -46,5 +47,10 @@ class ContractConfiguration extends Model
     public function activity()
     {
         return $this->belongsTo(GeneralParametric::class, 'fk_id_activity','id');
+    }
+
+    public function diameter()
+    {
+        return $this->belongsTo(GeneralParametric::class, 'fk_id_diameter','id');
     }
 }

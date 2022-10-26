@@ -14,4 +14,5 @@ return [
     'valorPorHora' => 'Valor por hora',
     'desde' => 'Desde',
     'hasta' => 'Hasta',
+    'diametro' => 'Diámetro',
 ];

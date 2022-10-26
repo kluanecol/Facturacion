@@ -7,6 +7,7 @@ use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeRe
 use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfigurationRepository;
 use App\Modules\Invoicing\Parametric\Repository\ParametricRepository;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
+use App\Modules\Admin\GeneralParametric\Repository\GeneralParametricRepository;
 
 class Drilling implements ConfigurationSubtypeFormsInterface
 {
@@ -16,12 +17,14 @@ class Drilling implements ConfigurationSubtypeFormsInterface
     protected $parametricRepository;
     protected $configurationSubtypeRepository;
     protected $contractConfigurationRepository;
+    protected $generalParametricRepository;
 
     function __construct()
     {
         $this->parametricRepository = new ParametricRepository();
         $this->configurationSubtypeRepository = new ConfigurationSubtypeRepository();
         $this->contractConfigurationRepository = new ContractConfigurationRepository();
+        $this->generalParametricRepository = new GeneralParametricRepository();
     }
 
     public function getForm($idContract, $idContractConfiguration)
@@ -29,7 +32,7 @@ class Drilling implements ConfigurationSubtypeFormsInterface
         $data = [];
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
-        //$data['BROCAS'] = $this->parametricRepository->getActiveChildren(GeneralVariables::ID_PARAMETRIC_CURRENCY)->pluck('name','id');
+        $data['diameters'] = $this->generalParametricRepository->getDrillingDiameters(GeneralVariables::getCurrentCountryId())->sortBy('name')->pluck('name','id');
 
         if (isset($idContractConfiguration)) {
             $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);

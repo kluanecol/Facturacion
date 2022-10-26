@@ -6,19 +6,19 @@
             {!! Form::hidden('fk_id_contract', (isset($idContract) ? $idContract : null), ['id'=>'fk_id_contract']) !!}
             {!! Form::hidden('id', (isset($contractConfiguration) ? $contractConfiguration->id : null), ['id'=>'id']) !!}
 
-            <!--div class="col-md-6">
+            <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('labels.broca') !!}(*):</label>
-                    {!!Form::select('fk_id_activity',[], (isset($contractConfiguration) ? $contractConfiguration->fk_id_activity : null) ,[
-                        'class'=>'form-control selectpicker fk_id_activity is_required',
+                    <label for="fk_id_diameter">{!! trans('labels.diametro') !!}(*):</label>
+                    {!!Form::select('fk_id_diameter',$diameters, (isset($contractConfiguration) ? $contractConfiguration->fk_id_diameter : null) ,[
+                        'class'=>'form-control selectpicker fk_id_diameter is_required',
                         'data-live-search'=>'true',
                         'title'=>'',
-                        'id'=>'fk_id_activity',
+                        'id'=>'fk_id_diameter',
                         'data-size'=>'5'
                     ])!!}
                     <span class="help-block"></span>
                 </div>
-            </div-->
+            </div>
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">

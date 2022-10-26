@@ -16,4 +16,20 @@ class GeneralParametricRepository implements GeneralParametricInterface{
         ->get();
     }
 
+    public function  getCasingDiameters($idCountry){
+        return GeneralParametric::where('id_country',$idCountry)
+        ->where('category','id_param_diametro')
+        ->where('ref1_descripcion', 'LIKE', '%casing%')
+        ->where('state',1)
+        ->get();
+    }
+
+    public function  getDrillingDiameters($idCountry){
+        return GeneralParametric::where('id_country',$idCountry)
+        ->where('category','id_param_diametro')
+        ->where('state',1)
+        ->where('ref1_descripcion', null)
+        ->get();
+    }
+
 }
