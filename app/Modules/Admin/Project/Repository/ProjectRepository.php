@@ -10,7 +10,9 @@ use Session;
 class ProjectRepository implements ProjectInterface{
 
     public function getByCountry($idCountry){
-        return Project::where('id_country',$idCountry)->orderBy('nombre_corto')->get();
+        return Project::where('id_country',$idCountry)
+            ->where('estado',1)
+            ->orderBy('nombre_corto')->get();
     }
 
 }
