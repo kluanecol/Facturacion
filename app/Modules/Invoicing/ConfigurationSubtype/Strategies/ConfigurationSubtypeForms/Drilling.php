@@ -46,7 +46,7 @@ class Drilling implements ConfigurationSubtypeFormsInterface
         $data = [];
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
-        $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
+        $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION)->sortBy('fk_id_parameter')->sortBy('initial_range');
 
         return view('sections.contracts.configurations.list.subtypes.drilling', $data)->render();
     }
@@ -72,6 +72,14 @@ class Drilling implements ConfigurationSubtypeFormsInterface
             }
         }
 
+        if ($configuration->multiple == 1) {
+            $result = $this->contractConfigurationRepository->isAValidRange($request->fk_id_contract, $request->fk_id_diameter, $request->initial_range, $request->final_range, $request->id);
+
+            return $result;
+        }
+
         return $result;
     }
+
+
 }

@@ -307,11 +307,9 @@ function reloadConfigurationContainer(id_configuration){
 
 function updateRangeInput(elem) {
     $('#'+$(elem).attr("id")+'_container').text($(elem).val());
-
 }
 
 function refreshInputs(){
-    informes_seleccionados = [];
     $('[data-toggle="tooltip"]').tooltip();
     $(".datepicker").datepicker({
         format: 'yyyy-mm-dd',
@@ -324,8 +322,17 @@ function refreshInputs(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
+    if($("#table-diameters").length > 0){
+        refreshTable("table-diameters");
+    }
 
+    if($("#table-activities").length > 0){
+        refreshTable("table-activities");
+    }
 
+    if($("#table-products").length > 0){
+        refreshTable("table-products");
+    }
 }
 
 function validateForm(id,rules,custom_messages){
@@ -379,3 +386,24 @@ function validateForm(id,rules,custom_messages){
     }
 }
 
+function refreshTable(string_id_table) {
+    table_contracts = $('#'+string_id_table).DataTable({
+        language: {
+            "url": vURL+"/js/general/datatables/"+current_lang+".json"
+        },
+        processing: true,
+        serverSide: false,
+        responsive: false,
+        "destroy": true,
+        scrollX: 400,
+        scrollY: 380,
+        scrollCollapse: true,
+        dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: 'excel',
+            }
+            ],
+        pageLength: 15,
+    });
+}

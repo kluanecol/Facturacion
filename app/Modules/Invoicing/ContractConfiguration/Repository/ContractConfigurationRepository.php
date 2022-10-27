@@ -72,4 +72,49 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
             return $e->getMessage();
         }
     }
+
+    public function isAValidRange($idContract, $idDiameter, $initialRange, $finalRange, $idContractConfiguration = null){
+        $isValid = 200;
+
+        $contractConfigurations = ContractConfiguration::where('fk_id_contract',$idContract)
+            ->where('fk_id_diameter', $idDiameter)
+            ->where('id','!=', $idContractConfiguration)
+            ->get();
+
+        if (($contractConfigurations->where('initial_range','<=',$initialRange)->where('final_range','>',$initialRange)->count() > 0)) {
+
+            $message = [
+                'title' => trans('general.algoSalioMal'),
+                'message' =>trans('contractConfiguration.elRangoInicialIngresadoEstaContenidoEnOtraConfiguracion'),
+                'type'  => 'warning',
+                'status' => 400
+            ];
+            return $message;
+        }
+
+        if (($contractConfigurations->where('initial_range','<',$finalRange)->where('final_range','>=',$finalRange)->count() > 0)) {
+
+            $message = [
+                'title' => trans('general.algoSalioMal'),
+                'message' =>trans('contractConfiguration.elRangoFinalIngresadoEstaContenidoEnOtraConfiguracion'),
+                'type'  => 'warning',
+                'status' => 400
+            ];
+            return $message;
+        }
+
+        if (($contractConfigurations->where('initial_range','>=',$initialRange)->where('final_range','<=',$finalRange)->count() > 0)) {
+
+            $message = [
+                'title' => trans('general.algoSalioMal'),
+                'message' =>trans('contractConfiguration.elRangoIngresadoContieneUnRangoConfiguracion'),
+                'type'  => 'warning',
+                'status' => 400
+            ];
+            return $message;
+        }
+
+        return $isValid;
+    }
+
 }
