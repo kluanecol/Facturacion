@@ -8,6 +8,7 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use App\Modules\Invoicing\Parametric\Models\Parametric;
 use App\Modules\Invoicing\ConfigurationSubtype\Models\ConfigurationSubtype;
 use App\Modules\Admin\GeneralParametric\Models\GeneralParametric;
+use App\Modules\Admin\Consumable\Models\Consumable;
 
 class ContractConfiguration extends Model
 {
@@ -52,5 +53,10 @@ class ContractConfiguration extends Model
     public function diameter()
     {
         return $this->belongsTo(GeneralParametric::class, 'fk_id_diameter','id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Consumable::class, 'fk_id_product','id');
     }
 }

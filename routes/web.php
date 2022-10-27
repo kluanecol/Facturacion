@@ -25,15 +25,4 @@ Route::group(['middleware' => 'auth'], function()
 
     Route::get('lang/{lang}', 'LanguageController@swap')->name('lang.swap');
     Route::get('changecountry/{id}', 'LanguageController@swapcountry')->name('lang.swapcountry');
-
-    Route::get('test', function () {
-        Excel::create('Filename', function($excel) {
-            $excel->sheet('Sheetname', function($sheet) {
-
-                // Sheet manipulation
-
-            });
-        })->export('xlsx');
-    });
-
 });

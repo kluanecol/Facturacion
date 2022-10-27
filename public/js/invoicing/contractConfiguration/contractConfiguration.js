@@ -51,6 +51,19 @@ jQuery(function() {
         deleteConfiguration($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
     });
 
+    $(document).on('change','#fk_id_consumable_group',function(){
+        getConsumables($(this).val());
+    });
+
+
+    $(document).on('click','#btn-search-consumable',function(){
+
+        if ($('#search_string').val().length < 2) {
+            toastr.warning($('#msg-write-more-than-one-letter').val(), $('#msg-something-went-wrong').val());
+        }else{
+            searchConsumables($('#search_string').val());
+        }
+    });
 });
 
 function getConfigurationForm(id_configuration, id_contract_configuration){
@@ -84,6 +97,132 @@ function getConfigurationForm(id_configuration, id_contract_configuration){
                 $('body').loading('stop');
                 refreshInputs();
                 validateForm("#form-configuration",[],[]);
+            } else {
+                $('body').loading('stop');
+                Swal.fire({
+                    type: 'error',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        }
+    ).fail(function(data) {
+        $('body').loading('stop');
+        if(data.status == 419){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=>{
+                location.reload();
+            });
+
+        }else if(data.status == 500){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    });
+}
+
+function getConsumables(id_group){
+    $('body').loading({
+        message: $('#msg-loading').val()
+    });
+
+    var domData = {
+        id_group : id_group
+    }
+
+    $.post(
+        vURL+"/production/consumable/getByGroupId",
+        domData,
+        function(data)
+        {
+            $('body').loading('stop');
+
+            if (data.success) {
+                var options = "";
+
+                $.each(data.consumables, function(i, product) {
+                    options += "<option value='" + i + "' >" + product + "</option>";
+                });
+
+                $("#fk_id_product").html(options);
+                $(".selectpicker").selectpicker('refresh');
+
+                refreshInputs();
+            } else {
+                $('body').loading('stop');
+                Swal.fire({
+                    type: 'error',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        }
+    ).fail(function(data) {
+        $('body').loading('stop');
+        if(data.status == 419){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=>{
+                location.reload();
+            });
+
+        }else if(data.status == 500){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    });
+}
+
+function searchConsumables(input_string){
+    $('body').loading({
+        message: $('#msg-loading').val()
+    });
+
+    var domData = {
+        input_string : input_string
+    }
+
+    $.post(
+        vURL+"/production/consumable/searchByString",
+        domData,
+        function(data)
+        {
+            $('body').loading('stop');
+
+            if (data.success) {
+                var options = "";
+
+                $.each(data.consumables, function(i, product) {
+                    options += "<option value='" + i + "' >" + product + "</option>";
+                });
+
+                $("#fk_id_product").html(options);
+                $(".selectpicker").selectpicker('refresh');
+
+                refreshInputs();
             } else {
                 $('body').loading('stop');
                 Swal.fire({

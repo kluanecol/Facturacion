@@ -15,4 +15,22 @@ class ConsumableRepository implements ConsumableInterface{
             ->orderBy('nombre')->get();
     }
 
+    public function getByGroupId($idGroup){
+        return Consumable::where('id_grupo', $idGroup)
+            ->where('state', 1)
+            ->orderBy('nombre')
+            ->get();
+    }
+
+    public function searchByString($string){
+        return Consumable::where('state','=', 1)
+        ->where(function ($q) use ($string){
+            $q->where('nombre', 'like', '%' .$string. '%')->orWhere('nombre_ingles', 'like', '%' .$string. '%');
+        })
+        ->orderBy('nombre')
+        ->take(100)
+        ->groupBy('id')
+        ->get();
+    }
+
 }

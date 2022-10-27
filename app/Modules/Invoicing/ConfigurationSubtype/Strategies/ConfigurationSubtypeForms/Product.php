@@ -7,21 +7,27 @@ use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfiguration
 use App\Modules\Admin\GeneralParametric\Repository\GeneralParametricRepository;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeRepository;
+use App\Modules\Admin\ConsumableGroup\Repository\ConsumableGroupRepository;
+use App\Modules\Admin\Consumable\Repository\ConsumableRepository;
 
 class Product implements ConfigurationSubtypeFormsInterface
 {
 
-    CONST ID_CONFIGURATION = 1;
+    CONST ID_CONFIGURATION = 5;
 
     protected $contractConfigurationRepository;
     protected $generalParametricRepository;
     protected $configurationSubtypeRepository;
+    protected $consumableGroupRepository;
+    protected $consumableRepository;
 
     function __construct()
     {
         $this->contractConfigurationRepository = new ContractConfigurationRepository();
         $this->generalParametricRepository = new GeneralParametricRepository();
         $this->configurationSubtypeRepository = new ConfigurationSubtypeRepository();
+        $this->consumableGroupRepository = new ConsumableGroupRepository();
+        $this->consumableRepository = new ConsumableRepository();
     }
 
     public function getForm($idContract, $idContractConfiguration)
@@ -30,25 +36,24 @@ class Product implements ConfigurationSubtypeFormsInterface
 
         if (isset($idContractConfiguration)) {
             $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);
+            $data['consumables'] = $this->consumableRepository->getByGroupId($data['contractConfiguration']->product->group->id)->sortBy('name')->pluck('name','id');
         }
 
-        $currentActivities = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
-
+        $currentProducts = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
+        /*
         if (isset($data['contractConfiguration'])) {
-            $currentActivities = $currentActivities->whereNotIn('fk_id_activity', [$data['contractConfiguration']->fk_id_activity]);
+            $currentProducts = $currentProducts->whereNotIn('fk_id_product', [$data['contractConfiguration']->fk_id_product]);
         }
 
-        $currentActivities = $currentActivities->pluck('fk_id_activity')->toArray();
-
+        $currentProducts = $currentProducts->pluck('fk_id_product')->toArray();
+        */
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
-        $data['activities'] = $this->generalParametricRepository->getActivitiesByCountry(GeneralVariables::getCurrentCountryId())
-            ->whereNotIn('id', $currentActivities)
-            ->sortBy('name')->pluck('name','id');
+        $data['consumableGroups'] = $this->consumableGroupRepository->getByCountry(GeneralVariables::getCurrentCountryId())
+            //->whereNotIn('id', $currentProducts)
+            ->push(" ")->sortBy('name')->pluck('nombre','id');
 
-
-
-        return view('sections.contracts.configurations.form.subtypes.activity', $data)->render();
+        return view('sections.contracts.configurations.form.subtypes.product', $data)->render();
     }
 
     public function getList($idContract)
@@ -59,7 +64,7 @@ class Product implements ConfigurationSubtypeFormsInterface
         $data['idContract'] = $idContract;
         $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION)->sortBy('activity.name');
 
-        return view('sections.contracts.configurations.list.subtypes.activity', $data)->render();
+        return view('sections.contracts.configurations.list.subtypes.product', $data)->render();
     }
 
     public function validate($request){
@@ -68,14 +73,14 @@ class Product implements ConfigurationSubtypeFormsInterface
 
         $configuration = $this->configurationSubtypeRepository->getById(self::ID_CONFIGURATION);
 
-        if ($configuration->multiple == 1 && $request->id == null) {
-            $actualConfigurations = $this->contractConfigurationRepository->getActivityConfiguration($request->fk_id_contract, self::ID_CONFIGURATION, $request->fk_id_activity);
+        if ($configuration->multiple == 1) {
+            $actualConfigurations = $this->contractConfigurationRepository->getProductConfiguration($request->fk_id_contract, self::ID_CONFIGURATION, $request->fk_id_product, $request->id);
 
             if (is_object($actualConfigurations)) {
 
                 $message = [
                     'title' => trans('general.algoSalioMal'),
-                    'message' =>trans('contractConfiguration.yaEstaConfiguradaEstaActividad'),
+                    'message' =>trans('contractConfiguration.yaEstaConfiguradoEsteConsumible'),
                     'type'  => 'warning',
                     'status' => 400
                 ];
