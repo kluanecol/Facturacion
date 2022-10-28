@@ -29,8 +29,7 @@ class ConsumableRepository implements ConsumableInterface{
         })
         ->orderBy('nombre')
         ->take(100)
-        ->unique()
-        ->get();
+        ->get()->unique('id');
     }
 
 }
