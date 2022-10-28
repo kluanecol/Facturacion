@@ -7,16 +7,20 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfigurationInterface;
 use App\Modules\Invoicing\ConfigurationSubtype\Context\ConfigurationSubtypeFormsContext;
+use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeInterface;
 
 class ContractConfigurationController extends Controller
 {
     private $contractConfigurationRepo;
+    private $contractConfigurationSubtypeRepo;
 
     function __construct(
-    ContractConfigurationInterface $contractConfigurationRepo
+        ContractConfigurationInterface $contractConfigurationRepo,
+        ConfigurationSubtypeInterface $contractConfigurationSubtypeRepo
     )
     {
         $this->contractConfigurationRepo = $contractConfigurationRepo;
+        $this->contractConfigurationSubtypeRepo = $contractConfigurationSubtypeRepo;
     }
 
 
@@ -98,6 +102,23 @@ class ContractConfigurationController extends Controller
             ];
         }
         return response()->json($messages);
+
+    }
+
+    public function reloadProgressBar(Request $request){
+        $percentage = 0;
+        $contractConfigurations = $this->contractConfigurationRepo->getContractConfigurationsByIdContract($request->id_contract)->groupBy('fk_id_configuration_subtype');
+        $globalCurrentSettings =  $this->contractConfigurationSubtypeRepo->getActive();
+
+        if ($globalCurrentSettings->count() > 0) {
+            $percentage = ($contractConfigurations->count()*100)/$globalCurrentSettings->count();
+        }
+
+        $data['percentage'] = $percentage;
+        $data['success'] = true;
+
+
+        return response()->json($data);
 
     }
 

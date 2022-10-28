@@ -9,6 +9,7 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeInterface;
+use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfigurationInterface;
 
 use Session;
 
@@ -18,18 +19,21 @@ class ContractController extends Controller
     protected $projectRepo;
     protected $clientRepo;
     protected $configurationSubtypeRepo;
+    protected $contractConfigurationRepo;
 
     function __construct(
             ContractInterface $contractRepo,
             ProjectInterface $projectRepo,
             ClientInterface $clientRepo,
-            ConfigurationSubtypeInterface $configurationSubtypeRepo
+            ConfigurationSubtypeInterface $configurationSubtypeRepo,
+            ContractConfigurationInterface $contractConfigurationRepo
         )
         {
             $this->contractRepo = $contractRepo;
             $this->projectRepo = $projectRepo;
             $this->clientRepo = $clientRepo;
             $this->configurationSubtypeRepo = $configurationSubtypeRepo;
+            $this->contractConfigurationRepo = $contractConfigurationRepo;
         }
 
     public function index(){
@@ -118,9 +122,18 @@ class ContractController extends Controller
 
     public function configuration($idContract){
         $data=[];
+        $percentage = 0;
+
+        $contractConfigurations = $this->contractConfigurationRepo->getContractConfigurationsByIdContract($idContract)->groupBy('fk_id_configuration_subtype');
+        $globalCurrentSettings =  $this->configurationSubtypeRepo->getActive();
+
+        if ($globalCurrentSettings->count() > 0) {
+            $percentage = ($contractConfigurations->count()*100)/$globalCurrentSettings->count();
+        }
 
         $data['contract'] = $this->contractRepo->getById($idContract);
         $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
+        $data['percentage'] = $percentage;
 
         return view('sections.contracts.configurations.index', $data);
     }

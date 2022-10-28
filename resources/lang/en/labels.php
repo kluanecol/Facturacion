@@ -15,4 +15,8 @@ return [
     'desde' => 'From',
     'hasta' => 'To',
     'diametro' => 'Diameter',
+    'grupo' => 'Group',
+    'consumible' => 'Consumable',
+    'valorUnitario' => 'Unit value',
+    'busqueElConsumibleQueNecesita' => 'Search for the consumable you need',
 ];

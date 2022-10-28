@@ -19,6 +19,11 @@
                 'as' => 'contractConfiguration.delete',
                 'uses' => 'ContractConfigurationController@delete'
             ]);
+
+            Route::post('/reloadProgressBar', [
+                'as' => 'contractConfiguration.reloadProgressBar',
+                'uses' => 'ContractConfigurationController@reloadProgressBar'
+            ]);
         });
 
     });

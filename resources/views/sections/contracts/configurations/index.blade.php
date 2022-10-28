@@ -16,6 +16,7 @@
 
 @section('content')
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
+        <div id="main-url-init" data-url="{{URL::to('/invoicing')}}"></div>
         @include('sections.validation.messages')
         @include('sections.contracts.configurations.components.messages')
         <div class="row">
@@ -46,7 +47,7 @@
 
 @push('plugins')
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/contractConfiguration/contractConfiguration.js?v=2022-10-27') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/contractConfiguration/contractConfiguration.js?v=2022-10-29') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

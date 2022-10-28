@@ -125,4 +125,9 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
         return $isValid;
     }
 
+    public function getContractConfigurationsByIdContract($idContract){
+
+        return ContractConfiguration::where('fk_id_contract',$idContract)->get();
+
+    }
 }

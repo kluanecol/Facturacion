@@ -9,9 +9,9 @@
                 <h5>{{(isset($contract) ? $contract->initial_date.' - '.$contract->end_date : 'N/R')}}</h5>
             </div>
             <div class="bg-light py-3">
-                <p><b>INVOICING</b></p>
+                <p><b>{!! strtoupper(trans('contractConfiguration.gestionConfiguracion')) !!}</b></p>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                    <div class="progress-bar progress-bar-striped bg-info"  role="progressbar" style="width:{{$percentage}}%" aria-valuenow="{{$percentage}}" aria-valuemin="0" aria-valuemax="100" id="configurations-progress-bar">{{$percentage}}%</div>
                 </div>
             </div>
         </div>

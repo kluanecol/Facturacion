@@ -1,12 +1,15 @@
 
 
 var vURL = null;
+var vURL_INVOICING = null;
 let reload = false;
 
 
 
 jQuery(function() {
+
 	vURL = $('#main-url').data('url');
+    vURL_INVOICING = $('#main-url-init').data('url');
 
     toastr.options = {
         "closeButton": true,
@@ -284,6 +287,7 @@ function saveConfiguration() {
                 toastr.success(data.message, data.title);
 
                 reloadConfigurationContainer(data.id_configuration);
+                reloadProgressBar();
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
@@ -353,6 +357,7 @@ function deleteConfiguration(id_configuration, id_contract_configuration) {
                     if (data.status == 200) {
                         toastr.success(data.message, data.title);
                         reloadConfigurationContainer(data.id_configuration);
+                        reloadProgressBar();
                     }
                     else if(data.status == 400){
                         toastr.warning(data.message, data.title);
@@ -409,7 +414,6 @@ function reloadConfigurationContainer(id_configuration){
 
                 $('#container-configuration-'+data.id_configuration).html(data.html);
                 refreshInputs();
-
             } else {
                 Swal.fire({
                     type: 'error',
@@ -544,5 +548,56 @@ function refreshTable(string_id_table) {
             }
             ],
         pageLength: 15,
+    });
+}
+
+function reloadProgressBar(){
+    reload = false;
+
+    var domData = {
+        id_contract : $('#id_contract').val()
+    }
+
+    $.post(
+        vURL_INVOICING+"/contractConfiguration/reloadProgressBar",
+        domData,
+        function(data)
+        {
+            if (data.success) {
+
+                $(`#configurations-progress-bar`).css('width',data.percentage+'%');
+                $(`#configurations-progress-bar`).html(data.percentage+'%')
+
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        }
+    ).fail(function(data) {
+        if(data.status == 419){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=>{
+                location.reload();
+            });
+
+        }else if(data.status == 500){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
     });
 }
