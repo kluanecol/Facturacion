@@ -28,8 +28,8 @@ class ConsumableRepository implements ConsumableInterface{
             $q->where('nombre', 'like', '%' .$string. '%')->orWhere('nombre_ingles', 'like', '%' .$string. '%');
         })
         ->orderBy('nombre')
-        ->groupBy('id','id_grupo')
         ->take(100)
+        ->unique()
         ->get();
     }
 
