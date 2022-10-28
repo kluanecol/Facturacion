@@ -29,7 +29,7 @@ class ConsumableRepository implements ConsumableInterface{
         })
         ->orderBy('nombre')
         ->take(100)
-        ->groupBy('id')
+        ->groupBy('id','id_grupo')
         ->get();
     }
 
