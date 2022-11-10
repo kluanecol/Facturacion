@@ -22,11 +22,27 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('labels.valorPorMetro') !!}(*):</label>
+                    <label for="fk_id_activity">{!! trans('labels.valorPorMetro') !!} {{isset($configurationCurrency) ? $configurationCurrency->currency->description : ""}} (*):</label>
                     {!! Form::number('value', isset($contractConfiguration) ? $contractConfiguration->value : null, ['class' => 'form-control is_required', 'id' => 'value', 'min'=> '0', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
             </div>
+
+            @if (isset($configurationSecondCurrency))
+                <div class="col-md-6">
+                    <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                        <label for="second_value">{!! trans('labels.valorAlterno') !!}({!! trans('labels.opcional') !!}) {{isset($configurationSecondCurrency) ? $configurationSecondCurrency->secondCurrency->description : ""}}:</label>
+                        {!! Form::number('second_value', isset($contractConfiguration) ? $contractConfiguration->second_value : null,
+                            ['class' => 'form-control',
+                                'id' => 'second_value',
+                                'min'=> '0',
+                                'Style' => 'width: 100%;'
+                            ])
+                        !!}
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+            @endif
 
             <div class="col-md-12"><hr>
                 <div class="wrapper">

@@ -19,4 +19,7 @@ return [
     'consumible' => 'Consumible',
     'valorUnitario' => 'Valor unitario',
     'busqueElConsumibleQueNecesita' => 'Busque el consumible que necesita',
+    'valorAlterno' => 'Valor alterno',
+    'opcional' => 'Opcional',
+    'valorPorMetro' => 'Valor por metro'
 ];

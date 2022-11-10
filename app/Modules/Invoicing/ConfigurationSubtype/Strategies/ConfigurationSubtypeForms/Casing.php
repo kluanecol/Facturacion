@@ -32,6 +32,8 @@ class Casing implements ConfigurationSubtypeFormsInterface
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
         $data['diameters'] = $this->generalParametricRepository->getCasingDiameters(GeneralVariables::getCurrentCountryId())->sortBy('name')->pluck('name','id');
+        $data['configurationCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_CURRENCY, ['currency'])->first();
+        $data['configurationSecondCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_SECOND_CURRENCY, ['secondCurrency'])->first();
 
         if (isset($idContractConfiguration)) {
             $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);
@@ -46,6 +48,8 @@ class Casing implements ConfigurationSubtypeFormsInterface
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
         $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION)->sortBy('fk_id_parameter')->sortBy('initial_range');
+        $data['configurationCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_CURRENCY, ['currency'])->first();
+        $data['configurationSecondCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_SECOND_CURRENCY, ['secondCurrency'])->first();
 
         return view('sections.contracts.configurations.list.subtypes.casing', $data)->render();
     }
