@@ -38,8 +38,8 @@ class ContractRepository implements ContractInterface{
         return Datatables::of($table)->addIndexColumn()->rawColumns(['options'])->make(true);
     }
 
-    public function getById($id){
-        return Contract::find($id);
+    public function getById($id, $relations = []){
+        return Contract::with($relations)->find($id);
     }
 
     public function getByProjectYearAndClient($idProject, $year, $idClient){

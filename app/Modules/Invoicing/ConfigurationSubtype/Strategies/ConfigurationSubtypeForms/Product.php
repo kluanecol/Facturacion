@@ -40,18 +40,10 @@ class Product implements ConfigurationSubtypeFormsInterface
         }
 
         $currentProducts = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
-        /*
-        if (isset($data['contractConfiguration'])) {
-            $currentProducts = $currentProducts->whereNotIn('fk_id_product', [$data['contractConfiguration']->fk_id_product]);
-        }
 
-        $currentProducts = $currentProducts->pluck('fk_id_product')->toArray();
-        */
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
-        $data['consumableGroups'] = $this->consumableGroupRepository->getByCountry(GeneralVariables::getCurrentCountryId())
-            //->whereNotIn('id', $currentProducts)
-            ->push(" ")->sortBy('name')->pluck('nombre','id');
+        $data['consumableGroups'] = $this->consumableGroupRepository->getByCountry(GeneralVariables::getCurrentCountryId())->push(" ")->sortBy('name')->pluck('nombre','id');
 
         return view('sections.contracts.configurations.form.subtypes.product', $data)->render();
     }
