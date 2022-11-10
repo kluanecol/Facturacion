@@ -25,7 +25,9 @@ class ConsumableRepository implements ConsumableInterface{
     public function searchByString($string){
         return Consumable::where('state','=', 1)
         ->where(function ($q) use ($string){
-            $q->where('nombre', 'like', '%' .$string. '%')->orWhere('nombre_ingles', 'like', '%' .$string. '%');
+            $q->where('nombre', 'like', '%' .$string. '%')
+                ->orWhere('nombre_ingles', 'like', '%' .$string. '%')
+                ->orWhere('referencia', 'like', '%' .$string. '%');
         })
         ->orderBy('nombre')
         ->take(100)

@@ -37,7 +37,7 @@ class CreateTableContractConfigurations extends Migration
 
             $table->unsignedBigInteger('fk_id_second_parametric')->nullable();
             $table->foreign('fk_id_second_parametric','fk_contract_to_second_parametric')->references('id')->on('parametrics');
-            $table->decimal('second_value', 16, 2)->default(0);
+            $table->decimal('second_value', 16, 2)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

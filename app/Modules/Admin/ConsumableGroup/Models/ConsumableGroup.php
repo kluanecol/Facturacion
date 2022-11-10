@@ -19,9 +19,7 @@ class ConsumableGroup extends Model
     public function getNameAttribute()
     {
         if (GeneralVariables::getCurrentLanguage() == 'es') {
-            return $this->nombre;
-        } else {
-            return $this->nombre_ingles;
+            return $this->nombre.' - '.$this->nombre_ingles;
         }
 
     }

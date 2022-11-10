@@ -28,7 +28,7 @@ class ConsumableController extends Controller
 
     public function searchByString(Request $request)
     {
-        $consumables = $this->consumableRepository->searchByString($request->input_string)->sortBy('name')->pluck('name','id');
+        $consumables = $this->consumableRepository->searchByString($request->input_string)->sortBy('name')->pluck('name_reference','id');
 
         return response()->json(['success' => true, 'consumables'=>$consumables]);
     }

@@ -13,7 +13,7 @@
                     <p><b>{{$configuration->product->group->name}}</b></p>
                 </td>
                 <td>
-                    <p><b>{{$configuration->product->name}}</b></p>
+                    <p><b>{{$configuration->product->name_reference}}</b></p>
                 </td>
                 <td>
                     <p><b>{{number_format($configuration->value,2,",",".")}}</b></p>

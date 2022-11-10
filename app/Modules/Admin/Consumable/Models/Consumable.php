@@ -31,4 +31,14 @@ class Consumable extends Model
         }
 
     }
+
+    public function getNameReferenceAttribute()
+    {
+        if (GeneralVariables::getCurrentLanguage() == 'es') {
+            return $this->nombre.' - '.$this->referencia;
+        } else {
+            return $this->nombre_ingles.' - '.$this->referencia;
+        }
+
+    }
 }
