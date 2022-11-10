@@ -21,9 +21,11 @@
                 <td>
                     <p><b>{{number_format($configuration->value,2,",",".")}}</b></p>
                 </td>
-                <td>
-                    <p><b>{{number_format($configuration->second_value,2,",",".")}}</b></p>
-                </td>
+                @if (isset($configurationSecondCurrency))
+                    <td>
+                        <p><b>{{number_format($configuration->second_value,2,",",".")}}</b></p>
+                    </td>
+                @endif
                 <td>
                     <a  class="btn  btn-warning edit-configuration" data-configuration-id="{{$configuration->fk_id_configuration_subtype}}" data-contract-configuration-id="{{$configuration->id}}" target="_blank"><i class="icofont-pencil-alt-1"></i></a>
 
