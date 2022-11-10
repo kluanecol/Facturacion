@@ -22,7 +22,7 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('labels.valorPorHora') !!}(*):</label>
+                    <label for="fk_id_activity">{!! trans('labels.valorPorMetro') !!}(*):</label>
                     {!! Form::number('value', isset($contractConfiguration) ? $contractConfiguration->value : null, ['class' => 'form-control is_required', 'id' => 'value', 'min'=> '0', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
@@ -45,7 +45,7 @@
             <div class="col-md-3 pt-1"><label for="initial_range">{!! trans('labels.desde') !!}:</label></div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <input name="initial_range" type="range" class="form-range form-control range is_required" min="0" max="1000" step="50" id="initial_range" oninput="updateRangeInput(this)" value="{{isset($contractConfiguration) ? $contractConfiguration->initial_range : 0}}">
+                    <input name="initial_range" type="range" class="form-range form-control range is_required" min="0" max="1600" step="10" id="initial_range" oninput="updateRangeInput(this)" value="{{isset($contractConfiguration) ? $contractConfiguration->initial_range : 0}}">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -54,11 +54,14 @@
             <div class="col-md-3 pt-1"> <label for="final_range">{!! trans('labels.hasta') !!}:</label></div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <input name="final_range" type="range" class="form-range form-control range biggerthanInitialRange is_required" min="0" max="1000" step="50" id="final_range" oninput="updateRangeInput(this)"  value="{{isset($contractConfiguration) ? $contractConfiguration->final_range : 500}}">
+                    <input name="final_range" type="range" class="form-range form-control range biggerthanInitialRange is_required" min="0" max="1600" step="10" id="final_range" oninput="updateRangeInput(this)"  value="{{isset($contractConfiguration) ? $contractConfiguration->final_range : 500}}">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="col-md-3"></div>
+
+            @include('sections.contracts.configurations.components.button-change-range-input')
+
         </div>
         <div class="form-actions ">
             <hr>

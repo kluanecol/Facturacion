@@ -67,6 +67,11 @@ jQuery(function() {
             searchConsumables($('#search_string').val());
         }
     });
+
+    $(document).on('click','#btn-change-range-input',function(){
+        $('#initial_range').get(0).type = 'number';
+        $('#final_range').get(0).type = 'number';
+    });
 });
 
 function getConfigurationForm(id_configuration, id_contract_configuration){

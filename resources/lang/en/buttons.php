@@ -10,5 +10,6 @@ return [
     'nuevo' => 'New',
     'cancelar' => 'Cancel',
     'guardar' => 'Save',
-    'actualizar' => 'Update'
+    'actualizar' => 'Update',
+    'digitarElRango' => 'If you prefer to type the range click here'
 ];

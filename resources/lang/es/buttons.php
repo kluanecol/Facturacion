@@ -10,5 +10,6 @@ return [
     'nuevo' => 'Nuevo',
     'cancelar' => 'Cancelar',
     'guardar' => 'Guardar',
-    'actualizar' => 'Actualizar'
+    'actualizar' => 'Actualizar',
+    'digitarElRango' => 'Si prefiere digitar el rango haga click aquí'
 ];
