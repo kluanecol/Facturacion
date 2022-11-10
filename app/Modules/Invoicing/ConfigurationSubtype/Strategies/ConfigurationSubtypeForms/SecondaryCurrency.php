@@ -36,7 +36,7 @@ class SecondaryCurrency implements ConfigurationSubtypeFormsInterface
             $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);
         }
 
-        return view('sections.contracts.configurations.form.subtypes.currency', $data)->render();
+        return view('sections.contracts.configurations.form.subtypes.second-currency', $data)->render();
     }
 
     public function getList($idContract)
@@ -46,7 +46,7 @@ class SecondaryCurrency implements ConfigurationSubtypeFormsInterface
         $data['idContract'] = $idContract;
         $data['configurations'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
 
-        return view('sections.contracts.configurations.list.subtypes.currency', $data)->render();
+        return view('sections.contracts.configurations.list.subtypes.second-currency', $data)->render();
     }
 
     public function validate($request){

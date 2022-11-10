@@ -39,11 +39,11 @@ class Product implements ConfigurationSubtypeFormsInterface
             $data['consumables'] = $this->consumableRepository->getByGroupId($data['contractConfiguration']->product->group->id)->sortBy('name')->pluck('name','id');
         }
 
-        $currentProducts = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
-
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
         $data['consumableGroups'] = $this->consumableGroupRepository->getByCountry(GeneralVariables::getCurrentCountryId())->push(" ")->sortBy('name')->pluck('nombre','id');
+        $data['configurationCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_CURRENCY, ['currency'])->first();
+        $data['configurationSecondCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_SECOND_CURRENCY, ['secondCurrency'])->first();
 
         return view('sections.contracts.configurations.form.subtypes.product', $data)->render();
     }

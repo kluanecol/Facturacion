@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ContractConfigurationRepository implements ContractConfigurationInterface{
 
-    public function getByContractAndSubtype($idContract, $idConfigurationSubtype){
-        return ContractConfiguration::where('fk_id_contract',$idContract)
+    public function getByContractAndSubtype($idContract, $idConfigurationSubtype, $relations = []){
+        return ContractConfiguration::with($relations)->where('fk_id_contract',$idContract)
             ->where('fk_id_configuration_subtype',$idConfigurationSubtype)
             ->get();
     }

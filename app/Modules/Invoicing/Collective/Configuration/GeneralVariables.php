@@ -8,6 +8,9 @@ class GeneralVariables
 
     CONST ID_PARAMETRIC_CURRENCY = 1;
 
+    CONST ID_CONFIGURATION_CURRENCY = 4;
+    CONST ID_CONFIGURATION_SECOND_CURRENCY = 6;
+
     public static function yearsArray(){
 
         $years = [];
