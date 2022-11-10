@@ -111,7 +111,7 @@ class ContractConfigurationController extends Controller
         $globalCurrentSettings =  $this->contractConfigurationSubtypeRepo->getActive();
 
         if ($globalCurrentSettings->count() > 0) {
-            $percentage = ($contractConfigurations->count()*100)/$globalCurrentSettings->count();
+            $percentage = round(($contractConfigurations->count()*100)/$globalCurrentSettings->count(),2);
         }
 
         $data['percentage'] = $percentage;

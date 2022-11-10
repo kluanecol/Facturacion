@@ -27,7 +27,9 @@ class ContractConfiguration extends Model
        'initial_range',
        'final_range',
        'value',
-       'order'
+       'order',
+       'fk_id_second_parametric',
+       'second_value',
 
     ];
 
@@ -38,6 +40,11 @@ class ContractConfiguration extends Model
     public function currency()
     {
         return $this->belongsTo(Parametric::class, 'fk_id_parametric','id');
+    }
+
+    public function secondCurrency()
+    {
+        return $this->belongsTo(Parametric::class, 'fk_id_second_parametric','id');
     }
 
     public function configurationSubtype()

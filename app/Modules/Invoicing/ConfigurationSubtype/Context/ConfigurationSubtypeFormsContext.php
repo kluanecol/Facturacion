@@ -7,6 +7,7 @@ use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeFo
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\Activity;
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\Currency;
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\Product;
+use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\SecondaryCurrency;
 
 class ConfigurationSubtypeFormsContext
 {
@@ -15,6 +16,7 @@ class ConfigurationSubtypeFormsContext
        '2' => Drilling::class,
        '3' => Activity::class,
        '4' => Currency::class,
-       '5' => Product::class
+       '5' => Product::class,
+       '6' => SecondaryCurrency::class,
     ];
 }

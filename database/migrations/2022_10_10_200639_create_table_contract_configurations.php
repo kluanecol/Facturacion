@@ -35,6 +35,10 @@ class CreateTableContractConfigurations extends Migration
             $table->decimal('value', 16, 2)->default(0);
             $table->integer('order')->nullable();
 
+            $table->unsignedBigInteger('fk_id_second_parametric')->nullable();
+            $table->foreign('fk_id_second_parametric','fk_contract_to_second_parametric')->references('id')->on('parametrics');
+            $table->decimal('second_value', 16, 2)->default(0);
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -52,6 +56,7 @@ class CreateTableContractConfigurations extends Migration
             $table->dropForeign('fk_contract_to_configuration');
             $table->dropForeign('fk_contract_to_subtype');
             $table->dropForeign('fk_contract_to_parametric');
+            $table->dropForeign('fk_contract_to_second_parametric');
         });
 
         Schema::dropIfExists('contract_configurations');

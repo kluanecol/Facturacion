@@ -48,5 +48,28 @@ class ParametricSeeder extends Seeder
             'fk_id_parent' => 1
         ]);
 
+        DB::table('parametrics')->insert([
+            'spanish_name'=>'Pesos Mexicanos',
+            'english_name'=>'Mexican pesos',
+            'spanish_description'=>'MXN',
+            'english_description'=>'MXN',
+            'state'=>1,
+            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'value'=>0,
+            'symbol'=>'$',
+            'fk_id_parent' => 1
+        ]);
+
+        DB::table('parametrics')->insert([
+            'spanish_name'=>'Soles',
+            'english_name'=>'Soles',
+            'spanish_description'=>'PEN',
+            'english_description'=>'PEN',
+            'state'=>1,
+            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'value'=>0,
+            'symbol'=>'$',
+            'fk_id_parent' => 1
+        ]);
     }
 }
