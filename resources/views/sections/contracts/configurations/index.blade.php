@@ -12,7 +12,7 @@
 <link href="{{ asset('css/configuration_collapse.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/card.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/range_picker.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('css/radio_switch.css') }}" rel="stylesheet" type="text/css" />
 
 @section('content')
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">

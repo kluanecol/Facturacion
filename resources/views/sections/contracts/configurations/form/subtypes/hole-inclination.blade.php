@@ -20,6 +20,21 @@
                 </div>
             </div>
 
+            <div class="col-md-6 text-center">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="fk_id_diameter">{!! trans('labels.incrementoPorPorcentaje') !!}:</label>
+                    <div class="toggle-radio">
+                        <input type="radio" name="rdo" id="yes">
+                        <input type="radio" name="rdo" id="no" checked>
+                        <div class="switch">
+                        <label for="yes">Si</label>
+                        <label for="no">No</label>
+                        <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_activity">{!! trans('labels.valorIncremento') !!} {{isset($configurationCurrency) ? $configurationCurrency->currency->description : ""}}(*):</label>
