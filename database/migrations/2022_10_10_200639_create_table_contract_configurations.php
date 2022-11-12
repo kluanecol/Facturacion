@@ -34,10 +34,12 @@ class CreateTableContractConfigurations extends Migration
             $table->decimal('final_range', 8, 2)->nullable();
             $table->decimal('value', 16, 2)->default(0);
             $table->integer('order')->nullable();
+            $table->smallInteger('charge_by_percentage')->nullable();
 
             $table->unsignedBigInteger('fk_id_second_parametric')->nullable();
             $table->foreign('fk_id_second_parametric','fk_contract_to_second_parametric')->references('id')->on('parametrics');
             $table->decimal('second_value', 16, 2)->nullable();
+
 
             $table->timestamps();
             $table->softDeletes();

@@ -133,7 +133,7 @@ class ContractController extends Controller
 
         $data['contract'] = $this->contractRepo->getById($idContract);
         $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
-        $data['percentage'] = $percentage;
+        $data['percentage'] = round($percentage, 1);
 
         return view('sections.contracts.configurations.index', $data);
     }
