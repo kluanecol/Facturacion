@@ -24,5 +24,6 @@ return [
     'valorPorMetro' => 'Charge per meter',
     'incremento' => 'Increment',
     'incrementoPorPorcentaje' => 'Increment by percentage',
-    'valorIncremento' => 'Increment value'
+    'valorIncremento' => 'Increment value',
+    'si' => 'Yes'
 ];

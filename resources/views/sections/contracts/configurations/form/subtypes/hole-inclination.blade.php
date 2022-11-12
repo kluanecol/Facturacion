@@ -32,7 +32,7 @@
                         <input  type="radio" name="charge_by_percentage" id="yes" value="1" {{(isset($contractConfiguration) && $contractConfiguration->charge_by_percentage == 1 ? "checked" : "")}}>
                         <input type="radio" name="charge_by_percentage" id="no" value="0" {{(isset($contractConfiguration) ? ($contractConfiguration->charge_by_percentage == 0 ? "checked" : "")  : "checked")}}>
                         <div class="switch">
-                            <label for="yes">Si</label>
+                            <label for="yes">{!! trans('labels.si') !!}</label>
                             <label for="no">No</label>
                             <span></span>
                         </div>
