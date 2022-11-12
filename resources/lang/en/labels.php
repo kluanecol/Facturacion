@@ -21,5 +21,8 @@ return [
     'busqueElConsumibleQueNecesita' => 'Search for the consumable you need',
     'valorAlterno' => 'Alternative value',
     'opcional' => 'Optional',
-    'valorPorMetro' => 'Charge per meter'
+    'valorPorMetro' => 'Charge per meter',
+    'incremento' => 'Increment',
+    'incrementoPorPorcentaje' => 'Increment by percentage',
+    'valorIncremento' => 'Increment value'
 ];

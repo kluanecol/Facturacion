@@ -9,4 +9,5 @@ return [
     'elRangoFinalIngresadoEstaContenidoEnOtraConfiguracion' => 'The final range is contained in another configuration',
     'elRangoIngresadoContieneUnRangoConfiguracion' => 'The entered range contains an already configured range',
     'yaEstaConfiguradoEsteConsumible' => 'This consumable is already configured, please edit it',
+    'porcentajeNoValido' => 'The percentage is not valid, it must go from 1% to 99%',
 ];

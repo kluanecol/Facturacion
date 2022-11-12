@@ -77,6 +77,20 @@ class HoleInclination implements ConfigurationSubtypeFormsInterface
         }
 
         if ($configuration->multiple == 1) {
+
+            if(isset($request->charge_by_percentage) && $request->charge_by_percentage == 1){
+                if ($request->value <= 0 || $request->value >= 100) {
+                    $message = [
+                        'title' => trans('general.algoSalioMal'),
+                        'message' =>trans('contractConfiguration.porcentajeNoValido'),
+                        'type'  => 'warning',
+                        'status' => 400
+                    ];
+
+                    return $message;
+                }
+            }
+
             $result = $this->contractConfigurationRepository->isAValidRange($request->fk_id_contract, $request->fk_id_diameter, $request->initial_range, $request->final_range, $request->id);
 
             return $result;

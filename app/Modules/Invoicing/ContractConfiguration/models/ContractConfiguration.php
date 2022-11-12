@@ -30,7 +30,7 @@ class ContractConfiguration extends Model
        'order',
        'fk_id_second_parametric',
        'second_value',
-       'i_charge_by_percentage'
+       'charge_by_percentage'
 
     ];
 

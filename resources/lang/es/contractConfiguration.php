@@ -9,4 +9,5 @@ return [
     'elRangoFinalIngresadoEstaContenidoEnOtraConfiguracion' => 'El rango final está contenido En otra configuración',
     'elRangoIngresadoContieneUnRangoConfiguracion' => 'El rango ingresado contiene un rango ya configurado',
     'yaEstaConfiguradoEsteConsumible' => 'Ya esta configurado este consumible por favor editelo',
+    'porcentajeNoValido' => 'El porcentaje no es válido debe ir de 1% a 99%',
 ];

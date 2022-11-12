@@ -6,7 +6,7 @@
             {!! Form::hidden('fk_id_contract', (isset($idContract) ? $idContract : null), ['id'=>'fk_id_contract']) !!}
             {!! Form::hidden('id', (isset($contractConfiguration) ? $contractConfiguration->id : null), ['id'=>'id']) !!}
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_diameter">{!! trans('labels.diametro') !!}(*):</label>
                     {!!Form::select('fk_id_diameter',$diameters, (isset($contractConfiguration) ? $contractConfiguration->fk_id_diameter : null) ,[
@@ -20,24 +20,32 @@
                 </div>
             </div>
 
-            <div class="col-md-6 text-center">
-                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_diameter">{!! trans('labels.incrementoPorPorcentaje') !!}:</label>
-                    <div class="toggle-radio">
-                        <input type="radio" name="rdo" id="yes">
-                        <input type="radio" name="rdo" id="no" checked>
-                        <div class="switch">
-                        <label for="yes">Si</label>
-                        <label for="no">No</label>
-                        <span></span>
-                        </div>
-                    </div>
+            <div class="col-md-6 mt-2">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align:right;">
+                    <label for="charge_by_percentage">{!! trans('labels.incrementoPorPorcentaje') !!}:</label>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_activity">{!! trans('labels.valorIncremento') !!} {{isset($configurationCurrency) ? $configurationCurrency->currency->description : ""}}(*):</label>
+                    <div class="toggle-radio ">
+                        <input  type="radio" name="charge_by_percentage" id="yes" value="1" {{(isset($contractConfiguration) && $contractConfiguration->charge_by_percentage == 1 ? "checked" : "")}}>
+                        <input type="radio" name="charge_by_percentage" id="no" value="0" {{(isset($contractConfiguration) ? ($contractConfiguration->charge_by_percentage == 0 ? "checked" : "")  : "checked")}}>
+                        <div class="switch">
+                            <label for="yes">Si</label>
+                            <label for="no">No</label>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12"><hr></div>
+
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="fk_id_activity">{!! trans('labels.incremento') !!} (*):</label>
                     {!! Form::number('value', isset($contractConfiguration) ? $contractConfiguration->value : null, ['class' => 'form-control is_required', 'id' => 'value', 'min'=> '0', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
@@ -51,7 +59,8 @@
                             ['class' => 'form-control',
                                 'id' => 'second_value',
                                 'min'=> '0',
-                                'Style' => 'width: 100%;'
+                                'Style' => 'width: 100%;',
+                                'disabled' => isset($contractConfiguration) && ($contractConfiguration->charge_by_percentage == 1) ? "disabled" : false
                             ])
                         !!}
                         <span class="help-block"></span>

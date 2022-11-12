@@ -72,6 +72,15 @@ jQuery(function() {
         $('#initial_range').get(0).type = 'number';
         $('#final_range').get(0).type = 'number';
     });
+
+    $(document).on('click','input[name="charge_by_percentage"]',function(){
+        if ($(this).val() == 1) {
+            $("#second_value").prop('disabled', true);
+        }else{
+            $("#second_value").prop('disabled', false);
+        }
+
+    });
 });
 
 function getConfigurationForm(id_configuration, id_contract_configuration){
