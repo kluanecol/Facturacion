@@ -16,4 +16,10 @@ class ParametricRepository implements ParametricInterface{
         ->where('fk_id_parent',$idParent)
         ->get();
     }
+
+    public function getMultipleById(array $idParametrics){
+        return Parametric::active()
+        ->whereIn('id', $idParametrics)
+        ->get();
+    }
 }

@@ -10,4 +10,6 @@ return [
     'elRangoIngresadoContieneUnRangoConfiguracion' => 'El rango ingresado contiene un rango ya configurado',
     'yaEstaConfiguradoEsteConsumible' => 'Ya esta configurado este consumible por favor editelo',
     'porcentajeNoValido' => 'El porcentaje no es válido debe ir de 1% a 99%',
+    'diametrosPerforacion' => 'Diámetros de perforación',
+    'diametrosEncamisado' => 'Diámetros de encamisado'
 ];

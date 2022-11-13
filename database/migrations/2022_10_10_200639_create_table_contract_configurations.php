@@ -35,6 +35,7 @@ class CreateTableContractConfigurations extends Migration
             $table->decimal('value', 16, 2)->default(0);
             $table->integer('order')->nullable();
             $table->smallInteger('charge_by_percentage')->nullable();
+            $table->json('json_fk_parametrics')->nullable();
 
             $table->unsignedBigInteger('fk_id_second_parametric')->nullable();
             $table->foreign('fk_id_second_parametric','fk_contract_to_second_parametric')->references('id')->on('parametrics');

@@ -1,6 +1,6 @@
 <table class="table table-hover table-bordered" id="table-diameters" style="width: 100%;">
     <thead class="text-light thead-dark">
-        <th class="text-center"><strong>{!! trans('labels.diametro') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.diametro') !!}s</strong></th>
         <th class="text-center"><strong>{!!trans('labels.desde') !!}</strong></th>
         <th class="text-center"><strong>{!!trans('labels.hasta') !!}</strong></th>
         <th class="text-center" style="width: 10%;"><strong>{!!trans('labels.incrementoPorPorcentaje') !!} %</strong></th>
@@ -13,7 +13,7 @@
     <tbody class="text-center bg-light">
             @foreach ($configurations as $configuration)
                 <tr>
-                    <td> <h6><b>{{$configuration->diameter->name}}</b></h6></td>
+                    <td> <h6 class="mt-4"><b>{{$configuration->parametrics_names}}</b></h6></td>
                     <td>
                         <div class="col-md-12 pt-2">
                             <h6 class="text-primary"><b>{{$configuration->initial_range}}</b></h6>

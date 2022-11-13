@@ -30,9 +30,11 @@ class ContractConfiguration extends Model
        'order',
        'fk_id_second_parametric',
        'second_value',
-       'charge_by_percentage'
+       'charge_by_percentage',
+       'json_fk_parametrics'
 
     ];
+
 
     public $timestamps = true;
 
@@ -66,5 +68,15 @@ class ContractConfiguration extends Model
     public function product()
     {
         return $this->belongsTo(Consumable::class, 'fk_id_product','id');
+    }
+
+    public function getParametricsAttribute()
+    {
+        return json_decode($this->json_fk_parametrics);
+    }
+
+    public function getParametricsNamesAttribute()
+    {
+        return GeneralParametric::whereIn('id',$this->parametrics)->get()->pluck('name')->implode(',');
     }
 }

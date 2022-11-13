@@ -32,7 +32,12 @@ class HoleInclination implements ConfigurationSubtypeFormsInterface
         $data = [];
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
-        $data['diameters'] = $this->generalParametricRepository->getDrillingDiameters(GeneralVariables::getCurrentCountryId())->sortBy('name')->pluck('name','id');
+        $drillingDiameters = $this->generalParametricRepository->getDrillingDiameters(GeneralVariables::getCurrentCountryId())->sortBy('name')->pluck('name','id')->toArray();
+        $casingDiameters = $this->generalParametricRepository->getCasingDiameters(GeneralVariables::getCurrentCountryId())->sortBy('name')->pluck('name','id')->toArray();
+
+        $data['drillingDiameters'] = $drillingDiameters;
+        $data['casingDiameters'] = $casingDiameters;
+
         $data['configurationCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_CURRENCY, ['currency'])->first();
         $data['configurationSecondCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_SECOND_CURRENCY, ['secondCurrency'])->first();
 
@@ -91,7 +96,7 @@ class HoleInclination implements ConfigurationSubtypeFormsInterface
                 }
             }
 
-            $result = $this->contractConfigurationRepository->isAValidRange($request->fk_id_contract, $request->fk_id_diameter, $request->initial_range, $request->final_range, $request->id);
+           $result = $this->contractConfigurationRepository->isAValidRange($request->fk_id_contract, $request->json_fk_parametrics, $request->initial_range, $request->final_range, $request->id);
 
             return $result;
         }

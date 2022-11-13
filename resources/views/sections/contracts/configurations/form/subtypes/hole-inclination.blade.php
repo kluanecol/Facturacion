@@ -8,13 +8,19 @@
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="fk_id_diameter">{!! trans('labels.diametro') !!}(*):</label>
-                    {!!Form::select('fk_id_diameter',$diameters, (isset($contractConfiguration) ? $contractConfiguration->fk_id_diameter : null) ,[
-                        'class'=>'form-control selectpicker fk_id_diameter is_required',
+                    <label for="json_fk_parametrics">{!! trans('labels.diametro') !!}(*):</label>
+                    {!!Form::select('json_fk_parametrics[]',[
+                        trans('contractConfiguration.diametrosPerforacion') => $drillingDiameters,
+                        trans('contractConfiguration.diametrosEncamisado') => $casingDiameters], (isset($contractConfiguration) ? $contractConfiguration->parametrics : null) ,[
+                        'class'=>'form-control selectpicker json_fk_parametrics is_required',
                         'data-live-search'=>'true',
-                        'title'=>'',
-                        'id'=>'fk_id_diameter',
-                        'data-size'=>'5'
+                        'data-actions-box'=>'true',
+                        'multiple'=>'multiple',
+                        'data-deselect-all-text'=>trans('general.ninguno'),
+                        'data-select-all-text'=>trans('general.seleccionarTodo'),
+                        'id' => 'json_fk_parametrics',
+                        'required' => 'required',
+                        'data-live-search'=>'true',
                     ])!!}
                     <span class="help-block"></span>
                 </div>

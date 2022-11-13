@@ -46,6 +46,10 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
 
            $data = $request->only($contractConfiguration->getFillable());
 
+           if (isset($data['json_fk_parametrics'])) {
+                $data['json_fk_parametrics'] = json_encode($data['json_fk_parametrics']);
+           }
+
            if ($contractConfiguration->fill($data)->save()) {
                 $result = 200;
             }else{
@@ -84,10 +88,25 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
     public function isAValidRange($idContract, $idDiameter, $initialRange, $finalRange, $idContractConfiguration = null){
         $isValid = 200;
 
-        $contractConfigurations = ContractConfiguration::where('fk_id_contract',$idContract)
+        if (is_array($idDiameter)) {
+            $contractConfigurations = ContractConfiguration::where('fk_id_contract',$idContract)
+            ->whereNotNull('json_fk_parametrics')
+            ->where('id','!=', $idContractConfiguration)
+            ->get();
+
+            $contractConfigurations = $contractConfigurations->map(function ($item, $key) use ($idDiameter) {
+                if(sizeof(array_intersect($item->parametrics,$idDiameter)) > 0 ){
+                    return $item;
+                }
+            });
+
+        }else{
+            $contractConfigurations = ContractConfiguration::where('fk_id_contract',$idContract)
             ->where('fk_id_diameter', $idDiameter)
             ->where('id','!=', $idContractConfiguration)
             ->get();
+
+        }
 
         if (($contractConfigurations->where('initial_range','<=',$initialRange)->where('final_range','>',$initialRange)->count() > 0)) {
 
