@@ -122,5 +122,21 @@ class ConfigurationSubtypeSeeder extends Seeder
             'fk_id_measure'=>null,
             'fk_id_configuration_type'=>1
         ]);
+
+        DB::table('configuration_subtypes')->insert([
+            'spanish_name'=>'Otros cargos',
+            'english_name'=>'Other charges',
+            'spanish_description'=>'',
+            'english_description'=>'',
+            'state'=>1,
+            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'required'=>0,
+            'multiple'=>1,
+            'charge_by_percentage'=>0,
+            'order'=>8,
+            'icon'=>'icofont-paperclip',
+            'fk_id_measure'=>null,
+            'fk_id_configuration_type'=>1
+        ]);
     }
 }

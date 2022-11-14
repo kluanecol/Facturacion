@@ -28,6 +28,9 @@ class CreateTableFacParametricsTable extends Migration
             $table->unsignedBigInteger('fk_id_parent')->nullable();
             $table->foreign('fk_id_parent','fk_parametric_to_parent')->references('id')->on('parametrics');
 
+            $table->unsignedBigInteger('fk_id_auxiliary_parametric')->nullable();
+            $table->foreign('fk_id_auxiliary_parametric','fk_parametric_to_auxiliary')->references('id')->on('parametrics');
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -43,6 +46,7 @@ class CreateTableFacParametricsTable extends Migration
         Schema::table('parametrics', function (Blueprint $table)
         {
             $table->dropForeign('fk_parametric_to_parent');
+            $table->dropForeign('fk_parametric_to_auxiliary');
 
         });
 
