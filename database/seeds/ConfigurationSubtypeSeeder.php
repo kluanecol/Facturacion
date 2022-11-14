@@ -98,7 +98,7 @@ class ConfigurationSubtypeSeeder extends Seeder
             'english_description'=>'',
             'state'=>1,
             'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
-            'required'=>1,
+            'required'=>0,
             'multiple'=>0,
             'charge_by_percentage'=>0,
             'order'=>2,

@@ -9,6 +9,7 @@ use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeFo
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\Product;
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\SecondaryCurrency;
 use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\HoleInclination;
+use App\Modules\Invoicing\ConfigurationSubtype\Strategies\ConfigurationSubtypeForms\OtherCharge;
 
 class ConfigurationSubtypeFormsContext
 {
@@ -19,6 +20,7 @@ class ConfigurationSubtypeFormsContext
        '4' => Currency::class,
        '5' => Product::class,
        '6' => SecondaryCurrency::class,
-       '7' => HoleInclination::class
+       '7' => HoleInclination::class,
+       '8' => OtherCharge::class
     ];
 }

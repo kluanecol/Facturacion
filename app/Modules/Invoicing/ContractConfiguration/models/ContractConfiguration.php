@@ -79,4 +79,9 @@ class ContractConfiguration extends Model
     {
         return GeneralParametric::whereIn('id',$this->parametrics)->get()->pluck('name')->implode(',');
     }
+
+    public function charge()
+    {
+        return $this->belongsTo(Parametric::class, 'fk_id_parametric','id');
+    }
 }
