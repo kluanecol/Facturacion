@@ -30,6 +30,14 @@ class ContractConfigurationRepository implements ContractConfigurationInterface{
             ->first();
     }
 
+    public function getChargeConfiguration($idContract, $idConfigurationSubtype, $idCharge, $id){
+        return ContractConfiguration::where('id','!=', $id)
+            ->where('fk_id_contract', $idContract)
+            ->where('fk_id_configuration_subtype', $idConfigurationSubtype)
+            ->where('fk_id_parametric', $idCharge)
+            ->first();
+    }
+
     public function getById($id){
         return ContractConfiguration::find($id);
     }

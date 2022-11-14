@@ -61,42 +61,23 @@ class OtherCharge implements ConfigurationSubtypeFormsInterface
     public function validate($request){
 
         $result = 200;
+
         $configuration = $this->configurationSubtypeRepository->getById(self::ID_CONFIGURATION);
 
-        if ($configuration->multiple == 0 && $request->id == null ) {
-            $actualConfigurations = $this->contractConfigurationRepository->getByContractAndSubtype($request->fk_id_contract, self::ID_CONFIGURATION);
+        if ($configuration->multiple == 1) {
+            $actualConfigurations = $this->contractConfigurationRepository->getChargeConfiguration($request->fk_id_contract, self::ID_CONFIGURATION, $request->fk_id_parametric, $request->id);
 
-            if ($actualConfigurations->count() > 0) {
+            if (is_object($actualConfigurations)) {
 
                 $message = [
                     'title' => trans('general.algoSalioMal'),
-                    'message' =>trans('contractConfiguration.yaExisteLaConfiguracion'),
+                    'message' =>trans('contractConfiguration.yaEstaConfiguradoEsteCobro'),
                     'type'  => 'warning',
                     'status' => 400
                 ];
 
                 return $message;
             }
-        }
-
-        if ($configuration->multiple == 1) {
-
-            if(isset($request->charge_by_percentage) && $request->charge_by_percentage == 1){
-                if ($request->value <= 0 || $request->value >= 100) {
-                    $message = [
-                        'title' => trans('general.algoSalioMal'),
-                        'message' =>trans('contractConfiguration.porcentajeNoValido'),
-                        'type'  => 'warning',
-                        'status' => 400
-                    ];
-
-                    return $message;
-                }
-            }
-
-           $result = $this->contractConfigurationRepository->isAValidRange($request->fk_id_contract, $request->json_fk_parametrics, $request->initial_range, $request->final_range, $request->id);
-
-            return $result;
         }
 
         return $result;
