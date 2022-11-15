@@ -33,7 +33,22 @@ class OtherCharge implements ConfigurationSubtypeFormsInterface
         $data['idConfiguration'] = self::ID_CONFIGURATION;
         $data['idContract'] = $idContract;
 
-        $otherCharges = $this->parametricRepository->getActiveChildren(GeneralVariables::ID_PARAMETRIC_OTHER_CHARGES)->sortBy('name')->pluck('name','id')->toArray();
+        if (isset($idContractConfiguration)) {
+            $data['contractConfiguration'] = $this->contractConfigurationRepository->getById($idContractConfiguration);
+        }
+
+        $currentCharges = $this->contractConfigurationRepository->getByContractAndSubtype($idContract, self::ID_CONFIGURATION);
+
+        if (isset($data['contractConfiguration'])) {
+            $currentCharges = $currentCharges->whereNotIn('fk_id_parametric', [$data['contractConfiguration']->fk_id_parametric]);
+        }
+
+
+        $currentCharges = $currentCharges->pluck('fk_id_parametric')->toArray();
+
+        $otherCharges = $this->parametricRepository->getActiveChildren(GeneralVariables::ID_PARAMETRIC_OTHER_CHARGES)->whereNotIn('id', $currentCharges)
+        ->sortBy('name')->pluck('name','id')->toArray();
+
         $data['otherCharges'] = $otherCharges;
 
         $data['configurationCurrency'] = $this->contractConfigurationRepository->getByContractAndSubtype($idContract,GeneralVariables::ID_CONFIGURATION_CURRENCY, ['currency'])->first();

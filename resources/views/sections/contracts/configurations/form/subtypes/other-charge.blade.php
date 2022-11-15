@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_parametric">{!! trans('labels.cobroPor') !!}(*):</label>
-                    {!!Form::select('fk_id_parametric',$otherCharges, (isset($contractConfiguration) ? $contractConfiguration->parametrics : null) ,[
+                    {!!Form::select('fk_id_parametric',$otherCharges, (isset($contractConfiguration) ? $contractConfiguration->fk_id_parametric : null) ,[
                         'class'=>'form-control selectpicker fk_id_parametric is_required',
                         'id' => 'fk_id_parametric',
                         'required' => 'required',
