@@ -64,7 +64,7 @@ class OtherCharge implements ConfigurationSubtypeFormsInterface
 
         $configuration = $this->configurationSubtypeRepository->getById(self::ID_CONFIGURATION);
 
-        if ($configuration->multiple == 1) {
+        if ($configuration->multiple == 1 && $request->id == null) {
             $actualConfigurations = $this->contractConfigurationRepository->getChargeConfiguration($request->fk_id_contract, self::ID_CONFIGURATION, $request->fk_id_parametric, $request->id);
 
             if (is_object($actualConfigurations)) {

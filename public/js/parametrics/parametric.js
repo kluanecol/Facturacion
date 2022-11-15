@@ -121,8 +121,13 @@ function saveParametric() {
 
             if (data.status == 200) {
 
-                toastr.success(data.message, data.title);
-
+                Swal.fire({
+                    title: data.title,
+                    html: data.message,
+                    type: `success`,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
