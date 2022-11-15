@@ -99,8 +99,8 @@ class ParametricSeeder extends Seeder
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Metro',
-            'english_name'=>'Meter',
+            'spanish_name'=>'METRO',
+            'english_name'=>'METER',
             'spanish_description'=>'MTS',
             'english_description'=>'MTS',
             'state'=>1,
@@ -111,8 +111,8 @@ class ParametricSeeder extends Seeder
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Hora',
-            'english_name'=>'Hour',
+            'spanish_name'=>'HORA',
+            'english_name'=>'HOUR',
             'spanish_description'=>'H',
             'english_description'=>'H',
             'state'=>1,
@@ -123,8 +123,8 @@ class ParametricSeeder extends Seeder
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Día',
-            'english_name'=>'Day',
+            'spanish_name'=>'DÍA',
+            'english_name'=>'DAY',
             'spanish_description'=>'D',
             'english_description'=>'D',
             'state'=>1,
@@ -147,8 +147,8 @@ class ParametricSeeder extends Seeder
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Kilo',
-            'english_name'=>'kilogram',
+            'spanish_name'=>'KILO',
+            'english_name'=>'KILOGRAM',
             'spanish_description'=>'KG',
             'english_description'=>'KG',
             'state'=>1,

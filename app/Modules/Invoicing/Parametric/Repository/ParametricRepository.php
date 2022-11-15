@@ -22,4 +22,29 @@ class ParametricRepository implements ParametricInterface{
         ->whereIn('id', $idParametrics)
         ->get();
     }
+
+    public function save($request){
+        $result = 200;
+
+        try {
+            if (isset($request->id)) {
+                $parametric = Parametric::find($request->id);
+            }else{
+                $parametric = new Parametric();
+            }
+
+           $data = $request->only($parametric->getFillable());
+
+           if ($parametric->fill($data)->save()) {
+                $result = 200;
+            }else{
+                $result = 400;
+           }
+
+           return $result;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

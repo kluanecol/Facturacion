@@ -58,4 +58,14 @@ class Parametric extends Model
     {
         return $this->belongsTo(Parametric::class, 'fk_id_auxiliary_parametric','id');
     }
+
+    public function setSpanishNameAttribute($value)
+    {
+        $this->attributes['spanish_name'] = strtoupper($value);
+    }
+
+    public function setEnglishNameAttribute($value)
+    {
+        $this->attributes['english_name'] = strtoupper($value);
+    }
 }

@@ -6,6 +6,8 @@
             {!! Form::hidden('fk_id_contract', (isset($idContract) ? $idContract : null), ['id'=>'fk_id_contract']) !!}
             {!! Form::hidden('id', (isset($contractConfiguration) ? $contractConfiguration->id : null), ['id'=>'id']) !!}
 
+            @include('sections.parametrics.components.button-create-new-charge')
+
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_parametric">{!! trans('labels.cobroPor') !!}(*):</label>
