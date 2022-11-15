@@ -11,5 +11,7 @@ return [
     'yaEstaConfiguradoEsteConsumible' => 'Ya esta configurado este consumible por favor editelo',
     'porcentajeNoValido' => 'El porcentaje no es válido debe ir de 1% a 99%',
     'diametrosPerforacion' => 'Diámetros de perforación',
-    'diametrosEncamisado' => 'Diámetros de encamisado'
+    'diametrosEncamisado' => 'Diámetros de encamisado',
+    'yaEstaConfiguradoEsteCobro' => 'Ya esta configurado este cobro por favor editelo',
+    'gestionOtroCargo' => 'Gestionar otro concepto de cobro'
 ];

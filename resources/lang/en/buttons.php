@@ -11,5 +11,6 @@ return [
     'cancelar' => 'Cancel',
     'guardar' => 'Save',
     'actualizar' => 'Update',
-    'digitarElRango' => 'If you prefer to type the range click here'
+    'digitarElRango' => 'If you prefer to type the range click here',
+    'crearOtroCobro' => 'Is the charge you want to parameterize not on the list? Click here',
 ];

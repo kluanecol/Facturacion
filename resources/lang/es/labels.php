@@ -25,5 +25,10 @@ return [
     'incremento' => 'Incremento',
     'incrementoPorPorcentaje' => 'Incremento por porcentaje',
     'valorIncremento' => 'Valor incremento',
-    'si' => 'Si'
+    'si' => 'Si',
+    'cobroPor' => 'Cobro por',
+    'unidadDeMedida' => 'Unidad de medida',
+    'nombreEnEspanol' => 'Nombre en español',
+    'nombreEnIngles' => 'Nombre en inglés'
+
 ];

@@ -11,5 +11,7 @@ return [
     'yaEstaConfiguradoEsteConsumible' => 'This consumable is already configured, please edit it',
     'porcentajeNoValido' => 'The percentage is not valid, it must go from 1% to 99%',
     'diametrosPerforacion' => 'Drilling diameters',
-    'diametrosEncamisado' => 'Casing diameters'
+    'diametrosEncamisado' => 'Casing diameters',
+    'yaEstaConfiguradoEsteCobro' => 'This charge is already configured, please edit it',
+    'gestionOtroCargo' => 'Manage new type of charge'
 ];
