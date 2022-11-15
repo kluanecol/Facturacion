@@ -479,8 +479,16 @@ function refreshInputs(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    if($("#table-diameters").length > 0){
-        refreshTable("table-diameters");
+    if($("#table-drilling").length > 0){
+        refreshTable("table-drilling");
+    }
+
+    if($("#table-casing").length > 0){
+        refreshTable("table-casing");
+    }
+
+    if($("#table-hole-inclination").length > 0){
+        refreshTable("table-hole-inclination");
     }
 
     if($("#table-activities").length > 0){
@@ -489,6 +497,10 @@ function refreshInputs(){
 
     if($("#table-products").length > 0){
         refreshTable("table-products");
+    }
+
+    if($("#table-charges").length > 0){
+        refreshTable("table-charges");
     }
 }
 
