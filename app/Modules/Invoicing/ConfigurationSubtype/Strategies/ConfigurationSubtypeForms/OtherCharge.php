@@ -47,7 +47,7 @@ class OtherCharge implements ConfigurationSubtypeFormsInterface
         $currentCharges = $currentCharges->pluck('fk_id_parametric')->toArray();
 
         $otherCharges = $this->parametricRepository->getActiveChildren(GeneralVariables::ID_PARAMETRIC_OTHER_CHARGES)->whereNotIn('id', $currentCharges)
-        ->sortBy('name')->pluck('name','id')->toArray();
+        ->sortBy('name')->pluck('name_and_auxiliary_name','id')->toArray();
 
         $data['otherCharges'] = $otherCharges;
 

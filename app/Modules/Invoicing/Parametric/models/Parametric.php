@@ -30,6 +30,15 @@ class Parametric extends Model
 
     use SoftDeletes;
 
+    public function scopeActive(){
+        return $this->where('state',1);
+    }
+
+    public function auxiliarParametric()
+    {
+        return $this->belongsTo(Parametric::class, 'fk_id_auxiliary_parametric','id');
+    }
+
     public function getNameAttribute()
     {
         if (GeneralVariables::getCurrentLanguage() == 'es') {
@@ -50,13 +59,14 @@ class Parametric extends Model
 
     }
 
-    public function scopeActive(){
-        return $this->where('state',1);
-    }
-
-    public function auxiliarParametric()
+    public function getNameAndAuxiliaryNameAttribute()
     {
-        return $this->belongsTo(Parametric::class, 'fk_id_auxiliary_parametric','id');
+        if (GeneralVariables::getCurrentLanguage() == 'es') {
+            return $this->spanish_name.' ('.$this->auxiliarParametric->name.')';
+        } else {
+            return $this->english_name.' ('.$this->auxiliarParametric->name.')';
+        }
+
     }
 
     public function setSpanishNameAttribute($value)
@@ -68,4 +78,6 @@ class Parametric extends Model
     {
         $this->attributes['english_name'] = strtoupper($value);
     }
+
+
 }
