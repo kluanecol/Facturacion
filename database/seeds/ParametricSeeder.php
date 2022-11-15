@@ -135,8 +135,8 @@ class ParametricSeeder extends Seeder
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Mes',
-            'english_name'=>'Month',
+            'spanish_name'=>'MES',
+            'english_name'=>'MONTH',
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
