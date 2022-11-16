@@ -6,6 +6,7 @@ use App\Modules\Admin\Consumable\Models\Consumable;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 
 class ConsumableRepository implements ConsumableInterface{
 
@@ -23,7 +24,8 @@ class ConsumableRepository implements ConsumableInterface{
     }
 
     public function searchByString($string){
-        return Consumable::where('state','=', 1)
+
+        return Consumable::with('group')->where('state','=', 1)
         ->where(function ($q) use ($string){
             $q->where('nombre', 'like', '%' .$string. '%')
                 ->orWhere('nombre_ingles', 'like', '%' .$string. '%')
@@ -31,7 +33,10 @@ class ConsumableRepository implements ConsumableInterface{
         })
         ->orderBy('nombre')
         ->take(100)
-        ->get()->unique('id');
+        ->get()->where('group.id_country', GeneralVariables::getCurrentCountryId()
+        )->unique('id');
+
+
     }
 
 }

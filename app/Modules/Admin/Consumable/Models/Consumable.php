@@ -35,9 +35,9 @@ class Consumable extends Model
     public function getNameReferenceAttribute()
     {
         if (GeneralVariables::getCurrentLanguage() == 'es') {
-            return $this->nombre.' - '.$this->referencia;
+            return $this->referencia.' - '.$this->nombre;
         } else {
-            return $this->nombre_ingles.' - '.$this->referencia;
+            return $this->referencia.' - '.$this->nombre_ingles;
         }
 
     }

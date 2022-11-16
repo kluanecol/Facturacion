@@ -21,7 +21,7 @@ class ConsumableController extends Controller
 
     public function getByGroupId(Request $request)
     {
-        $consumables = $this->consumableRepository->getByGroupId($request->id_group)->sortBy('name')->pluck('name','id');
+        $consumables = $this->consumableRepository->getByGroupId($request->id_group)->sortBy('name')->pluck('name_reference','id');
 
         return response()->json(['success' => true, 'consumables'=>$consumables]);
     }
