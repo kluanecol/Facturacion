@@ -6,16 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Parametric\Repository\ParametricInterface;
-
-use Session;
+use App\Modules\Admin\UserCountry\Repository\UserCountryInterface;
 
 class ParametricController extends Controller
 {
     private $parametricRepo;
+    protected $userCountryRepo;
 
-    function __construct(ParametricInterface $parametricRepo)
+    function __construct(
+            ParametricInterface $parametricRepo,
+            UserCountryInterface $userCountryRepo
+        )
     {
         $this->parametricRepo = $parametricRepo;
+        $this->userCountryRepo = $userCountryRepo;
+    }
+
+    public function index(){
+        $data = [];
+
+        $data['countries'] = $this->userCountryRepo->getCountriesByUser()->pluck('name','id_country');
+        $data['parametricParents'] = $this->parametricRepo->getAllParents()->pluck('name','id');
+
+        return view('sections.parametrics.index', $data);
     }
 
     public function save(Request $request)

@@ -10,9 +10,16 @@ use Session;
 
 class ParametricRepository implements ParametricInterface{
 
+    public function getAllParents(){
+        return Parametric::active()
+        ->whereNull('fk_id_parent')
+        ->whereRaw('JSON_CONTAINS(json_countries, \'"'. GeneralVariables::getCurrentCountryId() .'"\')')
+        ->get()
+        ->sortBy('name')
+        ;
+    }
+
     public function getActiveChildren($idParent){
-
-
         return Parametric::active()
         ->whereRaw('JSON_CONTAINS(json_countries, \'"'. GeneralVariables::getCurrentCountryId() .'"\')')
         ->where('fk_id_parent',$idParent)

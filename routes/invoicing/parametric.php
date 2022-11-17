@@ -4,6 +4,11 @@
 
         Route::group(['namespace' => $controller, 'prefix' => 'parametric' ], function (){
 
+            Route::get('/index', [
+                'as' => 'parametric.index',
+                'uses' => 'ParametricController@index'
+            ]);
+
             Route::post('/getOtherChargeForm', [
                 'as' => 'parametric.getOtherChargeForm',
                 'uses' => 'ParametricController@getOtherChargeForm'

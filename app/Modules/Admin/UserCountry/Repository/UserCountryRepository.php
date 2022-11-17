@@ -9,7 +9,7 @@ use Session;
 
 class UserCountryRepository implements UserCountryInterface{
 
-    protected function getCountriesByUser()
+    public function getCountriesByUser()
     {
         return $userCountries = UserCountry::join('countries','countries.id','=','users_by_countries.id_country')
         ->Where('users_by_countries.id_user',Auth()->user()->id)
