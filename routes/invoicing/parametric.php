@@ -19,6 +19,10 @@
                 'uses' => 'ParametricController@save'
             ]);
 
+            Route::post('/search', [
+                'as' => 'parametric.search',
+                'uses' => 'ParametricController@search'
+            ]);
         });
 
     });

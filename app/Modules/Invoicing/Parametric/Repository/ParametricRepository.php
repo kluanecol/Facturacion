@@ -10,6 +10,32 @@ use Session;
 
 class ParametricRepository implements ParametricInterface{
 
+    public function dataTableChildrenParametrics($request){
+
+        $parametrics=[];
+        $table=[];
+
+        if (isset($request->id_country) && isset($request->id_parametrics)) {
+            $parametrics = $this->getAllChildrenByMultipleIdParent($request->id_parametrics, $request->id_country);
+        }
+
+
+        foreach ($parametrics as $parametric) {
+
+            $table[] = [
+                'id' => $parametric->id,
+                'name' => $parametric->name,
+                'auxiliary' => isset($parametric->auxiliarParametric) ? $parametric->auxiliarParametric->name : "NO",
+                'parent' => $parametric->parent->name,
+                'options' => view('sections.parametrics.components.table-options', ['parametric' => $parametric])->render()
+            ];
+
+
+        }
+
+        return Datatables::of($table)->addIndexColumn()->rawColumns(['options'])->make(true);
+    }
+
     public function getAllParents(){
         return Parametric::active()
         ->whereNull('fk_id_parent')
@@ -26,10 +52,18 @@ class ParametricRepository implements ParametricInterface{
         ->get();
     }
 
+    public function getAllChildrenByMultipleIdParent(array $idParents, $idCountry, $relations = []){
+
+        return Parametric::with($relations)
+            ->whereRaw('JSON_CONTAINS(json_countries, \'"'. intval($idCountry) .'"\')')
+            ->whereIn('fk_id_parent', $idParents)
+            ->get();
+    }
+
     public function getMultipleById(array $idParametrics){
         return Parametric::active()
-        ->whereIn('id', $idParametrics)
-        ->get();
+            ->whereIn('id', $idParametrics)
+            ->get();
     }
 
     public function save($request){

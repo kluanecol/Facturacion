@@ -21,17 +21,21 @@
             'title'=>trans('general.seleccioneEl').' '.trans('labels.parametricasPadre') ,
             'id' => 'id_parent_parametrics',
             'required' => 'required',
+            'multiple' => 'multiple',
             'data-live-search'=>'true',
+            'data-actions-box' => 'true',
+            'data-deselect-all-text' => trans('general.ninguno'),
+            'data-select-all-text' => trans('general.seleccionarTodo'),
         ]) !!}
     </div>
 </div>
 
-<div class="row mb-2">
-    <div class="col-md-12">
-        <div class="form-group form-md-line-input has-info">
-            <button type="button" id="search-contracts" class="btn btn-primary btn-block">
-                {!! trans('buttons.consultar') !!}
-            </button>
-        </div>
+
+<div class="col-md-12">
+    <div class="form-group form-md-line-input has-info">
+        <button type="button" id="search-parametrics" class="btn btn-primary btn-block">
+            {!! trans('buttons.consultar') !!}
+        </button>
     </div>
 </div>
+

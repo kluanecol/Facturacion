@@ -34,6 +34,11 @@ class Parametric extends Model
         return $this->where('state',1);
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(Parametric::class, 'fk_id_parent','id');
+    }
+
     public function auxiliarParametric()
     {
         return $this->belongsTo(Parametric::class, 'fk_id_auxiliary_parametric','id');

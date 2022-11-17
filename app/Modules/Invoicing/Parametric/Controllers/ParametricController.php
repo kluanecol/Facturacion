@@ -31,6 +31,10 @@ class ParametricController extends Controller
         return view('sections.parametrics.index', $data);
     }
 
+    public function Search(Request $request){
+        return $this->parametricRepo->dataTableChildrenParametrics($request);
+    }
+
     public function save(Request $request)
     {
         $result = $this->parametricRepo->save($request);

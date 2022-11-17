@@ -3,7 +3,8 @@
 var vURL = null;
 var vURL_INVOICING = null;
 
-
+let id_country = null;
+let id_parametrics = [];
 
 jQuery(function() {
 
@@ -21,6 +22,19 @@ jQuery(function() {
         "hideDuration": "1000",
         "timeOut": "5000",
     }
+    $(document).on('click','#search-parametrics',function(){
+        domData = getFormFields();
+
+        if (id_country != '' && id_parametrics != '') {
+            refreshParametricsTable(domData);
+        }else{
+            Swal.fire({
+                type: 'warning',
+                title: $('#msg-cant-filter-title').val()+'!',
+                text: $('#msg-cant-filter-subtitle').val()
+            });
+        }
+    });
 
     $(document).on('click','#btn-create-new-charge',function(){
         getOtherChargeForm();
@@ -160,6 +174,55 @@ function saveParametric() {
             }
         }
     });
+}
+
+function refreshParametricsTable(datos) {
+    table_contracts = $('#table-parametrics').DataTable({
+        language: {
+            "url": vURL+"/js/general/datatables/"+current_lang+".json"
+        },
+        processing: true,
+        serverSide: false,
+        responsive: false,
+        "destroy": true,
+        scrollX: 400,
+        scrollY: 380,
+        scrollCollapse: true,
+
+        "ajax": {
+            "url": vURL+"/invoicing/parametric/search",
+            "type": 'POST',
+            "data": datos
+        },
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'auxiliary', name: 'auxiliary'},
+            {data: 'parent', name: 'parent'},
+            {data: 'options', name: 'options'}
+        ],
+        dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: 'excel',
+            }
+            ],
+        pageLength: 8,
+    });
+}
+
+function getFormFields() {
+    id_country = $('#id_country').val();
+    id_parametrics = $('#id_parent_parametrics').val();
+
+
+    var domData = {
+        'id_country' : id_country,
+        'id_parametrics' : id_parametrics
+    };
+
+    return domData;
 }
 
 function validateForm(id,rules,custom_messages){
