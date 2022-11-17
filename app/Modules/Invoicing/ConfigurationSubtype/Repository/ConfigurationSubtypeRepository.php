@@ -12,7 +12,7 @@ class ConfigurationSubtypeRepository implements ConfigurationSubtypeInterface{
 
     public function getActive(){
        return ConfigurationSubtype::active()
-        ->where('json_countries', 'like', '%' . GeneralVariables::getCurrentCountryId() . '%')
+        ->whereRaw('JSON_CONTAINS(json_countries, \''. GeneralVariables::getCurrentCountryId() .'\')')
         ->orderBy('order')->get();
     }
 

@@ -11,8 +11,10 @@ use Session;
 class ParametricRepository implements ParametricInterface{
 
     public function getActiveChildren($idParent){
+
+
         return Parametric::active()
-        ->where('json_countries', 'like', '%' . GeneralVariables::getCurrentCountryId() . '%')
+        ->whereRaw('JSON_CONTAINS(json_countries, \''. GeneralVariables::getCurrentCountryId() .'\')')
         ->where('fk_id_parent',$idParent)
         ->get();
     }
@@ -34,6 +36,10 @@ class ParametricRepository implements ParametricInterface{
             }
 
            $data = $request->only($parametric->getFillable());
+
+           if(!isset($data['json_countries'])){
+                $data['json_countries'] = json_encode(array(GeneralVariables::getCurrentCountryId()));
+           }
 
            if ($parametric->fill($data)->save()) {
                 $result = 200;

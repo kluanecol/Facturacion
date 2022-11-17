@@ -14,24 +14,24 @@ class ParametricSeeder extends Seeder
         //PARENTS
         //Currency
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Moneda',
-            'english_name'=>'Currency',
+            'spanish_name'=>'MONEDA',
+            'english_name'=>'CURRENCY',
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => null
         ]);
         //Measurement units
          DB::table('parametrics')->insert([
-            'spanish_name'=>'Medidas',
-            'english_name'=>'Measures',
+            'spanish_name'=>'MEDIDAS',
+            'english_name'=>'MEAURES',
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => null
@@ -39,60 +39,60 @@ class ParametricSeeder extends Seeder
 
         //Measurement units
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Otros cargos',
-            'english_name'=>'Other charges',
+            'spanish_name'=>'OTROS CARGOS',
+            'english_name'=>'OTHER CHARGES',
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => null
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Pesos Colombianos',
-            'english_name'=>'Colombian pesos',
+            'spanish_name'=>'PESOS COLOMBIANOS',
+            'english_name'=>'COLOMBIAN PESOS',
             'spanish_description'=>'COP',
             'english_description'=>'COP',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Dólares',
-            'english_name'=>'Dollars',
+            'spanish_name'=>'DÓLARES',
+            'english_name'=>'DOLLARS',
             'spanish_description'=>'USD',
             'english_description'=>'USD',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Pesos Mexicanos',
-            'english_name'=>'Mexican pesos',
+            'spanish_name'=>'PESOS MEXICANOS',
+            'english_name'=>'MEXICAN PESOS',
             'spanish_description'=>'MXN',
             'english_description'=>'MXN',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
         ]);
 
         DB::table('parametrics')->insert([
-            'spanish_name'=>'Soles',
-            'english_name'=>'Soles',
+            'spanish_name'=>'SOLES',
+            'english_name'=>'SOLES',
             'spanish_description'=>'PEN',
             'english_description'=>'PEN',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
@@ -104,7 +104,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'MTS',
             'english_description'=>'MTS',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'MTS',
             'fk_id_parent' => 2
@@ -116,7 +116,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'H',
             'english_description'=>'H',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'H',
             'fk_id_parent' => 2
@@ -128,7 +128,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'D',
             'english_description'=>'D',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'D',
             'fk_id_parent' => 2
@@ -140,7 +140,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 2
@@ -152,7 +152,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'KG',
             'english_description'=>'KG',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'KG',
             'fk_id_parent' => 2
@@ -164,7 +164,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'U',
             'english_description'=>'U',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'U',
             'fk_id_parent' => 2
@@ -176,7 +176,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,
@@ -189,7 +189,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,
@@ -202,7 +202,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,
@@ -215,7 +215,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}',
+            'json_countries'=>'[1, 2, 3, 4, 5, 6, 7, 8, 9]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,

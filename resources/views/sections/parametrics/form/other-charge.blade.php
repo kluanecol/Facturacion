@@ -3,7 +3,6 @@
         <div class="row">
             {!! Form::hidden('state', 1 , ['id'=>'state']) !!}
             {!! Form::hidden('fk_id_parent', 3, ['id'=>'fk_id_parent']) !!}
-            {!! Form::hidden('json_countries','{"country": [1, 2, 3, 4, 5, 6, 7, 8, 9]}', ['id'=>'json_countries']) !!}
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
