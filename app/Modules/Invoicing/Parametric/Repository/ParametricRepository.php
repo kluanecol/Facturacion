@@ -14,7 +14,7 @@ class ParametricRepository implements ParametricInterface{
 
 
         return Parametric::active()
-        ->whereRaw('JSON_CONTAINS(json_countries, \''. GeneralVariables::getCurrentCountryId() .'\')')
+        ->whereRaw('JSON_CONTAINS(json_countries, \'"'. GeneralVariables::getCurrentCountryId() .'"\')')
         ->where('fk_id_parent',$idParent)
         ->get();
     }
@@ -38,7 +38,7 @@ class ParametricRepository implements ParametricInterface{
            $data = $request->only($parametric->getFillable());
 
            if(!isset($data['json_countries'])){
-                $data['json_countries'] = json_encode(array(GeneralVariables::getCurrentCountryId()));
+                $data['json_countries'] = json_encode(array(strval(GeneralVariables::getCurrentCountryId())));
            }
 
            if ($parametric->fill($data)->save()) {
