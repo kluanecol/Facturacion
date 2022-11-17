@@ -13,28 +13,32 @@ class ConsumableRepository implements ConsumableInterface{
     public function getByCountry($idCountry){
         return Consumable::where('id_country',$idCountry)
             ->where('state', 1)
-            ->orderBy('nombre')->get();
+            ->orderBy('referencia')->get();
     }
 
     public function getByGroupId($idGroup){
         return Consumable::where('id_grupo', $idGroup)
             ->where('state', 1)
-            ->orderBy('nombre')
+            ->orderBy('referencia')
             ->get();
     }
 
     public function searchByString($string){
 
-        return Consumable::with('group')->where('state','=', 1)
+        $idCountry = GeneralVariables::getCurrentCountryId();
+
+        return Consumable::whereHas('group', function ($q) use($idCountry){
+            $q->where('id_country',$idCountry);
+        })->where('state','=', 1)
         ->where(function ($q) use ($string){
             $q->where('nombre', 'like', '%' .$string. '%')
                 ->orWhere('nombre_ingles', 'like', '%' .$string. '%')
                 ->orWhere('referencia', 'like', '%' .$string. '%');
         })
-        ->orderBy('nombre')
+        ->orderBy('referencia')
         ->take(100)
-        ->get()->where('group.id_country', GeneralVariables::getCurrentCountryId()
-        )->unique('id');
+        ->get()
+        ->unique('id');
 
 
     }
