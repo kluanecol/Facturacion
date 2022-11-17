@@ -19,7 +19,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => null
@@ -31,7 +31,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => null
@@ -44,7 +44,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => null
@@ -56,7 +56,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'COP',
             'english_description'=>'COP',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
@@ -68,7 +68,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'USD',
             'english_description'=>'USD',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
@@ -80,7 +80,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'MXN',
             'english_description'=>'MXN',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
@@ -92,7 +92,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'PEN',
             'english_description'=>'PEN',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'$',
             'fk_id_parent' => 1
@@ -104,7 +104,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'MTS',
             'english_description'=>'MTS',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'MTS',
             'fk_id_parent' => 2
@@ -116,7 +116,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'H',
             'english_description'=>'H',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'H',
             'fk_id_parent' => 2
@@ -128,7 +128,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'D',
             'english_description'=>'D',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'D',
             'fk_id_parent' => 2
@@ -140,7 +140,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 2
@@ -152,7 +152,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'KG',
             'english_description'=>'KG',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'KG',
             'fk_id_parent' => 2
@@ -164,7 +164,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'U',
             'english_description'=>'U',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'U',
             'fk_id_parent' => 2
@@ -176,7 +176,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,
@@ -189,7 +189,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,
@@ -202,7 +202,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,
@@ -215,7 +215,7 @@ class ParametricSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
             'value'=>0,
             'symbol'=>'',
             'fk_id_parent' => 3,

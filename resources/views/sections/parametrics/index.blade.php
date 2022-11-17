@@ -27,7 +27,7 @@
         <div class="row">
             <div id="div-btn-add-contract" class="col-md-12 mb-2">
                 <div class="btn-group-vertical" role="group">
-                    <button type="button" class="btn btn-primary btn-block add-contract">
+                    <button type="button" class="btn btn-primary btn-block add-parametric">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>  {!! trans('buttons.nuevo') !!}
                     </button>
                     <br>
@@ -45,7 +45,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/parametrics/parametric.js?v=2022-11-18') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/parametrics/parametric.js?v=2022-11-15') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

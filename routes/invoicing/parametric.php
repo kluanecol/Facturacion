@@ -9,6 +9,11 @@
                 'uses' => 'ParametricController@index'
             ]);
 
+            Route::post('/getParametricForm', [
+                'as' => 'parametric.getParametricForm',
+                'uses' => 'ParametricController@getParametricForm'
+            ]);
+
             Route::post('/getOtherChargeForm', [
                 'as' => 'parametric.getOtherChargeForm',
                 'uses' => 'ParametricController@getOtherChargeForm'

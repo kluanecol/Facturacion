@@ -24,6 +24,7 @@ class ParametricRepository implements ParametricInterface{
 
             $table[] = [
                 'id' => $parametric->id,
+                'country' => $parametric->json_countries,
                 'name' => $parametric->name,
                 'auxiliary' => isset($parametric->auxiliarParametric) ? $parametric->auxiliarParametric->name : "NO",
                 'parent' => $parametric->parent->name,
@@ -41,8 +42,7 @@ class ParametricRepository implements ParametricInterface{
         ->whereNull('fk_id_parent')
         ->whereRaw('JSON_CONTAINS(json_countries, \'"'. GeneralVariables::getCurrentCountryId() .'"\')')
         ->get()
-        ->sortBy('name')
-        ;
+        ->sortBy('name');
     }
 
     public function getActiveChildren($idParent){

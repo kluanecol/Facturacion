@@ -18,7 +18,7 @@ class ConfigurationTypeSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
         ]);
 
         DB::table('configuration_types')->insert([
@@ -27,7 +27,7 @@ class ConfigurationTypeSeeder extends Seeder
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
-            'json_countries'=>'["1","2","3","4","5","6","7","8","9"]',
+            'json_countries'=>'["1","2","3","4","5","6","7","8"]',
         ]);
     }
 }

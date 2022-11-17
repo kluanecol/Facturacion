@@ -10,6 +10,7 @@
 <table class="table table-hover table-bordered" id="table-parametrics" style="width: 100%;">
     <thead class="bg-kluane text-light">
         <th class="text-center"><strong>Id</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.pais') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.nombre') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.parametricaAuxiliar') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.padre') !!}</strong></th>

@@ -26,6 +26,10 @@ class Parametric extends Model
         'fk_id_auxiliary_parametric'
     ];
 
+    protected $casts = [
+        'json_countries' => 'array',
+    ];
+
     public $timestamps = true;
 
     use SoftDeletes;

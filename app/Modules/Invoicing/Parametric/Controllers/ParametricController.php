@@ -63,6 +63,18 @@ class ParametricController extends Controller
         return response()->json($messages);
     }
 
+    public function getParametricForm(Request $request){
+
+        $data['parents'] = $this->parametricRepo->getAllParents()->sortBy('name')->pluck('name','id')->toArray();
+        $data['auxiliary'] = $this->parametricRepo->getActiveChildren(GeneralVariables::ID_PARAMETRIC_MEASURES)->sortBy('name')->pluck('name','id')->toArray();
+        $data['countries'] = $this->userCountryRepo->getCountriesByUser()->sortBy('name')->pluck('name','id')->toArray();
+
+        $returnHTML = view('sections.parametrics.form.form', $data)->render();
+
+        return response()->json(['success' => true, 'html'=> $returnHTML]);
+    }
+
+
     public function getOtherChargeForm(Request $request){
 
         $data['measures'] = $this->parametricRepo->getActiveChildren(GeneralVariables::ID_PARAMETRIC_MEASURES)->sortBy('name')->pluck('name','id')->toArray();

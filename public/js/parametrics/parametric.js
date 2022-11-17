@@ -22,6 +22,7 @@ jQuery(function() {
         "hideDuration": "1000",
         "timeOut": "5000",
     }
+
     $(document).on('click','#search-parametrics',function(){
         domData = getFormFields();
 
@@ -36,6 +37,18 @@ jQuery(function() {
         }
     });
 
+    $(document).on('click','.add-parametric',function(){
+        getParametricForm();
+    });
+
+    $(document).on('click','#btn-add',function(){
+
+        if ($("#form-parametric").valid()) {
+            saveParametric('form-parametric');
+        }
+
+    });
+
     $(document).on('click','#btn-create-new-charge',function(){
         getOtherChargeForm();
     });
@@ -43,10 +56,88 @@ jQuery(function() {
     $(document).on('click','#btn-save-parametric',function(){
 
         if ($('#form-other-charge').valid()) {
-            saveParametric();
+            saveParametric('form-other-charge');
         }
     });
+
+    $(document).on('click','.edit-parametric',function(){
+        getParametricForm($(this).data('id'));
+    });
 });
+
+function getParametricForm(id_parametric = null){
+
+    var domData = {
+        id_parametric : id_parametric
+    }
+
+    $.post(
+        vURL+"/invoicing/parametric/getParametricForm",
+        domData,
+        function(data)
+        {
+            if (data.success) {
+                Swal.fire({
+                    width:'800px',
+                    title: '<strong>'+$('#msg-contract-form-title').val()+'</strong>',
+                    html:data.html,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    allowOutsideClick: true
+                  })
+
+                refreshInputs();
+                validateForm("#form-parametric",[],[]);
+            } else {
+                Swal.fire({
+                    type: 'error',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        }
+    ).fail(function(data) {
+        if(data.status == 419){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=>{
+                location.reload();
+            });
+
+        }else if(data.status == 500){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    });
+}
+
+function refreshInputs(){
+
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".datepicker").datepicker({
+        format: 'yyyy-mm-dd',
+        weekStart: 1,
+        language: 'es',
+        autoclose: true,
+    });
+
+    $("select.selectpicker").selectpicker('refresh');
+
+    $('[data-toggle="tooltip"]').tooltip();
+}
 
 function getOtherChargeForm(){
     $('body').loading({
@@ -113,9 +204,9 @@ function getOtherChargeForm(){
     });
 }
 
-function saveParametric() {
+function saveParametric(form_name) {
 
-    let myForm = document.getElementById('form-other-charge');
+    let myForm = document.getElementById(form_name);
     var domData = new FormData(myForm);
 
     $('body').loading({
@@ -197,6 +288,7 @@ function refreshParametricsTable(datos) {
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         columns: [
             {data: 'id', name: 'id'},
+            {data: 'country', name: 'country'},
             {data: 'name', name: 'name'},
             {data: 'auxiliary', name: 'auxiliary'},
             {data: 'parent', name: 'parent'},
