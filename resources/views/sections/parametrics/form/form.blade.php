@@ -6,7 +6,7 @@
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
 
                     <label for="json_countries">{!! trans('labels.pais') !!}(*)</label>
-                    <select name="json_countries[]" id="json_countries" class="form-control selectpicker is_required" multiple="multiple" title="{{trans('general.seleccioneEl').' '.trans('labels.pais')}}">
+                    <select name="json_countries[]" id="json_countries" class="form-control selectpicker" multiple="multiple" title="{{trans('general.seleccioneEl').' '.trans('labels.pais')}}">
                         @foreach ($countries as $key => $name )
                             <option value="{{$key}}"
                                 {{isset($userCountries) && !in_array($key, $userCountries) ? "disabled": "" }}

@@ -41,7 +41,9 @@ class ParametricController extends Controller
 
     public function save(Request $request)
     {
-        $result = $this->parametricRepo->save($request);
+        $userCountries = $this->userCountryRepo->getCountriesByUser()->pluck('id')->toArray();
+        $countries = $this->countryRepo->getAll()->pluck('id')->toArray();
+        $result = $this->parametricRepo->save($request, $countries, $userCountries);
 
         if($result == 200){
             $messages = [
@@ -77,7 +79,7 @@ class ParametricController extends Controller
 
         $data['parents'] = $this->parametricRepo->getAllParents()->sortBy('name')->pluck('name','id')->toArray();
         $data['auxiliary'] = $this->parametricRepo->getActiveChildren(GeneralVariables::ID_PARAMETRIC_MEASURES)->sortBy('name')->pluck('name','id')->toArray();
-        $data['userCountries'] = $this->userCountryRepo->getCountriesByUser()->sortBy('name')->pluck('name','id')->toArray();
+        $data['userCountries'] = $this->userCountryRepo->getCountriesByUser()->sortBy('name')->pluck('id')->toArray();
         $data['countries'] = $this->countryRepo->getAll()->sortBy('name')->pluck('name','id')->toArray();
 
         $returnHTML = view('sections.parametrics.form.form', $data)->render();

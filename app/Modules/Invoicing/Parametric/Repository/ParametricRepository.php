@@ -70,17 +70,29 @@ class ParametricRepository implements ParametricInterface{
             ->get();
     }
 
-    public function save($request){
+    public function save($request, $countries, $userCountries){
         $result = 200;
 
         try {
             if (isset($request->id)) {
                 $parametric = Parametric::find($request->id);
+                $oldParametricCountries = $parametric->json_countries;
             }else{
                 $parametric = new Parametric();
             }
 
-           $data = $request->only($parametric->getFillable());
+            $data = $request->only($parametric->getFillable());
+
+            if (isset($oldParametricCountries)) {
+                $disabledCountries = array_diff($countries,$userCountries);
+                $disabledCountriesInParametric = array_intersect($oldParametricCountries, $disabledCountries);
+
+                if (is_array($request->json_countries)) {
+                    $data['json_countries'] = array_merge($disabledCountriesInParametric, $request->json_countries);
+                }else{
+                    $data['json_countries'] = $disabledCountriesInParametric;
+                }
+            }
 
             if(!isset($data['json_countries'])){
                 $data['json_countries'] = array( strval(GeneralVariables::getCurrentCountryId()));
