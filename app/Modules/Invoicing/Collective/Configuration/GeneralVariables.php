@@ -32,4 +32,9 @@ class GeneralVariables
     public static function getCurrentLanguage(){
         return Session::get('locale');
     }
+
+
+    public static function getCountryNamesByIds($ids){
+
+    }
 }
