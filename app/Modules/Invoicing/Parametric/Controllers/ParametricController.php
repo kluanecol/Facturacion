@@ -25,7 +25,7 @@ class ParametricController extends Controller
     public function index(){
         $data = [];
 
-        $data['countries'] = $this->userCountryRepo->getCountriesByUser()->pluck('name','id_country');
+        $data['countries'] = $this->userCountryRepo->getCountriesByUser()->sortBy('name')->pluck('name','id_country');
         $data['parametricParents'] = $this->parametricRepo->getAllParents()->pluck('name','id');
 
         return view('sections.parametrics.index', $data);

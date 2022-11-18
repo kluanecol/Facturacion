@@ -14,8 +14,8 @@
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="english_name">{!! trans('labels.nombreEnIngles') !!}(*):</label>
-                    {!! Form::text('english_name', null, ['class' => 'form-control is_required', 'id' => 'english_name', 'maxlength'=> '255', 'Style' => 'width: 100%;']) !!}
+                    <label for="english_name">{!! trans('labels.nombreEnIngles') !!}:</label>
+                    {!! Form::text('english_name', null, ['class' => 'form-control', 'id' => 'english_name', 'maxlength'=> '255', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
             </div>

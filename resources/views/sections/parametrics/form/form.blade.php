@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="json_countries">{!! trans('labels.pais') !!}(*)</label>
-                    {!! Form::select('json_countries', $countries, null, [
+                    {!! Form::select('json_countries[]', $countries, null, [
                         'class' => 'form-control selectpicker is_required',
                         'title'=>trans('general.seleccioneEl').' '.trans('labels.pais') ,
                         'id' => 'json_countries',
@@ -43,7 +43,7 @@
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="english_name">{!! trans('labels.nombreEnIngles') !!}(*):</label>
+                    <label for="english_name">{!! trans('labels.nombreEnIngles') !!}:</label>
                     {!! Form::text('english_name', null,
                         [
                             'class' => 'form-control',
@@ -64,6 +64,7 @@
                         'data-live-search'=>'true',
                         'title'=>'',
                         'id'=>'fk_id_auxiliary_parametric',
+                        'placeholder' => trans('general.seleccionOpcional'),
                         'data-size'=>'5'
                     ])!!}
                     <span class="help-block"></span>

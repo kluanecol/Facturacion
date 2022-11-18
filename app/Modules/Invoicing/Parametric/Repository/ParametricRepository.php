@@ -78,11 +78,15 @@ class ParametricRepository implements ParametricInterface{
 
            $data = $request->only($parametric->getFillable());
 
-           if(!isset($data['json_countries'])){
-                $data['json_countries'] = json_encode(array(strval(GeneralVariables::getCurrentCountryId())));
-           }
+            if(!isset($data['json_countries'])){
+                $data['json_countries'] = array( strval(GeneralVariables::getCurrentCountryId()));
+            }
 
-           if ($parametric->fill($data)->save()) {
+            if($data['english_name'] == ""){
+                $data['english_name'] = $data['spanish_name'];
+            }
+
+            if ($parametric->fill($data)->save()) {
                 $result = 200;
             }else{
                 $result = 400;

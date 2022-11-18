@@ -25,5 +25,6 @@ return [
     'seleccionarTodo' => 'Select all',
     'ninguno' => 'None',
     'seleccioneEl' => 'Select the',
-    'seleccioneLa' => 'Select the'
+    'seleccioneLa' => 'Select the',
+    'seleccionOpcional' => 'Optional selection'
 ];
