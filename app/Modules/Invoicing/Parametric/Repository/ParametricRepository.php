@@ -83,6 +83,7 @@ class ParametricRepository implements ParametricInterface{
 
             $data = $request->only($parametric->getFillable());
 
+            //Update parametric's countries
             if (isset($oldParametricCountries)) {
                 $disabledCountries = array_diff($countries,$userCountries);
                 $disabledCountriesInParametric = array_intersect($oldParametricCountries, $disabledCountries);
@@ -90,7 +91,11 @@ class ParametricRepository implements ParametricInterface{
                 if (is_array($request->json_countries)) {
                     $data['json_countries'] = array_merge($disabledCountriesInParametric, $request->json_countries);
                 }else{
-                    $data['json_countries'] = $disabledCountriesInParametric;
+                    if (is_array($disabledCountriesInParametric)) {
+                        $data['json_countries'] = $disabledCountriesInParametric;
+                    }{
+                        $data['json_countries'] = array( strval(GeneralVariables::getCurrentCountryId()));
+                    }
                 }
             }
 
