@@ -5,11 +5,9 @@
 
  <!-- DatePicker -->
  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-<!-- Modal Styles -->
-<link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
+<!-- Custom Styles -->
 <link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('css/general_tooltip.css') }}" rel="stylesheet" type="text/css" />
 @section('content')
 
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">

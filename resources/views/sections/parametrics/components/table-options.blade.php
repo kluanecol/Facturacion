@@ -1,6 +1,7 @@
 
 <a  class="btn  btn-warning edit-parametric" data-id="{{$parametric->id}}" target="_blank"><i class="icofont-pencil-alt-1"></i></a>
-<a  class="btn  btn-danger delete-parametric" data-id="{{$parametric->id}}" target="_blank"><i class="icofont-trash"></i></a>
-<a href="{{route('contracts.configuration',$parametric->id)}}" class="btn  btn-info config-contract" target="_blank"><i class="icofont-options"></i></a>
+<span class="tool" data-tip="{{trans('buttons.cambiarEstado')}}"tabindex="1">
+    <a  class="btn  btn-success disable-parametric" data-id="{{$parametric->id}}" target="_blank" > <i class="icofont-power"></i></a>
+</span>
 
 
