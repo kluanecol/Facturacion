@@ -2,7 +2,7 @@
 
 var vURL = null;
 var vURL_INVOICING = null;
-
+let table_parametrics = 0;
 let id_country = null;
 let id_parametrics = [];
 
@@ -62,6 +62,10 @@ jQuery(function() {
 
     $(document).on('click','.edit-parametric',function(){
         getParametricForm($(this).data('id'));
+    });
+
+    $(document).on('click','.disable-parametric',function(){
+        disableParametric($(this).data('id'));
     });
 });
 
@@ -233,6 +237,8 @@ function saveParametric(form_name) {
                     showConfirmButton: false,
                     timer: 1500
                 });
+
+                table_parametrics.ajax.reload();
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
@@ -267,8 +273,82 @@ function saveParametric(form_name) {
     });
 }
 
+function disableParametric(id_parametric) {
+
+    var formData = new FormData();
+    formData.append("id_parametric", id_parametric);
+
+    Swal.fire({
+        title: $('#msg-parametrics-delete').val(),
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonText: $('#msg-change-state').val(),
+        cancelButtonText: $('#msg-cancel').val(),
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        allowOutsideClick: false
+    }).then((result) => {
+        if (result.value == true) {
+            $('body').loading({
+                message: $('#msg-loading').val()
+            });
+
+            $.ajax({
+
+                url: vURL+'/invoicing/parametric/changeState',
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(data){
+                    $('body').loading('stop');
+
+                    if (data.status == 200) {
+                        toastr.success(data.message, data.title);
+
+                        table_parametrics.ajax.reload();
+
+                    }
+                    else if(data.status == 400){
+                        toastr.warning(data.message, data.title);
+                    }
+                    else{
+                        toastr.error(data.message, data.title);
+                    }
+                },
+                error: function(data){
+                    $('body').loading('stop');
+
+                    if(data.status == 419){
+                        Swal.fire({
+                            title: $('#msg-something-went-wrong').val(),
+                            html: $('#msg-session-expired').val(),
+                            type: `error`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        }).then(()=>{
+                            location.reload();
+                        });
+                    }else if(data.status == 500){
+                        Swal.fire({
+                            title: $('#msg-something-went-wrong').val(),
+                            html: $('#msg-contact-support').val(),
+                            type: `error`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                }
+            });
+
+        }
+    })
+
+}
+
 function refreshParametricsTable(datos) {
-    table_contracts = $('#table-parametrics').DataTable({
+    table_parametrics = $('#table-parametrics').DataTable({
         language: {
             "url": vURL+"/js/general/datatables/"+current_lang+".json"
         },

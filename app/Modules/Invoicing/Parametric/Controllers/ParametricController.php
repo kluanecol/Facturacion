@@ -96,4 +96,33 @@ class ParametricController extends Controller
 
         return response()->json(['success' => true, 'html'=> $returnHTML]);
     }
+
+    public function changeState(Request $request){
+        $result = $this->parametricRepo->changeState($request);
+
+        if (is_string($result)) {
+            $messages = [
+                'message' => $result,
+                'title' => trans('general.errorNoControlado'),
+                'type'  => 'warning',
+            ];
+        }
+        else if($result == 200){
+            $messages = [
+                'title' => trans('general.bienHecho'),
+                'message' => trans('general.estadoCambiadoExito'),
+                'type'  => 'success',
+                'status' => $result
+            ];
+        }else{
+            $messages = [
+                'message' => trans('general.algoSalioMal'),
+                'title' => trans('general.errorAlEliminar'),
+                'type'  => 'warning',
+                'status' => $result
+            ];
+        }
+        return response()->json($messages);
+
+    }
 }

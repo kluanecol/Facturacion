@@ -119,4 +119,35 @@ class ParametricRepository implements ParametricInterface{
             return $e->getMessage();
         }
     }
+
+    public function changeState($request){
+        $result = 200;
+
+        try {
+
+            if (isset($request->id_parametric)) {
+                $parametric = Parametric::find($request->id_parametric);
+
+                if ($parametric->state == 1) {
+                    $state = 0;
+                }else{
+                    $state = 1;
+                }
+
+                $parametric->state = $state;
+
+                if ($parametric->save()) {
+                    $result = 200;
+                }else{
+                    $result = 400;
+                }
+
+               return $result;
+            }
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
 }

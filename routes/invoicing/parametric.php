@@ -28,6 +28,11 @@
                 'as' => 'parametric.search',
                 'uses' => 'ParametricController@search'
             ]);
+
+            Route::post('/changeState', [
+                'as' => 'parametric.changeState',
+                'uses' => 'ParametricController@changeState'
+            ]);
         });
 
     });
