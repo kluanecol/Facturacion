@@ -231,7 +231,7 @@ function saveParametric(form_name) {
                     html: data.message,
                     type: `success`,
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 1500
                 });
             }
             else if(data.status == 400){
