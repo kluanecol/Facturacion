@@ -370,6 +370,7 @@ function refreshParametricsTable(datos) {
             {data: 'id', name: 'id'},
             {data: 'country', name: 'country'},
             {data: 'name', name: 'name'},
+            {data: 'state', name: 'state'},
             {data: 'auxiliary', name: 'auxiliary'},
             {data: 'parent', name: 'parent'},
             {data: 'options', name: 'options'}

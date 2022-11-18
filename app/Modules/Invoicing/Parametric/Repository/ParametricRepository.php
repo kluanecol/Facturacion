@@ -28,13 +28,14 @@ class ParametricRepository implements ParametricInterface{
                 'name' => $parametric->name,
                 'auxiliary' => isset($parametric->auxiliarParametric) ? $parametric->auxiliarParametric->name : "NO",
                 'parent' => $parametric->parent->name,
+                'state' => view('sections.components.badge-state', ['state' => $parametric->state])->render(),
                 'options' => view('sections.parametrics.components.table-options', ['parametric' => $parametric])->render()
             ];
 
 
         }
 
-        return Datatables::of($table)->addIndexColumn()->rawColumns(['options'])->make(true);
+        return Datatables::of($table)->addIndexColumn()->rawColumns(['options','state'])->make(true);
     }
 
     public function getAllParents(){
