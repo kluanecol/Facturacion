@@ -7,19 +7,23 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Parametric\Repository\ParametricInterface;
 use App\Modules\Admin\UserCountry\Repository\UserCountryInterface;
+use App\Modules\Admin\Country\Repository\CountryInterface;
 
 class ParametricController extends Controller
 {
     private $parametricRepo;
     protected $userCountryRepo;
+    protected $countryRepo;
 
     function __construct(
             ParametricInterface $parametricRepo,
-            UserCountryInterface $userCountryRepo
+            UserCountryInterface $userCountryRepo,
+            CountryInterface $countryRepo
         )
     {
         $this->parametricRepo = $parametricRepo;
         $this->userCountryRepo = $userCountryRepo;
+        $this->countryRepo = $countryRepo;
     }
 
     public function index(){
@@ -65,9 +69,16 @@ class ParametricController extends Controller
 
     public function getParametricForm(Request $request){
 
+        $data = [];
+
+        if (isset($request->id_parametric)) {
+            $data['parametric'] = $this->parametricRepo->getById($request->id_parametric);
+        }
+
         $data['parents'] = $this->parametricRepo->getAllParents()->sortBy('name')->pluck('name','id')->toArray();
         $data['auxiliary'] = $this->parametricRepo->getActiveChildren(GeneralVariables::ID_PARAMETRIC_MEASURES)->sortBy('name')->pluck('name','id')->toArray();
-        $data['countries'] = $this->userCountryRepo->getCountriesByUser()->sortBy('name')->pluck('name','id')->toArray();
+        $data['userCountries'] = $this->userCountryRepo->getCountriesByUser()->sortBy('name')->pluck('name','id')->toArray();
+        $data['countries'] = $this->countryRepo->getAll()->sortBy('name')->pluck('name','id')->toArray();
 
         $returnHTML = view('sections.parametrics.form.form', $data)->render();
 

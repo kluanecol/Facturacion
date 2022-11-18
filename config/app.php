@@ -175,7 +175,7 @@ return [
         App\Modules\Admin\ConsumableGroup\Providers\ConsumableGroupServiceProvider::class,
         App\Modules\Admin\Consumable\Providers\ConsumableServiceProvider::class,
         App\Modules\Admin\UserCountry\Providers\UserCountryServiceProvider::class,
-
+        App\Modules\Admin\Country\Providers\CountryServiceProvider::class,
 
     ],
 

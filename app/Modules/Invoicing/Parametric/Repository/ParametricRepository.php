@@ -60,6 +60,10 @@ class ParametricRepository implements ParametricInterface{
             ->get();
     }
 
+    public function getById($id){
+        return Parametric::find($id);
+    }
+
     public function getMultipleById(array $idParametrics){
         return Parametric::active()
             ->whereIn('id', $idParametrics)

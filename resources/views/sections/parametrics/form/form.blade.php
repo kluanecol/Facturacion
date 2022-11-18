@@ -1,20 +1,20 @@
 <div id="main-content-form">
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-parametric','enctype' => 'multipart/form-data']) !!}
         <div class="row">
-
+            {!! Form::hidden('id', (isset($parametric) ? $parametric->id : null), ['id'=>'id']) !!}
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+
                     <label for="json_countries">{!! trans('labels.pais') !!}(*)</label>
-                    {!! Form::select('json_countries[]', $countries, null, [
-                        'class' => 'form-control selectpicker is_required',
-                        'title'=>trans('general.seleccioneEl').' '.trans('labels.pais') ,
-                        'id' => 'json_countries',
-                        'multiple' => 'multiple',
-                        'data-live-search'=>'true',
-                        'data-actions-box' => 'true',
-                        'data-deselect-all-text' => trans('general.ninguno'),
-                        'data-select-all-text' => trans('general.seleccionarTodo'),
-                    ]) !!}
+                    <select name="json_countries[]" id="json_countries" class="form-control selectpicker is_required" multiple="multiple" title="{{trans('general.seleccioneEl').' '.trans('labels.pais')}}">
+                        @foreach ($countries as $key => $name )
+                            <option value="{{$key}}"
+                                {{isset($userCountries) && !in_array($key, $userCountries) ? "disabled": "" }}
+                                {{isset($parametric->json_countries) && in_array($key, $parametric->json_countries) ? "selected": "" }}>
+                                {{$name}}
+                            </option>
+                        @endforeach
+                    </select>
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_parent">{!! trans('labels.grupoDeParametricas') !!}(*):</label>
-                    {!!Form::select('fk_id_parent',$parents,null,[
+                    {!!Form::select('fk_id_parent',$parents,isset($parametric) ? $parametric->fk_id_parent : null,[
                         'class'=>'form-control selectpicker fk_id_parent is_required',
                         'data-live-search'=>'true',
                         'title'=>'',
@@ -36,7 +36,7 @@
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="spanish_name">{!! trans('labels.nombreEnEspanol') !!}(*):</label>
-                    {!! Form::text('spanish_name', null, ['class' => 'form-control is_required', 'id' => 'spanish_name', 'maxlength'=> '255', 'Style' => 'width: 100%;']) !!}
+                    {!! Form::text('spanish_name', isset($parametric) ? $parametric->spanish_name : null, ['class' => 'form-control is_required', 'id' => 'spanish_name', 'maxlength'=> '255', 'Style' => 'width: 100%;']) !!}
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="english_name">{!! trans('labels.nombreEnIngles') !!}:</label>
-                    {!! Form::text('english_name', null,
+                    {!! Form::text('english_name', isset($parametric) ? $parametric->english_name : null,
                         [
                             'class' => 'form-control',
                             'id' => 'english_name',
@@ -59,7 +59,7 @@
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_auxiliary_parametric">{!! trans('labels.parametricaAuxiliar') !!}(*):</label>
-                    {!!Form::select('fk_id_auxiliary_parametric',$auxiliary, 0,[
+                    {!!Form::select('fk_id_auxiliary_parametric',$auxiliary, isset($parametric) ? $parametric->fk_id_auxiliary_parametric : null,[
                         'class'=>'form-control selectpicker fk_id_auxiliary_parametric',
                         'data-live-search'=>'true',
                         'title'=>'',
