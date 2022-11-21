@@ -1,4 +1,4 @@
-<div style="width: 150px;
+<div style="width: 100%;
 text-align: center;
 height: 70px;
 overflow-y: scroll;
