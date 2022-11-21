@@ -179,6 +179,8 @@ return [
         //Rhomb production providers
         App\Modules\Production\Machine\Providers\MachineServiceProvider::class,
         App\Modules\Production\MachineProject\Providers\MachineProjectServiceProvider::class,
+        App\Modules\Production\DailyRecord\Providers\DailyRecordServiceProvider::class,
+        App\Modules\Production\OperationRecord\Providers\OperationRecordServiceProvider::class,
     ],
 
     /*
