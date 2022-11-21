@@ -269,12 +269,7 @@ function refreshContractsTable(datos) {
         },
         processing: true,
         serverSide: false,
-        responsive: false,
         "destroy": true,
-        scrollX: 400,
-        scrollY: 380,
-        scrollCollapse: true,
-
         "ajax": {
             "url": vURL+"/invoicing/contract/search",
             "type": 'POST',

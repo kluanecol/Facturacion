@@ -10,7 +10,7 @@ use Session;
 
 class ParametricRepository implements ParametricInterface{
 
-    public function dataTableChildrenParametrics($request){
+    public function dataTableChildrenParametrics($request,$countries){
 
         $parametrics=[];
         $table=[];
@@ -22,10 +22,11 @@ class ParametricRepository implements ParametricInterface{
 
         foreach ($parametrics as $parametric) {
 
+            $strCountries = $countries->whereIn('id',$parametric->json_countries)->sortBy('name')->pluck('name')->implode(',');
             $table[] = [
                 'id' => $parametric->id,
-                'country' => $parametric->json_countries,
-                'name' => $parametric->name,
+                'country' => view('sections.components.scrollable-datatable-div', ['string' => $strCountries])->render(),
+                'name' => view('sections.components.scrollable-datatable-div-width', ['string' => $parametric->name])->render(),
                 'auxiliary' => isset($parametric->auxiliarParametric) ? $parametric->auxiliarParametric->name : "NO",
                 'parent' => $parametric->parent->name,
                 'state' => view('sections.components.badge-state', ['state' => $parametric->state])->render(),
@@ -35,7 +36,7 @@ class ParametricRepository implements ParametricInterface{
 
         }
 
-        return Datatables::of($table)->addIndexColumn()->rawColumns(['options','state'])->make(true);
+        return Datatables::of($table)->addIndexColumn()->rawColumns(['country','name','options','state'])->make(true);
     }
 
     public function getAllParents(){

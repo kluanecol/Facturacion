@@ -36,7 +36,8 @@ class ParametricController extends Controller
     }
 
     public function Search(Request $request){
-        return $this->parametricRepo->dataTableChildrenParametrics($request);
+        $countries = $this->countryRepo->getAll();
+        return $this->parametricRepo->dataTableChildrenParametrics($request, $countries);
     }
 
     public function save(Request $request)

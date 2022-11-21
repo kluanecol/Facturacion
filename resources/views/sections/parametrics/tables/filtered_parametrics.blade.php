@@ -14,8 +14,8 @@
         <th class="text-center"><strong>{!! trans('labels.nombre') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.estado') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.parametricaAuxiliar') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.padre') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
     </thead>
     <tbody class="text-center bg-light">
 

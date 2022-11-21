@@ -8,6 +8,7 @@
 <!-- Custom Styles -->
 <link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/general_tooltip.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href=" {{ asset('css/general.css') }}" type="text/css">
 @section('content')
 
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
@@ -43,7 +44,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/parametrics/parametric.js?v=2022-11-19') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/parametrics/parametric.js?v=2022-11-20') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
