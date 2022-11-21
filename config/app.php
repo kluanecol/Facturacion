@@ -168,7 +168,7 @@ return [
         App\Modules\Invoicing\ConfigurationSubtype\Providers\ConfigurationSubtypeServiceProvider::class,
         App\Modules\Invoicing\Parametric\Providers\ParametricServiceProvider::class,
         App\Modules\Invoicing\ContractConfiguration\Providers\ContractConfigurationServiceProvider::class,
-
+        //Rhomb admin providers
         App\Modules\Admin\Project\Providers\ProjectServiceProvider::class,
         App\Modules\Admin\Client\Providers\ClientServiceProvider::class,
         App\Modules\Admin\GeneralParametric\Providers\GeneralParametricServiceProvider::class,
@@ -176,7 +176,9 @@ return [
         App\Modules\Admin\Consumable\Providers\ConsumableServiceProvider::class,
         App\Modules\Admin\UserCountry\Providers\UserCountryServiceProvider::class,
         App\Modules\Admin\Country\Providers\CountryServiceProvider::class,
-
+        //Rhomb production providers
+        App\Modules\Production\Machine\Providers\MachineServiceProvider::class,
+        App\Modules\Production\MachineProject\Providers\MachineProjectServiceProvider::class,
     ],
 
     /*
