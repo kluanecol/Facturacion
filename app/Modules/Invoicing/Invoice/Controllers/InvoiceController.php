@@ -28,10 +28,10 @@ class InvoiceController extends Controller
             $this->projectRepo = $projectRepo;
         }
 
-    public function index(){
+    public function index($idContract){
+
+        dd($idContract);
         $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
-        $data['clients'] = $this->clientRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
-        $data['years'] = GeneralVariables::yearsArray();
 
         return view('sections.contracts.index', $data);
     }

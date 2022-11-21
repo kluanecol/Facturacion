@@ -4,7 +4,7 @@
 
         Route::group(['namespace' => $controller, 'prefix' => 'invoice' ], function (){
 
-            Route::get('/index', [
+            Route::get('/index/{idContract}', [
                 'as' => 'invoice.index',
                 'uses' => 'InvoiceController@index'
             ]);

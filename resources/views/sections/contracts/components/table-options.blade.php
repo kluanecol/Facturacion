@@ -11,7 +11,7 @@
 </span>
 
 <span class="tool" data-tip="{{trans('buttons.facturacion')}}"tabindex="1">
-    <a href="{{route('contracts.configuration',$contract->id)}}" class="btn  btn-success" target="_blank"><i class="icofont-briefcase-1"></i></a>
+    <a href="{{route('invoice.index',$contract->id)}}" class="btn  btn-success" target="_blank"><i class="icofont-briefcase-1"></i></a>
 </span>
 
 

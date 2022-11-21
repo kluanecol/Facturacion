@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Modules\Invoicing\Contract\Repository;
+namespace App\Modules\Invoicing\Invoice\Repository;
 
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
-use App\Modules\Invoicing\Contract\Models\Contract;
+use App\Modules\Invoicing\Invoice\Models\Invoice;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
-class ContractRepository implements ContractInterface{
+class InvoiceRepository implements InvoiceInterface{
 
-    public function dataTableContracts($request){
+    public function dataTableInvoices($request){
 
         $contracts=[];
         $table=[];
@@ -39,11 +39,11 @@ class ContractRepository implements ContractInterface{
     }
 
     public function getById($id, $relations = []){
-        return Contract::with($relations)->find($id);
+        return Invoice::with($relations)->find($id);
     }
 
     public function getByProjectYearAndClient($idProject, $year, $idClient){
-        return Contract::whereIn('fk_id_project',$idProject)
+        return Invoice::whereIn('fk_id_project',$idProject)
             ->whereIn('year',$year)
             ->whereIn('fk_id_client',$idClient)
             ->get();
@@ -54,9 +54,9 @@ class ContractRepository implements ContractInterface{
 
         try {
             if (isset($request->id)) {
-                $contract = Contract::find($request->id);
+                $contract = Invoice::find($request->id);
             }else{
-                $contract = new Contract();
+                $contract = new Invoice();
             }
 
            $data = $request->only($contract->getFillable());
@@ -82,7 +82,7 @@ class ContractRepository implements ContractInterface{
         try {
 
             if (isset($request->id_contract)) {
-                $contract = Contract::find($request->id_contract);
+                $contract = Invoice::find($request->id_contract);
             }
 
            if ($contract->delete()) {
