@@ -42,12 +42,10 @@ class InvoiceRepository implements InvoiceInterface{
         return Invoice::with($relations)->find($id);
     }
 
-    public function getByProjectYearAndClient($idProject, $year, $idClient){
-        return Invoice::whereIn('fk_id_project',$idProject)
-            ->whereIn('year',$year)
-            ->whereIn('fk_id_client',$idClient)
-            ->get();
+    public function getByIdContract($id, $relations = []){
+        return Invoice::with($relations)->where('fk_id_contract', $id)->get();
     }
+
 
     public function save($request){
         $result = 200;

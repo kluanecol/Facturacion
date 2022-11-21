@@ -8,41 +8,44 @@ use App\Modules\Admin\Project\Repository\ProjectInterface;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Invoice\Repository\InvoiceInterface;
+use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 
 use Session;
 
 class InvoiceController extends Controller
 {
-    private $contractRepo;
+    private $invoiceRepo;
     protected $projectRepo;
-    protected $clientRepo;
-    protected $configurationSubtypeRepo;
-    protected $contractConfigurationRepo;
+    private $contractRepo;
 
     function __construct(
-            InvoiceInterface $contractRepo,
-            ProjectInterface $projectRepo
+            InvoiceInterface $invoiceRepo,
+            ProjectInterface $projectRepo,
+            ContractInterface $contractRepo
         )
         {
-            $this->contractRepo = $contractRepo;
+            $this->invoiceRepo = $invoiceRepo;
             $this->projectRepo = $projectRepo;
+            $this->contractRepo = $contractRepo;
         }
 
     public function index($idContract){
+        $data=[];
 
-        dd($idContract);
-        $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
+        $data['contract'] = $this->contractRepo->getById($idContract);
+        $data['isInvoiceView'] = true;
+        $data['invoices'] = $this->invoiceRepo->getByIdContract($idContract);
 
-        return view('sections.contracts.index', $data);
+        return view('sections.invoices.index', $data);
     }
 
     public function Search(Request $request){
-        return $this->contractRepo->dataTableInvoices($request);
+        return $this->invoiceRepo->dataTableInvoices($request);
     }
 
     public function getInvoiceForm(Request $request){
         if (isset($request->id_contract)) {
-            $data['contract'] = $this->contractRepo->getById($request->id_contract);
+            $data['contract'] = $this->invoiceRepo->getById($request->id_contract);
         }
 
         $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
@@ -55,7 +58,7 @@ class InvoiceController extends Controller
     }
 
     public function save(Request $request){
-        $result = $this->contractRepo->save($request);
+        $result = $this->invoiceRepo->save($request);
 
         if (is_string($result)) {
             $messages = [
@@ -84,7 +87,7 @@ class InvoiceController extends Controller
     }
 
     public function delete(Request $request){
-        $result = $this->contractRepo->delete($request);
+        $result = $this->invoiceRepo->delete($request);
 
         if (is_string($result)) {
             $messages = [
@@ -123,7 +126,7 @@ class InvoiceController extends Controller
             $percentage = ($contractConfigurations->count()*100)/$globalCurrentSettings->count();
         }
 
-        $data['contract'] = $this->contractRepo->getById($idInvoice);
+        $data['contract'] = $this->invoiceRepo->getById($idInvoice);
         $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
         $data['percentage'] = round($percentage, 1);
 
