@@ -26,5 +26,8 @@ class Invoice extends Model
 
     public $timestamps = true;
 
-
+    public function getPeriodAttribute()
+    {
+        return $this->initial_period.' - '.$this->end_period;
+    }
 }

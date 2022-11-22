@@ -15,15 +15,16 @@ class InvoiceRepository implements InvoiceInterface{
         $invoices=[];
         $table=[];
 
-        $invoices = $this->getByIdContract($request->id_contract);
+        $invoices = $this->getByIdContract($request->id_contract)->sortBy('period');
 
         foreach ($invoices as $invoice) {
 
             $table[] = [
                 'id' => $invoice->id,
-                'initial_period' => $invoice->initial_period,
-                'end_period' => $invoice->end_period,
-                'versions' => "",
+                'period' =>trans('invoice.periodoDeFacturacion').": ".$invoice->period,
+                'code' => "",
+                'version' => "",
+                'state' => "",
                 'options' => view('sections.contracts.components.table-options', ['contract' => $invoice])->render()
             ];
 

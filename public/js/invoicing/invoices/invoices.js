@@ -15,7 +15,6 @@ jQuery(function() {
     vURL_INVOICING = $('#main-url-init').data('url');
 
     refreshInvoicesTable();
-
     toastr.options = {
         "closeButton": true,
         "newestOnTop": false,
@@ -422,21 +421,33 @@ function validateForm(id,rules,custom_messages){
 }
 
 function refreshInvoicesTable() {
+    var groupColumn = 1;
 
     var domData = {
         'id_contract' : $('#id_contract').val()
     };
-    $('#example').DataTable( {
-        order: [[2, 'asc']],
-        rowGroup: {
-            startRender: null,
-            endRender: function ( rows, group ) {
-                return group +' ('+rows.count()+')';
-            },
-            dataSrc: 2
-        }
-    } );
+
     table_invoices = $('#table-invoices').DataTable({
+        "columnDefs": [
+            { "visible": false, "targets": groupColumn }
+        ],
+        "order": [[ groupColumn, 'asc' ]],
+        "displayLength": 25,
+        "drawCallback": function ( settings ) {
+            var api = this.api();
+            var rows = api.rows( {page:'current'} ).nodes();
+            var last=null;
+
+            api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                if ( last !== group ) {
+                    $(rows).eq( i ).before(
+                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                    );
+
+                    last = group;
+                }
+            } );
+        },
         language: {
             "url": vURL+"/js/general/datatables/"+current_lang+".json"
         },
@@ -459,9 +470,10 @@ function refreshInvoicesTable() {
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'initial_period', name: 'initial_period'},
-            {data: 'end_period', name: 'end_period'},
-            {data: 'versions', name: 'versions'},
+            {data: 'period', name: 'period'},
+            {data: 'code', name: 'code'},
+            {data: 'version', name: 'version'},
+            {data: 'state', name: 'state'},
             {data: 'options', name: 'options'}
         ],
         dom: 'Bfrtip',
