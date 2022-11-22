@@ -13,7 +13,7 @@ class MachineProjectRepository implements MachineProjectInterface{
         return MachineProject::with($relations)
         ->where('id_proyecto', $id)
         ->whereHas('machine.functionality', function ($q){
-            $q->whereIn('value',[1,7]);
+            $q->whereIn('value',[GeneralVariables::ID_VAL_FUNCTIONALITY_SURFACE_MACHINE,GeneralVariables::ID_VAL_FUNCTIONALITY_WATER_LINES]);
         })
         ->where('estado', 1)->get();
     }

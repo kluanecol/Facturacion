@@ -6,7 +6,7 @@ use Session;
 class GeneralVariables
 {
 
-    //PARAMETRICS
+    //INVOICE PARAMETRICS
     CONST ID_PARAMETRIC_CURRENCY = 1;
     CONST ID_PARAMETRIC_MEASURES = 2;
     CONST ID_PARAMETRIC_OTHER_CHARGES = 3;
@@ -14,6 +14,10 @@ class GeneralVariables
     //CONFIGURATION SUBTYPES
     CONST ID_CONFIGURATION_CURRENCY = 4;
     CONST ID_CONFIGURATION_SECOND_CURRENCY = 6;
+
+    //PARAMETRICS FUNCTIONALITY
+    CONST ID_VAL_FUNCTIONALITY_SURFACE_MACHINE = 1;
+    CONST ID_VAL_FUNCTIONALITY_WATER_LINES = 7;
 
     public static function yearsArray(){
 
@@ -33,8 +37,4 @@ class GeneralVariables
         return Session::get('locale');
     }
 
-
-    public static function getCountryNamesByIds($ids){
-
-    }
 }

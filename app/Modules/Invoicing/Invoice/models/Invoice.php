@@ -13,13 +13,15 @@ class Invoice extends Model
     protected $primaryKey= 'id';
 
     protected $fillable = [
+        'fk_id_contract',
         'fk_id_user',
-        'fk_id_project',
-        'fk_id_country',
-        'fk_id_client',
-        'initial_date',
-        'end_date',
-        'year'
+        'initial_period',
+        'end_period',
+        'code', 255,
+        'state',
+        'version',
+        'json_fk_machines',
+        'json_fk_pits'
     ];
 
     public $timestamps = true;
