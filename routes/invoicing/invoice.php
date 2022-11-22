@@ -29,6 +29,10 @@
                 'uses' => 'InvoiceController@delete'
             ]);
 
+            Route::post('/getPitsBySearch', [
+                'as' => 'invoice.getPitsBySearch',
+                'uses' => 'InvoiceController@getPitsBySearch'
+            ]);
 
         });
 

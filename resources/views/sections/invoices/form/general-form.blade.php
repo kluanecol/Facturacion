@@ -49,6 +49,12 @@
                 </div>
             </div>
 
+            <div class="col-md-12 col-xs-12">
+                <button type="button" class="btn btn-bordered btn-xs btn-outline-info btn-search-pits" id="btn-search-pits">
+                    {!! trans('buttons.buscarPozos') !!}  <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="json_fk_pits">{!! trans('labels.maquinas') !!}(*):</label>

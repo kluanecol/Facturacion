@@ -2,9 +2,11 @@
 
 var vURL = null;
 var vURL_INVOICING = null;
-let reload = false;
-
-
+let id_machines = [];
+let initial_date = null;
+let end_date = null;
+let id_pits = [];
+let id_contract = null;
 
 jQuery(function() {
 
@@ -27,6 +29,16 @@ jQuery(function() {
         getInvoiceForm($('#id_contract').val());
     });
 
+    $(document).on('click','#btn-search-pits',function(){
+        domData = getFormFields();
+
+        if (id_machines != '' && initial_date != '' && end_date != '') {
+            getPits(domData);
+        }else{
+            toastr.warning($('#msg-cant-filter-subtitle').val(), $('#msg-cant-filter-title').val()+'!');
+        }
+    });
+
     $(document).on('click','#btn-save-configuration',function(){
 
         if ($('#form-configuration').valid()) {
@@ -41,10 +53,6 @@ jQuery(function() {
 
     $(document).on('click','.delete-configuration',function(){
         deleteConfiguration($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
-    });
-
-    $(document).on('change','#fk_id_consumable_group',function(){
-        getConsumables($(this).val());
     });
 
 });
@@ -114,17 +122,29 @@ function getInvoiceForm(id_contract){
     });
 }
 
-function getConsumables(id_group){
+function getFormFields() {
+    id_machines = $('#json_fk_machines').val();
+    initial_date = $('#initial_date').val();
+    end_date = $('#end_date').val();
+    id_contract = $('#fk_id_contract').val();
+
+    var domData = {
+        'id_machines' : id_machines,
+        'initial_date' : initial_date,
+        'end_date' : end_date,
+        'id_contract' : id_contract
+    };
+
+    return domData;
+}
+
+function getPits(domData){
     $('body').loading({
         message: $('#msg-loading').val()
     });
 
-    var domData = {
-        id_group : id_group
-    }
-
     $.post(
-        vURL+"/production/consumable/getByGroupId",
+        vURL+"/invoicing/invoice/getPitsBySearch",
         domData,
         function(data)
         {
@@ -133,8 +153,8 @@ function getConsumables(id_group){
             if (data.success) {
                 var options = "";
 
-                $.each(data.consumables, function(i, product) {
-                    options += "<option value='" + i + "' >" + product + "</option>";
+                $.each(data.pits, function(i, pits) {
+                    options += "<option value='" + i + "' >" + pits + "</option>";
                 });
 
                 $("#fk_id_product").html(options);
@@ -310,60 +330,6 @@ function deleteConfiguration(id_configuration, id_contract_configuration) {
     })
 
 }
-
-
-function reloadConfigurationContainer(id_configuration){
-    reload = false;
-
-    var domData = {
-        id_configuration : id_configuration,
-        id_contract : $('#id_contract').val()
-    }
-
-    $.post(
-        vURL+"/invoicing/contractConfiguration/getList",
-        domData,
-        function(data)
-        {
-            if (data.success) {
-
-                $('#container-configuration-'+data.id_configuration).html(data.html);
-                refreshInputs();
-            } else {
-                Swal.fire({
-                    type: 'error',
-                    title: $('#msg-something-went-wrong').val(),
-                    text: $('#msg-error-getting-data').val(),
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            }
-        }
-    ).fail(function(data) {
-        if(data.status == 419){
-            Swal.fire({
-                type: 'error',
-                title: $('#msg-something-went-wrong').val(),
-                text: $('#msg-session-expired').val(),
-                showConfirmButton: false,
-                timer: 2000
-            }).then(()=>{
-                location.reload();
-            });
-
-        }else if(data.status == 500){
-            Swal.fire({
-                type: 'error',
-                title: $('#msg-something-went-wrong').val(),
-                text: $('#msg-contact-support').val(),
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }
-    });
-}
-
-
 
 function refreshInputs(){
     $('[data-toggle="tooltip"]').tooltip();

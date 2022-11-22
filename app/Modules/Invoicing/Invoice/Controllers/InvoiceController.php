@@ -52,6 +52,10 @@ class InvoiceController extends Controller
 
     }
 
+    public function getPitsBySearch(Request $request){
+        dd($request->all());
+    }
+
     public function save(Request $request){
         $result = $this->invoiceRepo->save($request);
 
@@ -108,24 +112,6 @@ class InvoiceController extends Controller
         }
         return response()->json($messages);
 
-    }
-
-    public function configuration($idInvoice){
-        $data=[];
-        $percentage = 0;
-
-        $contractConfigurations = $this->contractConfigurationRepo->getInvoiceConfigurationsByIdInvoice($idInvoice)->groupBy('fk_id_configuration_subtype');
-        $globalCurrentSettings =  $this->configurationSubtypeRepo->getActive();
-
-        if ($globalCurrentSettings->count() > 0) {
-            $percentage = ($contractConfigurations->count()*100)/$globalCurrentSettings->count();
-        }
-
-        $data['contract'] = $this->invoiceRepo->getById($idInvoice);
-        $data['configurationSubtypes'] = $this->configurationSubtypeRepo->getActive();
-        $data['percentage'] = round($percentage, 1);
-
-        return view('sections.contracts.configurations.index', $data);
     }
 
 }
