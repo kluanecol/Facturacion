@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Modules\Invoicing\Invoice\Repository\InvoiceInterface;
 use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 use App\Modules\Production\MachineProject\Repository\MachineProjectInterface;
+use App\Modules\Production\DailyRecord\Repository\DailyRecordInterface;
+use App\Modules\Production\OperationRecord\Repository\OperationRecordInterface;
 
 use Session;
 
@@ -16,16 +18,22 @@ class InvoiceController extends Controller
     private $invoiceRepo;
     protected $machineProjectRepo;
     private $contractRepo;
+    private $dailyRecordRepo;
+    private $operationRecordRepo;
 
     function __construct(
             InvoiceInterface $invoiceRepo,
             MachineProjectInterface $machineProjectRepo,
-            ContractInterface $contractRepo
+            ContractInterface $contractRepo,
+            DailyRecordInterface $dailyRecordRepo,
+            OperationRecordInterface  $operationRecordRepo
         )
         {
             $this->invoiceRepo = $invoiceRepo;
             $this->machineProjectRepo = $machineProjectRepo;
             $this->contractRepo = $contractRepo;
+            $this->dailyRecordRepo = $dailyRecordRepo;
+            $this->operationRecordRepo = $operationRecordRepo;
         }
 
     public function index($idContract){
@@ -53,7 +61,11 @@ class InvoiceController extends Controller
     }
 
     public function getPitsBySearch(Request $request){
-        dd($request->all());
+        $contract = $this->contractRepo->getById($request->id_contract);
+        $dailyRecordsIds = $this->dailyRecordRepo->getIdsByMachinesAndDate($request, $contract->fk_id_project);
+        $pits = $this->operationRecordRepo->getPitsByDailyRecordsIds($dailyRecordsIds);
+
+        return response()->json(['success' => true, 'pits'=> $pits]);
     }
 
     public function save(Request $request){

@@ -57,7 +57,7 @@
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
-                    <label for="json_fk_pits">{!! trans('labels.maquinas') !!}(*):</label>
+                    <label for="json_fk_pits">{!! trans('labels.pozos') !!}(*):</label>
                     {!!Form::select('json_fk_pits[]', isset($pits) ? $pits : [], (isset($invoice) ? $invoice->json_fk_pits : null) ,[
                         'class'=>'form-control selectpicker json_fk_pits is_required',
                         'data-live-search'=>'true',

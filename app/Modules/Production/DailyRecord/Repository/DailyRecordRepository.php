@@ -10,5 +10,13 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 
 class DailyRecordRepository implements DailyRecordInterface{
 
+    public function getIdsByMachinesAndDate($request, $projectId){
+
+        return DailyRecord::where('id_proyecto', $projectId)
+            ->whereIn('id_maquina', $request->id_machines)
+            ->whereBetween('fecha_registro', [$request->initial_date, $request->end_date])
+            ->where('state',1)
+            ->pluck('id');
+    }
 
 }

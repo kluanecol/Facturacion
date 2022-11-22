@@ -139,6 +139,7 @@ function getFormFields() {
 }
 
 function getPits(domData){
+
     $('body').loading({
         message: $('#msg-loading').val()
     });
@@ -152,24 +153,24 @@ function getPits(domData){
 
             if (data.success) {
                 var options = "";
+                console.log(data.pits.length);
 
-                $.each(data.pits, function(i, pits) {
-                    options += "<option value='" + i + "' >" + pits + "</option>";
-                });
+                if (data.pits.length > 0) {
+                    $.each(data.pits, function(i, pit) {
+                        options += "<option value='" + pit + "' >" + pit + "</option>";
+                    });
 
-                $("#fk_id_product").html(options);
-                $(".selectpicker").selectpicker('refresh');
+                    $("#json_fk_pits").html(options);
+                    $(".selectpicker").selectpicker('refresh');
 
-                refreshInputs();
+                    refreshInputs();
+                }else{
+                    toastr.info($('#msg-error-getting-data').val(), "NO HAY POZOS EN ESTE PERIODO DE TIEMPO");
+                }
+
             } else {
                 $('body').loading('stop');
-                Swal.fire({
-                    type: 'error',
-                    title: $('#msg-something-went-wrong').val(),
-                    text: $('#msg-error-getting-data').val(),
-                    showConfirmButton: false,
-                    timer: 2000
-                })
+                toastr.error($('#msg-error-getting-data').val(), $('#msg-something-went-wrong').val());
             }
         }
     ).fail(function(data) {
