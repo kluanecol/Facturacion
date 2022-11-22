@@ -3,29 +3,28 @@
 namespace App\Modules\Invoicing\Invoice\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Admin\Client\Repository\ClientInterface;
-use App\Modules\Admin\Project\Repository\ProjectInterface;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use Illuminate\Http\Request;
 use App\Modules\Invoicing\Invoice\Repository\InvoiceInterface;
 use App\Modules\Invoicing\Contract\Repository\ContractInterface;
+use App\Modules\Production\MachineProject\Repository\MachineProjectInterface;
 
 use Session;
 
 class InvoiceController extends Controller
 {
     private $invoiceRepo;
-    protected $projectRepo;
+    protected $machineProjectRepo;
     private $contractRepo;
 
     function __construct(
             InvoiceInterface $invoiceRepo,
-            ProjectInterface $projectRepo,
+            MachineProjectInterface $machineProjectRepo,
             ContractInterface $contractRepo
         )
         {
             $this->invoiceRepo = $invoiceRepo;
-            $this->projectRepo = $projectRepo;
+            $this->machineProjectRepo = $machineProjectRepo;
             $this->contractRepo = $contractRepo;
         }
 
@@ -43,16 +42,12 @@ class InvoiceController extends Controller
         return $this->invoiceRepo->dataTableInvoices($request);
     }
 
-    public function getInvoiceForm(Request $request){
-        if (isset($request->id_contract)) {
-            $data['contract'] = $this->invoiceRepo->getById($request->id_contract);
-        }
+    public function getGeneralForm(Request $request){
+        $data['contract'] = $this->contractRepo->getById($request->id_contract);
+        $data['machines'] = $this->machineProjectRepo->getByActiveByProjectId( $data['contract']->fk_id_project, ['machine'])->pluck('machine.code_name','machine.id');
 
-        $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
-        $data['clients'] = $this->clientRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
-        $data['years'] = GeneralVariables::yearsArray();
 
-        $returnHTML = view('sections.contracts.form.form', $data)->render();
+        $returnHTML = view('sections.invoices.form.general-form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
 
     }
