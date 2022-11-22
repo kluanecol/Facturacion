@@ -451,7 +451,7 @@ function refreshInvoicesTable() {
         language: {
             "url": vURL+"/js/general/datatables/"+current_lang+".json"
         },
-        order: [[2, 'asc']],
+        order: [[2, 'desc']],
         rowGroup: {
             startRender: null,
             endRender: function ( rows, group ) {
@@ -482,7 +482,7 @@ function refreshInvoicesTable() {
                 extend: 'excel',
             }
             ],
-        pageLength: 8,
+
     });
 }
 
