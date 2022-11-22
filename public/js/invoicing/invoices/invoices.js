@@ -3,15 +3,18 @@
 var vURL = null;
 var vURL_INVOICING = null;
 let id_machines = [];
-let initial_date = null;
-let end_date = null;
+let initial_period = null;
+let end_period = null;
 let id_pits = [];
 let id_contract = null;
+let table_invoices = null;
 
 jQuery(function() {
 
 	vURL = $('#main-url').data('url');
     vURL_INVOICING = $('#main-url-init').data('url');
+
+    refreshInvoicesTable();
 
     toastr.options = {
         "closeButton": true,
@@ -32,17 +35,17 @@ jQuery(function() {
     $(document).on('click','#btn-search-pits',function(){
         domData = getFormFields();
 
-        if (id_machines != '' && initial_date != '' && end_date != '') {
+        if (id_machines != '' && initial_period != '' && end_period != '') {
             getPits(domData);
         }else{
             toastr.warning($('#msg-cant-filter-subtitle').val(), $('#msg-cant-filter-title').val()+'!');
         }
     });
 
-    $(document).on('click','#btn-save-configuration',function(){
+    $(document).on('click','#btn-save-invoice',function(){
 
-        if ($('#form-configuration').valid()) {
-            saveConfiguration();
+        if ($('#form-invoice').valid()) {
+            saveInvoice('form-invoice');
         }
 
     });
@@ -124,14 +127,14 @@ function getInvoiceForm(id_contract){
 
 function getFormFields() {
     id_machines = $('#json_fk_machines').val();
-    initial_date = $('#initial_date').val();
-    end_date = $('#end_date').val();
+    initial_period = $('#initial_period').val();
+    end_period = $('#end_period').val();
     id_contract = $('#fk_id_contract').val();
 
     var domData = {
         'id_machines' : id_machines,
-        'initial_date' : initial_date,
-        'end_date' : end_date,
+        'initial_period' : initial_period,
+        'end_period' : end_period,
         'id_contract' : id_contract
     };
 
@@ -198,9 +201,9 @@ function getPits(domData){
     });
 }
 
-function saveConfiguration() {
+function saveInvoice(str_id_form) {
 
-    let myForm = document.getElementById('form-configuration');
+    let myForm = document.getElementById(str_id_form);
     var domData = new FormData(myForm);
 
     $('body').loading({
@@ -208,8 +211,7 @@ function saveConfiguration() {
     });
 
     $.ajax({
-
-        url: vURL+'/invoicing/contractConfiguration/save',
+        url: vURL+'/invoicing/invoice/save',
         type: 'POST',
         dataType: 'json',
         processData: false,
@@ -221,9 +223,7 @@ function saveConfiguration() {
             if (data.status == 200) {
 
                 toastr.success(data.message, data.title);
-
-                reloadConfigurationContainer(data.id_configuration);
-                reloadProgressBar();
+                table_invoices.ajax.reload();
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
@@ -421,25 +421,56 @@ function validateForm(id,rules,custom_messages){
     }
 }
 
-function refreshTable(string_id_table) {
-    table_contracts = $('#'+string_id_table).DataTable({
+function refreshInvoicesTable() {
+
+    var domData = {
+        'id_contract' : $('#id_contract').val()
+    };
+    $('#example').DataTable( {
+        order: [[2, 'asc']],
+        rowGroup: {
+            startRender: null,
+            endRender: function ( rows, group ) {
+                return group +' ('+rows.count()+')';
+            },
+            dataSrc: 2
+        }
+    } );
+    table_invoices = $('#table-invoices').DataTable({
         language: {
             "url": vURL+"/js/general/datatables/"+current_lang+".json"
         },
+        order: [[2, 'asc']],
+        rowGroup: {
+            startRender: null,
+            endRender: function ( rows, group ) {
+                return group +' ('+rows.count()+')';
+            },
+            dataSrc: 1
+        },
         processing: true,
         serverSide: false,
-        responsive: false,
         "destroy": true,
-        scrollX: 400,
-        scrollY: 380,
-        scrollCollapse: true,
+        "ajax": {
+            "url": vURL+"/invoicing/invoice/search",
+            "type": 'POST',
+            "data": domData
+        },
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'initial_period', name: 'initial_period'},
+            {data: 'end_period', name: 'end_period'},
+            {data: 'versions', name: 'versions'},
+            {data: 'options', name: 'options'}
+        ],
         dom: 'Bfrtip',
             buttons: [
             {
                 extend: 'excel',
             }
             ],
-        pageLength: 15,
+        pageLength: 8,
     });
 }
 

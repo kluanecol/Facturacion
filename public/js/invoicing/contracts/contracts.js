@@ -262,7 +262,7 @@ function deleteContract(id_contract) {
 }
 
 
-function refreshContractsTable(datos) {
+function refreshContractsTable(postData) {
     table_contracts = $('#table-contracts').DataTable({
         language: {
             "url": vURL+"/js/general/datatables/"+current_lang+".json"
@@ -273,7 +273,7 @@ function refreshContractsTable(datos) {
         "ajax": {
             "url": vURL+"/invoicing/contract/search",
             "type": 'POST',
-            "data": datos
+            "data": postData
         },
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         columns: [

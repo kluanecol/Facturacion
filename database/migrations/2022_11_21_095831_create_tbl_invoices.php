@@ -25,7 +25,7 @@ class CreateTblInvoices extends Migration
             $table->date('initial_period');
             $table->date('end_period');
 
-            $table->string('code', 255);
+            $table->string('code', 255)->nullable();
             $table->smallInteger('state')->nullable();
             $table->smallInteger('version')->nullable();
             $table->json('json_fk_machines')->nullable();

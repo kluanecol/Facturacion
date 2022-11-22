@@ -1,8 +1,9 @@
 <div id="main_contenido_formulario">
-    {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-contract','enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice','enctype' => 'multipart/form-data']) !!}
         <div class="row">
             {!! Form::hidden('id', (isset($invoice) ? $invoice->id : null), ['id'=>'id_invoice']) !!}
             {!! Form::hidden('fk_id_contract', (isset($contract) ? $contract->id : null), ['id'=>'fk_id_contract']) !!}
+            {!! Form::hidden('state', 1, ['id'=>'state']) !!}
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
@@ -25,10 +26,10 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
-                    <label for="initial_date">{!! trans('labels.fechaInicial') !!}(*):</label>
-                        {!! Form::date('initial_date',(isset($invoice) ? $invoice->initial_date : null), [
+                    <label for="initial_period">{!! trans('labels.fechaInicialPeriodoFacturacion') !!}(*):</label>
+                        {!! Form::date('initial_period',(isset($invoice) ? $invoice->initial_period : null), [
                             'class' => 'form-control is_required',
-                            'id' => 'initial_date',
+                            'id' => 'initial_period',
 
                             'title'=>'',
                         ]) !!}
@@ -38,10 +39,10 @@
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
-                    <label for="end_date">{!! trans('labels.fechaFinal') !!}(*):</label>
-                        {!! Form::date('end_date', (isset($invoice) ? $invoice->end_date : null), [
+                    <label for="end_period">{!! trans('labels.fechaFinalPeriodoFacturacion') !!}(*):</label>
+                        {!! Form::date('end_period', (isset($invoice) ? $invoice->end_period : null), [
                             'class' => 'form-control is_required',
-                            'id' => 'end_date',
+                            'id' => 'end_period',
 
                             'title'=>'',
                         ]) !!}

@@ -14,7 +14,7 @@ class DailyRecordRepository implements DailyRecordInterface{
 
         return DailyRecord::where('id_proyecto', $projectId)
             ->whereIn('id_maquina', $request->id_machines)
-            ->whereBetween('fecha_registro', [$request->initial_date, $request->end_date])
+            ->whereBetween('fecha_registro', [$request->initial_period, $request->end_period])
             ->where('state',1)
             ->pluck('id');
     }

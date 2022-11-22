@@ -12,24 +12,19 @@ class InvoiceRepository implements InvoiceInterface{
 
     public function dataTableInvoices($request){
 
-        $contracts=[];
+        $invoices=[];
         $table=[];
 
-        if (isset($request->id_project) && isset($request->year)) {
-            $contracts = $this->getByProjectYearAndClient($request->id_project, $request->year, $request->id_client);
-        }
+        $invoices = $this->getByIdContract($request->id_contract);
 
-
-        foreach ($contracts as $contract) {
+        foreach ($invoices as $invoice) {
 
             $table[] = [
-                'id' => $contract->id,
-                'project_name' => $contract->project->nombre_corto,
-                'client_name' => $contract->client->nombre_cliente,
-                'initial_date' => $contract->initial_date,
-                'end_date' => $contract->end_date,
-                'year' => $contract->year,
-                'options' => view('sections.contracts.components.table-options', ['contract' => $contract])->render()
+                'id' => $invoice->id,
+                'initial_period' => $invoice->initial_period,
+                'end_period' => $invoice->end_period,
+                'versions' => "",
+                'options' => view('sections.contracts.components.table-options', ['contract' => $invoice])->render()
             ];
 
 
@@ -52,16 +47,17 @@ class InvoiceRepository implements InvoiceInterface{
 
         try {
             if (isset($request->id)) {
-                $contract = Invoice::find($request->id);
+                $invoice = Invoice::find($request->id);
             }else{
-                $contract = new Invoice();
+                $invoice = new Invoice();
             }
 
-           $data = $request->only($contract->getFillable());
+           $data = $request->only($invoice->getFillable());
            $data['fk_id_user'] = Auth::user()->id;
-           $data['fk_id_country'] = GeneralVariables::getCurrentCountryId();
+           $data['json_fk_machines'] = json_encode($data['json_fk_machines']);
+           $data['json_fk_pits'] = json_encode($data['json_fk_pits']);
 
-           if ($contract->fill($data)->save()) {
+           if ($invoice->fill($data)->save()) {
                 $result = 200;
             }else{
                 $result = 400;
