@@ -9,11 +9,9 @@
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/configuration_collapse.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/card.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/range_picker.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/radio_switch.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ asset('css/general_tooltip.css') }}" rel="stylesheet" type="text/css" />
 @section('content')
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
         <div id="main-url-init" data-url="{{URL::to('/invoicing')}}"></div>
@@ -52,7 +50,7 @@
 
 @push('plugins')
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/invoices/invoices.js?v=2022-11-23') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/invoices/invoices.js?v=2022-11-24') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

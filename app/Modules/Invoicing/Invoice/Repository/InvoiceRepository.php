@@ -28,19 +28,19 @@ class InvoiceRepository implements InvoiceInterface{
 
             $table[] = [
                 'id' => $invoice->id,
-                'period' =>trans('invoice.periodoDeFacturacion').": ".$invoice->period,
+                'period' =>trans('invoices.periodoDeFacturacion').": ".$invoice->period,
                 'code' => "FAC-".$invoice->id,
-                'version' => "",
-                'state' => $invoice->state,
+                'version' => "1",
+                'state' => view('sections.invoices.components.badge-invoice-state', ['state' => $invoice->state])->render(),
                 'machines' => $this->machineRepository->getByIdsArray($invoice->json_fk_machines)->sortBy('code_name')->pluck('code_name')->implode(','),
                 'pits' => $invoice->json_fk_pits,
-                'options' => view('sections.contracts.components.table-options', ['contract' => $invoice])->render()
+                'options' => view('sections.invoices.components.table-options', ['invoice' => $invoice])->render()
             ];
 
 
         }
 
-        return Datatables::of($table)->addIndexColumn()->rawColumns(['options'])->make(true);
+        return Datatables::of($table)->addIndexColumn()->rawColumns(['state','options'])->make(true);
     }
 
     public function getById($id, $relations = []){

@@ -461,6 +461,7 @@ function refreshInvoicesTable() {
         },
         processing: true,
         serverSide: false,
+        orderable: false,
         "destroy": true,
         "ajax": {
             "url": vURL+"/invoicing/invoice/search",
