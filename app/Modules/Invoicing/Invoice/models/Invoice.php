@@ -24,6 +24,11 @@ class Invoice extends Model
         'json_fk_pits'
     ];
 
+    protected $casts = [
+        'json_fk_machines' => 'array',
+        'json_fk_pits' => 'array'
+    ];
+
     public $timestamps = true;
 
     public function getPeriodAttribute()

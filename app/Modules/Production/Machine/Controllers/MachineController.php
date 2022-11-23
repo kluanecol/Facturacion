@@ -11,11 +11,9 @@ class MachineController extends Controller
 {
     protected $machineRepository;
 
-    function __construct(
-            MachineInterface $machineRepository
-        )
-        {
-            $this->machineRepository = $machineRepository;
+    function __construct(MachineInterface $machineRepository)
+    {
+        $this->machineRepository = $machineRepository;
     }
 
 }

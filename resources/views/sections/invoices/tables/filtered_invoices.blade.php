@@ -13,6 +13,8 @@
         <th class="text-center bg-secondary"><strong>{!! trans('labels.periodoDeFacturacion') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.codigo') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.version') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.maquinas') !!}</strong></th>
+        <th class="text-center"><strong>{!! trans('labels.pozos') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.estado') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
     </thead>

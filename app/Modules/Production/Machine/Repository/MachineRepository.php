@@ -10,5 +10,8 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 
 class MachineRepository implements MachineInterface{
 
+    public function getByIdsArray($machinesIds){
+        return Machine::whereIn('id', $machinesIds)->get();
+    }
 
 }

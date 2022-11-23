@@ -473,6 +473,8 @@ function refreshInvoicesTable() {
             {data: 'period', name: 'period'},
             {data: 'code', name: 'code'},
             {data: 'version', name: 'version'},
+            {data: 'machines', name: 'machines'},
+            {data: 'pits', name: 'pits'},
             {data: 'state', name: 'state'},
             {data: 'options', name: 'options'}
         ],

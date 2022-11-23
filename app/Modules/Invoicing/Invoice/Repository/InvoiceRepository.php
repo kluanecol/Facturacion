@@ -6,9 +6,16 @@ use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
 use App\Modules\Invoicing\Invoice\Models\Invoice;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use App\Modules\Production\Machine\Repository\MachineRepository;
 
 class InvoiceRepository implements InvoiceInterface{
+
+    protected $machineRepository;
+
+    function __construct()
+    {
+        $this->machineRepository = new MachineRepository();
+    }
 
     public function dataTableInvoices($request){
 
@@ -22,9 +29,11 @@ class InvoiceRepository implements InvoiceInterface{
             $table[] = [
                 'id' => $invoice->id,
                 'period' =>trans('invoice.periodoDeFacturacion').": ".$invoice->period,
-                'code' => "",
+                'code' => "FAC-".$invoice->id,
                 'version' => "",
-                'state' => "",
+                'state' => $invoice->state,
+                'machines' => $this->machineRepository->getByIdsArray($invoice->json_fk_machines)->sortBy('code_name')->pluck('code_name')->implode(','),
+                'pits' => $invoice->json_fk_pits,
                 'options' => view('sections.contracts.components.table-options', ['contract' => $invoice])->render()
             ];
 
