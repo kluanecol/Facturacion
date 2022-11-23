@@ -28,7 +28,7 @@ class InvoiceRepository implements InvoiceInterface{
 
             $table[] = [
                 'id' => $invoice->id,
-                'period' =>trans('invoices.periodoDeFacturacion').": ".$invoice->period,
+                'period' =>view('sections.invoices.components.period-header', ['invoice' => $invoice])->render(),
                 'code' => "FAC-".$invoice->id,
                 'version' => "1",
                 'state' => view('sections.invoices.components.badge-invoice-state', ['state' => $invoice->state])->render(),
@@ -40,7 +40,7 @@ class InvoiceRepository implements InvoiceInterface{
 
         }
 
-        return Datatables::of($table)->addIndexColumn()->rawColumns(['state','options'])->make(true);
+        return Datatables::of($table)->addIndexColumn()->rawColumns(['period','state','options'])->make(true);
     }
 
     public function getById($id, $relations = []){
@@ -64,8 +64,8 @@ class InvoiceRepository implements InvoiceInterface{
 
            $data = $request->only($invoice->getFillable());
            $data['fk_id_user'] = Auth::user()->id;
-           $data['json_fk_machines'] = json_encode($data['json_fk_machines']);
-           $data['json_fk_pits'] = json_encode($data['json_fk_pits']);
+           $data['json_fk_machines'] = $data['json_fk_machines'];
+           $data['json_fk_pits'] = $data['json_fk_pits'];
 
            if ($invoice->fill($data)->save()) {
                 $result = 200;
