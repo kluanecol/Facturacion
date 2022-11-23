@@ -126,4 +126,7 @@ class InvoiceController extends Controller
 
     }
 
+    public function generatePreview($idInvoice){
+        dd($idInvoice);
+    }
 }

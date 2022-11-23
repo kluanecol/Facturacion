@@ -34,6 +34,11 @@
                 'uses' => 'InvoiceController@getPitsBySearch'
             ]);
 
+            Route::get('/generatePreview/{idInvoice}', [
+                'as' => 'invoice.generatePreview',
+                'uses' => 'InvoiceController@generatePreview'
+            ]);
+
         });
 
     });
