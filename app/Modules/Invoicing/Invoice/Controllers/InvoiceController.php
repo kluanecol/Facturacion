@@ -10,8 +10,8 @@ use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 use App\Modules\Production\MachineProject\Repository\MachineProjectInterface;
 use App\Modules\Production\DailyRecord\Repository\DailyRecordInterface;
 use App\Modules\Production\OperationRecord\Repository\OperationRecordInterface;
+use Maatwebsite\Excel\Facades\Excel;
 
-use Session;
 
 class InvoiceController extends Controller
 {
@@ -127,6 +127,21 @@ class InvoiceController extends Controller
     }
 
     public function generatePreview($idInvoice){
-        dd($idInvoice);
+
+        $invoice = $this->invoiceRepo->getById($idInvoice, ['contract']);
+        $contract = $invoice->contract;
+        $dailyRecords = $this->dailyRecordRepo->getIdsByInvoiceObjectAndProjectId($invoice, $contract->fk_id_project);
+
+        dd($dailyRecords);
+
+        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) {
+
+            $clonedWorksheet = clone $file->getSheet(0);
+            $clonedWorksheet->setTitle('Copy of Worksheet 1');
+
+            $clonedWorksheet->getRowDimension(24)->setVisible(false);
+
+            $file->addSheet($clonedWorksheet);
+        })->export('xlsx');
     }
 }

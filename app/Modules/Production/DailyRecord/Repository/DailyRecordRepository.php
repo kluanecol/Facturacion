@@ -19,4 +19,13 @@ class DailyRecordRepository implements DailyRecordInterface{
             ->pluck('id');
     }
 
+    public function getIdsByInvoiceObjectAndProjectId($invoice, $projectId){
+
+        return DailyRecord::where('id_proyecto', $projectId)
+            ->whereIn('id_maquina', $invoice->json_fk_machines)
+            ->whereBetween('fecha_registro', [$invoice->initial_period, $invoice->end_period])
+            ->where('state',1)
+            ->get();
+    }
+
 }

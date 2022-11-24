@@ -4,6 +4,7 @@ namespace App\Modules\Invoicing\Invoice\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Invoicing\Contract\Models\contract;
 
 class Invoice extends Model
 {
@@ -17,7 +18,7 @@ class Invoice extends Model
         'fk_id_user',
         'initial_period',
         'end_period',
-        'code', 255,
+        'code',
         'state',
         'version',
         'json_fk_machines',
@@ -30,6 +31,12 @@ class Invoice extends Model
     ];
 
     public $timestamps = true;
+
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'fk_id_contract','id');
+    }
 
     public function getPeriodAttribute()
     {

@@ -5,6 +5,7 @@ namespace App\Modules\Production\OperationRecord\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Invoicing\Collective\Configuration\GeneralVariables;
+use App\Modules\Production\DailyRecord\Models\DailyRecord;
 
 class OperationRecord extends Model
 {
@@ -15,4 +16,10 @@ class OperationRecord extends Model
     {
         $this->connection = config('connections.rhomb');
     }
+
+    public function dailyRecord()
+    {
+        return $this->belongsTo(DailyRecord::class, 'id_prod_registro_diario');
+    }
+
 }
