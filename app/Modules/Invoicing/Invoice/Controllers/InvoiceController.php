@@ -10,23 +10,26 @@ use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 use App\Modules\Production\MachineProject\Repository\MachineProjectInterface;
 use App\Modules\Production\DailyRecord\Repository\DailyRecordInterface;
 use App\Modules\Production\OperationRecord\Repository\OperationRecordInterface;
+use App\Modules\Production\Machine\Repository\MachineInterface;
 use Maatwebsite\Excel\Facades\Excel;
 
 
 class InvoiceController extends Controller
 {
     private $invoiceRepo;
-    protected $machineProjectRepo;
+    private $machineProjectRepo;
     private $contractRepo;
     private $dailyRecordRepo;
     private $operationRecordRepo;
+    private $machineRepo;
 
     function __construct(
             InvoiceInterface $invoiceRepo,
             MachineProjectInterface $machineProjectRepo,
             ContractInterface $contractRepo,
             DailyRecordInterface $dailyRecordRepo,
-            OperationRecordInterface  $operationRecordRepo
+            OperationRecordInterface  $operationRecordRepo,
+            MachineInterface $machineRepo
         )
         {
             $this->invoiceRepo = $invoiceRepo;
@@ -34,6 +37,7 @@ class InvoiceController extends Controller
             $this->contractRepo = $contractRepo;
             $this->dailyRecordRepo = $dailyRecordRepo;
             $this->operationRecordRepo = $operationRecordRepo;
+            $this->machineRepo = $machineRepo;
         }
 
     public function index($idContract){
@@ -129,10 +133,13 @@ class InvoiceController extends Controller
     public function generatePreview($idInvoice){
 
         $invoice = $this->invoiceRepo->getById($idInvoice, ['contract']);
-        $contract = $invoice->contract;
+        $contract = $invoice->contract->load('client','project');
+        $machines = $this->machineRepo->getByIdsArray($invoice->json_fk_machines);
         $dailyRecords = $this->dailyRecordRepo->getIdsByInvoiceObjectAndProjectId($invoice, $contract->fk_id_project);
 
-        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($invoice, $dailyRecords) {
+        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines) {
+
+            $file->setTitle('INVOICE-'.$contract->project->name."(".$invoice->initial_period."-".$invoice->end_period.")");
 
             foreach ($invoice->json_fk_machines as $key => $machineId) {
 
@@ -145,12 +152,21 @@ class InvoiceController extends Controller
 
                         if ($machinePitOperation->count() > 0) {
 
-                            $clonedWorksheet = clone $file->getSheet(0);
-                            $clonedWorksheet->setTitle($machineId." - ".$pitName);
+                            $machine = $machines->where('id', $machineId)->first();
 
-                            $clonedWorksheet->getRowDimension(24)->setVisible(false);
+                            $workSheet = clone $file->getSheet(0);
+                            $workSheet->setTitle($machine->name." - ".$pitName);
 
-                            $file->addSheet($clonedWorksheet);
+                            $workSheet->setCellValue('I4',strtoupper($machine->name));
+                            $workSheet->setCellValue('N3', strtoupper($contract->client->name));
+                            $workSheet->setCellValue('N4', strtoupper($contract->project->name));
+                            $workSheet->setCellValue('N6', strtoupper($contract->project->location));
+                            //pit data
+                            $workSheet->setCellValue('W3', strtoupper($pitName));
+
+                            //$workSheet->getRowDimension(24)->setVisible(false);
+
+                            $file->addSheet($workSheet);
                         }
 
                     }

@@ -15,4 +15,14 @@ class Project extends Model
         $this->connection = config('connections.rhomb');
     }
 
+    public function getNameAttribute()
+    {
+        return $this->nombre_corto;
+    }
+
+    public function getLocationAttribute()
+    {
+        return $this->ubicación;
+    }
+
 }

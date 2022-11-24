@@ -26,4 +26,9 @@ class Machine extends Model
     {
         return $this->codigo.' - '.$this->nombre;
     }
+
+    public function getNameAttribute()
+    {
+        return $this->nombre;
+    }
 }

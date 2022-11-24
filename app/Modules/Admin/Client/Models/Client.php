@@ -14,4 +14,9 @@ class Client extends Model
     {
         $this->connection = config('connections.rhomb');
     }
+
+    public function getNameAttribute()
+    {
+        return $this->nombre_cliente;
+    }
 }
