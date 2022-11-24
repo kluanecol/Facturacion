@@ -18,4 +18,11 @@ class OperationRecordRepository implements OperationRecordInterface{
             ->unique('hoyo')
             ->pluck('hoyo');
     }
+
+    public function getByDailyRecordsIds($dailyRecordsIds){
+        return OperationRecord::whereIn('id_prod_registro_diario', $dailyRecordsIds)
+        ->where('state',1)
+        ->get();
+    }
+
 }

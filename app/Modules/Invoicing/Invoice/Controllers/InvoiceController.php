@@ -132,16 +132,32 @@ class InvoiceController extends Controller
         $contract = $invoice->contract;
         $dailyRecords = $this->dailyRecordRepo->getIdsByInvoiceObjectAndProjectId($invoice, $contract->fk_id_project);
 
-        dd($dailyRecords);
+        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($invoice, $dailyRecords) {
 
-        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) {
+            foreach ($invoice->json_fk_machines as $key => $machineId) {
 
-            $clonedWorksheet = clone $file->getSheet(0);
-            $clonedWorksheet->setTitle('Copy of Worksheet 1');
+                $operationRecords = $this->operationRecordRepo->getByDailyRecordsIds($dailyRecords->where('id_maquina',$machineId)->pluck('id')->toArray());
 
-            $clonedWorksheet->getRowDimension(24)->setVisible(false);
+                if ($operationRecords->count() > 0) {
+                    foreach ($invoice->json_fk_pits as $key => $pitName) {
 
-            $file->addSheet($clonedWorksheet);
+                        $machinePitOperation =$operationRecords->where('hoyo', $pitName);
+
+                        if ($machinePitOperation->count() > 0) {
+
+                            $clonedWorksheet = clone $file->getSheet(0);
+                            $clonedWorksheet->setTitle($machineId." - ".$pitName);
+
+                            $clonedWorksheet->getRowDimension(24)->setVisible(false);
+
+                            $file->addSheet($clonedWorksheet);
+                        }
+
+                    }
+                }
+            }
+
+
         })->export('xlsx');
     }
 }
