@@ -11,8 +11,9 @@ use App\Modules\Production\MachineProject\Repository\MachineProjectInterface;
 use App\Modules\Production\DailyRecord\Repository\DailyRecordInterface;
 use App\Modules\Production\OperationRecord\Repository\OperationRecordInterface;
 use App\Modules\Production\Machine\Repository\MachineInterface;
+use App\Modules\Admin\GeneralParametric\Repository\GeneralParametricInterface;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Carbon\Carbon;
 
 class InvoiceController extends Controller
 {
@@ -29,7 +30,8 @@ class InvoiceController extends Controller
             ContractInterface $contractRepo,
             DailyRecordInterface $dailyRecordRepo,
             OperationRecordInterface  $operationRecordRepo,
-            MachineInterface $machineRepo
+            MachineInterface $machineRepo,
+            GeneralParametricInterface $generalParametricRepo
         )
         {
             $this->invoiceRepo = $invoiceRepo;
@@ -38,6 +40,7 @@ class InvoiceController extends Controller
             $this->dailyRecordRepo = $dailyRecordRepo;
             $this->operationRecordRepo = $operationRecordRepo;
             $this->machineRepo = $machineRepo;
+            $this->generalParametricRepo = $generalParametricRepo;
         }
 
     public function index($idContract){
@@ -143,26 +146,72 @@ class InvoiceController extends Controller
 
             foreach ($invoice->json_fk_machines as $key => $machineId) {
 
-                $operationRecords = $this->operationRecordRepo->getByDailyRecordsIds($dailyRecords->where('id_maquina',$machineId)->pluck('id')->toArray());
+                $machineDailyRecords = $dailyRecords->where('id_maquina',$machineId);
+                $operationRecords = $this->operationRecordRepo->getByDailyRecordsIds($machineDailyRecords->where('id_maquina',$machineId)->pluck('id')->toArray());
 
                 if ($operationRecords->count() > 0) {
                     foreach ($invoice->json_fk_pits as $key => $pitName) {
 
-                        $machinePitOperation =$operationRecords->where('hoyo', $pitName);
+                        $machinePitOperation = $operationRecords->where('hoyo', $pitName);
 
                         if ($machinePitOperation->count() > 0) {
 
                             $machine = $machines->where('id', $machineId)->first();
+                            $initialDate = Carbon::parse($invoice->initial_period);
+                            $finalDate = Carbon::parse($invoice->end_period);
+                            $days = $initialDate->diffInDays($finalDate);
 
                             $workSheet = clone $file->getSheet(0);
                             $workSheet->setTitle($machine->name." - ".$pitName);
 
+                            //SHEET HEADER
                             $workSheet->setCellValue('I4',strtoupper($machine->name));
                             $workSheet->setCellValue('N3', strtoupper($contract->client->name));
                             $workSheet->setCellValue('N4', strtoupper($contract->project->name));
                             $workSheet->setCellValue('N6', strtoupper($contract->project->location));
                             //pit data
                             $workSheet->setCellValue('W3', strtoupper($pitName));
+                            //Table row headers
+                            $workSheet->setCellValue('G8', $invoice->initial_period);
+
+                            //DIAMTERS
+                            $diameters = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
+
+
+
+                            //dd($initialDate, $initialDate->addDay());
+                            $row = 12;
+                            foreach ($diameters as $diameter) {
+                                $col = "D";
+                                $workSheet->setCellValue($col.$row, strtoupper($diameter->name));
+
+                                $operations = $machinePitOperation->where('id_param_diametro', $diameter->id);
+                                $dailys = $machineDailyRecords->whereIn('id',$operationRecords->pluck('id_prod_registro_diario'));
+
+                                $col = "G";
+                                for ($i=0; $i < $days ; $i++) {
+                                    $currentDayRecord = $dailys->where('fecha_registro',$initialDate->format('Y-m-d'));
+
+                                    if ($currentDayRecord->isNotEmpty()) {
+                                        //dd("gola",$currentDayRecord,$initialDate);
+                                        if($currentDayRecord->where('id_param_turno',3)->first()){
+                                            $workSheet->setCellValue($col.$row, "hola");
+                                        }
+                                        if($currentDayRecord->where('id_param_turno',4)->first()){
+                                            $workSheet->setCellValue($col.($row + 1), "hola");
+                                        }
+                                        $col++;$col++;$col++;$col++;
+                                    }
+                                    else {
+                                        $col++;$col++;$col++;$col++;
+                                        $initialDate->addDay();
+                                    }
+                                }
+
+
+                                $row = $row + 3;
+                            }
+
 
                             //$workSheet->getRowDimension(24)->setVisible(false);
 

@@ -32,4 +32,7 @@ class GeneralParametricRepository implements GeneralParametricInterface{
         ->get();
     }
 
+    public function  getByIdsArray($ids){
+        return GeneralParametric::whereIn('id',$ids)->get();
+    }
 }
