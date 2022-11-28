@@ -27,7 +27,7 @@ class ParametricSeeder extends Seeder
         //Measurement units
          DB::table('parametrics')->insert([
             'spanish_name'=>'MEDIDAS',
-            'english_name'=>'MEAURES',
+            'english_name'=>'MEASURES',
             'spanish_description'=>'',
             'english_description'=>'',
             'state'=>1,
@@ -37,7 +37,7 @@ class ParametricSeeder extends Seeder
             'fk_id_parent' => null
         ]);
 
-        //Measurement units
+        //Other charges
         DB::table('parametrics')->insert([
             'spanish_name'=>'OTROS CARGOS',
             'english_name'=>'OTHER CHARGES',

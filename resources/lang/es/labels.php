@@ -29,6 +29,14 @@ return [
     'cobroPor' => 'Cobro por',
     'unidadDeMedida' => 'Unidad de medida',
     'nombreEnEspanol' => 'Nombre en español',
-    'nombreEnIngles' => 'Nombre en inglés'
-
+    'nombreEnIngles' => 'Nombre en inglés',
+    'pais' => 'País',
+    'parametricasPadre' => 'Grupo de paramétricas',
+    'nombre' => 'Nombre',
+    'estado' => 'Estado',
+    'parametricaAuxiliar' => 'Paramétrica auxiliar',
+    'padre' => 'Grupo padre',
+    'grupoDeParametricas' => 'Grupo',
+    'activo' => 'Activo',
+    'inactivo' => 'Inactivo',
 ];

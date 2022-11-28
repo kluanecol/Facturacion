@@ -83,7 +83,7 @@ function getParametricForm(id_parametric = null){
             if (data.success) {
                 Swal.fire({
                     width:'800px',
-                    title: '<strong>'+$('#msg-contract-form-title').val()+'</strong>',
+                    title: '<strong>'+$('#msg-parametric-form-title').val()+'</strong>',
                     html:data.html,
                     showCloseButton: false,
                     showCancelButton: false,
@@ -160,7 +160,7 @@ function getOtherChargeForm(){
             if (data.success) {
                 Swal.fire({
                     width:'800px',
-                    title: '<strong>'+$('#msg-contract-config-other-charge').val()+'</strong>',
+                    title: '<strong>'+$('#msg-parametric-config-other-charge').val()+'</strong>',
                     html:data.html,
                     showCloseButton: false,
                     showCancelButton: false,

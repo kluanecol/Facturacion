@@ -29,5 +29,14 @@ return [
     'cobroPor' => 'Charge for',
     'unidadDeMedida' => 'Unit of measure',
     'nombreEnEspanol' => 'Name in spanish',
-    'nombreEnIngles' => 'Name in english'
+    'nombreEnIngles' => 'Name in english',
+    'pais' => 'Country',
+    'parametricasPadre' => 'Parametric groups',
+    'nombre' => 'Name',
+    'estado' => 'State',
+    'parametricaAuxiliar' => 'Auxiliary parametric',
+    'padre' => 'Group',
+    'grupoDeParametricas' => 'Group',
+    'activo' => 'Active',
+    'inactivo' => 'Inactive',
 ];

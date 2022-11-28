@@ -13,7 +13,7 @@
 
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
         @include('sections.validation.messages')
-        {{--@include('sections.contracts.components.messages')--}}
+        @include('sections.parametrics.components.messages')
         <div class="row">
             <div class="col-md-12">
 
@@ -44,7 +44,7 @@
 @push('plugins')
 
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/parametrics/parametric.js?v=2022-11-20') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/parametrics/parametric.js?v=2022-11-28') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
