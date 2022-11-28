@@ -22,6 +22,11 @@ class OperationRecord extends Model
         return $this->belongsTo(DailyRecord::class, 'id_prod_registro_diario');
     }
 
+    public function getAngleAttribute()
+    {
+        return $this->angulo;
+    }
+
     public function getFromAttribute()
     {
         return $this->desde;

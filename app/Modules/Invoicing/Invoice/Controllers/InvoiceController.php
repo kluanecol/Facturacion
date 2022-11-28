@@ -171,6 +171,7 @@ class InvoiceController extends Controller
                             $workSheet->setCellValue('N6', strtoupper($contract->project->location));
                             //pit data
                             $workSheet->setCellValue('W3', strtoupper($pitName));
+                            $workSheet->setCellValue('W4', strtoupper($operationRecords->first()->angle));
                             //Table row headers
                             $workSheet->setCellValue('G8',  Carbon::parse($invoice->initial_period)->format('d/m/Y'));
 
@@ -237,7 +238,7 @@ class InvoiceController extends Controller
                 }
             }
 
-            //$file->removeSheetByIndex(0);
+            $file->removeSheetByIndex(0);
 
         })->export('xlsx');
     }
