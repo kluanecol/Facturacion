@@ -22,4 +22,13 @@ class OperationRecord extends Model
         return $this->belongsTo(DailyRecord::class, 'id_prod_registro_diario');
     }
 
+    public function getFromAttribute()
+    {
+        return $this->desde;
+    }
+
+    public function getToAttribute()
+    {
+        return $this->hasta;
+    }
 }

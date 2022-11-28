@@ -176,35 +176,56 @@ class InvoiceController extends Controller
 
                             //DIAMTERS
                             $diameters = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
+                           // dd($machinePitOperation->pluck('id')->implode(',') ,$diameters);
 
 
 
-                            //dd($initialDate, $initialDate->addDay());
                             $row = 12;
                             foreach ($diameters as $diameter) {
+
                                 $col = "D";
                                 $workSheet->setCellValue($col.$row, strtoupper($diameter->name));
 
                                 $operations = $machinePitOperation->where('id_param_diametro', $diameter->id);
                                 $dailys = $machineDailyRecords->whereIn('id',$operationRecords->pluck('id_prod_registro_diario'));
 
+                                $currentDay = Carbon::parse($invoice->initial_period);
+
                                 $col = "G";
-                                for ($i=0; $i < $days ; $i++) {
-                                    $currentDayRecord = $dailys->where('fecha_registro',$initialDate->format('Y-m-d'));
+                                for ($i=0; $i <= $days ; $i++) {
+
+                                    $currentDayRecord = $dailys->where('fecha_registro',$currentDay->format('Y-m-d'));
 
                                     if ($currentDayRecord->isNotEmpty()) {
-                                        //dd("gola",$currentDayRecord,$initialDate);
-                                        if($currentDayRecord->where('id_param_turno',3)->first()){
-                                            $workSheet->setCellValue($col.$row, "hola");
+
+                                        $dayShift = $currentDayRecord->whereIn('id_param_turno',GeneralVariables::ARRAY_ID_PARAMETRIC_DAY_SHIFT)->first();
+                                        if($dayShift){
+
+                                            $dayShiftOperation = $operations->where('id_prod_registro_diario',$dayShift->id)->first();
+                                            if($dayShiftOperation){
+                                                $workSheet->setCellValue($col.$row, $dayShiftOperation->from);
+                                                $workSheet->setCellValue($col.($row + 1), $dayShiftOperation->to);
+                                            }
                                         }
-                                        if($currentDayRecord->where('id_param_turno',4)->first()){
-                                            $workSheet->setCellValue($col.($row + 1), "hola");
+
+                                        $nightShift = $currentDayRecord->where('id_param_turno',GeneralVariables::ARRAY_ID_PARAMETRIC_NIGHT_SHIFT)->first();
+                                        dd($nightShift);
+                                        $col++;$col++;
+                                        if($nightShift){
+                                            $nightShiftOperation = $operations->where('id_prod_registro_diario',$nightShift->id)->first();
+                                            if($nightShiftOperation){
+                                                $workSheet->setCellValue($col.$row, $nightShiftOperation->from);
+                                                $workSheet->setCellValue($col.($row+1), $nightShiftOperation->to);
+                                            }
                                         }
-                                        $col++;$col++;$col++;$col++;
+
+                                        $col++;$col++;
+                                        $currentDay->addDay();
                                     }
                                     else {
                                         $col++;$col++;$col++;$col++;
-                                        $initialDate->addDay();
+                                        $currentDay = $currentDay->addDay();
+
                                     }
                                 }
 
