@@ -174,12 +174,8 @@ class InvoiceController extends Controller
                             //Table row headers
                             $workSheet->setCellValue('G8', $invoice->initial_period);
 
-                            //DIAMTERS
+                            //DIAMETERS
                             $diameters = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
-                           // dd($machinePitOperation->pluck('id')->implode(',') ,$diameters);
-
-
-
                             $row = 12;
                             foreach ($diameters as $diameter) {
 
@@ -208,8 +204,7 @@ class InvoiceController extends Controller
                                             }
                                         }
 
-                                        $nightShift = $currentDayRecord->where('id_param_turno',GeneralVariables::ARRAY_ID_PARAMETRIC_NIGHT_SHIFT)->first();
-                                        dd($nightShift);
+                                        $nightShift = $currentDayRecord->whereIn('id_param_turno',GeneralVariables::ARRAY_ID_PARAMETRIC_NIGHT_SHIFT)->first();
                                         $col++;$col++;
                                         if($nightShift){
                                             $nightShiftOperation = $operations->where('id_prod_registro_diario',$nightShift->id)->first();
