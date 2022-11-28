@@ -237,7 +237,7 @@ class InvoiceController extends Controller
                                 $row = $row + 3;
                             }
 
-                            //ACTIVITIES
+                            /*ACTIVITIES
                             $activities = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
                             $row = 12;
                             $drillingRowsLimit = 42;
@@ -245,6 +245,7 @@ class InvoiceController extends Controller
                             if($activityRecords->count() > 0){
                                 dd($activityRecords[0]);
                             }
+                            */
 
                             $file->addSheet($workSheet);
                         }
