@@ -182,6 +182,7 @@ return [
         App\Modules\Production\MachineProject\Providers\MachineProjectServiceProvider::class,
         App\Modules\Production\DailyRecord\Providers\DailyRecordServiceProvider::class,
         App\Modules\Production\OperationRecord\Providers\OperationRecordServiceProvider::class,
+        App\Modules\Production\ActivityRecord\Providers\ActivityRecordServiceProvider::class,
     ],
 
     /*

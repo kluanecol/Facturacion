@@ -12,6 +12,7 @@ use App\Modules\Production\DailyRecord\Repository\DailyRecordInterface;
 use App\Modules\Production\OperationRecord\Repository\OperationRecordInterface;
 use App\Modules\Production\Machine\Repository\MachineInterface;
 use App\Modules\Admin\GeneralParametric\Repository\GeneralParametricInterface;
+use App\Modules\Production\ActivityRecord\Repository\ActivityRecordInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
@@ -23,6 +24,7 @@ class InvoiceController extends Controller
     private $dailyRecordRepo;
     private $operationRecordRepo;
     private $machineRepo;
+    private $activityRecordRepo;
 
     function __construct(
             InvoiceInterface $invoiceRepo,
@@ -31,7 +33,8 @@ class InvoiceController extends Controller
             DailyRecordInterface $dailyRecordRepo,
             OperationRecordInterface  $operationRecordRepo,
             MachineInterface $machineRepo,
-            GeneralParametricInterface $generalParametricRepo
+            GeneralParametricInterface $generalParametricRepo,
+            ActivityRecordInterface $activityRecordRepo
         )
         {
             $this->invoiceRepo = $invoiceRepo;
@@ -41,6 +44,7 @@ class InvoiceController extends Controller
             $this->operationRecordRepo = $operationRecordRepo;
             $this->machineRepo = $machineRepo;
             $this->generalParametricRepo = $generalParametricRepo;
+            $this->activityRecordRepo = $activityRecordRepo;
         }
 
     public function index($idContract){
@@ -148,6 +152,8 @@ class InvoiceController extends Controller
 
                 $machineDailyRecords = $dailyRecords->where('id_maquina',$machineId);
                 $operationRecords = $this->operationRecordRepo->getByDailyRecordsIds($machineDailyRecords->where('id_maquina',$machineId)->pluck('id')->toArray());
+                $activityRecords = $this->activityRecordRepo->getByDailyRecordsIds($machineDailyRecords->where('id_maquina',$machineId)->pluck('id')->toArray());
+
 
                 if ($operationRecords->count() > 0) {
                     foreach ($invoice->json_fk_pits as $key => $pitName) {
@@ -182,7 +188,7 @@ class InvoiceController extends Controller
                             for ($i=($row + ($diameters->count()*3)); $i < ($drillingRowsLimit); $i++) {
                                 $workSheet->getRowDimension($i)->setVisible(false);
                             }
-
+                            //Drilling rows
                             foreach ($diameters as $diameter) {
                                 //DRILLING AND CASING ROWS
                                 $col = "D";
@@ -231,11 +237,23 @@ class InvoiceController extends Controller
                                 $row = $row + 3;
                             }
 
+                            //ACTIVITIES
+                            $activities = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
+                            $row = 12;
+                            $drillingRowsLimit = 42;
+
+                            if($activityRecords->count() > 0){
+                                dd($activityRecords[0]);
+                            }
+
                             $file->addSheet($workSheet);
                         }
 
                     }
                 }
+
+
+
             }
 
             $file->removeSheetByIndex(0);
