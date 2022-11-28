@@ -21,6 +21,7 @@ return [
     'bienHecho' => '¡Well done!',
     'guardadoConExito' => 'Data saved successfully',
     'borradoConExito' => 'Data deleted successfully',
+    'estadoCambiadoExito' => 'Status changed successfully',
     //Select Messages
     'seleccionarTodo' => 'Select all',
     'ninguno' => 'None',

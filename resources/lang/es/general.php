@@ -21,7 +21,8 @@ return [
     'bienHecho' => '¡Bien hecho!',
     'guardadoConExito' => 'Datos guardados con éxito',
     'borradoConExito' => 'Datos eliminados con éxito',
-
+    'estadoCambiadoExito' => 'Estado cambiado con éxito',
+    //Select Messages
     'seleccionarTodo' => 'Seleccionar todo',
     'ninguno' => 'Ninguno',
     'seleccioneEl' => 'Seleccione el',

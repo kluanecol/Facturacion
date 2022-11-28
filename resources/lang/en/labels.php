@@ -39,4 +39,10 @@ return [
     'grupoDeParametricas' => 'Group',
     'activo' => 'Active',
     'inactivo' => 'Inactive',
+    'maquinas' => 'Machines',
+    'fechaInicialPeriodoFacturacion' => 'Beginning date of the period to be invoiced',
+    'fechaFinalPeriodoFacturacion' => 'End date of the period to be invoiced',
+    'pozos' => 'Pits',
+    'codigo' => 'Code',
+    'version' => 'Version',
 ];

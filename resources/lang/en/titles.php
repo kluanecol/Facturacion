@@ -6,4 +6,5 @@ return [
     'configuracion' => 'Settings',
     'gestion' => 'Management',
     'parametricas' => 'Parametric',
+    'facturacion' => 'Invoicing'
 ];

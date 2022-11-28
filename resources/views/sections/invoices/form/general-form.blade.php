@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-12"><br></div>
 
-            <div class="col-md-6">
+            <div class="col-lg-12 col-md-12 col-xs-12">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="initial_period">{!! trans('labels.fechaInicialPeriodoFacturacion') !!}(*):</label>
                         {!! Form::date('initial_period',(isset($invoice) ? $invoice->initial_period : null), [
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-lg-12 col-md-12 col-xs-12">
                 <div class="form-group form-md-line-input has-info text-primary " style="text-align: left;">
                     <label for="end_period">{!! trans('labels.fechaFinalPeriodoFacturacion') !!}(*):</label>
                         {!! Form::date('end_period', (isset($invoice) ? $invoice->end_period : null), [
@@ -77,7 +77,7 @@
         </div>
         <hr>
         <div class="form-actions noborder">
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-12 col-xs-12">
                 <div class="form-group form-md-line-input has-info">
                     <button type="button" class='btn btn-danger close-alert-modal btn-block'>
                         {!! trans('buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
@@ -85,13 +85,13 @@
                 </div>
             </div>
             @if (isset($invoice))
-                <div class="col-md-6 col-xs-12">
+                <div class="col-lg-6 col-md-12 col-xs-12">
                     <button type="button" class="btn btn-warning btn-block btn-save-invoice" id="btn-save-invoice">
                         {!! trans('buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>
                 </div>
             @else
-                <div class="col-md-6 col-xs-12">
+                <div class="col-lg-6 col-md-12 col-xs-12">
                     <button type="button" class="btn btn-success btn-block btn-save-invoice" id="btn-save-invoice">
                         {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                     </button>

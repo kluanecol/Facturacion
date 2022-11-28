@@ -17,6 +17,8 @@ return [
     'eliminar' => 'Delete',
     'configurar' => 'Configuration',
     'facturacion' => 'Invoicing',
-    'Editar' => 'Edit',
-    'CambiarEstado' => 'Change status',
+    'editar' => 'Edit',
+    'cambiarEstado' => 'Change status',
+    'previsualizarExcel' => 'Excel preview',
+    'buscarPozos' => 'Search for pits'
 ];

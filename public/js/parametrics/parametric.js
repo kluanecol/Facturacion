@@ -279,13 +279,13 @@ function disableParametric(id_parametric) {
     formData.append("id_parametric", id_parametric);
 
     Swal.fire({
-        title: $('#msg-parametrics-delete').val(),
+        title: $('#msg-parametric-title-change-state').val(),
         type: 'question',
         showCancelButton: true,
-        confirmButtonText: $('#msg-change-state').val(),
-        cancelButtonText: $('#msg-cancel').val(),
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
+        confirmButtonText: $('#msg-parametric-change-state').val(),
+        cancelButtonText: $('#msg-parametric-cancel').val(),
+        confirmButtonColor: '#5cb85c',
+        cancelButtonColor: '#d33',
         allowOutsideClick: false
     }).then((result) => {
         if (result.value == true) {

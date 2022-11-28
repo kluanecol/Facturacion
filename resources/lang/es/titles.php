@@ -6,5 +6,6 @@ return [
     'configuracion' => 'Configuración',
     'gestion' => 'Gestión',
     'parametricas' => 'Paramétricas',
+    'facturacion' => 'Facturación',
 
 ];

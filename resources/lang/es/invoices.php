@@ -5,5 +5,5 @@ return [
     'creada' => 'CREADA',
     'generada' => 'GENERADA',
     'finalizada' => 'FINALIZADA',
-
+    'facturasDelContrato' => 'Facturas del contrato',
 ];

@@ -17,6 +17,8 @@ return [
     'eliminar' => 'Eliminar',
     'configurar' => 'Configurar',
     'facturacion' => 'Facturación',
-    'Editar' => 'Editar',
-    'CambiarEstado' => 'Cambiar estado',
+    'editar' => 'Editar',
+    'cambiarEstado' => 'Cambiar estado',
+    'previsualizarExcel' => 'Previsualizar excel',
+    'buscarPozos' => 'Buscar pozos',
 ];
