@@ -142,7 +142,7 @@ class InvoiceController extends Controller
 
         Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines) {
 
-            $file->setTitle('INVOICE-'.$contract->project->name."(".$invoice->initial_period."-".$invoice->end_period.")");
+            //$file->setTitle('INVOICE-'.$contract->project->name."(".$invoice->initial_period."-".$invoice->end_period.")");
 
             foreach ($invoice->json_fk_machines as $key => $machineId) {
 
@@ -172,19 +172,22 @@ class InvoiceController extends Controller
                             //pit data
                             $workSheet->setCellValue('W3', strtoupper($pitName));
                             //Table row headers
-                            $workSheet->setCellValue('G8', $invoice->initial_period);
+                            $workSheet->setCellValue('G8',  Carbon::parse($invoice->initial_period)->format('d/m/Y'));
 
                             //DIAMETERS
                             $diameters = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
                             $row = 12;
-                            foreach ($diameters as $diameter) {
+                            $drillingRowsLimit = 42;
+                            for ($i=($row + ($diameters->count()*3)); $i < ($drillingRowsLimit); $i++) {
+                                $workSheet->getRowDimension($i)->setVisible(false);
+                            }
 
+                            foreach ($diameters as $diameter) {
+                                //DRILLING AND CASING ROWS
                                 $col = "D";
                                 $workSheet->setCellValue($col.$row, strtoupper($diameter->name));
-
                                 $operations = $machinePitOperation->where('id_param_diametro', $diameter->id);
                                 $dailys = $machineDailyRecords->whereIn('id',$operationRecords->pluck('id_prod_registro_diario'));
-
                                 $currentDay = Carbon::parse($invoice->initial_period);
 
                                 $col = "G";
@@ -224,12 +227,8 @@ class InvoiceController extends Controller
                                     }
                                 }
 
-
                                 $row = $row + 3;
                             }
-
-
-                            //$workSheet->getRowDimension(24)->setVisible(false);
 
                             $file->addSheet($workSheet);
                         }
@@ -238,6 +237,7 @@ class InvoiceController extends Controller
                 }
             }
 
+            //$file->removeSheetByIndex(0);
 
         })->export('xlsx');
     }
