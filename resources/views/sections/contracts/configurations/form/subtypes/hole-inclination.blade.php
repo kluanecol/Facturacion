@@ -27,7 +27,7 @@
             </div>
 
             <div class="col-md-6 mt-2">
-                <div class="form-group form-md-line-input has-info text-primary" style="text-align:right;">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align:left;">
                     <label for="charge_by_percentage">{!! trans('labels.incrementoPorPorcentaje') !!}:</label>
                 </div>
             </div>
