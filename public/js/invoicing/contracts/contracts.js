@@ -269,6 +269,7 @@ function refreshContractsTable(postData) {
         },
         processing: true,
         serverSide: false,
+        responsive: true,
         "destroy": true,
         "ajax": {
             "url": vURL+"/invoicing/contract/search",

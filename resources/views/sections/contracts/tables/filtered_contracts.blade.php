@@ -6,18 +6,19 @@
 </h5>
 
 <hr>
+<div class="table-responsive">
+    <table class="table table-hover table-bordered" id="table-contracts" style="width: 100%;">
+        <thead class="bg-kluane text-light">
+            <th class="text-center"><strong>Id</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.proyecto') !!}</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.cliente') !!}</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.fechaInicial') !!}</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.fechaFinal') !!}</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.ano') !!}</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
+        </thead>
+        <tbody class="text-center bg-light">
 
-<table class="table table-responsive table-hover table-bordered" id="table-contracts" style="width: 100%;">
-    <thead class="bg-kluane text-light">
-        <th class="text-center"><strong>Id</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.proyecto') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.cliente') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.fechaInicial') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.fechaFinal') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.ano') !!}</strong></th>
-        <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>
-    </thead>
-    <tbody class="text-center bg-light">
-
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

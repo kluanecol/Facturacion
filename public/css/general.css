@@ -59,11 +59,6 @@ body {
     color: #515151;
 }
 
-
-.table{
-    width: 100%;
-}
-
 .table-responsive::-webkit-scrollbar {
     -webkit-appearance: none;
 }
