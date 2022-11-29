@@ -1,4 +1,4 @@
-<table class="table table-hover table-bordered" id="table-charges" style="width: 100%;">
+<table class="table table-responsive table-hover table-bordered" id="table-charges" style="width: 100%;">
     <thead class="text-light thead-dark">
         <th class="text-center"><strong>{!! trans('labels.cobroPor') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.unidadDeMedida') !!}</strong></th>

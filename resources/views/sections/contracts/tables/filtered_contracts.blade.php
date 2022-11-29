@@ -7,7 +7,7 @@
 
 <hr>
 
-<table class="table table-hover table-bordered" id="table-contracts" style="width: 100%;">
+<table class="table table-responsive table-hover table-bordered" id="table-contracts" style="width: 100%;">
     <thead class="bg-kluane text-light">
         <th class="text-center"><strong>Id</strong></th>
         <th class="text-center"><strong>{!! trans('labels.proyecto') !!}</strong></th>

@@ -7,7 +7,7 @@
 
 <hr>
 
-<table class="table table-hover table-bordered" id="table-invoices" style="width: 100%;">
+<table class="table table-hover table-responsive table-bordered" id="table-invoices" style="width: 100%;">
     <thead class="bg-kluane text-light">
         <th class="text-center"><strong>Id</strong></th>
         <th class="text-center bg-secondary"><strong>{!! trans('labels.periodoDeFacturacion') !!}</strong></th>

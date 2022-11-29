@@ -1,4 +1,4 @@
-<table class="table table-hover table-bordered" id="table-currencys" style="width: 100%;">
+<table class="table  table-responsive table-hover table-bordered" id="table-currencys" style="width: 100%;">
     <thead class="text-light thead-dark">
         <th class="text-center"><strong>{!! trans('labels.moneda') !!}</strong></th>
         <th class="text-center"><strong>{!! trans('labels.opciones') !!}</strong></th>

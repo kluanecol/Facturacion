@@ -354,6 +354,7 @@ function refreshParametricsTable(datos) {
         },
         processing: true,
         serverSide: false,
+        responsive: true,
         "destroy": true,
         "ajax": {
             "url": vURL+"/invoicing/parametric/search",
