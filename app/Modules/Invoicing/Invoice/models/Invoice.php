@@ -4,7 +4,7 @@ namespace App\Modules\Invoicing\Invoice\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Modules\Invoicing\Contract\Models\contract;
+use App\Modules\Invoicing\Contract\Models\Contract;
 
 class Invoice extends Model
 {
