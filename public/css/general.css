@@ -60,6 +60,9 @@ body {
 }
 
 
+.table{
+    width: 100%;
+}
 
 .table-responsive::-webkit-scrollbar {
     -webkit-appearance: none;
