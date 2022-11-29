@@ -8,7 +8,7 @@
 <hr>
 
 <div class="table-responsive">
-    <table class="table table-hover table-responsive table-bordered" id="table-parametrics" style="width: 100%;">
+    <table class="table table-hover table-bordered" id="table-parametrics" style="width: 100%;">
         <thead class="bg-kluane text-light">
             <th class="text-center"><strong>Id</strong></th>
             <th class="text-center"><strong>{!! trans('labels.pais') !!}</strong></th>
