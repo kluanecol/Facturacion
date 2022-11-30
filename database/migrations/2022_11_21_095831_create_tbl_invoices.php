@@ -22,6 +22,9 @@ class CreateTblInvoices extends Migration
 
             $table->unsignedBigInteger('fk_id_user');
 
+            $table->unsignedBigInteger('fk_id_parent_invoice')->nullable();;
+            $table->foreign('fk_id_parent_invoice','fk_invoice_to_parent_invoice')->references('id')->on('invoices');
+
             $table->date('initial_period');
             $table->date('end_period');
 
@@ -45,6 +48,7 @@ class CreateTblInvoices extends Migration
         Schema::table('invoices', function (Blueprint $table)
         {
             $table->dropForeign('fk_contract_to_invoice');
+            $table->dropForeign('fk_invoice_to_parent_invoice');
         });
 
         Schema::dropIfExists('invoices');

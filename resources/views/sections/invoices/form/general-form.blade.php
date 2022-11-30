@@ -1,10 +1,11 @@
 <div id="main_contenido_formulario">
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice','enctype' => 'multipart/form-data']) !!}
         <div class="row">
-            {!! Form::hidden('id', (isset($invoice) ? $invoice->id : null), ['id'=>'id_invoice']) !!}
+
             {!! Form::hidden('fk_id_contract', (isset($contract) ? $contract->id : null), ['id'=>'fk_id_contract']) !!}
             {!! Form::hidden('state', 1, ['id'=>'state']) !!}
             {!! Form::hidden('is_new_version', $isNewVersion, ['id'=>'is_new_version']) !!}
+            {!! Form::hidden('fk_id_parent_invoice', (isset($invoice) ? $invoice->id : null), ['id'=>'fk_id_parent_invoice']) !!}
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">

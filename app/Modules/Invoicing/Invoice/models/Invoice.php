@@ -16,6 +16,7 @@ class Invoice extends Model
     protected $fillable = [
         'fk_id_contract',
         'fk_id_user',
+        'fk_id_parent_invoice',
         'initial_period',
         'end_period',
         'code',
@@ -41,5 +42,10 @@ class Invoice extends Model
     public function getPeriodAttribute()
     {
         return $this->initial_period.' - '.$this->end_period;
+    }
+
+    public function parentInvoice()
+    {
+        return $this->belongsTo(Invoice::class, 'fk_id_parent_invoice','id');
     }
 }
