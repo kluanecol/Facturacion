@@ -22,7 +22,7 @@ class CreateTblInvoices extends Migration
 
             $table->unsignedBigInteger('fk_id_user');
 
-            $table->unsignedBigInteger('fk_id_parent_invoice')->nullable();;
+            $table->unsignedBigInteger('fk_id_parent_invoice')->nullable();
             $table->foreign('fk_id_parent_invoice','fk_invoice_to_parent_invoice')->references('id')->on('invoices');
 
             $table->date('initial_period');

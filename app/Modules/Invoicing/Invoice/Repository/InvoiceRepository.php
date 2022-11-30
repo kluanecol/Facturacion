@@ -29,8 +29,8 @@ class InvoiceRepository implements InvoiceInterface{
             $table[] = [
                 'id' => $invoice->id,
                 'period' =>view('sections.invoices.components.period-header', ['invoice' => $invoice])->render(),
-                'code' => "FAC-".$invoice->id,
-                'version' => "1",
+                'code' => "FAC-".$invoice->version,
+                'version' => $invoice->version,
                 'state' => view('sections.invoices.components.badge-invoice-state', ['state' => $invoice->state])->render(),
                 'machines' => $this->machineRepository->getByIdsArray($invoice->json_fk_machines)->sortBy('code_name')->pluck('code_name')->implode(','),
                 'pits' => $invoice->json_fk_pits,
@@ -62,11 +62,8 @@ class InvoiceRepository implements InvoiceInterface{
         $result = 200;
 
         try {
-            if (isset($request->id)) {
-                $invoice = Invoice::find($request->id);
-            }else{
-                $invoice = new Invoice();
-            }
+
+           $invoice = new Invoice();
 
            $data = $request->only($invoice->getFillable());
            $data['fk_id_user'] = Auth::user()->id;

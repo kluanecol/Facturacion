@@ -64,14 +64,31 @@ class InvoiceController extends Controller
     public function getGeneralForm(Request $request){
         $data['contract'] = $this->contractRepo->getById($request->id_contract);
         $data['machines'] = $this->machineProjectRepo->getByActiveByProjectId( $data['contract']->fk_id_project, ['machine'])->pluck('machine.code_name','machine.id');
-        $data['isNewVersion'] = false;
+        $data['isNewVersion'] = 0;
+        $data['version'] = 1;
 
         $returnHTML = view('sections.invoices.form.general-form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
 
     }
 
+    public function getNewInvoiceVersionForm(Request $request){
+
+        $invoice = $this->invoiceRepo->getById($request->id_invoice);
+
+        $data['contract'] = $this->contractRepo->getById($invoice->fk_id_contract);
+        $data['machines'] = $this->machineProjectRepo->getByActiveByProjectId( $data['contract']->fk_id_project, ['machine'])->pluck('machine.code_name','machine.id');
+        $data['invoice'] = $invoice;
+        $data['isNewVersion'] = 1;
+        $data['version'] = 2 + $invoice->versions->count();
+
+
+        $returnHTML = view('sections.invoices.form.general-form', $data)->render();
+        return response()->json(['success' => true, 'html'=>$returnHTML]);
+    }
+
     public function getPitsBySearch(Request $request){
+
         $contract = $this->contractRepo->getById($request->id_contract);
         $dailyRecordsIds = $this->dailyRecordRepo->getIdsByMachinesAndDate($request, $contract->fk_id_project);
         $pits = $this->operationRecordRepo->getPitsByDailyRecordsIds($dailyRecordsIds);

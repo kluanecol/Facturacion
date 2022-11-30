@@ -19,6 +19,11 @@
                 'uses' => 'InvoiceController@getGeneralForm'
             ]);
 
+            Route::post('/getNewInvoiceVersionForm', [
+                'as' => 'invoice.getNewInvoiceVersionForm',
+                'uses' => 'InvoiceController@getNewInvoiceVersionForm'
+            ]);
+
             Route::post('/save', [
                 'as' => 'invoice.save',
                 'uses' => 'InvoiceController@save'

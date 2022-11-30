@@ -31,6 +31,10 @@ jQuery(function() {
         getInvoiceForm($('#id_contract').val());
     });
 
+    $(document).on('click','.add-new-version',function(){
+        getNewInvoiceVersionForm($(this).data('id'));
+    });
+
     $(document).on('click','#btn-search-pits',function(){
         domData = getFormFields();
 
@@ -140,6 +144,71 @@ function getFormFields() {
     return domData;
 }
 
+function getNewInvoiceVersionForm(id_invoice){
+    $('body').loading({
+        message: $('#msg-loading').val()
+    });
+
+    var domData = {
+        id_invoice : id_invoice,
+    }
+
+    $.post(
+        vURL+"/invoicing/invoice/getNewInvoiceVersionForm",
+        domData,
+        function(data)
+        {
+            if (data.success) {
+                Swal.fire({
+                    width:'800px',
+                    title: '<strong>'+$('#msg-invoice-form-title').val()+'</strong>',
+                    html:data.html,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    allowOutsideClick: true
+                })
+
+                $('body').loading('stop');
+                refreshInputs();
+                validateForm("#form-invoice",[],[]);
+            } else {
+                $('body').loading('stop');
+                Swal.fire({
+                    type: 'error',
+                    title: $('#msg-something-went-wrong').val(),
+                    text: $('#msg-error-getting-data').val(),
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        }
+    ).fail(function(data) {
+        $('body').loading('stop');
+        if(data.status == 419){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-session-expired').val(),
+                showConfirmButton: false,
+                timer: 2000
+            }).then(()=>{
+                location.reload();
+            });
+
+        }else if(data.status == 500){
+            Swal.fire({
+                type: 'error',
+                title: $('#msg-something-went-wrong').val(),
+                text: $('#msg-contact-support').val(),
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }
+    });
+}
+
 function getPits(domData){
 
     $('body').loading({
@@ -220,8 +289,14 @@ function saveInvoice(str_id_form) {
           $('body').loading('stop');
 
             if (data.status == 200) {
+                Swal.fire({
+                    title: data.title,
+                    html: data.message,
+                    type: `success`,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
 
-                toastr.success(data.message, data.title);
                 table_invoices.ajax.reload();
             }
             else if(data.status == 400){

@@ -48,4 +48,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Invoice::class, 'fk_id_parent_invoice','id');
     }
+
+    public function versions()
+    {
+        return $this->hasMany(Invoice::class, 'fk_id_parent_invoice');
+    }
 }

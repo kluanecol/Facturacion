@@ -7,6 +7,22 @@
             {!! Form::hidden('is_new_version', $isNewVersion, ['id'=>'is_new_version']) !!}
             {!! Form::hidden('fk_id_parent_invoice', (isset($invoice) ? $invoice->id : null), ['id'=>'fk_id_parent_invoice']) !!}
 
+
+            <div class="col-md-12 bg-light">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="version">{!! trans('labels.version') !!}(*):</label>
+                    {!! Form::number('version', $version,
+                        [
+                            'id'=>'version',
+                            'readonly'=> true,
+                            'style' => 'width:60px;text-align: center;'
+                        ])
+                    !!}
+                </div>
+            </div>
+
+            <div class="col-md-12"><hr></div>
+
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="json_fk_machines">{!! trans('labels.maquinas') !!}(*):</label>
@@ -32,8 +48,8 @@
                         {!! Form::date('initial_period',(isset($invoice) ? $invoice->initial_period : null), [
                             'class' => 'form-control is_required',
                             'id' => 'initial_period',
-
                             'title'=>'',
+                            'readonly' => isset($invoice)
                         ]) !!}
                     <span class="help-block"></span>
                 </div>
@@ -45,7 +61,7 @@
                         {!! Form::date('end_period', (isset($invoice) ? $invoice->end_period : null), [
                             'class' => 'form-control is_required',
                             'id' => 'end_period',
-
+                            'readonly' => isset($invoice),
                             'title'=>'',
                         ]) !!}
                         <span class="help-block"></span>
