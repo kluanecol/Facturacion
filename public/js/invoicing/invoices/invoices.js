@@ -167,7 +167,7 @@ function getPits(domData){
 
                     refreshInputs();
                 }else{
-                    toastr.info($('#msg-error-getting-data').val(), "NO HAY POZOS EN ESTE PERIODO DE TIEMPO");
+                    toastr.info($('#msg-error-getting-data').val(), $('#msg-invoice-no-pits').val());
                 }
 
             } else {
