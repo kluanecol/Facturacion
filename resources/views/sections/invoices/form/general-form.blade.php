@@ -4,6 +4,7 @@
             {!! Form::hidden('id', (isset($invoice) ? $invoice->id : null), ['id'=>'id_invoice']) !!}
             {!! Form::hidden('fk_id_contract', (isset($contract) ? $contract->id : null), ['id'=>'fk_id_contract']) !!}
             {!! Form::hidden('state', 1, ['id'=>'state']) !!}
+            {!! Form::hidden('is_new_version', $isNewVersion, ['id'=>'is_new_version']) !!}
 
             <div class="col-md-12">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
@@ -84,19 +85,13 @@
                     </button>
                 </div>
             </div>
-            @if (isset($invoice))
-                <div class="col-lg-6 col-md-12 col-xs-12">
-                    <button type="button" class="btn btn-warning btn-block btn-save-invoice" id="btn-save-invoice">
-                        {!! trans('buttons.actualizar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
-                    </button>
-                </div>
-            @else
-                <div class="col-lg-6 col-md-12 col-xs-12">
-                    <button type="button" class="btn btn-success btn-block btn-save-invoice" id="btn-save-invoice">
-                        {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
-                    </button>
-                </div>
-            @endif
+
+            <div class="col-lg-6 col-md-12 col-xs-12">
+                <button type="button" class="btn btn-success btn-block btn-save-invoice" id="btn-save-invoice">
+                    {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+            </div>
+
         </div>
 
     {!! Form::close() !!}

@@ -51,6 +51,12 @@ class InvoiceRepository implements InvoiceInterface{
         return Invoice::with($relations)->where('fk_id_contract', $id)->get();
     }
 
+    public function getByContractAndPeriod($fk_id_contract, $initial_period, $end_period){
+        return Invoice::where('fk_id_contract', $fk_id_contract)
+        ->where('initial_period', $initial_period)
+        ->where('end_period', $end_period)
+        ->get();
+    }
 
     public function save($request){
         $result = 200;
@@ -101,5 +107,6 @@ class InvoiceRepository implements InvoiceInterface{
             return $e->getMessage();
         }
     }
+
 
 }

@@ -64,7 +64,7 @@ class InvoiceController extends Controller
     public function getGeneralForm(Request $request){
         $data['contract'] = $this->contractRepo->getById($request->id_contract);
         $data['machines'] = $this->machineProjectRepo->getByActiveByProjectId( $data['contract']->fk_id_project, ['machine'])->pluck('machine.code_name','machine.id');
-
+        $data['isNewVersion'] = false;
 
         $returnHTML = view('sections.invoices.form.general-form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
@@ -80,6 +80,27 @@ class InvoiceController extends Controller
     }
 
     public function save(Request $request){
+
+        $initialDate = Carbon::parse($request->initial_period);
+        $finalDate = Carbon::parse($request->end_period);
+
+        if($initialDate->diffInDays($finalDate) > 16){
+            return  $messages = [
+                'message' => trans('general.errorAlGuardar'),
+                'title' => trans('invoices.periodoDeFacturacionMuyLargo')
+            ];
+        }
+
+        if($request->is_new_version == false){
+            if($this->invoiceRepo->getByContractAndPeriod($request->fk_id_contract, $request->initial_period, $request->end_period)->count() > 0){
+                return  $messages = [
+                    'message' => trans('general.errorAlGuardar'),
+                    'title' =>  trans('invoices.periodoDeFacturacionRepetido')
+                ];
+            }
+        }
+
+
         $result = $this->invoiceRepo->save($request);
 
         if (is_string($result)) {
