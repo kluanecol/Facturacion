@@ -562,7 +562,7 @@ function refreshTable(string_id_table) {
         },
         processing: true,
         serverSide: false,
-        responsive: false,
+        responsive: true,
         "destroy": true,
         scrollX: 400,
         scrollY: 380,
