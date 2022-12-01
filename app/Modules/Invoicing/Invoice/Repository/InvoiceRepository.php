@@ -88,11 +88,11 @@ class InvoiceRepository implements InvoiceInterface{
 
         try {
 
-            if (isset($request->id_contract)) {
-                $contract = Invoice::find($request->id_contract);
+            if (isset($request->id_invoice)) {
+                $invoice = Invoice::find($request->id_invoice);
             }
 
-           if ($contract->delete()) {
+           if ($invoice->delete()) {
                 $result = 200;
             }else{
                 $result = 400;

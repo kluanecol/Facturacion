@@ -53,12 +53,9 @@ jQuery(function() {
 
     });
 
-    $(document).on('click','.edit-configuration',function(){
-        getConfigurationForm($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
-    });
 
-    $(document).on('click','.delete-configuration',function(){
-        deleteConfiguration($(this).data('configuration-id'), $(this).data('contract-configuration-id'));
+    $(document).on('click','.delete-invoice',function(){
+        deleteInvoice($(this).data('id'));
     });
 
 });
@@ -332,14 +329,13 @@ function saveInvoice(str_id_form) {
     });
 }
 
-function deleteConfiguration(id_configuration, id_contract_configuration) {
+function deleteInvoice(id_invoice) {
 
     var formData = new FormData();
-    formData.append("id_configuration", id_configuration);
-    formData.append("id_contract_configuration", id_contract_configuration);
+    formData.append("id_invoice", id_invoice);
 
     Swal.fire({
-        title: $('#msg-contract-config-delete').val(),
+        title: $('#msg-invoice-delete').val(),
         type: 'question',
         showCancelButton: true,
         confirmButtonText: $('#msg-delete').val(),
@@ -355,7 +351,7 @@ function deleteConfiguration(id_configuration, id_contract_configuration) {
 
             $.ajax({
 
-                url: vURL+'/invoicing/contractConfiguration/delete',
+                url: vURL+'/invoicing/invoice/delete',
                 type: 'POST',
                 dataType: 'json',
                 processData: false,
@@ -366,8 +362,7 @@ function deleteConfiguration(id_configuration, id_contract_configuration) {
 
                     if (data.status == 200) {
                         toastr.success(data.message, data.title);
-                        reloadConfigurationContainer(data.id_configuration);
-                        reloadProgressBar();
+                        table_invoices.ajax.reload();
                     }
                     else if(data.status == 400){
                         toastr.warning(data.message, data.title);
