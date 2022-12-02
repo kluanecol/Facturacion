@@ -145,6 +145,7 @@
 
     {{-- PLUGINS --}}
     @stack('plugins')
+    <script src="{{ asset('js/register-sw.js') }}" type="text/javascript"></script>
     <!-- jQuery -->
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
