@@ -425,9 +425,9 @@ function reloadConfigurationContainer(id_configuration){
         function(data)
         {
             if (data.success) {
-
-                $('#container-configuration-'+data.id_configuration).html(data.html);
                 refreshInputs();
+                $('#container-configuration-'+data.id_configuration).html(data.html);
+
             } else {
                 Swal.fire({
                     type: 'error',
@@ -478,6 +478,7 @@ function refreshInputs(){
     $("select.selectpicker").selectpicker('refresh');
 
     $('[data-toggle="tooltip"]').tooltip();
+
 
     if($("#table-drilling").length > 0){
         refreshTable("table-drilling");
@@ -556,7 +557,7 @@ function validateForm(id,rules,custom_messages){
 }
 
 function refreshTable(string_id_table) {
-    table_contracts = $('#'+string_id_table).DataTable({
+    $('#'+string_id_table).DataTable({
         language: {
             "url": vURL+"/js/general/datatables/"+current_lang+".json"
         },

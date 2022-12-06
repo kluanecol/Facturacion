@@ -6,6 +6,7 @@ use App\Modules\Admin\Client\Models\Client;
 use App\Modules\Admin\Project\Models\Project;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\Invoicing\ContractConfiguration\Models\ContractConfiguration;
 
 class Contract extends Model
 {
@@ -38,4 +39,8 @@ class Contract extends Model
         return $this->belongsTo(Client::class, 'fk_id_client','id');
     }
 
+    public function configurations()
+    {
+        return $this->hasMany(ContractConfiguration::class, 'fk_id_contract', 'id');
+    }
 }

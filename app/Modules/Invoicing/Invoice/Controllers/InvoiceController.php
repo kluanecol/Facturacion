@@ -178,11 +178,12 @@ class InvoiceController extends Controller
     public function generatePreview($idInvoice){
 
         $invoice = $this->invoiceRepo->getById($idInvoice, ['contract']);
-        $contract = $invoice->contract->load('client','project');
+        $contract = $invoice->contract->load('client','project','configurations.diameter');
         $machines = $this->machineRepo->getByIdsArray($invoice->json_fk_machines);
         $dailyRecords = $this->dailyRecordRepo->getIdsByInvoiceObjectAndProjectId($invoice, $contract->fk_id_project);
+        $drillingConfigurations = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_DRILLING,GeneralVariables::ID_CONFIGURATION_CASING]);
 
-        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines) {
+        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines, $drillingConfigurations) {
 
             //$file->setTitle('INVOICE-'.$contract->project->name."(".$invoice->initial_period."-".$invoice->end_period.")");
 
@@ -273,6 +274,44 @@ class InvoiceController extends Controller
                                 }
 
                                 $row = $row + 3;
+                            }
+
+
+                            //DRILLING AND CASING CONFIGURATION TABLE
+                            $row = 126;
+                            $initialRow = $row;
+                            foreach ($drillingConfigurations->groupBy('fk_id_diameter') as $configurationGroup) {
+
+                                $configurationDiameter = $configurationGroup->first();
+
+                                $workSheet->setCellValue('C'.$row, $configurationDiameter->diameter->name);
+                                $workSheet->setCellValue('D'.$row, $machinePitOperation->where('id_param_diametro', $configurationDiameter->diameter->id)->sum('total'));
+
+                                foreach ($configurationGroup->sortBy('initial_range') as $configuration) {
+                                    $workSheet->setCellValue('F'.$row, $configuration->initial_range);
+                                    $workSheet->setCellValue('G'.$row, $configuration->final_range);
+                                    /*
+                                    $workSheet->setCellValue('I'.$row,
+                                        $machinePitOperation->where('id_param_diametro',$idConfigurationDiameter)->sum('total')
+                                    );
+                                    */
+                                    $workSheet->setCellValue('L'.$row, $configuration->value);
+
+                                    $row++;
+                                }
+
+                                if ($configurationGroup->count() > 1) {
+                                    $workSheet->mergeCells('C'.$initialRow.':C'.($row - 1));
+                                    $workSheet->mergeCells('D'.$initialRow.':D'.($row - 1));
+                                    $workSheet->mergeCells('E'.$initialRow.':E'.($row - 1));
+                                    $initialRow = $row;
+                                }
+
+                            }
+
+                            $rowsLimit = 176;
+                            for ($i=($row); $i <= ($rowsLimit); $i++) {
+                                $workSheet->getRowDimension($i)->setVisible(false);
                             }
 
                             /*ACTIVITIES
