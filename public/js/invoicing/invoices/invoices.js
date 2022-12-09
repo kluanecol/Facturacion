@@ -69,7 +69,7 @@ function getInvoiceForm(id_contract){
         id_contract : id_contract,
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/invoice/getGeneralForm",
         domData,
         function(data)
@@ -150,7 +150,7 @@ function getNewInvoiceVersionForm(id_invoice){
         id_invoice : id_invoice,
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/invoice/getNewInvoiceVersionForm",
         domData,
         function(data)
@@ -212,7 +212,7 @@ function getPits(domData){
         message: $('#msg-loading').val()
     });
 
-    $.post(
+    $.get(
         vURL+"/invoicing/invoice/getPitsBySearch",
         domData,
         function(data)
@@ -221,7 +221,6 @@ function getPits(domData){
 
             if (data.success) {
                 var options = "";
-                console.log(data.pits.length);
 
                 if (data.pits.length > 0) {
                     $.each(data.pits, function(i, pit) {

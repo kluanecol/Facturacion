@@ -14,7 +14,7 @@
                 'uses' => 'ContractController@search'
             ]);
 
-            Route::post('/getContractForm', [
+            Route::get('/getContractForm', [
                 'as' => 'contracts.getContractForm',
                 'uses' => 'ContractController@getContractForm'
             ]);

@@ -14,12 +14,12 @@
                 'uses' => 'InvoiceController@search'
             ]);
 
-            Route::post('/getGeneralForm', [
+            Route::get('/getGeneralForm', [
                 'as' => 'invoice.getGeneralForm',
                 'uses' => 'InvoiceController@getGeneralForm'
             ]);
 
-            Route::post('/getNewInvoiceVersionForm', [
+            Route::get('/getNewInvoiceVersionForm', [
                 'as' => 'invoice.getNewInvoiceVersionForm',
                 'uses' => 'InvoiceController@getNewInvoiceVersionForm'
             ]);
@@ -34,7 +34,7 @@
                 'uses' => 'InvoiceController@delete'
             ]);
 
-            Route::post('/getPitsBySearch', [
+            Route::get('/getPitsBySearch', [
                 'as' => 'invoice.getPitsBySearch',
                 'uses' => 'InvoiceController@getPitsBySearch'
             ]);

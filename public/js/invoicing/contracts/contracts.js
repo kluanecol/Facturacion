@@ -65,7 +65,7 @@ function getContractForm(id_contract = null){
         id_contract : id_contract
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/contract/getContractForm",
         domData,
         function(data)
