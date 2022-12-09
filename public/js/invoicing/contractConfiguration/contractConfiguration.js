@@ -94,7 +94,7 @@ function getConfigurationForm(id_configuration, id_contract_configuration){
         id_contract_configuration : id_contract_configuration
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/configurationSubtype/getForm",
         domData,
         function(data)
@@ -159,7 +159,7 @@ function getConsumables(id_group){
         id_group : id_group
     }
 
-    $.post(
+    $.get(
         vURL+"/production/consumable/getByGroupId",
         domData,
         function(data)
@@ -222,7 +222,7 @@ function searchConsumables(input_string){
         input_string : input_string
     }
 
-    $.post(
+    $.get(
         vURL+"/production/consumable/searchByString",
         domData,
         function(data)
@@ -419,7 +419,7 @@ function reloadConfigurationContainer(id_configuration){
         id_contract : $('#id_contract').val()
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/contractConfiguration/getList",
         domData,
         function(data)
@@ -585,7 +585,7 @@ function reloadProgressBar(){
         id_contract : $('#id_contract').val()
     }
 
-    $.post(
+    $.get(
         vURL_INVOICING+"/contractConfiguration/reloadProgressBar",
         domData,
         function(data)

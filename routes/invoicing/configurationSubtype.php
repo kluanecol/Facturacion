@@ -5,7 +5,7 @@
         Route::group(['namespace' => $controller, 'prefix' => 'configurationSubtype'], function (){
 
 
-            Route::post('/getForm', [
+            Route::get('/getForm', [
                 'as' => 'configurationSubtype.getForm',
                 'uses' => 'ConfigurationSubtypeController@getForm'
             ]);

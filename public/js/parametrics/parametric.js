@@ -75,7 +75,7 @@ function getParametricForm(id_parametric = null){
         id_parametric : id_parametric
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/parametric/getParametricForm",
         domData,
         function(data)
@@ -152,7 +152,7 @@ function getOtherChargeForm(){
 
     }
 
-    $.post(
+    $.get(
         vURL+"/invoicing/parametric/getOtherChargeForm",
         domData,
         function(data)
@@ -160,7 +160,7 @@ function getOtherChargeForm(){
             if (data.success) {
                 Swal.fire({
                     width:'800px',
-                    title: '<strong>'+$('#msg-parametric-config-other-charge').val()+'</strong>',
+                    title: '<strong>'+$('#msg-parametric-form-title').val()+'</strong>',
                     html:data.html,
                     showCloseButton: false,
                     showCancelButton: false,

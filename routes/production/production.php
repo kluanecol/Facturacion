@@ -4,12 +4,12 @@
 
         Route::group(['namespace' => $controller, 'prefix' => 'consumable' ], function (){
 
-            Route::post('/getByGroupId', [
+            Route::get('/getByGroupId', [
                 'as' => 'consumables.getByGroupId',
                 'uses' => 'ConsumableController@getByGroupId'
             ]);
 
-            Route::post('/searchByString', [
+            Route::get('/searchByString', [
                 'as' => 'consumables.searchByString',
                 'uses' => 'ConsumableController@searchByString'
             ]);

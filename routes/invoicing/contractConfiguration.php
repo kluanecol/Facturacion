@@ -10,7 +10,7 @@
                 'uses' => 'ContractConfigurationController@save'
             ]);
 
-            Route::post('/getList', [
+            Route::get('/getList', [
                 'as' => 'contractConfiguration.getList',
                 'uses' => 'ContractConfigurationController@getList'
             ]);
@@ -20,7 +20,7 @@
                 'uses' => 'ContractConfigurationController@delete'
             ]);
 
-            Route::post('/reloadProgressBar', [
+            Route::get('/reloadProgressBar', [
                 'as' => 'contractConfiguration.reloadProgressBar',
                 'uses' => 'ContractConfigurationController@reloadProgressBar'
             ]);
