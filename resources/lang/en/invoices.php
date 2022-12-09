@@ -10,5 +10,6 @@ return [
     'sinPozos' => 'No pit activity in this time period',
     'periodoDeFacturacionMuyLargo' => 'Long billing period (Maximum 16 days)',
     'periodoDeFacturacionRepetido' => 'Repeated Billing period (Generate a new version of the invoice)',
-    'borrarFactura' => 'Are you sure you want to delete the invoice?'
+    'borrarFactura' => 'Are you sure you want to delete the invoice?',
+    'PRECIO' =>'PRICE'
 ];

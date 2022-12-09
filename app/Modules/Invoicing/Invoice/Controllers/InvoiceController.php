@@ -182,10 +182,11 @@ class InvoiceController extends Controller
         $machines = $this->machineRepo->getByIdsArray($invoice->json_fk_machines);
         $dailyRecords = $this->dailyRecordRepo->getIdsByInvoiceObjectAndProjectId($invoice, $contract->fk_id_project);
         $drillingConfigurations = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_DRILLING,GeneralVariables::ID_CONFIGURATION_CASING]);
+        $currency = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_CURRENCY])->first();
 
-        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines, $drillingConfigurations) {
+        Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines, $drillingConfigurations, $currency) {
 
-            //$file->setTitle('INVOICE-'.$contract->project->name."(".$invoice->initial_period."-".$invoice->end_period.")");
+            //$file->getProperties()->setTitle('INVOICE-'.$contract->project->name."(".$invoice->initial_period."-".$invoice->end_period.")");
 
             foreach ($invoice->json_fk_machines as $key => $machineId) {
 
@@ -276,6 +277,11 @@ class InvoiceController extends Controller
                                 $row = $row + 3;
                             }
 
+                            //HEADERS DRILLING AND CASING CONFIGURATION TABLE
+                            $row = 124;
+                            $workSheet->setCellValue('E'.$row, isset($currency) ? "TOTAL ".$currency->currency->description : "TOTAL");
+                            $workSheet->setCellValue('L'.$row, isset($currency) ? trans('invoices.PRECIO')." ".$currency->currency->description : trans('invoices.PRECIO'));
+                            $workSheet->setCellValue('M'.$row, isset($currency) ? "TOTAL ".$currency->currency->description : "TOTAL");
 
                             //DRILLING AND CASING CONFIGURATION TABLE
                             $row = 126;
