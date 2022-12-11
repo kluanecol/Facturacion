@@ -55,6 +55,7 @@
 
 
     @yield('css')
+    @laravelPWA
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed body">
