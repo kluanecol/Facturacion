@@ -45,11 +45,27 @@ function manejoApi( cacheName, req){
 
     if (req.clone().method === 'POST') {
 
+        //console.log(req.clone());
+        req.clone().formData().then( data => {
+
+           //const bodyObject = JSON.parse( data );
+           //data.delete('username');
+           const dataObject = Object.fromEntries(data.entries());
+           dataObject.topics = data.getAll("topics");
+            if (dataObject._token) {
+                dataObject.token = dataObject._token;
+                delete dataObject._token;
+
+            }
+           console.log(dataObject);
+           guardarMensaje( dataObject );
+        });
+
         return fetch( req );
     }
     else{
         return fetch( req ).then( res => {
-            console.log(res);
+
             if (res.ok) {
                 actualizaCacheDinamico( cacheName, req, res.clone() );
                 return res.clone();
