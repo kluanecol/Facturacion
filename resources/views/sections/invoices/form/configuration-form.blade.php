@@ -1,26 +1,46 @@
 
-<div id="main-content-form">
+<div id="main-content-form" >
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice-configuration','enctype' => 'multipart/form-data']) !!}
+        <div style="max-height: 800px; overflow-y: scroll;">
+            <table style="width: 100%;">
 
-        <div class="tabset">
-            <!-- Tab -->
-            @foreach ($invoice->json_fk_pits as $pit)
-                <input type="radio" name="tabset" id="tab-{{$pit}}" aria-controls="{{$pit}}">
-                <label for="tab-{{$pit}}">{{$pit}}</label>
-            @endforeach
+                <tbody id="tbody-configurations">
+                    @foreach ($invoice->json_fk_pits as $pit)
+                        <tr>
+                            <td>
+                                <hr>
+                                <div class="panel-group py-0">
+                                    <div class="panel panel-default bg-secondary">
+                                        <div class="panel-body text-center">
+                                            <h5>
+                                                {{$pit}}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
 
-            <!-- Panels -->
-            <div class="tab-panels">
-                @foreach ($invoice->json_fk_pits as $pit)
+                        @foreach ($otherChargeConfigurations as $configuration)
+                            <tr class="rowConfiguration">
+                                {{ Form::hidden('fk_id_pit', isset($pit) ? $pit : null ,['class'=>'fk_id_pit']) }}
 
-                    <section id="{{$pit}}" class="tab-panel">
-                        <h5>{{$pit}}</h5>
+                                <td class="text-justify">
+                                    <br>
+                                    <strong>{{$configuration->charge->NameAndAuxiliaryName}}</strong>
+                                    {!!Form::number('quantity', 0 ,['class'=>'form-control is_required','placeholder'=>'','required'=>'required','maxlength'=>'4'])!!}
+                                </td>
 
-                    </section>
+                            </tr>
 
-                @endforeach
-            </div>
+                        @endforeach
+
+                    @endforeach
+
+                </tbody>
+            </table>
         </div>
+
 
         <hr>
 

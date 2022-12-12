@@ -53,6 +53,12 @@ jQuery(function() {
 
     });
 
+    $(document).on('click','#btn-save-invoice-configuration',function(){
+
+        saveInvoiceConfiguration('form-invoice-configuration');
+
+    });
+
 
     $(document).on('click','.delete-invoice',function(){
         deleteInvoice($(this).data('id'));
@@ -331,6 +337,56 @@ function saveInvoice(str_id_form) {
         }
     });
 }
+
+function saveInvoiceConfiguration(str_id_form) {
+
+    var invoice_configurations = elementsToArrayByElement($('#tbody-configurations'), 'tr');
+    console.log(str_id_form);
+
+    console.log(invoice_configurations);
+
+    var datos = {
+        'invoice_configurations' : invoice_configurations,
+
+    }
+    $.post(
+        vURL+'/invoicing/invoice/saveConfiguration',
+        datos,
+        function(data) {
+            swal({
+                title: data.title,
+                html: data.message,
+                type: data.type,
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+        }
+    ).fail(function(data) {
+        if (data.status == 419) {
+            swal({
+                title: `¡Algo salió Mal!`,
+                html: `Ha caducado el tiempo de sesión, se recargará la página`,
+                type: `error`,
+                showConfirmButton: false,
+                timer: 3000
+            }).then(() => {
+                location.reload();
+            });
+
+        } else if (data.status == 500) {
+            swal({
+                title: `¡Algo salió Mal!`,
+                html: `Ha ocurrido un error en el servidor, contacte al soporte de Pandora: ${data.responseJSON}`,
+                type: `error`,
+                //showConfirmButton: false,
+                //timer: 3000
+            })
+        }
+    });
+}
+
 
 function deleteInvoice(id_invoice) {
 
@@ -635,4 +691,31 @@ function refreshInvoicesTable() {
     });
 }
 
+function elementsToArrayByElement(container, row) {
+    var datos = [];
+    container.find(row).each(function(i, element) {
+        let campos = elementsToArray(element);
+        if (Object.keys(campos).length != 0)
+            datos.push(campos);
+    });
+    return datos;
+}
 
+function elementsToArray(element) {
+    let campos = {};
+    $(element).find("input,textarea").each(function(i, input) {
+        if (input.type == 'checkbox') {
+            campos[input.name] = input.checked;
+        } else {
+            if ($(input).hasClass('formatoMoneda')) {
+                campos[input.name] = convertirANumero(input.value);
+            } else {
+                campos[input.name] = input.value;
+            }
+        }
+    });
+    $(element).find("select").each(function(i, input) {
+        campos[input.name] = input.value;
+    });
+    return campos;
+}

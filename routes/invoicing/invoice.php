@@ -29,6 +29,11 @@
                 'uses' => 'InvoiceController@save'
             ]);
 
+            Route::post('/saveConfiguration', [
+                'as' => 'invoice.saveConfiguration',
+                'uses' => 'InvoiceController@saveConfiguration'
+            ]);
+
             Route::post('/delete', [
                 'as' => 'invoice.delete',
                 'uses' => 'InvoiceController@delete'
