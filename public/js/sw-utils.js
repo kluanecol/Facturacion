@@ -45,11 +45,27 @@ function manejoApi( cacheName, req){
 
     if (req.clone().method === 'POST') {
 
-        //console.log(req.clone());
         req.clone().formData().then( data => {
 
-           //const bodyObject = JSON.parse( data );
-           //data.delete('username');
+            var object = {};
+            data.forEach((value, key) => {
+                // Reflect.has in favor of: object.hasOwnProperty(key)
+                if(!Reflect.has(object, key)){
+                    if (key  != '_token' ) {
+                        object[key] = value;
+                        return;
+                    }else{
+                        object['token'] = value;
+                        return;
+                    }
+                }
+                if(!Array.isArray(object[key])){
+                    object[key] = [object[key]];
+                }
+                object[key].push(value);
+            });
+            var json = JSON.stringify(object);
+           /*
            const dataObject = Object.fromEntries(data.entries());
            dataObject.topics = data.getAll("topics");
             if (dataObject._token) {
@@ -57,8 +73,10 @@ function manejoApi( cacheName, req){
                 delete dataObject._token;
 
             }
-           console.log(dataObject);
-           guardarMensaje( dataObject );
+           */
+            console.log( object );
+
+           guardarMensaje( object );
         });
 
         return fetch( req );
