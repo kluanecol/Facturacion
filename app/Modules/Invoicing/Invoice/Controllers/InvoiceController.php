@@ -183,7 +183,7 @@ class InvoiceController extends Controller
 
         $otherChargesConfiguration = $contract->configurations->where('fk_id_configuration_subtype', GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE);
 
-        if(!($otherChargesConfiguration->count() > 0)){
+        if($otherChargesConfiguration->count() > 0){
             $data['contract'] = $contract;
             $data['invoice'] = $invoice;
             $data['otherChargeConfigurations'] = $otherChargesConfiguration->load('charge');

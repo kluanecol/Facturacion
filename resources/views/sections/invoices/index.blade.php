@@ -12,6 +12,7 @@
 <link href="{{ asset('css/card.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/radio_switch.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/general_tooltip.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/tabs.css') }}" rel="stylesheet" type="text/css" />
 @section('content')
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
         <div id="main-url-init" data-url="{{URL::to('/invoicing')}}"></div>
