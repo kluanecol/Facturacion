@@ -58,6 +58,10 @@ jQuery(function() {
         deleteInvoice($(this).data('id'));
     });
 
+    $(document).on('click','.config-invoice',function(){
+        configInvoice($(this).data('id'));
+    });
+
 });
 
 function getInvoiceForm(id_contract){
@@ -397,6 +401,78 @@ function deleteInvoice(id_invoice) {
 
         }
     })
+
+}
+
+
+function configInvoice(id_invoice) {
+
+    var formData = new FormData();
+    formData.append("id_invoice", id_invoice);
+
+    $('body').loading({
+        message: $('#msg-loading').val()
+    });
+
+    $.ajax({
+
+        url: vURL+'/invoicing/invoice/getConfigurationInvoiceForm/'+id_invoice,
+        type: 'GET',
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function(data){
+            $('body').loading('stop');
+
+            if (data.status == 200) {
+                Swal.fire({
+                    width:'800px',
+                    title: '<strong>'+$('#msg-invoice-form-title').val()+'</strong>',
+                    html:data.html,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    focusConfirm: false,
+                    allowOutsideClick: true
+                })
+
+                $('body').loading('stop');
+                refreshInputs();
+                validateForm("#form-invoice-configuration",[],[]);
+
+            }
+            else if(data.status == 400){
+                toastr.warning(data.message, data.title);
+            }
+            else{
+                toastr.error(data.message, data.title);
+            }
+        },
+        error: function(data){
+            $('body').loading('stop');
+
+            if(data.status == 419){
+                Swal.fire({
+                    title: $('#msg-something-went-wrong').val(),
+                    html: $('#msg-session-expired').val(),
+                    type: `error`,
+                    showConfirmButton: false,
+                    timer: 3000
+                }).then(()=>{
+                    location.reload();
+                });
+            }else if(data.status == 500){
+                Swal.fire({
+                    title: $('#msg-something-went-wrong').val(),
+                    html: $('#msg-contact-support').val(),
+                    type: `error`,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        }
+    });
 
 }
 

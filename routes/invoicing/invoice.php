@@ -39,6 +39,11 @@
                 'uses' => 'InvoiceController@getPitsBySearch'
             ]);
 
+            Route::get('/getConfigurationInvoiceForm/{idInvoice}', [
+                'as' => 'invoice.getConfigurationInvoiceForm',
+                'uses' => 'InvoiceController@getConfigurationInvoiceForm'
+            ]);
+
             Route::get('/generatePreview/{idInvoice}', [
                 'as' => 'invoice.generatePreview',
                 'uses' => 'InvoiceController@generatePreview'

@@ -175,6 +175,32 @@ class InvoiceController extends Controller
 
     }
 
+
+    public function getConfigurationInvoiceForm($idInvoice){
+        $data = [];
+        $invoice = $this->invoiceRepo->getById($idInvoice);
+        $contract = $this->contractRepo->getById($invoice->fk_id_contract, ['configurations']);
+
+        $otherChargesConfiguration = $contract->configurations->where('fk_id_configuration_subtype', GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE);
+
+        if(!($otherChargesConfiguration->count() > 0)){
+            $data['contract'] = $contract;
+            $data['invoice'] = $invoice;
+            $data['otherChargeConfigurations'] = $otherChargesConfiguration->load('charge');
+
+            $returnHTML = view('sections.invoices.form.configuration-form', $data)->render();
+            return response()->json(['status' => 200, 'html'=> $returnHTML]);
+
+        }else{
+            $response = [
+                'title' => trans('invoices.noEsPosibleConfigurarLaFactura'),
+                'message' => trans('invoices.elContratoNoHaSidoConfigurado'),
+                'status' => 400
+            ];
+            return response()->json($response);
+        }
+    }
+
     public function generatePreview($idInvoice){
 
         $invoice = $this->invoiceRepo->getById($idInvoice, ['contract']);
