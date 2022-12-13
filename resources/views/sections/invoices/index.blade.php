@@ -12,6 +12,7 @@
 <link href="{{ asset('css/card.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/radio_switch.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('css/general_tooltip.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/tabs.css') }}" rel="stylesheet" type="text/css" />
 @section('content')
     <div class="col-md-12" id="main-url" data-url="{{URL::to('/')}}">
         <div id="main-url-init" data-url="{{URL::to('/invoicing')}}"></div>
@@ -50,7 +51,7 @@
 
 @push('plugins')
     <script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('js/invoicing/invoices/invoices.js?v=2022-12-09') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/invoicing/invoices/invoices.js?v=2022-12-10') }}" type="text/javascript"></script>
 
     <!-- DataTables -->
     <script src=" {{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>

@@ -1,4 +1,4 @@
-<div id="main_contenido_formulario">
+<div id="main-content-form">
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice','enctype' => 'multipart/form-data']) !!}
         <div class="row">
 

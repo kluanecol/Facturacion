@@ -102,7 +102,7 @@ class InvoiceController extends Controller
         $finalDate = Carbon::parse($request->end_period);
 
         if($initialDate->diffInDays($finalDate) > 16){
-            return  $messages = [
+            return  $response = [
                 'message' => trans('general.errorAlGuardar'),
                 'title' => trans('invoices.periodoDeFacturacionMuyLargo')
             ];
@@ -110,7 +110,7 @@ class InvoiceController extends Controller
 
         if($request->is_new_version == false){
             if($this->invoiceRepo->getByContractAndPeriod($request->fk_id_contract, $request->initial_period, $request->end_period)->count() > 0){
-                return  $messages = [
+                return  $response = [
                     'message' => trans('general.errorAlGuardar'),
                     'title' =>  trans('invoices.periodoDeFacturacionRepetido')
                 ];
@@ -121,28 +121,28 @@ class InvoiceController extends Controller
         $result = $this->invoiceRepo->save($request);
 
         if (is_string($result)) {
-            $messages = [
+            $response = [
                 'message' => $result,
                 'title' => trans('general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
-            $messages = [
+            $response = [
                 'title' => trans('general.bienHecho'),
                 'message' => trans('general.guardadoConExito'),
                 'type'  => 'success',
                 'status' => $result
             ];
         }else{
-            $messages = [
+            $response = [
                 'message' => trans('general.algoSalioMal'),
                 'title' => trans('general.errorAlGuardar'),
                 'type'  => 'warning',
                 'status' => $result
             ];
         }
-        return response()->json($messages);
+        return response()->json($response);
 
     }
 
@@ -150,29 +150,59 @@ class InvoiceController extends Controller
         $result = $this->invoiceRepo->delete($request);
 
         if (is_string($result)) {
-            $messages = [
+            $response = [
                 'message' => $result,
                 'title' => trans('general.errorNoControlado'),
                 'type'  => 'warning',
             ];
         }
         else if($result == 200){
-            $messages = [
+            $response = [
                 'title' => trans('general.bienHecho'),
                 'message' => trans('general.borradoConExito'),
                 'type'  => 'success',
                 'status' => $result
             ];
         }else{
-            $messages = [
+            $response = [
                 'message' => trans('general.algoSalioMal'),
                 'title' => trans('general.errorAlEliminar'),
                 'type'  => 'warning',
                 'status' => $result
             ];
         }
-        return response()->json($messages);
+        return response()->json($response);
 
+    }
+
+
+    public function getConfigurationInvoiceForm($idInvoice){
+        $data = [];
+        $invoice = $this->invoiceRepo->getById($idInvoice);
+        $contract = $this->contractRepo->getById($invoice->fk_id_contract, ['configurations']);
+
+        $otherChargesConfiguration = $contract->configurations->where('fk_id_configuration_subtype', GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE);
+
+        if($otherChargesConfiguration->count() > 0){
+            $data['contract'] = $contract;
+            $data['invoice'] = $invoice;
+            $data['otherChargeConfigurations'] = $otherChargesConfiguration->load('charge');
+
+            $returnHTML = view('sections.invoices.form.configuration-form', $data)->render();
+            return response()->json(['status' => 200, 'html'=> $returnHTML]);
+
+        }else{
+            $response = [
+                'title' => trans('invoices.noEsPosibleConfigurarLaFactura'),
+                'message' => trans('invoices.elContratoNoHaSidoConfigurado'),
+                'status' => 400
+            ];
+            return response()->json($response);
+        }
+    }
+
+    public function saveConfiguration(Request $request){
+        dd($request->all());
     }
 
     public function generatePreview($idInvoice){

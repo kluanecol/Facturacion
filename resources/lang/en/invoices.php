@@ -11,5 +11,7 @@ return [
     'periodoDeFacturacionMuyLargo' => 'Long billing period (Maximum 16 days)',
     'periodoDeFacturacionRepetido' => 'Repeated Billing period (Generate a new version of the invoice)',
     'borrarFactura' => 'Are you sure you want to delete the invoice?',
-    'PRECIO' =>'PRICE'
+    'PRECIO' =>'PRICE',
+    'noEsPosibleConfigurarLaFactura' => 'It is not possible to set up the invoice',
+    'elContratoNoHaSidoConfigurado' => 'The contract does not have the necessary configurations parameterized',
 ];

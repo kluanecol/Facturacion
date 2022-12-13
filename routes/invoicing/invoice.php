@@ -29,6 +29,11 @@
                 'uses' => 'InvoiceController@save'
             ]);
 
+            Route::post('/saveConfiguration', [
+                'as' => 'invoice.saveConfiguration',
+                'uses' => 'InvoiceController@saveConfiguration'
+            ]);
+
             Route::post('/delete', [
                 'as' => 'invoice.delete',
                 'uses' => 'InvoiceController@delete'
@@ -37,6 +42,11 @@
             Route::get('/getPitsBySearch', [
                 'as' => 'invoice.getPitsBySearch',
                 'uses' => 'InvoiceController@getPitsBySearch'
+            ]);
+
+            Route::get('/getConfigurationInvoiceForm/{idInvoice}', [
+                'as' => 'invoice.getConfigurationInvoiceForm',
+                'uses' => 'InvoiceController@getConfigurationInvoiceForm'
             ]);
 
             Route::get('/generatePreview/{idInvoice}', [

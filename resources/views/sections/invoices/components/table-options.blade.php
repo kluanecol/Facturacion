@@ -13,7 +13,7 @@
 
 @if ($invoice->state < 2)
     <span class="tool" data-tip="{{trans('buttons.configurar')}}"tabindex="1">
-        <a href="{{route('contracts.configuration',$invoice->id)}}" class="btn  btn-info config-invoice" target="_blank"><i class="icofont-options"></i></a>
+        <a data-id="{{$invoice->id}}" class="btn  btn-info config-invoice" target="_blank"><i class="icofont-options"></i></a>
     </span>
 @endif
 
