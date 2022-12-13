@@ -169,6 +169,7 @@ return [
         App\Modules\Invoicing\Parametric\Providers\ParametricServiceProvider::class,
         App\Modules\Invoicing\ContractConfiguration\Providers\ContractConfigurationServiceProvider::class,
         App\Modules\Invoicing\Invoice\Providers\InvoiceServiceProvider::class,
+        App\Modules\Invoicing\InvoiceConfiguration\Providers\InvoiceConfigurationServiceProvider::class,
         //Rhomb admin providers
         App\Modules\Admin\Project\Providers\ProjectServiceProvider::class,
         App\Modules\Admin\Client\Providers\ClientServiceProvider::class,
