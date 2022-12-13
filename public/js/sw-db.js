@@ -11,11 +11,11 @@ function guardarMensaje( mensaje ) {
 
         console.log("Guardado",mensaje);
 
-//        self.registration.sync.register('nuevo-post');
+        self.registration.sync.register('nuevo-post');
 
-//       const newResp = { ok: true, offline: true };
+        const newResp = { ok: true, offline: true };
 
-//        return new Response( JSON.stringify(newResp) );
+        return new Response( JSON.stringify(newResp) );
 
     });
 

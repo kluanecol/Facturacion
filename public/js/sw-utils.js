@@ -42,44 +42,50 @@ function actualizaCacheStatico( staticCache, req, APP_SHELL_INMUTABLE ) {
 
 function manejoApi( cacheName, req){
 
-
     if (req.clone().method === 'POST') {
 
-        req.clone().formData().then( data => {
+        if ( self.registration.sync ) {
 
-            var object = {};
-            data.forEach((value, key) => {
-                // Reflect.has in favor of: object.hasOwnProperty(key)
-                if(!Reflect.has(object, key)){
-                    if (key  != '_token' ) {
-                        object[key] = value;
-                        return;
-                    }else{
-                        object['token'] = value;
-                        return;
+            console.log("request clone");
+
+            console.log(req.clone());
+
+            return req.clone().formData().then( data => {
+
+                var object = {};
+                data.forEach((value, key) => {
+                    // Reflect.has in favor of: object.hasOwnProperty(key)
+                    if(!Reflect.has(object, key)){
+                        if (key  != '_token' ) {
+                            object[key] = value;
+                            return;
+                        }else{
+                            object['token'] = value;
+                            return;
+                        }
                     }
+                    if(!Array.isArray(object[key])){
+                        object[key] = [object[key]];
+                    }
+                    object[key].push(value);
+                });
+                var json = JSON.stringify(object);
+               /*
+               const dataObject = Object.fromEntries(data.entries());
+               dataObject.topics = data.getAll("topics");
+                if (dataObject._token) {
+                    dataObject.token = dataObject._token;
+                    delete dataObject._token;
+
                 }
-                if(!Array.isArray(object[key])){
-                    object[key] = [object[key]];
-                }
-                object[key].push(value);
+               */
+
+
+               return guardarMensaje( object );
             });
-            var json = JSON.stringify(object);
-           /*
-           const dataObject = Object.fromEntries(data.entries());
-           dataObject.topics = data.getAll("topics");
-            if (dataObject._token) {
-                dataObject.token = dataObject._token;
-                delete dataObject._token;
-
-            }
-           */
-            console.log( object );
-
-           guardarMensaje( object );
-        });
-
-        return fetch( req );
+        } else {
+            return fetch( req );
+        }
     }
     else{
         return fetch( req ).then( res => {
