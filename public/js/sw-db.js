@@ -34,7 +34,7 @@ function postearMensajes() {
 
             const doc = row.doc;
 
-            const fetchPom =  fetch('api', {
+            const fetchPom =  fetch('http://127.0.0.1:8000/rhombapi/contract/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

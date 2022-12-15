@@ -73,14 +73,14 @@
         </div>
         <hr>
         <div class="form-actions noborder">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
                 <div class="form-group form-md-line-input has-info">
                     <button type="button" class='btn btn-danger close-alert-modal btn-block'>
                         {!! trans('buttons.cancelar') !!} <i class="fa fa-times-circle"  aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
                 <button type="button" class="btn btn-success btn-block" id="btn-add">
                     {!! trans('buttons.guardar') !!}  <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
