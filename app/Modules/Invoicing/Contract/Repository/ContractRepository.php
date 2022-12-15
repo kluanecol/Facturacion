@@ -53,15 +53,15 @@ class ContractRepository implements ContractInterface{
         $result = 200;
 
         try {
-            if (isset($request->id)) {
+            if (isset($request->id) && $request->id != "") {
+
                 $contract = Contract::find($request->id);
             }else{
                 $contract = new Contract();
             }
 
            $data = $request->only($contract->getFillable());
-           $data['fk_id_user'] = Auth::user()->id;
-           $data['fk_id_country'] = GeneralVariables::getCurrentCountryId();
+
 
            if ($contract->fill($data)->save()) {
                 $result = 200;
@@ -72,7 +72,7 @@ class ContractRepository implements ContractInterface{
            return $result;
 
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return $e->getTrace();
         }
     }
 

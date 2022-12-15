@@ -14,7 +14,8 @@
 <meta name="apple-mobile-web-app-title" content="{{ $config['short_name'] }}">
 <link rel="apple-touch-icon" href="{{ data_get(end($config['icons']), 'src') }}">
 
-
+<link href="{{ asset('bower_components/toastr/toastr.css') }}" rel="stylesheet" type="text/css" />
+<!--
 <link href="{{ $config['splash']['640x1136'] }}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="{{ $config['splash']['750x1334'] }}" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="{{ $config['splash']['1242x2208'] }}" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
@@ -25,11 +26,13 @@
 <link href="{{ $config['splash']['1668x2224'] }}" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="{{ $config['splash']['1668x2388'] }}" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="{{ $config['splash']['2048x2732'] }}" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+-->
 
 <!-- Tile for Win8 -->
 <meta name="msapplication-TileColor" content="{{ $config['background_color'] }}">
 <meta name="msapplication-TileImage" content="{{ data_get(end($config['icons']), 'src') }}">
-
+<script src=" {{ asset('plugins/jquery/jquery.min.js') }}" type="text/javascript" ></script>
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script type="text/javascript">
     // Initialize the service worker
     if ('serviceWorker' in navigator) {
@@ -43,4 +46,25 @@
             console.log('Laravel PWA: ServiceWorker registration failed: ', err);
         });
     }
+
+        function isOnline() {
+
+        if ( navigator.onLine ) {
+            console.log("ONLINE");
+            toastr.success("ONLINE", "LA APLICACIÓN TIENE CONEXIÓN");
+
+        } else{
+            console.log("OFFLINE");
+            toastr.warning("OFFLINE", "EN ESTE MOMENTO ESTÁS TRABAJANDO SIN CONEXIÓN");
+
+
+        }
+
+        }
+
+        window.addEventListener('online', isOnline() );
+        window.addEventListener('offline', isOnline() );
+
+        isOnline();
+
 </script>

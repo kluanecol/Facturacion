@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Modules\Invoicing\Contract\Repository\ContractInterface;
 use App\Modules\Invoicing\ConfigurationSubtype\Repository\ConfigurationSubtypeInterface;
 use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfigurationInterface;
-
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class ContractController extends Controller
@@ -56,6 +56,8 @@ class ContractController extends Controller
         $data['projects'] = $this->projectRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_corto', 'id');
         $data['clients'] = $this->clientRepo->getByCountry(GeneralVariables::getCurrentCountryId())->pluck('nombre_cliente', 'id');
         $data['years'] = GeneralVariables::yearsArray();
+        $data['fk_id_user'] = Auth::user()->id;
+        $data['fk_id_country'] = GeneralVariables::getCurrentCountryId();
 
         $returnHTML = view('sections.contracts.form.form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);

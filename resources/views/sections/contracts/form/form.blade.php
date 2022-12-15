@@ -3,6 +3,8 @@
         <div class="row">
 
             {!! Form::hidden('id', (isset($contract) ? $contract->id : null), ['id'=>'id_contract']) !!}
+            {!! Form::hidden('fk_id_user', (isset($fk_id_user) ? $fk_id_user : null), ['id'=>'fk_id_user']) !!}
+            {!! Form::hidden('fk_id_country', (isset($fk_id_country) ? $fk_id_country : null), ['id'=>'fk_id_country']) !!}
 
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">

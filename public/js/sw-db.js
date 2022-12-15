@@ -22,7 +22,6 @@ function guardarMensaje( mensaje ) {
 }
 
 
-// Postear mensajes a la API
 function postearMensajes() {
 
     const posteos = [];
@@ -34,7 +33,11 @@ function postearMensajes() {
 
             const doc = row.doc;
 
-            const fetchPom =  fetch('http://127.0.0.1:8000/rhombapi/contract/save', {
+            console.log("Document PouchDB");
+            console.log(doc);
+
+
+            const fetchPom =  fetch('http://127.0.0.1:8000/api/rhombapi/contract/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -17,7 +17,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('api/contract/save', [
-    'as' => 'contracts.save',
-    'uses' => 'ContractController@save'
-]);
+Route::group(['prefix' => 'rhombapi' ], function (){
+
+
+    $controller = "Invoicing\Contract\Controllers";
+
+    Route::group(['namespace' => $controller, 'prefix' => 'contract' ], function (){
+
+        Route::post('/save', [
+            'as' => 'contracts.save',
+            'uses' => 'ContractController@save'
+        ]);
+    });
+
+
+
+
+});
+
+
