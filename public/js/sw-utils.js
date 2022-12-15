@@ -46,10 +46,6 @@ function manejoApi( cacheName, req){
 
         if ( self.registration.sync ) {
 
-            console.log("request clone");
-
-            console.log(req.clone());
-
             return req.clone().formData().then( data => {
 
                 var object = {};
@@ -95,7 +91,7 @@ function manejoApi( cacheName, req){
                 return res.clone();
             }
             else{
-                console.log("else manejO API");
+                console.log("else manejo API");
                 return caches.match( req );
             }
         }).catch( err => {
