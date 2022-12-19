@@ -340,18 +340,19 @@ function saveInvoice(str_id_form) {
 
 function saveInvoiceConfiguration(str_id_form) {
 
+    var formData = [];
     var invoice_configurations = elementsToArrayByElement($('#tbody-configurations'), 'tr');
-    console.log(str_id_form);
 
-    console.log(invoice_configurations);
 
-    var datos = {
+    //formData = $('#'+str_id_form).serializeArray();
+
+    var data = {
         'invoice_configurations' : invoice_configurations,
-
+        'fk_id_invoice': $('#fk_id_invoice').val()
     }
     $.post(
         vURL+'/invoicing/invoice/saveConfiguration',
-        datos,
+        data,
         function(data) {
             swal({
                 title: data.title,
