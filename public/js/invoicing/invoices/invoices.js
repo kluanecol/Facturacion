@@ -692,30 +692,28 @@ function refreshInvoicesTable() {
 }
 
 function elementsToArrayByElement(container, row) {
-    var datos = [];
+    var data = [];
     container.find(row).each(function(i, element) {
-        let campos = elementsToArray(element);
-        if (Object.keys(campos).length != 0)
-            datos.push(campos);
+        let fields = elementsToArray(element);
+        if (Object.keys(fields).length != 0)
+            data.push(fields);
     });
-    return datos;
+    return data;
 }
 
 function elementsToArray(element) {
-    let campos = {};
+    let fields = {};
     $(element).find("input,textarea").each(function(i, input) {
         if (input.type == 'checkbox') {
-            campos[input.name] = input.checked;
+            fields[input.name] = input.checked;
         } else {
-            if ($(input).hasClass('formatoMoneda')) {
-                campos[input.name] = convertirANumero(input.value);
-            } else {
-                campos[input.name] = input.value;
-            }
+            fields[input.name] = input.value;
         }
     });
+
     $(element).find("select").each(function(i, input) {
-        campos[input.name] = input.value;
+        fields[input.name] = input.value;
     });
-    return campos;
+
+    return fields;
 }

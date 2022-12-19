@@ -1,6 +1,9 @@
 
 <div id="main-content-form" >
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice-configuration','enctype' => 'multipart/form-data']) !!}
+
+        {{ Form::hidden('fk_id_invoice', isset($invoice) ? $invoice->id : null ,['class'=>'fk_id_invoice']) }}
+
         <div style="max-height: 800px; overflow-y: scroll;">
             <table style="width: 100%;">
 
@@ -24,13 +27,12 @@
                         @foreach ($otherChargeConfigurations as $configuration)
                             <tr class="rowConfiguration">
                                 {{ Form::hidden('fk_id_pit', isset($pit) ? $pit : null ,['class'=>'fk_id_pit']) }}
-
+                                {{ Form::hidden('fk_id_configuration', isset($configuration) ? $configuration->id : null ,['class'=>'fk_id_configuration']) }}
                                 <td class="text-justify">
                                     <br>
                                     <strong>{{$configuration->charge->NameAndAuxiliaryName}}</strong>
                                     {!!Form::number('quantity', 0 ,['class'=>'form-control is_required','placeholder'=>'','required'=>'required','maxlength'=>'4'])!!}
                                 </td>
-
                             </tr>
 
                         @endforeach
