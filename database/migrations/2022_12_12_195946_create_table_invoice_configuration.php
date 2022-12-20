@@ -43,6 +43,7 @@ class CreateTableInvoiceConfiguration extends Migration
             $table->foreign('fk_id_second_parametric','fk_invoice_to_second_parametric')->references('id')->on('parametrics');
             $table->decimal('second_value', 16, 2)->nullable();
 
+            $table->unsignedBigInteger('fk_id_pit');
 
             $table->timestamps();
         });

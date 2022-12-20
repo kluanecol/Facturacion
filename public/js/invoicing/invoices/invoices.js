@@ -340,51 +340,51 @@ function saveInvoice(str_id_form) {
 
 function saveInvoiceConfiguration(str_id_form) {
 
-    var formData = [];
+
     var invoice_configurations = elementsToArrayByElement($('#tbody-configurations'), 'tr');
 
 
-    //formData = $('#'+str_id_form).serializeArray();
-
-    var data = {
+    var formData = {
         'invoice_configurations' : invoice_configurations,
-        'fk_id_invoice': $('#fk_id_invoice').val()
+        'fk_id_invoice': $('#fk_id_invoice').val(),
+        'fk_id_contract': $('#fk_id_contract').val()
     }
 
     $.post(
         vURL+'/invoicing/invoice/saveConfiguration',
-        data,
+        formData,
         function(data) {
-            swal({
-                title: data.title,
-                html: data.message,
-                type: data.type,
-                position: 'bottom-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
+            if (data.status == 200) {
+                Swal.fire({
+                    title: data.title,
+                    html: data.message,
+                    type: data.type,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
 
         }
     ).fail(function(data) {
-        if (data.status == 419) {
-            swal({
-                title: `¡Algo salió Mal!`,
-                html: `Ha caducado el tiempo de sesión, se recargará la página`,
+
+        if(data.status == 419){
+            Swal.fire({
+              title: $('#msg-something-went-wrong').val(),
+              html: $('#msg-session-expired').val(),
+              type: `error`,
+              showConfirmButton: false,
+              timer: 3000
+            }).then(()=>{
+              location.reload();
+            });
+        }else if(data.status == 500){
+            Swal.fire({
+                title: $('#msg-something-went-wrong').val(),
+                html: $('#msg-contact-support').val(),
                 type: `error`,
                 showConfirmButton: false,
                 timer: 3000
-            }).then(() => {
-                location.reload();
             });
-
-        } else if (data.status == 500) {
-            swal({
-                title: `¡Algo salió Mal!`,
-                html: `Ha ocurrido un error en el servidor, contacte al soporte de Pandora: ${data.responseJSON}`,
-                type: `error`,
-                //showConfirmButton: false,
-                //timer: 3000
-            })
         }
     });
 }

@@ -52,7 +52,7 @@ class InvoiceController extends Controller
             $this->machineRepo = $machineRepo;
             $this->generalParametricRepo = $generalParametricRepo;
             $this->activityRecordRepo = $activityRecordRepo;
-            $this->invoiceConfigurarionRepo = $invoiceConfigurarionRepo;
+            $this->invoiceConfigurationRepo = $invoiceConfigurationRepo;
             $this->contractConfigurationRepo = $contractConfigurationRepo;
         }
 
@@ -212,18 +212,16 @@ class InvoiceController extends Controller
 
     public function saveConfiguration(Request $request){
 
+        $result = 200;
         foreach($request->invoice_configurations as $configuration){
 
-            if($configuration->quantity > 0){
-                $contractConfiguration = $this->contractConfigurationRepo->getById($configuration->fk_id_configuration);
+            if($configuration['quantity'] > 0){
+                $contractConfiguration = $this->contractConfigurationRepo->getById($configuration['fk_id_configuration'])->makeHidden(['id','fk_id_contract','fk_id_user']);
 
                 $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice);
             }
 
         }
-
-
-
 
         if (is_string($result)) {
             $response = [

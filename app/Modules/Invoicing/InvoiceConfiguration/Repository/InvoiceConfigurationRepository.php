@@ -10,22 +10,21 @@ use Illuminate\Support\Facades\Auth;
 class InvoiceConfigurationRepository implements InvoiceConfigurationInterface{
 
 
-    public function saveConfiguration($request){
-
-        dd($request->all());
+    public function saveConfiguration($configuration, $contractConfiguration, $idInvoice){
 
         $result = 200;
 
         try {
 
-           $invoice = new Invoice();
+           $invoice = new InvoiceConfiguration();
 
-           $data = $request->only($invoice->getFillable());
+           $data = $contractConfiguration->toArray();
            $data['fk_id_user'] = Auth::user()->id;
-           $data['json_fk_machines'] = $data['json_fk_machines'];
-           $data['json_fk_pits'] = $data['json_fk_pits'];
+           $data['quantity'] = $configuration['quantity'];
+           $data['fk_id_pit'] = $configuration['fk_id_pit'];
+           $data['fk_id_invoice'] = $idInvoice;
 
-           if ($invoice->fill($data)->save()) {
+            if ($invoice->fill($data)->save()) {
                 $result = 200;
             }else{
                 $result = 400;
