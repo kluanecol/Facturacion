@@ -350,6 +350,7 @@ function saveInvoiceConfiguration(str_id_form) {
         'invoice_configurations' : invoice_configurations,
         'fk_id_invoice': $('#fk_id_invoice').val()
     }
+
     $.post(
         vURL+'/invoicing/invoice/saveConfiguration',
         data,

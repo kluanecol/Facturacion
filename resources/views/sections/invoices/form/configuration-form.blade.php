@@ -2,7 +2,7 @@
 <div id="main-content-form" >
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice-configuration','enctype' => 'multipart/form-data']) !!}
 
-        {{ Form::hidden('fk_id_invoice', isset($invoice) ? $invoice->id : null ,['class'=>'fk_id_invoice']) }}
+        {{ Form::hidden('fk_id_invoice', isset($invoice) ? $invoice->id : null ,['id'=>'fk_id_invoice']) }}
 
         <div style="max-height: 800px; overflow-y: scroll;">
             <table style="width: 100%;">

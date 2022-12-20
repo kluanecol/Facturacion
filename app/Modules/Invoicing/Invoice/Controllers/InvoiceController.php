@@ -13,6 +13,9 @@ use App\Modules\Production\OperationRecord\Repository\OperationRecordInterface;
 use App\Modules\Production\Machine\Repository\MachineInterface;
 use App\Modules\Admin\GeneralParametric\Repository\GeneralParametricInterface;
 use App\Modules\Production\ActivityRecord\Repository\ActivityRecordInterface;
+use App\Modules\Invoicing\InvoiceConfiguration\Repository\InvoiceConfigurationInterface;
+use App\Modules\Invoicing\ContractConfiguration\Repository\ContractConfigurationInterface;
+
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
@@ -25,6 +28,8 @@ class InvoiceController extends Controller
     private $operationRecordRepo;
     private $machineRepo;
     private $activityRecordRepo;
+    private $invoiceConfigurationRepo;
+    private $contractConfigurationRepo;
 
     function __construct(
             InvoiceInterface $invoiceRepo,
@@ -34,7 +39,9 @@ class InvoiceController extends Controller
             OperationRecordInterface  $operationRecordRepo,
             MachineInterface $machineRepo,
             GeneralParametricInterface $generalParametricRepo,
-            ActivityRecordInterface $activityRecordRepo
+            ActivityRecordInterface $activityRecordRepo,
+            InvoiceConfigurationInterface $invoiceConfigurationRepo,
+            ContractConfigurationInterface $contractConfigurationRepo
         )
         {
             $this->invoiceRepo = $invoiceRepo;
@@ -45,6 +52,8 @@ class InvoiceController extends Controller
             $this->machineRepo = $machineRepo;
             $this->generalParametricRepo = $generalParametricRepo;
             $this->activityRecordRepo = $activityRecordRepo;
+            $this->invoiceConfigurarionRepo = $invoiceConfigurarionRepo;
+            $this->contractConfigurationRepo = $contractConfigurationRepo;
         }
 
     public function index($idContract){
@@ -202,7 +211,44 @@ class InvoiceController extends Controller
     }
 
     public function saveConfiguration(Request $request){
-        dd($request->all());
+
+        foreach($request->invoice_configurations as $configuration){
+
+            if($configuration->quantity > 0){
+                $contractConfiguration = $this->contractConfigurationRepo->getById($configuration->fk_id_configuration);
+
+                $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice);
+            }
+
+        }
+
+
+
+
+        if (is_string($result)) {
+            $response = [
+                'message' => $result,
+                'title' => trans('general.errorNoControlado'),
+                'type'  => 'warning',
+            ];
+        }
+        else if($result == 200){
+            $response = [
+                'title' => trans('general.bienHecho'),
+                'message' => trans('general.guardadoConExito'),
+                'type'  => 'success',
+                'status' => $result
+            ];
+        }else{
+            $response = [
+                'message' => trans('general.algoSalioMal'),
+                'title' => trans('general.errorAlGuardar'),
+                'type'  => 'warning',
+                'status' => $result
+            ];
+        }
+        return response()->json($response);
+
     }
 
     public function generatePreview($idInvoice){
