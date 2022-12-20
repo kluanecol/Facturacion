@@ -27,6 +27,9 @@
 
                         @foreach ($otherChargeConfigurations as $configuration)
                             <tr class="rowConfiguration">
+                                {{--@if (isset($invoiceConfigurations) && $invoiceConfigurations->where)
+
+                                @endif--}}
                                 {{ Form::hidden('fk_id_pit', isset($pit) ? $pit : null ,['class'=>'fk_id_pit']) }}
                                 {{ Form::hidden('fk_id_configuration', isset($configuration) ? $configuration->id : null ,['class'=>'fk_id_configuration']) }}
                                 <td class="text-justify">

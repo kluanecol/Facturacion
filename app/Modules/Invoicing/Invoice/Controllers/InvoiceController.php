@@ -187,7 +187,7 @@ class InvoiceController extends Controller
 
     public function getConfigurationInvoiceForm($idInvoice){
         $data = [];
-        $invoice = $this->invoiceRepo->getById($idInvoice);
+        $invoice = $this->invoiceRepo->getById($idInvoice, ['configurations']);
         $contract = $this->contractRepo->getById($invoice->fk_id_contract, ['configurations']);
 
         $otherChargesConfiguration = $contract->configurations->where('fk_id_configuration_subtype', GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE);
@@ -196,6 +196,7 @@ class InvoiceController extends Controller
             $data['contract'] = $contract;
             $data['invoice'] = $invoice;
             $data['otherChargeConfigurations'] = $otherChargesConfiguration->load('charge');
+            $data['invoiceConfigurations'] = $invoice->configurations->where('fk_id_configuration_subtype', GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE);
 
             $returnHTML = view('sections.invoices.form.configuration-form', $data)->render();
             return response()->json(['status' => 200, 'html'=> $returnHTML]);
@@ -215,12 +216,8 @@ class InvoiceController extends Controller
         $result = 200;
         foreach($request->invoice_configurations as $configuration){
 
-            if($configuration['quantity'] > 0){
-                $contractConfiguration = $this->contractConfigurationRepo->getById($configuration['fk_id_configuration'])->makeHidden(['id','fk_id_contract','fk_id_user']);
-
-                $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice);
-            }
-
+            $contractConfiguration = $this->contractConfigurationRepo->getById($configuration['fk_id_configuration'])->makeHidden(['id','fk_id_contract','fk_id_user']);
+            $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice);
         }
 
         if (is_string($result)) {
