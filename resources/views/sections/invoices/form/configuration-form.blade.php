@@ -27,15 +27,20 @@
 
                         @foreach ($otherChargeConfigurations as $configuration)
                             <tr class="rowConfiguration">
-                                {{--@if (isset($invoiceConfigurations) && $invoiceConfigurations->where)
+                                @php
+                                    if (isset($invoiceConfigurations)) {
+                                        $config = $invoiceConfigurations->where('fk_id_pit', $pit)->where('fk_id_contract_configuration', $configuration->id)->first();
+                                    }else {
+                                        $config = null;
+                                    }
+                                @endphp
 
-                                @endif--}}
                                 {{ Form::hidden('fk_id_pit', isset($pit) ? $pit : null ,['class'=>'fk_id_pit']) }}
                                 {{ Form::hidden('fk_id_configuration', isset($configuration) ? $configuration->id : null ,['class'=>'fk_id_configuration']) }}
                                 <td class="text-justify">
                                     <br>
                                     <strong>{{$configuration->charge->NameAndAuxiliaryName}}</strong>
-                                    {!!Form::number('quantity', 0 ,['class'=>'form-control is_required','placeholder'=>'','required'=>'required','maxlength'=>'4'])!!}
+                                    {!!Form::number('quantity', isset($config) ? $config->quantity : 0 ,['class'=>'form-control is_required','placeholder'=>'','required'=>'required','maxlength'=>'4'])!!}
                                 </td>
                             </tr>
 

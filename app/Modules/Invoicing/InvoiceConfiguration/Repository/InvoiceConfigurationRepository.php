@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class InvoiceConfigurationRepository implements InvoiceConfigurationInterface{
 
 
-    public function saveConfiguration($configuration, $contractConfiguration, $idInvoice){
+    public function saveConfiguration($configuration, $contractConfiguration, $idInvoice, $idConfiguration){
 
         $result = 200;
 
@@ -23,6 +23,7 @@ class InvoiceConfigurationRepository implements InvoiceConfigurationInterface{
            $data['quantity'] = $configuration['quantity'];
            $data['fk_id_pit'] = $configuration['fk_id_pit'];
            $data['fk_id_invoice'] = $idInvoice;
+           $data['fk_id_contract_configuration'] = $idConfiguration;
 
             if ($invoice->fill($data)->save()) {
                 $result = 200;

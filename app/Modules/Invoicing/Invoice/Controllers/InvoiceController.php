@@ -217,7 +217,7 @@ class InvoiceController extends Controller
         foreach($request->invoice_configurations as $configuration){
 
             $contractConfiguration = $this->contractConfigurationRepo->getById($configuration['fk_id_configuration'])->makeHidden(['id','fk_id_contract','fk_id_user']);
-            $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice);
+            $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice, $configuration['fk_id_configuration']);
         }
 
         if (is_string($result)) {

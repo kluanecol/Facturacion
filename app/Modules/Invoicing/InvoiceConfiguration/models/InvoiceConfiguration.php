@@ -33,7 +33,9 @@ class InvoiceConfiguration extends Model
        'second_value',
        'charge_by_percentage',
        'json_fk_parametrics',
-       'quantity'
+       'quantity',
+       'fk_id_pit',
+       'fk_id_contract_configuration'
     ];
 
 
