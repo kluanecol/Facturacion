@@ -223,6 +223,15 @@ class InvoiceController extends Controller
                 $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice, $configuration['fk_id_configuration']);
             }
 
+            $contractConfigurations = $this->contractConfigurationRepo->getContractConfigurationsByIdContract($request->fk_id_contract);
+
+            if ($contractConfigurations->count() > 0){
+                foreach($contractConfigurations->where('fk_id_configuration_subtype','!=',GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE) as $contractConfiguration){
+                    $result = $this->invoiceConfigurationRepo->saveConfiguration(null, $contractConfiguration, $request->fk_id_invoice, $contractConfiguration->id);
+                }
+            }
+
+
             if (is_string($result)) {
                 $response = [
                     'message' => $result,
@@ -247,7 +256,15 @@ class InvoiceController extends Controller
             }
             return response()->json($response);
         }
-
+        else{
+            $response = [
+                'message' => trans('general.algoSalioMal'),
+                'title' => trans('general.errorAlGuardar'),
+                'type'  => 'warning',
+                'status' => $result
+            ];
+            return response()->json($response);
+        }
 
     }
 

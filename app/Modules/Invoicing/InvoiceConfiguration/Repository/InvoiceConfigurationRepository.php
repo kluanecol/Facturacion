@@ -20,8 +20,8 @@ class InvoiceConfigurationRepository implements InvoiceConfigurationInterface{
 
            $data = $contractConfiguration->toArray();
            $data['fk_id_user'] = Auth::user()->id;
-           $data['quantity'] = $configuration['quantity'];
-           $data['fk_id_pit'] = $configuration['fk_id_pit'];
+           $data['quantity'] = isset($configuration) ? $configuration['quantity'] : 0;
+           $data['fk_id_pit'] = isset($configuration) ? $configuration['fk_id_pit'] : null;
            $data['fk_id_invoice'] = $idInvoice;
            $data['fk_id_contract_configuration'] = $idConfiguration;
 
