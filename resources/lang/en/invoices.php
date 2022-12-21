@@ -14,4 +14,6 @@ return [
     'PRECIO' =>'PRICE',
     'noEsPosibleConfigurarLaFactura' => 'It is not possible to set up the invoice',
     'elContratoNoHaSidoConfigurado' => 'The contract does not have the necessary configurations parameterized',
+    'guardarConfigurada' =>'Are you sure you want to save the invoice with the configured settings?',
+    'guardarFactura' =>'Save invoice'
 ];

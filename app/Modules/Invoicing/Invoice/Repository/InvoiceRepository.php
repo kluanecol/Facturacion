@@ -105,5 +105,25 @@ class InvoiceRepository implements InvoiceInterface{
         }
     }
 
+    public function advanceStatus($request){
+        $result = 200;
+
+        try {
+
+           $invoice = Invoice::find($request->id_invoice);
+           $invoice->state =  $invoice->state + 1;
+
+           if ($invoice->save()) {
+                $result = 200;
+            }else{
+                $result = 400;
+           }
+
+           return $result;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
 }

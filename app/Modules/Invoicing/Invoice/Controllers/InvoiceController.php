@@ -437,4 +437,35 @@ class InvoiceController extends Controller
 
         })->export('xlsx');
     }
+
+    public function saveConfiguratedInvoice(Request $request){
+
+        $result = $this->invoiceRepo->advanceStatus($request);
+
+        if (is_string($result)) {
+            $response = [
+                'message' => $result,
+                'title' => trans('general.errorNoControlado'),
+                'type'  => 'warning',
+            ];
+        }
+        else if($result == 200){
+            $response = [
+                'title' => trans('general.bienHecho'),
+                'message' => trans('general.guardadoConExito'),
+                'type'  => 'success',
+                'status' => $result
+            ];
+        }else{
+            $response = [
+                'message' => trans('general.algoSalioMal'),
+                'title' => trans('general.errorAlGuardar'),
+                'type'  => 'warning',
+                'status' => $result
+            ];
+        }
+        return response()->json($response);
+
+    }
+
 }

@@ -14,4 +14,6 @@ return [
     'PRECIO' =>'PRECIO',
     'noEsPosibleConfigurarLaFactura' => 'No es posible configurar la factura',
     'elContratoNoHaSidoConfigurado' => 'El contrato no tiene parametrizadas las configuraciones necesarias',
+    'guardarConfigurada' =>'¿Está seguro que quiere guardar la factura con las configuraciones parametrizadas?',
+    'guardarFactura' =>'Guardar factura'
 ];
