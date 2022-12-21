@@ -43,7 +43,7 @@ class InvoiceConfigurationRepository implements InvoiceConfigurationInterface{
         $configurations = InvoiceConfiguration::where('fk_id_invoice', $idInvoice)->get();
 
         if ($configurations->count() > 0) {
-            return $configurations->delete();
+            return InvoiceConfiguration::where('fk_id_invoice', $idInvoice)->delete();
         }else{
             return true;
         }

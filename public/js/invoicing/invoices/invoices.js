@@ -360,10 +360,10 @@ function saveInvoiceConfiguration(str_id_form) {
                     html: data.message,
                     type: data.type,
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 1000
                 });
             }
-
+            table_invoices.ajax.reload();
         }
     ).fail(function(data) {
 
