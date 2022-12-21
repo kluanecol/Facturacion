@@ -38,4 +38,9 @@ class InvoiceConfigurationRepository implements InvoiceConfigurationInterface{
         }
     }
 
+    public function deleteAllByIdInvoice($idInvoice){
+
+        return InvoiceConfiguration::where('fk_id_invoice', $idInvoice)->delete();
+    }
+
 }

@@ -214,35 +214,40 @@ class InvoiceController extends Controller
     public function saveConfiguration(Request $request){
 
         $result = 200;
-        foreach($request->invoice_configurations as $configuration){
 
-            $contractConfiguration = $this->contractConfigurationRepo->getById($configuration['fk_id_configuration'])->makeHidden(['id','fk_id_contract','fk_id_user']);
-            $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice, $configuration['fk_id_configuration']);
+        if ($this->invoiceConfigurationRepo->deleteAllByIdInvoice($request->fk_id_invoice)) {
+
+            foreach($request->invoice_configurations as $configuration){
+
+                $contractConfiguration = $this->contractConfigurationRepo->getById($configuration['fk_id_configuration'])->makeHidden(['id','fk_id_contract','fk_id_user']);
+                $result = $this->invoiceConfigurationRepo->saveConfiguration($configuration, $contractConfiguration, $request->fk_id_invoice, $configuration['fk_id_configuration']);
+            }
+
+            if (is_string($result)) {
+                $response = [
+                    'message' => $result,
+                    'title' => trans('general.errorNoControlado'),
+                    'type'  => 'warning',
+                ];
+            }
+            else if($result == 200){
+                $response = [
+                    'title' => trans('general.bienHecho'),
+                    'message' => trans('general.guardadoConExito'),
+                    'type'  => 'success',
+                    'status' => $result
+                ];
+            }else{
+                $response = [
+                    'message' => trans('general.algoSalioMal'),
+                    'title' => trans('general.errorAlGuardar'),
+                    'type'  => 'warning',
+                    'status' => $result
+                ];
+            }
+            return response()->json($response);
         }
 
-        if (is_string($result)) {
-            $response = [
-                'message' => $result,
-                'title' => trans('general.errorNoControlado'),
-                'type'  => 'warning',
-            ];
-        }
-        else if($result == 200){
-            $response = [
-                'title' => trans('general.bienHecho'),
-                'message' => trans('general.guardadoConExito'),
-                'type'  => 'success',
-                'status' => $result
-            ];
-        }else{
-            $response = [
-                'message' => trans('general.algoSalioMal'),
-                'title' => trans('general.errorAlGuardar'),
-                'type'  => 'warning',
-                'status' => $result
-            ];
-        }
-        return response()->json($response);
 
     }
 
