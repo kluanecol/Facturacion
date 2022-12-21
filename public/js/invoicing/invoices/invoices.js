@@ -106,9 +106,9 @@ function getInvoiceForm(id_contract){
             } else {
                 $('body').loading('stop');
                 Swal.fire({
-                    type: 'error',
-                    title: $('#msg-something-went-wrong').val(),
-                    text: $('#msg-error-getting-data').val(),
+                    type: 'warning',
+                    title:  $('#msg-something-went-wrong').val(),
+                    text: $('#msg-invoice-version-created').val(),
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -187,11 +187,10 @@ function getNewInvoiceVersionForm(id_invoice){
             } else {
                 $('body').loading('stop');
                 Swal.fire({
-                    type: 'error',
-                    title: $('#msg-something-went-wrong').val(),
-                    text: $('#msg-error-getting-data').val(),
-                    showConfirmButton: false,
-                    timer: 2000
+                    type: 'warning',
+                    title:  $('#msg-invoice-version-created').val(),
+                    text: $('#msg-something-went-wrong').val(),
+                    showConfirmButton: true
                 })
             }
         }

@@ -83,7 +83,7 @@ class InvoiceController extends Controller
 
     public function getNewInvoiceVersionForm(Request $request){
 
-        $invoice = $this->invoiceRepo->getById($request->id_invoice);
+        $invoice = $this->invoiceRepo->getById($request->id_invoice,  ['versions']);
 
         $data['contract'] = $this->contractRepo->getById($invoice->fk_id_contract);
         $data['machines'] = $this->machineProjectRepo->getByActiveByProjectId( $data['contract']->fk_id_project, ['machine'])->pluck('machine.code_name','machine.id');
@@ -91,7 +91,11 @@ class InvoiceController extends Controller
         $data['isNewVersion'] = 1;
         $data['version'] = 2 + $invoice->versions->count();
 
-
+        if ($invoice->versions->count() > 0) {
+            if ($invoice->versions->where('state', GeneralVariables::INVOICE_STATE_CREATED)->count() > 0) {
+                return response()->json(['success' => false]);
+            }
+        }
         $returnHTML = view('sections.invoices.form.general-form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
     }

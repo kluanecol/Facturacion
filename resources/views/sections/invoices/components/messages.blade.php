@@ -3,3 +3,4 @@
 <input type="hidden" id="msg-invoice-no-pits" value="{!! trans('invoices.sinPozos') !!}">
 <input type="hidden" id="msg-invoice-save-configurated" value="{!! trans('invoices.guardarConfigurada') !!}">
 <input type="hidden" id="msg-invoice-save" value="{!! trans('invoices.guardarFactura') !!}">
+<input type="hidden" id="msg-invoice-version-created" value="{!! trans('invoices.versionCreadaActiva') !!}">
