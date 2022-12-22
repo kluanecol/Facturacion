@@ -18,7 +18,7 @@ class CreateTableInvoiceConfiguration extends Migration
             $table->bigIncrements('id');
 
 
-            $table->unsignedBigInteger('fk_id_pit')->nullable();
+            $table->string('fk_id_pit',255)->nullable();
             $table->unsignedBigInteger('fk_id_contract_configuration')->nullable();
             $table->decimal('quantity', 16, 2)->default(0);
 
