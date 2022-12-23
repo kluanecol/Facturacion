@@ -91,11 +91,16 @@ class InvoiceController extends Controller
         $data['isNewVersion'] = 1;
         $data['version'] = 2 + $invoice->versions->count();
 
+        if ($invoice->state == GeneralVariables::INVOICE_STATE_CREATED) {
+            return response()->json(['success' => false]);
+        }
+
         if ($invoice->versions->count() > 0) {
             if ($invoice->versions->where('state', GeneralVariables::INVOICE_STATE_CREATED)->count() > 0) {
                 return response()->json(['success' => false]);
             }
         }
+
         $returnHTML = view('sections.invoices.form.general-form', $data)->render();
         return response()->json(['success' => true, 'html'=>$returnHTML]);
     }
