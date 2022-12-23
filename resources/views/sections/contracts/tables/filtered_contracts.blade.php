@@ -12,6 +12,7 @@
             <th class="text-center"><strong>Id</strong></th>
             <th class="text-center"><strong>{!! trans('labels.proyecto') !!}</strong></th>
             <th class="text-center"><strong>{!! trans('labels.cliente') !!}</strong></th>
+            <th class="text-center"><strong>{!! trans('labels.nombre') !!}</strong></th>
             <th class="text-center"><strong>{!! trans('labels.fechaInicial') !!}</strong></th>
             <th class="text-center"><strong>{!! trans('labels.fechaFinal') !!}</strong></th>
             <th class="text-center"><strong>{!! trans('labels.ano') !!}</strong></th>

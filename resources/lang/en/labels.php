@@ -45,4 +45,5 @@ return [
     'pozos' => 'Pits',
     'codigo' => 'Code',
     'version' => 'Version',
+    'nombreNumeroContrato' => 'Name or contract number',
 ];
