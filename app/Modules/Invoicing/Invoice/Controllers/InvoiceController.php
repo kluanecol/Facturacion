@@ -274,12 +274,20 @@ class InvoiceController extends Controller
 
     public function generatePreview($idInvoice){
 
-        $invoice = $this->invoiceRepo->getById($idInvoice, ['contract']);
+        $invoice = $this->invoiceRepo->getById($idInvoice, ['contract', 'configurations.diameter','configurations.diameter']);
         $contract = $invoice->contract->load('client','project','configurations.diameter');
         $machines = $this->machineRepo->getByIdsArray($invoice->json_fk_machines);
         $dailyRecords = $this->dailyRecordRepo->getIdsByInvoiceObjectAndProjectId($invoice, $contract->fk_id_project);
-        $drillingConfigurations = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_DRILLING,GeneralVariables::ID_CONFIGURATION_CASING]);
-        $currency = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_CURRENCY])->first();
+
+        if($invoice->configurations->count() > 0){
+
+            $drillingConfigurations = $invoice->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_DRILLING,GeneralVariables::ID_CONFIGURATION_CASING]);
+            $currency = $invoice->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_CURRENCY])->first();
+        }else{
+            $drillingConfigurations = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_DRILLING,GeneralVariables::ID_CONFIGURATION_CASING]);
+            $currency = $contract->configurations->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_CURRENCY])->first();
+        }
+
 
         Excel::load(public_path('excel_templates/INVOICE_V1.xlsx'), function ($file) use ($contract, $invoice, $dailyRecords, $machines, $drillingConfigurations, $currency) {
 
@@ -296,6 +304,9 @@ class InvoiceController extends Controller
                     foreach ($invoice->json_fk_pits as $key => $pitName) {
 
                         $machinePitOperation = $operationRecords->where('hoyo', $pitName);
+                        $pitOtherCharges =  $invoice->configurations
+                            ->where('fk_id_pit', $pitName)
+                            ->whereIn('fk_id_configuration_subtype', [GeneralVariables::ID_CONFIGURATION_OTHER_CHARGE]);
 
                         if ($machinePitOperation->count() > 0) {
 
@@ -412,10 +423,33 @@ class InvoiceController extends Controller
 
                             }
 
+                            //HIDE ROWS
                             $rowsLimit = 176;
                             for ($i=($row); $i <= ($rowsLimit); $i++) {
                                 $workSheet->getRowDimension($i)->setVisible(false);
                             }
+
+                            //OTHER CHARGES ROWS
+                            if($pitOtherCharges->count() > 0) {
+                                $row = 235;
+
+                                foreach($pitOtherCharges as $otherCharge) {
+
+                                    $workSheet->setCellValue('D'.$row, strtoupper($otherCharge->charge->name));
+                                    $workSheet->setCellValue('H'.$row, strtoupper($otherCharge->charge->auxiliarParametric->name));
+                                    $workSheet->setCellValue('J'.$row, strtoupper($otherCharge->quantity));
+                                    $workSheet->setCellValue('L'.$row, strtoupper($otherCharge->value));
+
+                                    $row++;
+                                }
+                            }
+                            //HIDE ROWS
+                            $rowsLimit = 240;
+                            for ($i=($row); $i <= ($rowsLimit); $i++) {
+                                $workSheet->getRowDimension($i)->setVisible(false);
+                            }
+
+
 
                             /*ACTIVITIES
                             $activities = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
