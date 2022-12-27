@@ -409,11 +409,15 @@ class InvoiceController extends Controller
                                 foreach ($configurationGroup->sortBy('initial_range') as $configuration) {
                                     $workSheet->setCellValue('F'.$row, $configuration->initial_range);
                                     $workSheet->setCellValue('G'.$row, $configuration->final_range);
-                                    /*
-                                    $workSheet->setCellValue('I'.$row,
-                                        $machinePitOperation->where('id_param_diametro',$idConfigurationDiameter)->sum('total')
-                                    );
-                                    */
+
+                                    $operationsInRange = $machinePitOperation
+                                    ->where('id_param_diametro',$configurationDiameter->diameter->id)
+                                    ->where('desde','>=', $configuration->initial_range)
+                                    ->where('desde','<=', $configuration->final_range)
+                                    ->sum('total');
+
+                                    $workSheet->setCellValue('I'.$row, $operationsInRange);
+
                                     $workSheet->setCellValue('L'.$row, $configuration->value);
 
                                     $row++;
