@@ -401,23 +401,45 @@ class InvoiceController extends Controller
                             $initialRow = $row;
                             foreach ($drillingConfigurations->groupBy('fk_id_diameter') as $configurationGroup) {
 
+                                $metersRangeAbove = [];
                                 $configurationDiameter = $configurationGroup->first();
 
                                 $workSheet->setCellValue('C'.$row, $configurationDiameter->diameter->name);
                                 $workSheet->setCellValue('D'.$row, $machinePitOperation->where('id_param_diametro', $configurationDiameter->diameter->id)->sum('total'));
 
                                 foreach ($configurationGroup->sortBy('initial_range') as $configuration) {
-                                    $workSheet->setCellValue('F'.$row, $configuration->initial_range);
-                                    $workSheet->setCellValue('G'.$row, $configuration->final_range);
 
                                     $operationsInRange = $machinePitOperation
-                                    ->where('id_param_diametro',$configurationDiameter->diameter->id)
-                                    ->where('desde','>=', $configuration->initial_range)
-                                    ->where('desde','<=', $configuration->final_range)
-                                    ->sum('total');
+                                        ->where('id_param_diametro',$configurationDiameter->diameter->id)
+                                        ->where('desde','>=', $configuration->initial_range)
+                                        ->where('desde','<=', $configuration->final_range);
 
-                                    $workSheet->setCellValue('I'.$row, $operationsInRange);
+                                    $operationOutOfRange = $operationsInRange->where('hasta','>', $configuration->final_range)->first();
 
+                                    $meters = $operationsInRange->sum('total');
+
+                                    if (isset($metersRangeAbove['configuration']) && $metersRangeAbove['configuration'] != $configuration->id ) {
+
+                                        $meters = $meters + $metersRangeAbove['meters'];
+                                        $metersRangeAbove['configuration'] = null;
+                                    }
+
+                                    $metersOutOfRange = 0;
+                                    if ($operationOutOfRange != null){
+                                        $metersOutOfRange = $operationOutOfRange->hasta - $configuration->final_range;
+                                    }
+
+
+                                    if($metersOutOfRange > 0){
+                                        $meters = $meters - $metersOutOfRange;
+
+                                        $metersRangeAbove['configuration'] = $configuration->id;
+                                        $metersRangeAbove['meters'] = $metersOutOfRange;
+                                    }
+
+                                    $workSheet->setCellValue('F'.$row, $configuration->initial_range);
+                                    $workSheet->setCellValue('G'.$row, $configuration->final_range);
+                                    $workSheet->setCellValue('I'.$row, $meters);
                                     $workSheet->setCellValue('L'.$row, $configuration->value);
 
                                     $row++;
