@@ -22,7 +22,8 @@ class Contract extends Model
         'fk_id_client',
         'initial_date',
         'end_date',
-        'year'
+        'year',
+        'name'
     ];
 
     public $timestamps = true;

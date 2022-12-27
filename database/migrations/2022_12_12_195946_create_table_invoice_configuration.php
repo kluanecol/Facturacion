@@ -17,7 +17,11 @@ class CreateTableInvoiceConfiguration extends Migration
 
             $table->bigIncrements('id');
 
+
+            $table->string('fk_id_pit',255)->nullable();
+            $table->unsignedBigInteger('fk_id_contract_configuration')->nullable();
             $table->decimal('quantity', 16, 2)->default(0);
+
 
             $table->unsignedBigInteger('fk_id_invoice');
             $table->foreign('fk_id_invoice','fk_invoice_to_configuration')->references('id')->on('invoices')->onDelete('cascade');
@@ -42,7 +46,6 @@ class CreateTableInvoiceConfiguration extends Migration
             $table->unsignedBigInteger('fk_id_second_parametric')->nullable();
             $table->foreign('fk_id_second_parametric','fk_invoice_to_second_parametric')->references('id')->on('parametrics');
             $table->decimal('second_value', 16, 2)->nullable();
-
 
             $table->timestamps();
         });

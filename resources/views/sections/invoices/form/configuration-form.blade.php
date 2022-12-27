@@ -1,6 +1,10 @@
 
 <div id="main-content-form" >
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-invoice-configuration','enctype' => 'multipart/form-data']) !!}
+
+        {{ Form::hidden('fk_id_invoice', isset($invoice) ? $invoice->id : null ,['id'=>'fk_id_invoice']) }}
+        {{ Form::hidden('fk_id_contract', isset($contract) ? $contract->id : null ,['id'=>'fk_id_contract']) }}
+
         <div style="max-height: 800px; overflow-y: scroll;">
             <table style="width: 100%;">
 
@@ -23,14 +27,21 @@
 
                         @foreach ($otherChargeConfigurations as $configuration)
                             <tr class="rowConfiguration">
-                                {{ Form::hidden('fk_id_pit', isset($pit) ? $pit : null ,['class'=>'fk_id_pit']) }}
+                                @php
+                                    if (isset($invoiceConfigurations)) {
+                                        $config = $invoiceConfigurations->where('fk_id_pit', $pit)->where('fk_id_contract_configuration', $configuration->id)->first();
+                                    }else {
+                                        $config = null;
+                                    }
+                                @endphp
 
+                                {{ Form::hidden('fk_id_pit', isset($pit) ? $pit : null ,['class'=>'fk_id_pit']) }}
+                                {{ Form::hidden('fk_id_configuration', isset($configuration) ? $configuration->id : null ,['class'=>'fk_id_configuration']) }}
                                 <td class="text-justify">
                                     <br>
                                     <strong>{{$configuration->charge->NameAndAuxiliaryName}}</strong>
-                                    {!!Form::number('quantity', 0 ,['class'=>'form-control is_required','placeholder'=>'','required'=>'required','maxlength'=>'4'])!!}
+                                    {!!Form::number('quantity', isset($config) ? $config->quantity : 0 ,['class'=>'form-control is_required','placeholder'=>'','required'=>'required','maxlength'=>'4'])!!}
                                 </td>
-
                             </tr>
 
                         @endforeach

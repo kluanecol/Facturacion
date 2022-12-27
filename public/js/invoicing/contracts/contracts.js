@@ -281,6 +281,7 @@ function refreshContractsTable(postData) {
             {data: 'id', name: 'id'},
             {data: 'project_name', name: 'project_name'},
             {data: 'client_name', name: 'client_name'},
+            {data: 'name', name: 'name'},
             {data: 'initial_date', name: 'initial_date'},
             {data: 'end_date', name: 'end_date'},
             {data: 'year', name: 'year'},

@@ -45,4 +45,5 @@ return [
     'pozos' => 'Pozos',
     'codigo' => 'Código',
     'version' => 'Versión',
+    'nombreNumeroContrato' => 'Nombre o número del contrato',
 ];

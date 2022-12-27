@@ -19,7 +19,7 @@ class InvoiceConfiguration extends Model
     protected $primaryKey= 'id';
 
     protected $fillable = [
-       'fk_id_contract',
+       'fk_id_invoice',
        'fk_id_configuration_subtype',
        'fk_id_parametric',
        'fk_id_diameter',
@@ -33,7 +33,9 @@ class InvoiceConfiguration extends Model
        'second_value',
        'charge_by_percentage',
        'json_fk_parametrics',
-       'quantity'
+       'quantity',
+       'fk_id_pit',
+       'fk_id_contract_configuration'
     ];
 
 

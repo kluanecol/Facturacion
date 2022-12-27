@@ -26,6 +26,7 @@ class ContractRepository implements ContractInterface{
                 'id' => $contract->id,
                 'project_name' => $contract->project->nombre_corto,
                 'client_name' => $contract->client->nombre_cliente,
+                'name' => $contract->name != NULL ? $contract->name : "NO",
                 'initial_date' => $contract->initial_date,
                 'end_date' => $contract->end_date,
                 'year' => $contract->year,

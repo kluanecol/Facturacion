@@ -1,5 +1,6 @@
 <div id="main_contenido_formulario">
     {!! Form::open(['method' => 'POST', 'role' => 'form', 'id' => 'form-contract','enctype' => 'multipart/form-data']) !!}
+
         <div class="row">
 
             {!! Form::hidden('id', (isset($contract) ? $contract->id : null), ['id'=>'id_contract']) !!}
@@ -19,6 +20,7 @@
                     <span class="help-block"></span>
                 </div>
             </div>
+
             <div class="col-md-6">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
                     <label for="fk_id_client">{!! trans('labels.cliente') !!}(*):</label>
@@ -32,6 +34,22 @@
                     <span class="help-block"></span>
                 </div>
             </div>
+
+            <div class="col-md-12">
+                <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">
+                    <label for="name">{!! trans('labels.nombreNumeroContrato') !!} ( {!! trans('labels.opcional') !!} ):</label>
+                    {!! Form::text('name', isset($contract) ? $contract->name : null,
+                        [
+                            'class' => 'form-control',
+                            'id' => 'name',
+                            'maxlength'=> '255',
+                            'Style' => 'width: 100%;'
+                        ])
+                    !!}
+                    <span class="help-block"></span>
+                </div>
+            </div>
+
             <div class="col-md-12"><br></div>
             <div class="col-md-4">
                 <div class="form-group form-md-line-input has-info text-primary" style="text-align: left;">

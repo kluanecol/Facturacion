@@ -19,7 +19,13 @@ Route::get('log_out', 'Auth\LoginController@logout')->name('log_out');
 Route::group(['middleware' => 'auth'], function()
 {
 
+
+
     Route::get('/', function () {
+        return view('home');
+    });
+
+    Route::get('/home', function () {
         return view('home');
     });
 

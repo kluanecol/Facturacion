@@ -54,6 +54,11 @@
                 'uses' => 'InvoiceController@generatePreview'
             ]);
 
+            Route::post('/saveConfiguratedInvoice', [
+                'as' => 'invoice.saveConfiguratedInvoice',
+                'uses' => 'InvoiceController@saveConfiguratedInvoice'
+            ]);
+
         });
 
     });

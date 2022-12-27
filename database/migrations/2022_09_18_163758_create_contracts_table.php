@@ -19,6 +19,7 @@ class CreateContractsTable extends Migration
             $table->date('initial_date');
             $table->date('end_date');
             $table->smallInteger('year');
+            $table->string('name', 255)->nullable();
 
             $table->unsignedBigInteger('fk_id_user');
             $table->unsignedBigInteger('fk_id_project');

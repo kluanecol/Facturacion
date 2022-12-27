@@ -5,6 +5,7 @@ namespace App\Modules\Invoicing\Invoice\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Invoicing\Contract\Models\Contract;
+use App\Modules\Invoicing\InvoiceConfiguration\Models\InvoiceConfiguration;
 
 class Invoice extends Model
 {
@@ -52,5 +53,10 @@ class Invoice extends Model
     public function versions()
     {
         return $this->hasMany(Invoice::class, 'fk_id_parent_invoice');
+    }
+
+    public function configurations()
+    {
+        return $this->hasMany(InvoiceConfiguration::class, 'fk_id_invoice', 'id');
     }
 }
