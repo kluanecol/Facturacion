@@ -446,9 +446,13 @@ class InvoiceController extends Controller
                                 }
 
                                 if ($configurationGroup->count() > 1) {
-                                    $workSheet->mergeCells('C'.$initialRow.':C'.($row - 1));
-                                    $workSheet->mergeCells('D'.$initialRow.':D'.($row - 1));
-                                    $workSheet->mergeCells('E'.$initialRow.':E'.($row - 1));
+                                    $lastRow = ($row - 1);
+                                    $workSheet->mergeCells('C'.$initialRow.':C'.$lastRow);
+                                    $workSheet->mergeCells('D'.$initialRow.':D'.$lastRow);
+                                    $workSheet->mergeCells('E'.$initialRow.':E'.$lastRow);
+
+                                    $workSheet->setCellValue('E'.$initialRow, '=SUM(M'.$initialRow.':N'.$lastRow.')');
+
                                     $initialRow = $row;
                                 }
 
