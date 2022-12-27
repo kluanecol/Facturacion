@@ -327,6 +327,7 @@ class InvoiceController extends Controller
                             $workSheet->setCellValue('I4',strtoupper($machine->name));
                             $workSheet->setCellValue('N3', strtoupper($contract->client->name));
                             $workSheet->setCellValue('N4', strtoupper($contract->project->name));
+                            $workSheet->setCellValue('N5', strtoupper($contract->name));
                             $workSheet->setCellValue('N6', strtoupper($contract->project->location));
                             //pit data
                             $workSheet->setCellValue('W3', strtoupper($pitName));
