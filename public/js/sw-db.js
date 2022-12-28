@@ -13,7 +13,14 @@ function guardarMensaje( mensaje ) {
 
         self.registration.sync.register('nuevo-post');
 
-        const newResp = { ok: true, offline: true };
+        const newResp = {
+            ok: true,
+            offline: true,
+            status: 200,
+            title: 'Datos guardados sin conexiòn',
+            message: 'Se sincronizaran los datos cuando recupere la conexión a internet',
+            type: 'success'
+        };
 
         return new Response( JSON.stringify(newResp) );
 
