@@ -37,7 +37,7 @@ function postearMensajes() {
             console.log(doc);
 
 
-            const fetchPom =  fetch('http://127.0.0.1:8000/api/rhombapi/contract/save', {
+            const fetchPom =  fetch('https://rhomboffline.kluanecorporatetraining.com/public/api/rhombapi/contract/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
