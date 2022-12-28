@@ -16,6 +16,7 @@ var staticCacheName = "pwa-v" + new Date().getTime();
         '/public/css/app.css',
         '/public/js/app.js',
         '/public/js/sw-utils.js',
+        '/public/invoicing/contract/getContractForm?id_contract=',
         '/public/js/utils/pouch-db.min.js',
         '/public/images/icons/icon-72x72.png',
         '/public/images/icons/icon-96x96.png',
