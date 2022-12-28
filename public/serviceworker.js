@@ -4,7 +4,7 @@ importScripts('js/sw-db.js');
 importScripts('js/sw-utils.js');
 
 const STATIC_CACHE    = 'static-v2';
-const DYNAMIC_CACHE   = 'dynamic-v22';
+const DYNAMIC_CACHE   = 'dynamic-v23';
 const INMUTABLE_CACHE = 'inmutable-v2';
 
 
