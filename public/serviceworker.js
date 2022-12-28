@@ -15,7 +15,7 @@ var staticCacheName = "pwa-v" + new Date().getTime();
         '/public/offline',
         '/public/css/app.css',
         '/public/js/app.js',
-        '/publicjs/sw-utils.js',
+        '/public/js/sw-utils.js',
         '/public/js/utils/pouch-db.min.js',
         '/public/images/icons/icon-72x72.png',
         '/public/images/icons/icon-96x96.png',
