@@ -12,11 +12,11 @@ const INMUTABLE_CACHE = 'inmutable-v2';
 var staticCacheName = "pwa-v" + new Date().getTime();
 
     APP_SHELL = [
-        '/offline',
-        '/css/app.css',
-        '/js/app.js',
-        'js/sw-utils.js',
-        'js/utils/pouch-db.min.js',
+        '/public/offline',
+        '/public/css/app.css',
+        '/public/js/app.js',
+        '/publicjs/sw-utils.js',
+        '/public/js/utils/pouch-db.min.js',
         '/public/images/icons/icon-72x72.png',
         '/public/images/icons/icon-96x96.png',
         '/public/images/icons/icon-128x128.png',
