@@ -44,7 +44,7 @@ function manejoApi( cacheName, req){
 
     if (req.clone().method === 'POST') {
 
-        if ( self.registration.sync ) {
+        if ( self.registration.sync && !navigator.onLine) {
 
             return req.clone().formData().then( data => {
 
@@ -79,7 +79,8 @@ function manejoApi( cacheName, req){
 
                return guardarMensaje( object );
             });
-        } else {
+        }
+        else {
             return fetch( req );
         }
     }

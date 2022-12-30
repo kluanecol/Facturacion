@@ -4,7 +4,7 @@ importScripts('js/sw-db.js');
 importScripts('js/sw-utils.js');
 
 const STATIC_CACHE    = 'static-v2';
-const DYNAMIC_CACHE   = 'dynamic-v22';
+const DYNAMIC_CACHE   = 'dynamic-v23';
 const INMUTABLE_CACHE = 'inmutable-v2';
 
 
@@ -80,8 +80,10 @@ self.addEventListener('activate', e => {
 self.addEventListener( 'fetch', e => {
 
     let respuesta;
+    console.log("LOGGER");
+    console.log(e.request.url);
 
-    if (e.request.url.includes('invoicing/')) {
+    if (e.request.url.includes('/invoicing/contract/save')) {
        respuesta = manejoApi(DYNAMIC_CACHE, e.request);
     }
     else{
