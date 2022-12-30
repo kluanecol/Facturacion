@@ -146,8 +146,10 @@ function saveContract() {
                     showConfirmButton: true,
                 });
                 domData = getFormFields();
-                refreshContractsTable(domData);
 
+                if (!data.offline) {
+                    refreshContractsTable(domData);
+                }
             }
             else if(data.status == 400){
                 toastr.warning(data.message, data.title);
