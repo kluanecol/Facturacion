@@ -81,8 +81,10 @@ self.addEventListener('activate', e => {
 self.addEventListener( 'fetch', e => {
 
     let respuesta;
+    console.log("LOGGER");
+    console.log(e.request.url);
 
-    if (e.request.url.includes('invoicing/')) {
+    if (e.request.url.includes('/invoicing/contract/save')) {
        respuesta = manejoApi(DYNAMIC_CACHE, e.request);
     }
     else{
