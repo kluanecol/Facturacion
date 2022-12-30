@@ -446,6 +446,7 @@ class InvoiceController extends Controller
                                     $row++;
                                 }
 
+                                //TOTAL METERS
                                 if ($configurationGroup->count() > 1) {
                                     $lastRow = ($row - 1);
                                     $workSheet->mergeCells('C'.$initialRow.':C'.$lastRow);
@@ -485,17 +486,6 @@ class InvoiceController extends Controller
                                 $workSheet->getRowDimension($i)->setVisible(false);
                             }
 
-
-
-                            /*ACTIVITIES
-                            $activities = $this->generalParametricRepo->getByIdsArray($machinePitOperation->pluck('id_param_diametro')->unique());
-                            $row = 12;
-                            $drillingRowsLimit = 42;
-
-                            if($activityRecords->count() > 0){
-                                dd($activityRecords[0]);
-                            }
-                            */
 
                             $file->addSheet($workSheet);
                         }
