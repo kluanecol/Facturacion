@@ -277,6 +277,7 @@ class InvoiceController extends Controller
 
     }
 
+
     public function generatePreview($idInvoice){
 
         $invoice = $this->invoiceRepo->getById($idInvoice, ['contract', 'configurations.diameter','configurations.diameter']);
